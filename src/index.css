@@ -1,0 +1,83 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
+  --color-primary: #022448;
+  --color-primary-container: #1E3A5F;
+  --color-surface: #F8F9FF;
+  --color-background: #FAFAF8;
+  --color-section-bg: #EDF1F5;
+  --color-surface-variant: #D9E3F6;
+  --color-on-background: #121C2A;
+  --color-on-surface-variant: #43474E;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  
+  body {
+    font-family: var(--font-sans);
+    background-color: #FAFAF8;
+    color: #121c2a;
+  }
+}
+
+/* Flat UI styles from Style Guidance */
+.section-bg {
+  background-color: #EDF1F5;
+}
+
+.border-base {
+  border: 1px solid rgba(31, 41, 55, 0.12);
+}
+
+.btn-primary {
+  background-color: #1E3A5F;
+  color: #FAFAF8;
+  border-radius: 0;
+  transition: all 0.2s ease-in-out;
+}
+.btn-primary:hover {
+  background-color: #022448;
+}
+
+.btn-ghost {
+  border: 1px solid #1E3A5F;
+  color: #1E3A5F;
+  border-radius: 0;
+  background: transparent;
+  transition: all 0.2s ease-in-out;
+}
+.btn-ghost:hover {
+  background-color: rgba(30, 58, 95, 0.06);
+}
+
+.input-field {
+  border: 1px solid rgba(31, 41, 55, 0.2);
+  border-radius: 0;
+  background-color: #ffffff;
+}
+.input-field:focus {
+  border: 2px solid #1E3A5F;
+  outline: none;
+}
+
+/* Material Symbols alignment helper */
+.material-symbols-outlined {
+  font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+/* Custom subtle scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #EDF1F5;
+}
+::-webkit-scrollbar-thumb {
+  background: #1E3A5F;
+}
