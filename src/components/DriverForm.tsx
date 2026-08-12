@@ -29,7 +29,7 @@ export const DriverForm: React.FC = () => {
   };
 
   return (
-    <div id="careers" className="bg-[#EEF2F6] border border-gray-300 p-6 md:p-8">
+    <div id="careers" className="bg-[#E3EDF7] border border-[#D1E1F0] p-6 md:p-8">
       <h3 className="text-lg font-extrabold text-[#1A202C] mb-6">
         Driver Registration
       </h3>

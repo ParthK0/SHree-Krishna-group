@@ -3,9 +3,9 @@ import { WHATSAPP_NUMBER } from '../lib/whatsapp';
 
 export const Contact: React.FC = () => {
   return (
-    <section id="contact" className="bg-[#EEF2F6] border-t border-gray-300 py-12 md:py-16">
+    <section id="contact" className="bg-[#E3EDF7] border-t border-gray-300 py-12 md:py-16">
       <div className="max-w-[1200px] mx-auto px-4 md:px-8">
-        <div className="bg-white border border-gray-300 p-8 text-center max-w-2xl mx-auto space-y-4 shadow-2xs">
+        <div className="bg-white border border-[#D1E1F0] p-8 text-center max-w-2xl mx-auto space-y-4 shadow-2xs">
           <span className="text-xs font-black uppercase text-[#1B2A4A] tracking-wider block">
             OPERATIONS & DISPATCH
           </span>

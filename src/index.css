@@ -4,8 +4,8 @@
   --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
   --color-primary: #1B2A4A;
   --color-secondary: #263238;
-  --color-background: #F8F9FA;
-  --color-section-bg: #EEF2F6;
+  --color-background: #F0F5FA;
+  --color-section-bg: #E3EDF7;
   --color-card-bg: #FFFFFF;
 }
 
@@ -16,12 +16,12 @@
   
   body {
     font-family: var(--font-sans);
-    background-color: #F8F9FA;
+    background-color: #F0F5FA;
     color: #1A202C;
   }
 }
 
-/* Image UI Exact Button & Form Component Styles */
+/* Light Blue UI Component Styles */
 .btn-dark-navy {
   background-color: #1B2A4A;
   color: #FFFFFF;
@@ -47,20 +47,20 @@
 }
 
 .btn-light-flat {
-  background-color: #EEF2F6;
-  border: 1px solid #CBD5E1;
+  background-color: #E3EDF7;
+  border: 1px solid #C4D9EC;
   color: #1B2A4A;
   font-weight: 700;
   border-radius: 0.125rem;
   transition: all 0.2s ease;
 }
 .btn-light-flat:hover {
-  background-color: #E2E8F0;
-  border-color: #94A3B8;
+  background-color: #D6E4F2;
+  border-color: #A3C5E4;
 }
 
 .input-flat {
-  border: 1px solid #E2E8F0;
+  border: 1px solid #D1E1F0;
   background-color: #FFFFFF;
   color: #1A202C;
   border-radius: 0.125rem;
@@ -75,7 +75,7 @@
 }
 
 .section-bg-slate {
-  background-color: #EEF2F6;
+  background-color: #E3EDF7;
 }
 
 .material-symbols-outlined {

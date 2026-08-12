@@ -8,7 +8,7 @@ export const About: React.FC = () => {
   ];
 
   return (
-    <section id="about" className="section-bg-slate border-t border-b border-gray-300 py-12 md:py-20">
+    <section id="about" className="bg-[#E3EDF7] border-t border-b border-[#D1E1F0] py-12 md:py-20">
       <div className="max-w-[1200px] mx-auto px-4 md:px-8">
         <div className="grid grid-cols-1 md:grid-cols-12 gap-8 lg:gap-12 items-center">
           
@@ -36,7 +36,7 @@ export const About: React.FC = () => {
 
           {/* Construction Worker Image */}
           <div className="md:col-span-6 lg:col-span-5">
-            <div className="w-full h-64 sm:h-80 md:h-96 rounded-xs overflow-hidden border border-gray-300 shadow-sm relative">
+            <div className="w-full h-64 sm:h-80 md:h-96 rounded-xs overflow-hidden border border-[#C4D9EC] shadow-sm relative">
               <img 
                 src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&q=80&w=1000" 
                 alt="Construction worker working on steel structural framework" 

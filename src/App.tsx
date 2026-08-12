@@ -10,7 +10,7 @@ import { Footer } from './components/Footer';
 
 export function App() {
   return (
-    <div className="min-h-screen bg-[#F8F9FA] text-[#1A202C] flex flex-col font-sans antialiased selection:bg-[#1B2A4A] selection:text-white">
+    <div className="min-h-screen bg-[#F0F5FA] text-[#1A202C] flex flex-col font-sans antialiased selection:bg-[#1B2A4A] selection:text-white">
       <Navbar />
       <main className="flex-grow">
         <Hero />
@@ -19,7 +19,7 @@ export function App() {
         <Services />
         
         {/* Logistics Operations Section */}
-        <section id="booking" className="section-bg-slate border-t border-b border-gray-300 py-12 md:py-20">
+        <section id="booking" className="bg-[#E3EDF7] border-t border-b border-[#D1E1F0] py-12 md:py-20">
           <div className="max-w-[1200px] mx-auto px-4 md:px-8">
             <h2 className="text-2xl sm:text-3xl font-extrabold text-[#1A202C] tracking-tight mb-8">
               Logistics Operations

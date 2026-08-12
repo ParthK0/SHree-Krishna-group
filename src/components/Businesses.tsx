@@ -10,7 +10,7 @@ export const Businesses: React.FC = () => {
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
         
         {/* Card 1: Buildtech */}
-        <div className="bg-[#EEF2F6] border border-gray-300 overflow-hidden flex flex-col justify-between">
+        <div className="bg-[#E3EDF7] border border-[#D1E1F0] overflow-hidden flex flex-col justify-between">
           <div>
             <div className="h-56 sm:h-64 w-full overflow-hidden">
               <img 
@@ -42,7 +42,7 @@ export const Businesses: React.FC = () => {
         </div>
 
         {/* Card 2: Transport */}
-        <div id="transport" className="bg-[#EEF2F6] border border-gray-300 overflow-hidden flex flex-col justify-between">
+        <div id="transport" className="bg-[#E3EDF7] border border-[#D1E1F0] overflow-hidden flex flex-col justify-between">
           <div>
             <div className="h-56 sm:h-64 w-full overflow-hidden">
               <img 
