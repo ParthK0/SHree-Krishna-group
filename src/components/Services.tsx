@@ -25,28 +25,31 @@ export const Services: React.FC = () => {
   ];
 
   return (
-    <section id="services" className="bg-[#E3EDF7] border-t border-b border-[#D1E1F0] py-12 md:py-20">
+    <section id="services" className="bg-[#E1EBF5] border-t border-b border-[#B8D1E8] py-12 md:py-20">
       <div className="max-w-[1200px] mx-auto px-4 md:px-8">
-        <h2 className="text-2xl sm:text-3xl font-extrabold text-[#1A202C] tracking-tight mb-8">
-          Core Services
-        </h2>
+        <div className="flex items-center gap-3 mb-8">
+          <img src="/logo.svg" alt="SK Logo" className="w-7 h-7 object-contain" />
+          <h2 className="text-2xl sm:text-3xl font-extrabold text-[#0D2C54] tracking-tight">
+            Core Services
+          </h2>
+        </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {coreServices.map((service, idx) => (
             <div 
               key={idx} 
-              className="bg-white border border-[#D1E1F0] p-6 flex flex-col justify-between space-y-4 shadow-2xs hover:border-[#1B2A4A] transition-colors"
+              className="bg-white border border-[#B8D1E8] p-6 flex flex-col justify-between space-y-4 shadow-2xs hover:border-[#0D2C54] transition-all hover:-translate-y-0.5"
             >
               <div>
-                <span className="material-symbols-outlined text-3xl text-[#1B2A4A] mb-3 block">
+                <span className="material-symbols-outlined text-3xl text-[#0D2C54] mb-3 block">
                   {service.icon}
                 </span>
 
-                <h3 className="text-xs font-black uppercase text-[#1A202C] tracking-wider mb-2">
+                <h3 className="text-xs font-black uppercase text-[#0D2C54] tracking-wider mb-2">
                   {service.title}
                 </h3>
 
-                <p className="text-xs text-[#475569] leading-relaxed font-medium">
+                <p className="text-xs text-[#133E75] leading-relaxed font-medium">
                   {service.desc}
                 </p>
               </div>

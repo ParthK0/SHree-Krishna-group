@@ -29,14 +29,17 @@ export const DriverForm: React.FC = () => {
   };
 
   return (
-    <div id="careers" className="bg-[#E3EDF7] border border-[#D1E1F0] p-6 md:p-8">
-      <h3 className="text-lg font-extrabold text-[#1A202C] mb-6">
-        Driver Registration
-      </h3>
+    <div id="careers" className="bg-[#E1EBF5] border border-[#B8D1E8] p-6 md:p-8">
+      <div className="flex items-center gap-2.5 mb-6">
+        <img src="/logo.svg" alt="SK Logo" className="w-6 h-6 object-contain" />
+        <h3 className="text-lg font-extrabold text-[#0D2C54]">
+          Driver Registration
+        </h3>
+      </div>
 
       <form onSubmit={handleSubmit} className="space-y-4">
         <div>
-          <label className="block text-xs font-bold text-[#475569] mb-1">
+          <label className="block text-xs font-bold text-[#133E75] mb-1">
             Full Name
           </label>
           <input
@@ -51,7 +54,7 @@ export const DriverForm: React.FC = () => {
         </div>
 
         <div>
-          <label className="block text-xs font-bold text-[#475569] mb-1">
+          <label className="block text-xs font-bold text-[#133E75] mb-1">
             Commercial License Number
           </label>
           <input
@@ -66,7 +69,7 @@ export const DriverForm: React.FC = () => {
         </div>
 
         <div>
-          <label className="block text-xs font-bold text-[#475569] mb-1">
+          <label className="block text-xs font-bold text-[#133E75] mb-1">
             Years of Experience
           </label>
           <input

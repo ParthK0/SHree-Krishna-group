@@ -2,11 +2,13 @@
 
 @theme {
   --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
-  --color-primary: #1B2A4A;
-  --color-secondary: #263238;
-  --color-background: #F0F5FA;
-  --color-section-bg: #E3EDF7;
+  --color-primary: #0D2C54;
+  --color-primary-dark: #071C38;
+  --color-secondary: #08203E;
+  --color-background: #F0F4F8;
+  --color-section-bg: #E1EBF5;
   --color-card-bg: #FFFFFF;
+  --color-accent-blue: #133E75;
 }
 
 @layer base {
@@ -16,66 +18,68 @@
   
   body {
     font-family: var(--font-sans);
-    background-color: #F0F5FA;
-    color: #1A202C;
+    background-color: #F0F4F8;
+    color: #0A192F;
   }
 }
 
-/* Light Blue UI Component Styles */
+/* UI Components oriented to #0D2C54 Logo Blue Palette */
 .btn-dark-navy {
-  background-color: #1B2A4A;
+  background-color: #0D2C54;
   color: #FFFFFF;
   font-weight: 700;
   text-transform: none;
   border-radius: 0.125rem;
-  transition: background-color 0.2s ease;
+  transition: all 0.2s ease;
 }
 .btn-dark-navy:hover {
-  background-color: #101B33;
+  background-color: #071C38;
+  box-shadow: 0 4px 12px rgba(13, 44, 84, 0.2);
 }
 
 .btn-dark-charcoal {
-  background-color: #263238;
+  background-color: #08203E;
   color: #FFFFFF;
   font-weight: 700;
   text-transform: none;
   border-radius: 0.125rem;
-  transition: background-color 0.2s ease;
+  transition: all 0.2s ease;
 }
 .btn-dark-charcoal:hover {
-  background-color: #1A2327;
+  background-color: #041226;
+  box-shadow: 0 4px 12px rgba(8, 32, 62, 0.25);
 }
 
 .btn-light-flat {
-  background-color: #E3EDF7;
-  border: 1px solid #C4D9EC;
-  color: #1B2A4A;
+  background-color: #E1EBF5;
+  border: 1px solid #B8D1E8;
+  color: #0D2C54;
   font-weight: 700;
   border-radius: 0.125rem;
   transition: all 0.2s ease;
 }
 .btn-light-flat:hover {
-  background-color: #D6E4F2;
-  border-color: #A3C5E4;
+  background-color: #D3E2F2;
+  border-color: #0D2C54;
 }
 
 .input-flat {
-  border: 1px solid #D1E1F0;
+  border: 1px solid #B8D1E8;
   background-color: #FFFFFF;
-  color: #1A202C;
+  color: #0A192F;
   border-radius: 0.125rem;
   padding: 0.75rem 1rem;
   width: 100%;
   font-size: 0.875rem;
 }
 .input-flat:focus {
-  border-color: #1B2A4A;
+  border-color: #0D2C54;
   outline: none;
-  box-shadow: 0 0 0 1px #1B2A4A;
+  box-shadow: 0 0 0 1px #0D2C54;
 }
 
 .section-bg-slate {
-  background-color: #E3EDF7;
+  background-color: #E1EBF5;
 }
 
 .material-symbols-outlined {

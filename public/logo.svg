@@ -1,20 +1,39 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500" width="100%" height="100%">
-  <g fill="#0D2C54">
-    <!-- Buildings -->
+  <defs>
+    <style>
+      .logo-navy { fill: #0D2C54; }
+      .logo-[#0D2C54] { fill: #0D2C54; }
+    </style>
+  </defs>
+  <g class="logo-navy">
+    <!-- Tall Skyscraper Building Pillars (Center/Top) -->
+    <!-- Left Building Pillar -->
     <polygon points="215,125 248,105 248,230 215,230" />
+    <!-- Center Skyscraper (Tallest) -->
     <polygon points="256,65 295,40 295,230 256,230" />
+    <!-- Right Building Pillar -->
     <polygon points="303,120 327,135 327,230 303,230" />
-    <!-- S Curve & Tap -->
+
+    <!-- S-Curve (Buildtech & Plumbing/Sanitary Tap) -->
+    <!-- Outer S Loop -->
     <path d="M 235,175 C 160,175 115,225 115,275 C 115,310 135,335 170,345 C 205,355 240,325 240,295 C 240,270 215,255 190,250 C 165,245 155,235 155,220 C 155,200 180,195 210,195 L 248,195 L 248,175 Z" />
+    
+    <!-- Water Tap & Drop on bottom-left loop -->
     <path d="M 95,335 C 95,375 130,395 185,395 C 230,395 255,370 255,335 C 255,305 225,290 195,290 C 170,290 160,300 160,315 C 160,335 185,340 205,340 C 215,340 225,335 225,325 C 225,315 210,310 195,310 C 175,310 145,315 145,335 C 145,355 170,370 205,370 C 235,370 240,345 240,335" />
+    
+    <!-- Tap Handle & Spout -->
     <rect x="130" y="295" width="25" height="6" rx="2" />
     <rect x="140" y="301" width="5" height="12" />
     <path d="M 132,313 H 153 V 330 C 153,338 143,338 143,330 V 323 H 132 Z" />
+    <!-- Water Drop -->
     <path d="M 163,342 C 163,342 155,352 155,358 C 155,362 158,366 163,366 C 168,366 171,362 171,358 C 171,352 163,342 163,342 Z" />
-    <!-- K Highway -->
+
+    <!-- K-Leg (Transport Highway & Dashed Road Lines) -->
+    <!-- Main Highway Road Slope -->
     <polygon points="256,290 405,200 405,235 256,385" />
     <polygon points="256,385 365,395 415,380 275,340" />
-    <!-- Dashes -->
+
+    <!-- Dashed Centerline Highway Lane Markers -->
     <g transform="rotate(-31 330 300)" fill="#FFFFFF">
       <rect x="230" y="296" width="16" height="4" />
       <rect x="256" y="296" width="16" height="4" />
