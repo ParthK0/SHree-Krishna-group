@@ -2,34 +2,35 @@ import React from 'react';
 
 export const Footer: React.FC = () => {
   return (
-    <footer className="bg-[#022448] w-full text-white">
-      <div className="w-full py-12 px-4 md:px-8 flex flex-col md:flex-row justify-between items-center gap-6 border-t border-white/10 max-w-[1200px] mx-auto">
-        <div className="flex flex-col items-center md:items-start gap-1">
-          <div className="text-lg font-extrabold tracking-tight text-white uppercase">
-            Shree Krishna Group
-          </div>
-          <div className="text-xs text-white/70">
-            © {new Date().getFullYear()} Shree Krishna Buildtech & Shree Krishna Transport. All rights reserved.
-          </div>
+    <footer className="bg-[#0B192C] text-white py-12 px-4 text-center">
+      <div className="max-w-[1200px] mx-auto space-y-6">
+        
+        {/* Brand Title */}
+        <h3 className="text-xl font-black tracking-tight text-white uppercase">
+          Shree Krishna Group
+        </h3>
+
+        {/* Copyright Tagline */}
+        <p className="text-xs text-slate-300 max-w-md mx-auto leading-relaxed font-medium">
+          © {new Date().getFullYear()} Shree Krishna Group. Industrial Excellence in Construction & Logistics.
+        </p>
+
+        {/* Link Grid */}
+        <div className="pt-2 flex flex-wrap justify-center items-center gap-x-8 gap-y-3 text-xs font-bold text-slate-300 max-w-lg mx-auto">
+          <a href="#about" className="hover:text-white transition-colors">
+            Privacy Policy
+          </a>
+          <a href="#services" className="hover:text-white transition-colors">
+            Terms of Service
+          </a>
+          <a href="#buildtech" className="hover:text-white transition-colors">
+            Safety Standards
+          </a>
+          <a href="#transport" className="hover:text-white transition-colors">
+            Fleet Details
+          </a>
         </div>
 
-        <nav className="flex flex-wrap justify-center gap-4 md:gap-6 text-xs font-bold">
-          <a className="text-white/70 hover:text-white transition-opacity uppercase" href="#buildtech">
-            Buildtech
-          </a>
-          <a className="text-white/70 hover:text-white transition-opacity uppercase" href="#transport">
-            Transport Fleet
-          </a>
-          <a className="text-white/70 hover:text-white transition-opacity uppercase" href="#services">
-            Capabilities
-          </a>
-          <a className="text-white/70 hover:text-white transition-opacity uppercase" href="#booking">
-            Truck Booking
-          </a>
-          <a className="text-white/70 hover:text-white transition-opacity uppercase" href="#careers">
-            Driver Network
-          </a>
-        </nav>
       </div>
     </footer>
   );

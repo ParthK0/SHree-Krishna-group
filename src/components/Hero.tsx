@@ -2,69 +2,49 @@ import React from 'react';
 
 export const Hero: React.FC = () => {
   return (
-    <section id="home" className="max-w-[1200px] mx-auto px-4 md:px-8 py-16 md:py-28 flex flex-col items-start gap-6 relative">
-      
-      {/* Location Badge */}
-      <div className="inline-flex items-center gap-2 px-3 py-1 bg-[#EDF1F5] border border-gray-300/60 text-[#1E3A5F] text-xs font-bold uppercase tracking-wider">
-        <span className="material-symbols-outlined text-sm">location_on</span>
-        Jaipur • Rajasthan • India
-      </div>
+    <section id="home" className="max-w-[1200px] mx-auto px-4 md:px-8 py-10 md:py-20">
+      <div className="grid grid-cols-1 md:grid-cols-12 gap-8 lg:gap-12 items-center">
+        
+        {/* Left Column: Copy & Actions */}
+        <div className="md:col-span-6 lg:col-span-7 space-y-5">
+          <h1 className="text-3xl sm:text-4xl md:text-5xl font-black text-[#1A202C] tracking-tight leading-[1.1]">
+            Building projects.<br />
+            Moving businesses.
+          </h1>
 
-      {/* Main Headline */}
-      <h1 className="text-3xl md:text-5xl font-extrabold text-[#022448] max-w-3xl uppercase tracking-tight leading-tight">
-        Building projects.<br />
-        Moving businesses.
-      </h1>
+          <p className="text-sm md:text-base text-[#475569] leading-relaxed max-w-xl font-medium">
+            Industrial excellence in construction and logistics. We provide the structural stability and operational reliability your projects demand. Built to last, engineered to deliver.
+          </p>
 
-      {/* Description */}
-      <p className="text-base md:text-lg text-[#43474E] max-w-2xl leading-relaxed">
-        Industrial excellence in construction materials, civil & sanitary works, and logistics. Under the leadership of <strong className="text-[#022448] font-bold">Deepesh Kumar</strong>, we provide the structural foundation and transportation network to keep industries moving efficiently.
-      </p>
-
-      {/* CTA Buttons */}
-      <div className="flex flex-col sm:flex-row gap-4 mt-2 w-full sm:w-auto">
-        <a 
-          href="#booking" 
-          className="btn-primary px-8 py-4 text-center font-bold text-xs uppercase tracking-wider flex items-center justify-center gap-2 min-h-[48px]"
-        >
-          Book a Truck
-          <span className="material-symbols-outlined text-[18px]">local_shipping</span>
-        </a>
-        <a 
-          href="#services" 
-          className="btn-ghost px-8 py-4 text-center font-bold text-xs uppercase tracking-wider flex items-center justify-center gap-2 min-h-[48px]"
-        >
-          Our Services
-        </a>
-      </div>
-
-      {/* Operational Highlights */}
-      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 w-full pt-8 border-t border-gray-200 mt-6">
-        <div className="flex items-center gap-3 p-3 bg-white border border-gray-200">
-          <span className="material-symbols-outlined text-[#1E3A5F] text-2xl">verified</span>
-          <div>
-            <h4 className="text-xs font-bold uppercase text-[#022448]">Buildtech Division</h4>
-            <p className="text-[11px] text-[#43474E]">Civil & Sanitary Execution</p>
+          {/* Action Buttons (Stacked on mobile, side-by-side on desktop) */}
+          <div className="flex flex-col sm:flex-row gap-3 pt-2 w-full max-w-md">
+            <a
+              href="#booking"
+              className="btn-dark-navy w-full py-4 text-center text-sm font-extrabold tracking-wide min-h-[50px] flex items-center justify-center"
+            >
+              Book a Truck
+            </a>
+            <a
+              href="#services"
+              className="btn-dark-charcoal w-full py-4 text-center text-sm font-extrabold tracking-wide min-h-[50px] flex items-center justify-center"
+            >
+              Our Services
+            </a>
           </div>
         </div>
 
-        <div className="flex items-center gap-3 p-3 bg-white border border-gray-200">
-          <span className="material-symbols-outlined text-[#1E3A5F] text-2xl">route</span>
-          <div>
-            <h4 className="text-xs font-bold uppercase text-[#022448]">Transport Network</h4>
-            <p className="text-[11px] text-[#43474E]">Jaipur & North India Routes</p>
+        {/* Right Column: Hero Construction Image */}
+        <div className="md:col-span-6 lg:col-span-5">
+          <div className="w-full h-64 sm:h-80 md:h-96 rounded-xs overflow-hidden border border-gray-300 shadow-sm relative">
+            <img 
+              src="https://images.unsplash.com/photo-1541888946425-d0fbb186a5b7?auto=format&fit=crop&q=80&w=1000" 
+              alt="Industrial construction site with heavy cranes and scaffolding" 
+              className="w-full h-full object-cover"
+            />
           </div>
         </div>
 
-        <div className="flex items-center gap-3 p-3 bg-white border border-gray-200">
-          <span className="material-symbols-outlined text-[#1E3A5F] text-2xl">account_circle</span>
-          <div>
-            <h4 className="text-xs font-bold uppercase text-[#022448]">Deepesh Kumar</h4>
-            <p className="text-[11px] text-[#43474E]">Project & Fleet Lead</p>
-          </div>
-        </div>
       </div>
-
     </section>
   );
 };

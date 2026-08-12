@@ -10,7 +10,7 @@ import { Footer } from './components/Footer';
 
 export function App() {
   return (
-    <div className="min-h-screen bg-[#FAFAF8] text-[#121c2a] flex flex-col font-sans antialiased selection:bg-[#022448] selection:text-white">
+    <div className="min-h-screen bg-[#F8F9FA] text-[#1A202C] flex flex-col font-sans antialiased selection:bg-[#1B2A4A] selection:text-white">
       <Navbar />
       <main className="flex-grow">
         <Hero />
@@ -18,17 +18,12 @@ export function App() {
         <Businesses />
         <Services />
         
-        {/* Logistics Operations Section (Forms) */}
-        <section className="section-bg w-full py-16 border-t border-gray-300" id="booking">
+        {/* Logistics Operations Section */}
+        <section id="booking" className="section-bg-slate border-t border-b border-gray-300 py-12 md:py-20">
           <div className="max-w-[1200px] mx-auto px-4 md:px-8">
-            <div className="mb-8">
-              <h2 className="text-2xl md:text-4xl font-extrabold text-[#022448] uppercase tracking-tight">
-                Logistics Operations
-              </h2>
-              <p className="text-base text-[#43474E] mt-2 max-w-2xl">
-                Streamlined booking for clients and straightforward onboarding for commercial drivers & fleet owners. No unnecessary steps.
-              </p>
-            </div>
+            <h2 className="text-2xl sm:text-3xl font-extrabold text-[#1A202C] tracking-tight mb-8">
+              Logistics Operations
+            </h2>
 
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
               <BookingForm />

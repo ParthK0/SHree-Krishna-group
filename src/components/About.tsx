@@ -1,46 +1,47 @@
 import React from 'react';
 
 export const About: React.FC = () => {
+  const features = [
+    'Nationwide Logistics Fleet',
+    'Heavy Structural Engineering',
+    'End-to-End Project Management',
+  ];
+
   return (
-    <section id="about" className="section-bg w-full border-t border-b border-base py-16">
+    <section id="about" className="section-bg-slate border-t border-b border-gray-300 py-12 md:py-20">
       <div className="max-w-[1200px] mx-auto px-4 md:px-8">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-8 lg:gap-12 items-center">
           
-          {/* Left Text */}
-          <div className="space-y-4">
-            <h2 className="text-xl md:text-2xl font-extrabold text-[#022448] uppercase border-b-2 border-[#022448] inline-block pb-2">
-              About Us
+          {/* Text & Checklist */}
+          <div className="md:col-span-6 lg:col-span-7 space-y-5">
+            <h2 className="text-2xl sm:text-3xl font-extrabold text-[#1A202C] tracking-tight">
+              Utilitarian. Dependable.
             </h2>
-            <p className="text-base text-[#121c2a] leading-relaxed font-medium">
-              Shree Krishna Group is a dual-force enterprise focused on structural integrity and logistical efficiency. Led by <strong className="text-[#022448]">Deepesh Kumar</strong>, we cut out the noise and focus on delivering tangible results for heavy industry and business clients.
-            </p>
-            <p className="text-sm text-[#43474E] leading-relaxed">
-              Through <strong>Shree Krishna Buildtech</strong> (civil, sanitary, BOQ coordination, and procurement) and <strong>Shree Krishna Transport</strong> (goods logistics & asset-light driver network), our methodology is simple: solid materials, dependable fleets, and transparent communication.
+
+            <p className="text-sm md:text-base text-[#475569] leading-relaxed max-w-xl font-medium">
+              We strip away the unnecessary to focus entirely on operational intent, whether moving raw materials across the country or erecting the structural framework for a new industrial site. Flat, minimalist, and uncompromisingly effective.
             </p>
 
-            <div className="pt-2 flex flex-col gap-2 text-xs font-bold text-[#022448]">
-              <div className="flex items-center gap-2">
-                <span className="w-2 h-2 bg-[#022448]"></span>
-                Direct Site Execution & Sanitary Procurement
-              </div>
-              <div className="flex items-center gap-2">
-                <span className="w-2 h-2 bg-[#022448]"></span>
-                Verified Fleet Drivers & Inter-City Freight Logistics
-              </div>
-            </div>
+            <ul className="space-y-3 pt-2">
+              {features.map((item, idx) => (
+                <li key={idx} className="flex items-center gap-3 text-sm font-bold text-[#1B2A4A]">
+                  <span className="material-symbols-outlined text-lg text-[#1B2A4A] shrink-0">
+                    settings
+                  </span>
+                  <span>{item}</span>
+                </li>
+              ))}
+            </ul>
           </div>
 
-          {/* Right Image Banner */}
-          <div 
-            className="h-72 md:h-80 w-full bg-cover bg-center border border-gray-300 relative shadow-xs" 
-            style={{ 
-              backgroundImage: `url('https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&q=80&w=1000')` 
-            }}
-          >
-            <div className="absolute inset-0 bg-[#022448]/30"></div>
-            <div className="absolute bottom-4 left-4 right-4 bg-white/95 border border-gray-300 p-3 text-xs font-bold text-[#022448] uppercase tracking-wider flex items-center justify-between">
-              <span>Industrial Execution & Freight Logistics</span>
-              <span className="material-symbols-outlined text-sm">precision_manufacturing</span>
+          {/* Construction Worker Image */}
+          <div className="md:col-span-6 lg:col-span-5">
+            <div className="w-full h-64 sm:h-80 md:h-96 rounded-xs overflow-hidden border border-gray-300 shadow-sm relative">
+              <img 
+                src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&q=80&w=1000" 
+                alt="Construction worker working on steel structural framework" 
+                className="w-full h-full object-cover"
+              />
             </div>
           </div>
 

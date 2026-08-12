@@ -1,61 +1,55 @@
 import React from 'react';
 
 export const Services: React.FC = () => {
-  const servicesList = [
+  const coreServices = [
     {
-      icon: 'apartment',
-      title: 'Commercial Const.',
-      desc: 'Project coordination, BOQ estimates, and execution support for commercial developments.',
+      icon: 'build',
+      title: 'STRUCTURAL FABRICATION',
+      desc: 'Custom-welded heavy steel fabrication for large-scale industrial applications.',
     },
     {
-      icon: 'factory',
-      title: 'Industrial Const.',
-      desc: 'Civil supervision and material logistics suited for industrial plants & warehouses.',
+      icon: 'sync',
+      title: 'FREIGHT FORWARDING',
+      desc: 'Reliable, scheduled freight transport prioritizing efficiency and raw material logistics.',
     },
     {
-      icon: 'plumbing',
-      title: 'Sanitary Works',
-      desc: 'Sanitaryware material planning, estimation, fitting coordination, and contractor support.',
-    },
-    {
-      icon: 'route',
-      title: 'Road Transport',
-      desc: 'Pan-national logistics network for goods movement starting from Jaipur & NCR.',
+      icon: 'square_foot',
+      title: 'PROJECT PLANNING',
+      desc: 'Utilitarian site planning and structural blueprinting for complex builds.',
     },
     {
       icon: 'warehouse',
-      title: 'Business Logistics',
-      desc: 'Regular commercial transport management for traders, contractors, and suppliers.',
-    },
-    {
-      icon: 'rv_hookup',
-      title: 'Return Loads & Fleet',
-      desc: 'Connect available trucks with return-route freight to optimize fleet efficiency.',
+      title: 'WAREHOUSING',
+      desc: 'Secure, heavy-capacity storage facilities for construction materials and fleet overflow.',
     },
   ];
 
   return (
-    <section id="services" className="w-full border-t border-gray-300 py-16 bg-white">
+    <section id="services" className="section-bg-slate border-t border-b border-gray-300 py-12 md:py-20">
       <div className="max-w-[1200px] mx-auto px-4 md:px-8">
-        <h2 className="text-xl md:text-2xl font-extrabold text-[#022448] uppercase mb-8 border-b-2 border-[#022448] inline-block pb-1">
-          Comprehensive Capabilities
+        <h2 className="text-2xl sm:text-3xl font-extrabold text-[#1A202C] tracking-tight mb-8">
+          Core Services
         </h2>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-0 border-t border-l border-gray-300">
-          {servicesList.map((s, idx) => (
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          {coreServices.map((service, idx) => (
             <div 
               key={idx} 
-              className="p-6 border-r border-b border-gray-300 hover:bg-[#EDF1F5]/60 transition-colors group"
+              className="bg-white border border-gray-200 p-6 flex flex-col justify-between space-y-4 shadow-2xs hover:border-gray-400 transition-colors"
             >
-              <span className="material-symbols-outlined text-4xl text-[#022448] mb-3 block group-hover:scale-105 transition-transform">
-                {s.icon}
-              </span>
-              <h3 className="text-sm font-extrabold uppercase text-[#022448] mb-2 tracking-wider">
-                {s.title}
-              </h3>
-              <p className="text-xs text-[#43474E] leading-relaxed">
-                {s.desc}
-              </p>
+              <div>
+                <span className="material-symbols-outlined text-3xl text-[#1B2A4A] mb-3 block">
+                  {service.icon}
+                </span>
+
+                <h3 className="text-xs font-black uppercase text-[#1A202C] tracking-wider mb-2">
+                  {service.title}
+                </h3>
+
+                <p className="text-xs text-[#475569] leading-relaxed font-medium">
+                  {service.desc}
+                </p>
+              </div>
             </div>
           ))}
         </div>
