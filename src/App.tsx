@@ -49,22 +49,13 @@ export function App() {
                 <BookingForm />
               </div>
 
-              {/* Image Placeholder Right */}
-              <div className="w-full h-full min-h-[420px] bg-[#ECE6DD] border-2 border-dashed border-[#c5beB4] rounded-2xl flex flex-col items-center justify-center p-8 text-center transition-all hover:border-[#0F6A37]/50 group">
-                <div className="w-16 h-16 rounded-full bg-[#E0D9CE] flex items-center justify-center text-[#6b786d] group-hover:text-[#0F6A37] group-hover:scale-110 transition-all mb-4">
-                  <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                  </svg>
-                </div>
-                <p className="font-['Manrope'] text-xs font-bold text-[#1a1f1b] uppercase tracking-wider mb-1">
-                  Book a Truck Image
-                </p>
-                <p className="font-['Space_Mono'] text-xs font-bold text-[#0F6A37] bg-[#EBF5EE] px-3 py-1 rounded-full mb-2">
-                  Recommended: 1200 × 900 px (4:3)
-                </p>
-                <p className="font-['Inter'] text-xs text-[#6b786d] max-w-xs">
-                  Ideal image: Loaded freight truck, cargo loading, or highway transport.
-                </p>
+              {/* Image Right */}
+              <div className="w-full h-full flex items-center justify-center">
+                <img
+                  src="/images/dropdelivery.png"
+                  alt="Book a Truck Delivery - Shree Krishna Transport"
+                  className="w-full h-auto max-h-[500px] object-cover rounded-2xl border border-[#c5beB4] shadow-lg transition-all duration-300 hover:shadow-xl"
+                />
               </div>
             </div>
           </section>
