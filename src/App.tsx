@@ -1,6 +1,5 @@
 import { Header } from './components/Header';
 import { Hero } from './components/Hero';
-import { RouteStrip } from './components/RouteStrip';
 import { Stats } from './components/Stats';
 import { TwoPathSplit } from './components/TwoPathSplit';
 import { HowItWorks } from './components/HowItWorks';
@@ -18,9 +17,6 @@ export function App() {
       <main className="flex-grow">
         {/* 1. Hero — animated truck + gradient buttons */}
         <Hero />
-
-        {/* 2. Route Strip — animated sequential arrows */}
-        <RouteStrip />
 
         {/* 3. Stats — count-up animation */}
         <FadeUp>

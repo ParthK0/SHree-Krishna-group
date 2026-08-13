@@ -15,9 +15,9 @@ const FloatingBg: React.FC = () => (
   </div>
 );
 
-/* Animated truck that drives across the bottom of the hero */
+/* Animated truck that drives across the bottom of the hero (hidden on mobile) */
 const AnimatedTruck: React.FC = () => (
-  <div className="absolute bottom-5 left-0 pointer-events-none select-none truck-animate" style={{ opacity: 0.5 }}>
+  <div className="hidden md:block absolute bottom-5 left-0 pointer-events-none select-none truck-animate" style={{ opacity: 0.5 }}>
     <div className="flex items-center gap-1 text-[#8ad7a0]">
       <Truck size={32} strokeWidth={1.5} />
       <div className="flex gap-1">
