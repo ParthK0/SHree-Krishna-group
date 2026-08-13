@@ -1,4 +1,6 @@
 export const WHATSAPP_NUMBER = "919784800833";
+export const PHONE_DISPLAY  = "+91 97848 00833";
+export const CONTACT_EMAIL  = "deepesh3052@gmail.com";
 
 export interface WhatsAppData {
   [key: string]: string | undefined;

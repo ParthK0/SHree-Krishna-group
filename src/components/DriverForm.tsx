@@ -1,100 +1,103 @@
 import React, { useState } from 'react';
 import { sendWhatsAppMessage } from '../lib/whatsapp';
+import { Navigation, CheckCircle2 } from 'lucide-react';
+
+const inputClass = 'sk-input';
+const labelClass = "block font-['Manrope'] text-[10px] font-bold text-[#6b786d] uppercase tracking-widest mb-1.5";
 
 export const DriverForm: React.FC = () => {
   const [formData, setFormData] = useState({
-    name: '',
-    license: '',
-    experience: '',
+    name: '', phone: '', vehicleNumber: '',
+    vehicleType: '', capacity: '', location: '', routes: '',
   });
-
   const [submitted, setSubmitted] = useState(false);
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-
-    sendWhatsAppMessage("SHREE KRISHNA LOGISTICS — DRIVER REGISTRATION", {
-      "Driver Full Name": formData.name,
-      "Commercial License Number": formData.license,
-      "Years of Experience": formData.experience,
+    if (!formData.name || !formData.phone || !formData.vehicleNumber || !formData.vehicleType || !formData.location) {
+      alert('Please fill in all required fields.');
+      return;
+    }
+    sendWhatsAppMessage('SHREE KRISHNA TRANSPORT — DRIVER REGISTRATION', {
+      'Name': formData.name,
+      'Mobile': formData.phone,
+      'Vehicle Number': formData.vehicleNumber,
+      'Vehicle Type': formData.vehicleType,
+      'Capacity': formData.capacity,
+      'Current Location': formData.location,
+      'Preferred Routes': formData.routes,
     });
-
     setSubmitted(true);
     setTimeout(() => setSubmitted(false), 5000);
   };
 
   return (
-    <div id="careers" className="bg-[#E1EBF5] border border-[#B8D1E8] p-6 md:p-8">
-      <div className="flex items-center gap-2.5 mb-6">
-        <img src="/logo.svg" alt="SK Logo" className="w-6 h-6 object-contain" />
-        <h3 className="text-lg font-extrabold text-[#0D2C54]">
-          Driver Registration
-        </h3>
+    <div>
+      <div className="flex items-center gap-2 mb-2">
+        <div className="w-8 h-8 rounded-lg bg-[#F1F5F2] border border-[#e5ebe7] flex items-center justify-center text-[#3d4a3f]">
+          <Navigation size={18} />
+        </div>
+        <p className="font-['Manrope'] text-[10px] font-bold text-[#6b786d] uppercase tracking-widest">Truck Owner / Driver</p>
       </div>
+      <h2 className="font-['Archivo_Narrow'] text-2xl md:text-3xl font-bold mb-6 uppercase text-[#1a1f1b]">
+        Register for Loads
+      </h2>
 
-      <form onSubmit={handleSubmit} className="space-y-4">
+      <form onSubmit={handleSubmit} className="space-y-5 border-t-2 border-[#e5ebe7] pt-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div>
+            <label className={labelClass}>Name<span className="text-[#0F6A37] ml-0.5">*</span></label>
+            <input type="text" name="name" value={formData.name} onChange={handleChange} placeholder="FULL NAME" required className={inputClass} />
+          </div>
+          <div>
+            <label className={labelClass}>Mobile Number<span className="text-[#0F6A37] ml-0.5">*</span></label>
+            <input type="tel" name="phone" value={formData.phone} onChange={handleChange} placeholder="10-DIGIT NUMBER" inputMode="tel" required className={inputClass} />
+          </div>
+        </div>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div>
+            <label className={labelClass}>Vehicle Number<span className="text-[#0F6A37] ml-0.5">*</span></label>
+            <input type="text" name="vehicleNumber" value={formData.vehicleNumber} onChange={handleChange} placeholder="RJ14XX0000" required className={inputClass} />
+          </div>
+          <div>
+            <label className={labelClass}>Vehicle Type<span className="text-[#0F6A37] ml-0.5">*</span></label>
+            <input type="text" name="vehicleType" value={formData.vehicleType} onChange={handleChange} placeholder="E.G., 14 FT" required className={inputClass} />
+          </div>
+        </div>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div>
+            <label className={labelClass}>Capacity</label>
+            <input type="text" name="capacity" value={formData.capacity} onChange={handleChange} placeholder="E.G., 5 TON" className={inputClass} />
+          </div>
+          <div>
+            <label className={labelClass}>Current Location<span className="text-[#0F6A37] ml-0.5">*</span></label>
+            <input type="text" name="location" value={formData.location} onChange={handleChange} placeholder="E.G., JAIPUR" required className={inputClass} />
+          </div>
+        </div>
         <div>
-          <label className="block text-xs font-bold text-[#133E75] mb-1">
-            Full Name
-          </label>
-          <input
-            type="text"
-            name="name"
-            required
-            value={formData.name}
-            onChange={handleChange}
-            placeholder="Driver name"
-            className="input-flat"
-          />
+          <label className={labelClass}>Preferred Routes</label>
+          <input type="text" name="routes" value={formData.routes} onChange={handleChange} placeholder="E.G., JAIPUR–JODHPUR, JAIPUR–DELHI" className={inputClass} />
         </div>
 
-        <div>
-          <label className="block text-xs font-bold text-[#133E75] mb-1">
-            Commercial License Number
-          </label>
-          <input
-            type="text"
-            name="license"
-            required
-            value={formData.license}
-            onChange={handleChange}
-            placeholder="License #"
-            className="input-flat"
-          />
-        </div>
-
-        <div>
-          <label className="block text-xs font-bold text-[#133E75] mb-1">
-            Years of Experience
-          </label>
-          <input
-            type="text"
-            name="experience"
-            required
-            value={formData.experience}
-            onChange={handleChange}
-            placeholder="Experience in years"
-            className="input-flat"
-          />
-        </div>
+        {submitted && (
+          <div className="bg-[#EBF5EE] border border-[#0F6A37]/30 rounded-lg px-4 py-3 flex items-center gap-2 font-['Manrope'] text-xs font-bold text-[#0F6A37]">
+            <CheckCircle2 size={16} />
+            Registration sent on WhatsApp! We'll be in touch soon.
+          </div>
+        )}
 
         <button
           type="submit"
-          className="btn-dark-charcoal w-full py-3.5 text-xs uppercase tracking-wider font-extrabold cursor-pointer mt-4"
+          className="w-full bg-[#F8FAF9] text-[#1a1f1b] font-['Manrope'] text-xs font-bold uppercase py-4 rounded-xs flex items-center justify-center gap-2 hover:bg-[#EBF5EE] hover:text-[#0F6A37] hover:-translate-y-0.5 hover:shadow-md transition-all duration-200 border-2 border-[#2a2f2b] hover:border-[#0F6A37] cursor-pointer tracking-wider"
         >
-          Register
+          <Navigation size={16} />
+          Register on WhatsApp
         </button>
-
-        {submitted && (
-          <p className="text-xs text-green-700 font-bold text-center mt-2">
-            ✓ Driver details submitted on WhatsApp!
-          </p>
-        )}
       </form>
     </div>
   );
