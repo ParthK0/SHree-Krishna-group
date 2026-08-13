@@ -2,6 +2,10 @@ export const WHATSAPP_NUMBER = "918079086274";
 export const PHONE_DISPLAY  = "+91 80790 86274";
 export const CONTACT_EMAIL  = "parthkhowal222@gmail.com";
 
+// Optional WhatsApp Gateway API keys (e.g. UltraMsg.com) for 100% silent background WhatsApp sending
+export const ULTRAMSG_INSTANCE_ID = ""; // e.g. "instance12345"
+export const ULTRAMSG_TOKEN = "";       // e.g. "abcdef123456"
+
 export interface WhatsAppData {
   [key: string]: string | undefined;
 }
@@ -32,6 +36,8 @@ export async function sendAutomatedForm(title: string, data: WhatsAppData): Prom
   const waUrl = getWhatsAppUrl(title, data);
   const formattedMessage = formatFormMessage(title, data);
 
+  // 1. Silent Background Email Dispatch (Web3Forms API)
+  let emailSuccess = false;
   try {
     const response = await fetch("https://api.web3forms.com/submit", {
       method: "POST",
@@ -50,11 +56,31 @@ export async function sendAutomatedForm(title: string, data: WhatsAppData): Prom
     });
 
     const resData = await response.json();
-    return { success: resData.success || response.ok, waUrl };
+    emailSuccess = resData.success || response.ok;
   } catch (error) {
-    console.error("Automated form error:", error);
-    return { success: false, waUrl };
+    console.error("Automated email form error:", error);
   }
+
+  // 2. Silent Background WhatsApp API Dispatch (if UltraMsg API key provided)
+  if (ULTRAMSG_INSTANCE_ID && ULTRAMSG_TOKEN) {
+    try {
+      const params = new URLSearchParams();
+      params.append("token", ULTRAMSG_TOKEN);
+      params.append("to", WHATSAPP_NUMBER);
+      params.append("body", formattedMessage);
+
+      await fetch(`https://api.ultramsg.com/${ULTRAMSG_INSTANCE_ID}/messages/chat`, {
+        method: "POST",
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        body: params,
+      });
+    } catch (waErr) {
+      console.error("Automated WhatsApp API error:", waErr);
+    }
+  }
+
+  return { success: emailSuccess, waUrl };
 }
+
 
 
