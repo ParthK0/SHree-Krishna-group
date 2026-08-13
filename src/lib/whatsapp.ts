@@ -32,33 +32,66 @@ export function sendWhatsAppMessage(title: string, data: WhatsAppData): void {
   window.open(encodedUrl, "_blank", "noopener,noreferrer");
 }
 
+// Optional EmailJS keys for 100% direct, zero-redirect, zero-spam Gmail delivery
+export const EMAILJS_SERVICE_ID  = ""; // e.g. "service_abc123"
+export const EMAILJS_TEMPLATE_ID = ""; // e.g. "template_xyz789"
+export const EMAILJS_PUBLIC_KEY  = ""; // e.g. "user_pk_12345"
+
 export async function sendAutomatedForm(title: string, data: WhatsAppData): Promise<{ success: boolean; waUrl: string }> {
   const waUrl = getWhatsAppUrl(title, data);
   const formattedMessage = formatFormMessage(title, data);
 
-  // 1. Silent Background Email Dispatch (FormSubmit.co + Web3Forms API)
   let emailSuccess = false;
-  try {
-    const response = await fetch(`https://formsubmit.co/ajax/${CONTACT_EMAIL}`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "Accept": "application/json",
-      },
-      body: JSON.stringify({
-        _subject: title,
-        _template: "table",
-        _captcha: "false",
-        "Form Type": title,
-        "Details": formattedMessage,
-        ...data,
-      }),
-    });
 
-    const resData = await response.json();
-    emailSuccess = resData.success === "true" || response.ok;
-  } catch (error) {
-    console.error("Automated email form error:", error);
+  // 1A. Direct EmailJS API Dispatch (Zero-Spam, Zero-Redirect via personal Gmail)
+  if (EMAILJS_SERVICE_ID && EMAILJS_TEMPLATE_ID && EMAILJS_PUBLIC_KEY) {
+    try {
+      const response = await fetch("https://api.emailjs.com/api/v1.0/email/send", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          service_id: EMAILJS_SERVICE_ID,
+          template_id: EMAILJS_TEMPLATE_ID,
+          user_id: EMAILJS_PUBLIC_KEY,
+          template_params: {
+            subject: title,
+            to_email: CONTACT_EMAIL,
+            message: formattedMessage,
+            ...data,
+          },
+        }),
+      });
+
+      emailSuccess = response.ok;
+    } catch (err) {
+      console.error("EmailJS dispatch error:", err);
+    }
+  } 
+  
+  // 1B. Fallback Direct Silent Email Dispatch (FormSubmit.co)
+  if (!emailSuccess) {
+    try {
+      const response = await fetch(`https://formsubmit.co/ajax/${CONTACT_EMAIL}`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Accept": "application/json",
+        },
+        body: JSON.stringify({
+          _subject: title,
+          _template: "table",
+          _captcha: "false",
+          "Form Type": title,
+          "Details": formattedMessage,
+          ...data,
+        }),
+      });
+
+      const resData = await response.json();
+      emailSuccess = resData.success === "true" || response.ok;
+    } catch (error) {
+      console.error("FormSubmit email form error:", error);
+    }
   }
 
   // 2. Silent Background WhatsApp API Dispatch (if UltraMsg API key provided)
