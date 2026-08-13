@@ -1,39 +1,69 @@
 import React from 'react';
+import { WHATSAPP_NUMBER, PHONE_DISPLAY, CONTACT_EMAIL } from '../lib/whatsapp';
 
 export const Footer: React.FC = () => {
   return (
-    <footer className="bg-[#071C38] text-white py-12 px-4 text-center border-t border-[#0D2C54]">
-      <div className="max-w-[1200px] mx-auto space-y-5">
-        
-        {/* Brand Logo & Title */}
-        <div className="flex items-center justify-center gap-3">
-          <img src="/logo.svg" alt="Shree Krishna Group Logo" className="w-8 h-8 object-contain filter brightness-200 contrast-125" />
-          <h3 className="text-xl font-black tracking-tight text-white uppercase">
-            Shree Krishna Group
-          </h3>
+    <footer className="w-full px-4 md:px-12 bg-[#31312c] border-t border-[#bfc9be]/20">
+      {/* Main footer row */}
+      <div className="py-10 md:py-12 flex flex-col md:flex-row justify-between items-start gap-8">
+
+        {/* Brand */}
+        <div className="flex flex-col gap-2">
+          <span className="font-['Archivo_Narrow'] text-xl font-bold text-[#fcf9f2] uppercase tracking-tight">
+            SHREE KRISHNA TRANSPORT
+          </span>
+          <span className="font-['Manrope'] text-xs text-[#f3f0e9]/60 max-w-xs leading-relaxed">
+            Connecting businesses with truck owners &amp; drivers across North India.
+            Quote within 1 hour via WhatsApp.
+          </span>
         </div>
 
-        {/* Copyright Tagline */}
-        <p className="text-xs text-[#B8D1E8] max-w-md mx-auto leading-relaxed font-medium">
-          © {new Date().getFullYear()} Shree Krishna Group. Industrial Excellence in Construction & Logistics.
-        </p>
-
-        {/* Link Grid */}
-        <div className="pt-2 flex flex-wrap justify-center items-center gap-x-8 gap-y-3 text-xs font-bold text-[#E1EBF5] max-w-lg mx-auto">
-          <a href="#about" className="hover:text-white transition-colors">
-            Privacy Policy
+        {/* Contact Info */}
+        <div className="flex flex-col gap-3">
+          <p className="font-['Manrope'] text-[10px] font-bold text-[#f3f0e9]/50 uppercase tracking-wider mb-1">Contact</p>
+          <a
+            href={`https://wa.me/${WHATSAPP_NUMBER}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-2 font-['Space_Mono'] text-xs text-[#e5e2db] hover:text-[#fcc019] transition-colors"
+          >
+            <span className="material-symbols-outlined text-[14px]">chat</span>
+            {PHONE_DISPLAY} (WhatsApp)
           </a>
-          <a href="#services" className="hover:text-white transition-colors">
-            Terms of Service
+          <a
+            href={`tel:+${WHATSAPP_NUMBER}`}
+            className="flex items-center gap-2 font-['Space_Mono'] text-xs text-[#e5e2db] hover:text-[#fcc019] transition-colors"
+          >
+            <span className="material-symbols-outlined text-[14px]">call</span>
+            {PHONE_DISPLAY}
           </a>
-          <a href="#buildtech" className="hover:text-white transition-colors">
-            Safety Standards
-          </a>
-          <a href="#transport" className="hover:text-white transition-colors">
-            Fleet Details
+          <a
+            href={`mailto:${CONTACT_EMAIL}`}
+            className="flex items-center gap-2 font-['Space_Mono'] text-xs text-[#e5e2db] hover:text-[#fcc019] transition-colors"
+          >
+            <span className="material-symbols-outlined text-[14px]">mail</span>
+            {CONTACT_EMAIL}
           </a>
         </div>
 
+        {/* Quick Links */}
+        <div className="flex flex-col gap-3">
+          <p className="font-['Manrope'] text-[10px] font-bold text-[#f3f0e9]/50 uppercase tracking-wider mb-1">Quick Links</p>
+          <a href="#forms" className="font-['Manrope'] text-xs text-[#e5e2db] hover:text-[#fcc019] transition-colors uppercase tracking-wider">Book a Truck</a>
+          <a href="#forms" className="font-['Manrope'] text-xs text-[#e5e2db] hover:text-[#fcc019] transition-colors uppercase tracking-wider">Register Loads</a>
+          <a href="#contact" className="font-['Manrope'] text-xs text-[#e5e2db] hover:text-[#fcc019] transition-colors uppercase tracking-wider">Contact Us</a>
+        </div>
+      </div>
+
+      {/* Bottom bar */}
+      <div className="border-t border-[#bfc9be]/10 py-4 flex flex-col md:flex-row justify-between items-center gap-2">
+        <span className="font-['Manrope'] text-[10px] text-[#f3f0e9]/40 uppercase tracking-wider">
+          © {new Date().getFullYear()} Shree Krishna Transport. All rights reserved.
+        </span>
+        <div className="flex gap-4">
+          <a href="#" className="font-['Manrope'] text-[10px] text-[#f3f0e9]/40 hover:text-[#fcc019] transition-colors uppercase tracking-wider">Privacy Policy</a>
+          <a href="#" className="font-['Manrope'] text-[10px] text-[#f3f0e9]/40 hover:text-[#fcc019] transition-colors uppercase tracking-wider">Terms of Service</a>
+        </div>
       </div>
     </footer>
   );

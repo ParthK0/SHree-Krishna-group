@@ -1,87 +1,261 @@
 @import "tailwindcss";
 
 @theme {
-  --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
-  --color-primary: #0D2C54;
-  --color-primary-dark: #071C38;
-  --color-secondary: #08203E;
-  --color-background: #F0F4F8;
-  --color-section-bg: #E1EBF5;
-  --color-card-bg: #FFFFFF;
-  --color-accent-blue: #133E75;
+  --font-body: 'Inter', 'Manrope', sans-serif;
+  --font-body-md: 'Manrope', sans-serif;
+  --font-data-mono: 'Space Mono', monospace;
+  --font-headline: 'Archivo Narrow', sans-serif;
+  --font-display: 'Archivo Narrow', sans-serif;
+  --font-label: 'Manrope', sans-serif;
+
+  /* Primary brand palette */
+  --color-brand:             #0F6A37;
+  --color-brand-dark:        #134E3A;
+  --color-brand-mid:         #1E8C4F;
+  --color-cta:               #F4B400;
+  --color-cta-hover:         #e0a500;
+
+  /* Surface palette */
+  --color-bg:                #ECE6DD;
+  --color-surface:           #fcf9f2;
+  --color-surface-alt:       #E0D9CE;
+  --color-surface-green:     #EBF5EE;
+
+  /* M3 semantic tokens (kept for compat) */
+  --color-primary:           #0F6A37;
+  --color-primary-container: #1c6b3e;
+  --color-on-primary:        #ffffff;
+  --color-on-primary-container: #9be9b0;
+  --color-inverse-primary:   #8ad7a0;
+
+  --color-secondary:         #785900;
+  --color-secondary-container: #fcc019;
+  --color-on-secondary-container: #6c5000;
+
+  --color-background:        #ECE6DD;
+  --color-on-background:     #1a1f1b;
+  --color-on-surface:        #1a1f1b;
+  --color-on-surface-variant: #3d4a3f;
+  --color-surface-container-low: #f1f5f2;
+  --color-surface-container-high: #e5ebe7;
+  --color-surface-container: #eaf0ec;
+  --color-surface-variant:   #dde5de;
+
+  --color-outline:           #6b786d;
+  --color-outline-variant:   #b8c9bb;
+
+  --color-inverse-surface:   #2a2f2b;
+  --color-inverse-on-surface: #eef3ef;
 }
 
+/* ─── Base ──────────────────────────────────────── */
 @layer base {
-  html {
-    scroll-behavior: smooth;
-  }
-  
+  html { scroll-behavior: smooth; }
+
   body {
-    font-family: var(--font-sans);
-    background-color: #F0F4F8;
-    color: #0A192F;
+    font-family: 'Inter', 'Manrope', sans-serif;
+    background-color: #ECE6DD;
+    color: #1a1f1b;
+    -webkit-font-smoothing: antialiased;
   }
+
+  * { box-sizing: border-box; }
 }
 
-/* UI Components oriented to #0D2C54 Logo Blue Palette */
-.btn-dark-navy {
-  background-color: #0D2C54;
-  color: #FFFFFF;
+/* ─── Animations ────────────────────────────────── */
+@keyframes truck-slide {
+  0%   { transform: translateX(-120px); opacity: 0; }
+  8%   { opacity: 0.55; }
+  88%  { opacity: 0.55; }
+  100% { transform: translateX(calc(100vw + 120px)); opacity: 0; }
+}
+
+@keyframes route-fill {
+  0%   { stroke-dashoffset: 100; opacity: 0.3; }
+  100% { stroke-dashoffset: 0;   opacity: 1;   }
+}
+
+@keyframes pulse-dot {
+  0%, 100% { transform: scale(1);   opacity: 1; }
+  50%       { transform: scale(1.4); opacity: 0.7; }
+}
+
+@keyframes count-up-fade {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes arrow-bounce {
+  0%, 100% { transform: translateX(0); }
+  50%       { transform: translateX(5px); }
+}
+
+@keyframes spin-smooth {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+@keyframes draw-check {
+  from { stroke-dashoffset: 40; }
+  to   { stroke-dashoffset: 0; }
+}
+
+@keyframes float-bg {
+  0%, 100% { transform: translateY(0) translateX(0); }
+  33%       { transform: translateY(-6px) translateX(4px); }
+  66%       { transform: translateY(4px) translateX(-3px); }
+}
+
+/* ─── Truck animation ───────────────────────────── */
+.truck-animate {
+  animation: truck-slide 10s ease-in-out infinite;
+  animation-delay: 1s;
+}
+
+/* ─── Arrow bounce ──────────────────────────────── */
+.group:hover .arrow-slide {
+  animation: arrow-bounce 0.6s ease-in-out;
+}
+
+/* ─── Floating BG ───────────────────────────────── */
+.float-bg {
+  animation: float-bg 12s ease-in-out infinite;
+}
+
+/* ─── Spinner ───────────────────────────────────── */
+.spinner {
+  animation: spin-smooth 0.8s linear infinite;
+}
+
+/* ─── Draw check ─────────────────────────────────── */
+.draw-check {
+  stroke-dasharray: 40;
+  stroke-dashoffset: 40;
+  animation: draw-check 0.4s ease forwards;
+}
+
+/* ─── Floating Labels ────────────────────────────── */
+.float-label-wrap {
+  position: relative;
+}
+
+.float-label-wrap label {
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  font-family: 'Manrope', sans-serif;
+  font-size: 0.75rem;
   font-weight: 700;
-  text-transform: none;
-  border-radius: 0.125rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #6b786d;
   transition: all 0.2s ease;
-}
-.btn-dark-navy:hover {
-  background-color: #071C38;
-  box-shadow: 0 4px 12px rgba(13, 44, 84, 0.2);
+  pointer-events: none;
+  padding: 0 2px;
 }
 
-.btn-dark-charcoal {
-  background-color: #08203E;
-  color: #FFFFFF;
-  font-weight: 700;
-  text-transform: none;
-  border-radius: 0.125rem;
-  transition: all 0.2s ease;
-}
-.btn-dark-charcoal:hover {
-  background-color: #041226;
-  box-shadow: 0 4px 12px rgba(8, 32, 62, 0.25);
+.float-label-wrap input:focus + label,
+.float-label-wrap input:not(:placeholder-shown) + label,
+.float-label-wrap select:focus + label,
+.float-label-wrap select:not([value=""]) + label {
+  top: -10px;
+  transform: translateY(0);
+  font-size: 0.6rem;
+  color: #0F6A37;
+  background: transparent;
 }
 
-.btn-light-flat {
-  background-color: #E1EBF5;
-  border: 1px solid #B8D1E8;
-  color: #0D2C54;
-  font-weight: 700;
-  border-radius: 0.125rem;
-  transition: all 0.2s ease;
-}
-.btn-light-flat:hover {
-  background-color: #D3E2F2;
-  border-color: #0D2C54;
-}
-
-.input-flat {
-  border: 1px solid #B8D1E8;
-  background-color: #FFFFFF;
-  color: #0A192F;
-  border-radius: 0.125rem;
-  padding: 0.75rem 1rem;
+/* ─── Input base ─────────────────────────────────── */
+.sk-input {
   width: 100%;
+  background: transparent;
+  border: none;
+  border-bottom: 2px solid #b8c9bb;
+  border-radius: 0;
+  padding: 10px 0 6px;
+  font-family: 'Space Mono', monospace;
   font-size: 0.875rem;
-}
-.input-flat:focus {
-  border-color: #0D2C54;
+  color: #1a1f1b;
+  transition: border-color 0.25s ease, box-shadow 0.25s ease;
   outline: none;
-  box-shadow: 0 0 0 1px #0D2C54;
 }
 
-.section-bg-slate {
-  background-color: #E1EBF5;
+.sk-input:focus {
+  border-bottom-color: #0F6A37;
+  box-shadow: 0 2px 0 0 rgba(15, 106, 55, 0.2);
 }
 
+/* ─── Gradient buttons ────────────────────────────── */
+.btn-brand {
+  background: linear-gradient(135deg, #0F6A37 0%, #1E8C4F 100%);
+  color: #ffffff;
+  font-family: 'Manrope', sans-serif;
+  font-weight: 700;
+  font-size: 0.75rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 14px 32px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: transform 0.25s ease, box-shadow 0.25s ease, background 0.25s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.btn-brand:hover {
+  transform: translateY(-2px) scale(1.03);
+  box-shadow: 0 8px 24px rgba(15, 106, 55, 0.35);
+  background: linear-gradient(135deg, #1E8C4F 0%, #0F6A37 100%);
+}
+
+.btn-brand:active {
+  transform: scale(0.98);
+  box-shadow: none;
+}
+
+.btn-outline-light {
+  background: transparent;
+  color: #9be9b0;
+  font-family: 'Manrope', sans-serif;
+  font-weight: 700;
+  font-size: 0.75rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 13px 32px;
+  border: 2px solid #9be9b0;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: transform 0.25s ease, box-shadow 0.25s ease, background 0.25s ease, color 0.25s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.btn-outline-light:hover {
+  background: rgba(155, 233, 176, 0.12);
+  transform: translateY(-2px) scale(1.03);
+  box-shadow: 0 6px 20px rgba(155, 233, 176, 0.2);
+}
+
+.btn-outline-light:active {
+  transform: scale(0.98);
+}
+
+/* ─── Card hover ─────────────────────────────────── */
+.hover-lift {
+  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+}
+
+.hover-lift:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 16px 40px rgba(15, 106, 55, 0.12);
+  border-color: #0F6A37 !important;
+}
+
+/* ─── Material Symbols ───────────────────────────── */
 .material-symbols-outlined {
   font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
   display: inline-block;
