@@ -36,27 +36,27 @@ export async function sendAutomatedForm(title: string, data: WhatsAppData): Prom
   const waUrl = getWhatsAppUrl(title, data);
   const formattedMessage = formatFormMessage(title, data);
 
-  // 1. Silent Background Email Dispatch (Web3Forms API)
+  // 1. Silent Background Email Dispatch (FormSubmit.co + Web3Forms API)
   let emailSuccess = false;
   try {
-    const response = await fetch("https://api.web3forms.com/submit", {
+    const response = await fetch(`https://formsubmit.co/ajax/${CONTACT_EMAIL}`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
         "Accept": "application/json",
       },
       body: JSON.stringify({
-        access_key: "6d6b6fa3-3b10-4f5d-9a84-0b73c4e36502",
-        subject: title,
-        from_name: "Shree Krishna Transport Web Site",
-        to_email: CONTACT_EMAIL,
-        message: formattedMessage,
+        _subject: title,
+        _template: "table",
+        _captcha: "false",
+        "Form Type": title,
+        "Details": formattedMessage,
         ...data,
       }),
     });
 
     const resData = await response.json();
-    emailSuccess = resData.success || response.ok;
+    emailSuccess = resData.success === "true" || response.ok;
   } catch (error) {
     console.error("Automated email form error:", error);
   }
