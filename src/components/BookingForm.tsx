@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { sendWhatsAppMessage } from '../lib/whatsapp';
+import { sendDualFormSubmission } from '../lib/whatsapp';
 import { Truck, Loader2, CheckCircle2 } from 'lucide-react';
 
 type LoadingStep = 'idle' | 'checking' | 'matching' | 'preparing' | 'done';
@@ -78,7 +78,7 @@ export const BookingForm: React.FC = () => {
     setTimeout(() => setLoadingStep('preparing'), 850);
     setTimeout(() => {
       setLoadingStep('done');
-      sendWhatsAppMessage('SHREE KRISHNA TRANSPORT — NEW BOOKING', {
+      sendDualFormSubmission('SHREE KRISHNA TRANSPORT — NEW BOOKING', {
         'Pickup': formData.pickup,
         'Drop': formData.drop,
         'Goods': formData.goods,

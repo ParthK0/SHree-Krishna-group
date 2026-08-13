@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { sendWhatsAppMessage } from '../lib/whatsapp';
+import { sendDualFormSubmission } from '../lib/whatsapp';
 import { Navigation, CheckCircle2 } from 'lucide-react';
 
 const inputClass = 'sk-input';
@@ -23,7 +23,7 @@ export const DriverForm: React.FC = () => {
       alert('Please fill in all required fields.');
       return;
     }
-    sendWhatsAppMessage('SHREE KRISHNA TRANSPORT — DRIVER REGISTRATION', {
+    sendDualFormSubmission('SHREE KRISHNA TRANSPORT — DRIVER REGISTRATION', {
       'Name': formData.name,
       'Mobile': formData.phone,
       'Vehicle Number': formData.vehicleNumber,
