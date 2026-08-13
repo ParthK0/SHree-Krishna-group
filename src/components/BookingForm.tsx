@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { sendDualFormSubmission } from '../lib/whatsapp';
-import { Truck, Loader2, CheckCircle2 } from 'lucide-react';
+import { sendAutomatedForm, sendWhatsAppMessage } from '../lib/whatsapp';
+import { Truck, Loader2, CheckCircle2, MessageCircle } from 'lucide-react';
 
 type LoadingStep = 'idle' | 'checking' | 'matching' | 'preparing' | 'done';
 
@@ -42,8 +42,8 @@ const Field: React.FC<FieldProps> = ({ label, name, value, onChange, placeholder
 const stepMessages: Record<LoadingStep, string> = {
   idle: '',
   checking: 'Checking available trucks...',
-  matching: 'Finding best match...',
-  preparing: 'Preparing WhatsApp message...',
+  matching: 'Sending booking details to dispatcher...',
+  preparing: 'Sending notification to email...',
   done: '',
 };
 
@@ -59,37 +59,49 @@ export const BookingForm: React.FC = () => {
     truck: 'Not sure', date: '', name: '', phone: '',
   });
   const [loadingStep, setLoadingStep] = useState<LoadingStep>('idle');
+  const [waUrl, setWaUrl] = useState<string>('');
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!formData.pickup || !formData.drop || !formData.goods || !formData.name || !formData.phone) {
       alert('Please fill in all required fields.');
       return;
     }
 
-    // Animated loading sequence
     setLoadingStep('checking');
-    setTimeout(() => setLoadingStep('matching'), 450);
-    setTimeout(() => setLoadingStep('preparing'), 850);
-    setTimeout(() => {
-      setLoadingStep('done');
-      sendDualFormSubmission('SHREE KRISHNA TRANSPORT — NEW BOOKING', {
-        'Pickup': formData.pickup,
-        'Drop': formData.drop,
-        'Goods': formData.goods,
-        'Weight': formData.weight,
-        'Truck Type': formData.truck,
-        'Date': formData.date,
-        'Customer': formData.name,
-        'Mobile': formData.phone,
-      });
-      setTimeout(() => setLoadingStep('idle'), 4000);
-    }, 1200);
+    setTimeout(() => setLoadingStep('matching'), 400);
+    setTimeout(() => setLoadingStep('preparing'), 800);
+
+    const result = await sendAutomatedForm('SHREE KRISHNA TRANSPORT — NEW BOOKING', {
+      'Pickup': formData.pickup,
+      'Drop': formData.drop,
+      'Goods': formData.goods,
+      'Weight': formData.weight,
+      'Truck Type': formData.truck,
+      'Date': formData.date,
+      'Customer': formData.name,
+      'Mobile': formData.phone,
+    });
+
+    setWaUrl(result.waUrl);
+    setLoadingStep('done');
+
+    // Auto-open WhatsApp tab silently in parallel if supported
+    sendWhatsAppMessage('SHREE KRISHNA TRANSPORT — NEW BOOKING', {
+      'Pickup': formData.pickup,
+      'Drop': formData.drop,
+      'Goods': formData.goods,
+      'Weight': formData.weight,
+      'Truck Type': formData.truck,
+      'Date': formData.date,
+      'Customer': formData.name,
+      'Mobile': formData.phone,
+    });
   };
 
   const isLoading = loadingStep !== 'idle' && loadingStep !== 'done';
@@ -152,9 +164,22 @@ export const BookingForm: React.FC = () => {
         )}
 
         {loadingStep === 'done' && (
-          <div className="bg-[#EBF5EE] border border-[#0F6A37]/30 rounded-lg px-4 py-3 flex items-center gap-2 font-['Manrope'] text-xs font-bold text-[#0F6A37]">
-            <CheckCircle2 size={16} className="text-[#0F6A37]" />
-            Booking request sent on WhatsApp! Check your app.
+          <div className="bg-[#EBF5EE] border border-[#0F6A37]/30 rounded-lg p-4 flex flex-col gap-3">
+            <div className="flex items-center gap-2 font-['Manrope'] text-xs font-bold text-[#0F6A37]">
+              <CheckCircle2 size={18} className="text-[#0F6A37] shrink-0" />
+              <span>Booking details automatically sent to email &amp; WhatsApp! We will call you shortly.</span>
+            </div>
+            {waUrl && (
+              <a
+                href={waUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-1.5 font-['Manrope'] text-xs font-bold text-[#0F6A37] hover:underline"
+              >
+                <MessageCircle size={14} />
+                Click here if WhatsApp didn't open automatically
+              </a>
+            )}
           </div>
         )}
 

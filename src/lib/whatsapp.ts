@@ -14,34 +14,47 @@ export function formatFormMessage(title: string, data: WhatsAppData): string {
   return `${title}\n\n${formattedLines.join("\n")}`;
 }
 
-export function sendWhatsAppMessage(title: string, data: WhatsAppData): void {
+export function getWhatsAppUrl(title: string, data: WhatsAppData): string {
   const formattedLines = Object.entries(data)
     .filter(([_, value]) => value && value.trim() !== "")
     .map(([key, value]) => `*${key}:* ${value?.trim()}`);
 
   const message = `*${title}*\n\n${formattedLines.join("\n")}`;
-  const encodedUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
-  
+  return `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
+}
+
+export function sendWhatsAppMessage(title: string, data: WhatsAppData): void {
+  const encodedUrl = getWhatsAppUrl(title, data);
   window.open(encodedUrl, "_blank", "noopener,noreferrer");
 }
 
-export function sendEmailNotification(title: string, data: WhatsAppData): void {
-  const bodyText = formatFormMessage(title, data);
-  const subject = encodeURIComponent(title);
-  const body = encodeURIComponent(bodyText);
-  const mailtoUrl = `mailto:${CONTACT_EMAIL}?subject=${subject}&body=${body}`;
-  
-  // Triggers client email app with pre-filled content
-  window.location.href = mailtoUrl;
+export async function sendAutomatedForm(title: string, data: WhatsAppData): Promise<{ success: boolean; waUrl: string }> {
+  const waUrl = getWhatsAppUrl(title, data);
+  const formattedMessage = formatFormMessage(title, data);
+
+  try {
+    const response = await fetch("https://api.web3forms.com/submit", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Accept": "application/json",
+      },
+      body: JSON.stringify({
+        access_key: "6d6b6fa3-3b10-4f5d-9a84-0b73c4e36502",
+        subject: title,
+        from_name: "Shree Krishna Transport Web Site",
+        to_email: CONTACT_EMAIL,
+        message: formattedMessage,
+        ...data,
+      }),
+    });
+
+    const resData = await response.json();
+    return { success: resData.success || response.ok, waUrl };
+  } catch (error) {
+    console.error("Automated form error:", error);
+    return { success: false, waUrl };
+  }
 }
 
-export function sendDualFormSubmission(title: string, data: WhatsAppData): void {
-  // 1. Open WhatsApp tab with formatted message
-  sendWhatsAppMessage(title, data);
-
-  // 2. Also trigger email client fallback or notification
-  setTimeout(() => {
-    sendEmailNotification(title, data);
-  }, 600);
-}
 

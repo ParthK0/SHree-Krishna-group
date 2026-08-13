@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { sendDualFormSubmission } from '../lib/whatsapp';
-import { Navigation, CheckCircle2 } from 'lucide-react';
+import { sendAutomatedForm, sendWhatsAppMessage } from '../lib/whatsapp';
+import { Navigation, CheckCircle2, MessageCircle } from 'lucide-react';
 
 const inputClass = 'sk-input';
 const labelClass = "block font-['Manrope'] text-[10px] font-bold text-[#6b786d] uppercase tracking-widest mb-1.5";
@@ -11,19 +11,21 @@ export const DriverForm: React.FC = () => {
     vehicleType: '', capacity: '', location: '', routes: '',
   });
   const [submitted, setSubmitted] = useState(false);
+  const [waUrl, setWaUrl] = useState<string>('');
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!formData.name || !formData.phone || !formData.vehicleNumber || !formData.vehicleType || !formData.location) {
       alert('Please fill in all required fields.');
       return;
     }
-    sendDualFormSubmission('SHREE KRISHNA TRANSPORT — DRIVER REGISTRATION', {
+
+    const result = await sendAutomatedForm('SHREE KRISHNA TRANSPORT — DRIVER REGISTRATION', {
       'Name': formData.name,
       'Mobile': formData.phone,
       'Vehicle Number': formData.vehicleNumber,
@@ -32,8 +34,19 @@ export const DriverForm: React.FC = () => {
       'Current Location': formData.location,
       'Preferred Routes': formData.routes,
     });
+
+    setWaUrl(result.waUrl);
     setSubmitted(true);
-    setTimeout(() => setSubmitted(false), 5000);
+
+    sendWhatsAppMessage('SHREE KRISHNA TRANSPORT — DRIVER REGISTRATION', {
+      'Name': formData.name,
+      'Mobile': formData.phone,
+      'Vehicle Number': formData.vehicleNumber,
+      'Vehicle Type': formData.vehicleType,
+      'Capacity': formData.capacity,
+      'Current Location': formData.location,
+      'Preferred Routes': formData.routes,
+    });
   };
 
   return (
@@ -85,9 +98,22 @@ export const DriverForm: React.FC = () => {
         </div>
 
         {submitted && (
-          <div className="bg-[#EBF5EE] border border-[#0F6A37]/30 rounded-lg px-4 py-3 flex items-center gap-2 font-['Manrope'] text-xs font-bold text-[#0F6A37]">
-            <CheckCircle2 size={16} />
-            Registration sent on WhatsApp! We'll be in touch soon.
+          <div className="bg-[#EBF5EE] border border-[#0F6A37]/30 rounded-lg p-4 flex flex-col gap-3">
+            <div className="flex items-center gap-2 font-['Manrope'] text-xs font-bold text-[#0F6A37]">
+              <CheckCircle2 size={18} className="shrink-0" />
+              <span>Registration details automatically sent to email &amp; WhatsApp! We will reach out shortly.</span>
+            </div>
+            {waUrl && (
+              <a
+                href={waUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-1.5 font-['Manrope'] text-xs font-bold text-[#0F6A37] hover:underline"
+              >
+                <MessageCircle size={14} />
+                Click here if WhatsApp didn't open automatically
+              </a>
+            )}
           </div>
         )}
 
