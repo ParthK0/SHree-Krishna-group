@@ -60,7 +60,7 @@ export const TwoPathSplit: React.FC = () => {
               className={
                 card.cta === 'Book a Truck'
                   ? "inline-flex items-center justify-center gap-2 bg-[#F4B400] hover:bg-[#e0a500] text-[#6c5000] font-['Manrope'] font-extrabold text-xs px-5 py-3 rounded-lg shadow-sm transition-all duration-200 uppercase tracking-wider self-start"
-                  : "inline-flex items-center gap-2 font-['Manrope'] text-xs font-bold text-[#0F6A37] hover:text-[#134E3A] uppercase tracking-wider group-hover:gap-3 transition-all duration-200 self-start"
+                  : "inline-flex items-center justify-center gap-2 bg-[#0F6A37] hover:bg-[#0c562c] text-white font-['Manrope'] font-extrabold text-xs px-5 py-3 rounded-lg shadow-sm transition-all duration-200 uppercase tracking-wider self-start"
               }
             >
               {card.cta}
