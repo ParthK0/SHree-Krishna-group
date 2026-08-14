@@ -8,10 +8,17 @@ export const Footer: React.FC = () => {
       <div className="py-10 md:py-12 flex flex-col md:flex-row justify-between items-start gap-8">
 
         {/* Brand */}
-        <div className="flex flex-col gap-2">
-          <span className="font-['Archivo_Narrow'] text-xl font-bold text-[#fcf9f2] uppercase tracking-tight">
-            SHREE KRISHNA TRANSPORT
-          </span>
+        <div className="flex flex-col gap-3">
+          <div className="flex items-center gap-3">
+            <img
+              alt="Shree Krishna Transport Logo"
+              className="h-10 w-auto object-contain"
+              src="/images/logo.png"
+            />
+            <span className="font-['Archivo_Narrow'] text-xl font-bold text-[#fcf9f2] uppercase tracking-tight">
+              SHREE KRISHNA TRANSPORT
+            </span>
+          </div>
           <span className="font-['Manrope'] text-xs text-[#f3f0e9]/60 max-w-xs leading-relaxed">
             Connecting businesses with truck owners &amp; drivers across North India.
             Quote within 1 hour via WhatsApp.

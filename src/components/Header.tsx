@@ -36,11 +36,11 @@ export const Header: React.FC = () => {
         }`}
       >
         {/* Brand */}
-        <a href="#" className="flex items-center gap-2.5 group shrink-0">
+        <a href="#" className="flex items-center gap-3 group shrink-0">
           <img
             alt="Shree Krishna Transport Logo"
-            className={`object-contain transition-all duration-300 ${scrolled ? 'h-7' : 'h-8'}`}
-            src="/logo.svg"
+            className={`object-contain transition-all duration-300 ${scrolled ? 'h-9 md:h-10' : 'h-10 md:h-12'}`}
+            src="/images/logo.png"
           />
           <span className={`font-['Archivo_Narrow'] font-bold tracking-tight text-[#1a1f1b] uppercase transition-all duration-300 ${scrolled ? 'text-base sm:text-lg' : 'text-lg sm:text-xl'}`}>
             SHREE KRISHNA TRANSPORT
