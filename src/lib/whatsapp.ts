@@ -32,10 +32,10 @@ export function sendWhatsAppMessage(title: string, data: WhatsAppData): void {
   window.open(encodedUrl, "_blank", "noopener,noreferrer");
 }
 
-// Optional EmailJS keys for 100% direct, zero-redirect, zero-spam Gmail delivery
-export const EMAILJS_SERVICE_ID  = ""; // e.g. "service_abc123"
-export const EMAILJS_TEMPLATE_ID = ""; // e.g. "template_xyz789"
-export const EMAILJS_PUBLIC_KEY  = ""; // e.g. "user_pk_12345"
+// EmailJS keys for 100% direct, zero-redirect, zero-spam Gmail delivery
+export const EMAILJS_SERVICE_ID  = "service_tf9b0lo";
+export const EMAILJS_TEMPLATE_ID = "template_6ju4zft";
+export const EMAILJS_PUBLIC_KEY  = "tckkT8QZp1MrQSKCL";
 
 export async function sendAutomatedForm(title: string, data: WhatsAppData): Promise<{ success: boolean; waUrl: string }> {
   const waUrl = getWhatsAppUrl(title, data);

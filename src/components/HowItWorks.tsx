@@ -6,29 +6,29 @@ const steps = [
   {
     num: '01',
     icon: <MapPin size={20} />,
-    title: 'Tell us your trip',
-    desc: 'Provide pickup, drop-off, goods type, and load details via our form.',
+    title: 'Submit Load Details',
+    desc: 'Enter pickup, destination, goods type, and weight in our simple form.',
     highlight: false,
   },
   {
     num: '02',
-    icon: <Search size={20} />,
-    title: 'Check availability',
-    desc: 'We verify trucks in our network that match your route and load.',
+    icon: <MessageCircle size={20} />,
+    title: 'WhatsApp Quote',
+    desc: 'Receive a competitive, transparent freight quote within 1 hour.',
     highlight: false,
   },
   {
     num: '03',
-    icon: <MessageCircle size={20} />,
-    title: 'Get a quote',
-    desc: 'Receive a freight quote via WhatsApp within 1 hour — guaranteed.',
+    icon: <Search size={20} />,
+    title: 'Verified Truck Match',
+    desc: 'We match your load with vetted, route-verified trucks in our fleet.',
     highlight: false,
   },
   {
     num: '04',
     icon: <CheckCircle2 size={20} />,
-    title: 'Confirmed',
-    desc: 'Booking locked. Truck & driver dispatched on agreed date.',
+    title: 'Dispatch & Delivery',
+    desc: 'Truck assigned and dispatched on your schedule with full coordination.',
     highlight: true,
   },
 ];
@@ -45,7 +45,7 @@ const cardVariants = {
 
 export const HowItWorks: React.FC = () => {
   return (
-    <section className="px-4 md:px-12 py-12 md:py-16 bg-[#ECE6DD] border-y border-[#d5ceC4]">
+    <section id="how-it-works" className="px-4 md:px-12 py-12 md:py-16 bg-[#ECE6DD] border-y border-[#d5ceC4]">
       <div className="mb-10">
         <p className="font-['Manrope'] text-xs font-bold text-[#6b786d] uppercase tracking-widest mb-2">Process</p>
         <h2 className="font-['Archivo_Narrow'] text-2xl md:text-3xl font-bold uppercase text-[#1a1f1b]">

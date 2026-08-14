@@ -23,7 +23,7 @@ const cards = [
 
 export const TwoPathSplit: React.FC = () => {
   return (
-    <section className="px-4 md:px-12 py-12 md:py-16 bg-[#ECE6DD]">
+    <section id="services" className="px-4 md:px-12 py-12 md:py-16 bg-[#ECE6DD]">
       <div className="mb-8">
         <p className="font-['Manrope'] text-xs font-bold text-[#6b786d] uppercase tracking-widest mb-2">Choose your path</p>
         <h2 className="font-['Archivo_Narrow'] text-2xl md:text-4xl font-bold uppercase text-[#1a1f1b]">

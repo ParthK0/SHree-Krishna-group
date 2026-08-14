@@ -1,32 +1,38 @@
-# React + TypeScript + Vite
+# 🚚 Shree Krishna Group Transportation
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+High-performance, modern industrial logistics web application for **Shree Krishna Group Transportation** (Jaipur, Rajasthan). Built with **React 19, TypeScript, Vite, Tailwind CSS, Framer Motion, and Lucide React**.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## 📄 Project Documentation
 
-## React Compiler
+For complete details on project vision, component structure, dual-dispatch WhatsApp/Email pipeline, and design specifications, please refer to:
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+👉 **[PROJECT_OVERVIEW.md](./PROJECT_OVERVIEW.md)**
 
-## Expanding the Oxlint configuration
+---
 
-If you are developing a production application, we recommend enabling type-aware lint rules by installing `oxlint-tsgolint` and editing `.oxlintrc.json`:
+## ⚡ Quick Start
 
-```json
-{
-  "$schema": "./node_modules/oxlint/configuration_schema.json",
-  "plugins": ["react", "typescript", "oxc"],
-  "options": {
-    "typeAware": true
-  },
-  "rules": {
-    "react/rules-of-hooks": "error",
-    "react/only-export-components": ["warn", { "allowConstantExport": true }]
-  }
-}
+### 1. Install Dependencies
+```bash
+npm install
 ```
 
-See the [Oxlint rules documentation](https://oxc.rs/docs/guide/usage/linter/rules) for the full list of rules and categories.
+### 2. Start Development Server
+```bash
+npm run dev
+```
+
+### 3. Build for Production
+```bash
+npm run build
+```
+
+---
+
+## 🛠️ Tech Stack & Features
+- **Frontend Framework:** React 19 + TypeScript + Vite
+- **Styling:** Tailwind CSS v4 + Modern Industrial Theme Tokens (`#ECE6DD`, `#0F6A37`, `#1a1f1b`, `#F4B400`)
+- **Lead Pipeline:** Dual EmailJS API forwarding + Instant WhatsApp auto-linking (`wa.me`)
+- **Assets:** WebP image optimization & WCAG 2.2 AA accessibility standards

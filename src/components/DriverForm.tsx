@@ -1,129 +1,384 @@
 import React, { useState } from 'react';
 import { sendAutomatedForm, sendWhatsAppMessage } from '../lib/whatsapp';
-import { Navigation, CheckCircle2, MessageCircle } from 'lucide-react';
+import { Navigation, CheckCircle2, MessageCircle, ArrowRight, ArrowLeft, AlertCircle } from 'lucide-react';
 
 const inputClass = 'sk-input';
-const labelClass = "block font-['Manrope'] text-[10px] font-bold text-[#6b786d] uppercase tracking-widest mb-1.5";
+const labelClass = "block font-['Manrope'] text-[10px] font-bold text-[#4A554C] uppercase tracking-widest mb-1.5";
+
+// Validation helpers
+const validatePhone = (phone: string) => /^[6-9]\d{9}$/.test(phone.trim());
+const validateName = (name: string) => /^[a-zA-Z\s\.]{3,50}$/.test(name.trim());
+const validateLocation = (loc: string) => loc.trim().length >= 2 && /[a-zA-Z]/.test(loc);
+
+// Indian Driving Licence (DL) format validator (e.g., RJ14 2021 0000123 or RJ14-20210000123)
+const validateDL = (dl: string) => {
+  const cleanDL = dl.trim().replace(/[\s\-]/g, '').toUpperCase();
+  const indianStateCodes = /^(AN|AP|AR|AS|BR|CG|CH|DD|DL|DN|GA|GJ|HR|HP|JH|JK|KA|KL|LA|LD|MH|ML|MN|MP|MZ|NL|OD|PB|PY|RJ|SK|TN|TR|TS|UK|UP|WB)/;
+  if (!indianStateCodes.test(cleanDL)) return false;
+  return cleanDL.length >= 13 && cleanDL.length <= 16 && /^[A-Z]{2}[0-9]{11,14}$/.test(cleanDL);
+};
+
+const validateVehicleNo = (vNo: string) => /^[A-Z]{2}[0-9]{1,2}[A-Z]{1,3}[0-9]{4}$/i.test(vNo.replace(/\s+/g, ''));
+const validateCapacity = (cap: string) => cap.trim().length >= 1 && /\d/.test(cap);
 
 export const DriverForm: React.FC = () => {
+  const [currentStep, setCurrentStep] = useState<1 | 2>(1);
   const [formData, setFormData] = useState({
-    name: '', phone: '', vehicleNumber: '',
-    vehicleType: '', capacity: '', location: '', routes: '',
+    name: '',
+    phone: '',
+    dlNumber: '',
+    vehicleNumber: '',
+    vehicleType: '',
+    customVehicleType: '',
+    capacity: '',
+    location: '',
+    isOwner: true,
+    ownerName: '',
+    // Step 2 optional fields
+    routes: '',
+    permitExpiry: '',
+    fitnessExpiry: '',
+    insuranceExpiry: '',
+    pucExpiry: '',
+    emergencyContact: '',
   });
+  const [errors, setErrors] = useState<Record<string, string>>({});
   const [submitted, setSubmitted] = useState(false);
   const [waUrl, setWaUrl] = useState<string>('');
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
-    const { name, value } = e.target;
-    setFormData((prev) => ({ ...prev, [name]: value }));
+    const { name, value, type } = e.target;
+    if (type === 'checkbox') {
+      const checked = (e.target as HTMLInputElement).checked;
+      setFormData((prev) => ({ ...prev, [name]: checked }));
+    } else {
+      setFormData((prev) => ({ ...prev, [name]: value }));
+    }
+    if (errors[name]) {
+      setErrors((prev) => ({ ...prev, [name]: '' }));
+    }
+  };
+
+  const validateStep1 = (): boolean => {
+    const newErrors: Record<string, string> = {};
+    if (!validateName(formData.name)) {
+      newErrors.name = 'Enter a valid full name (at least 3 letters)';
+    }
+    if (!validatePhone(formData.phone)) {
+      newErrors.phone = 'Enter a valid 10-digit mobile number starting with 6-9';
+    }
+    if (!validateDL(formData.dlNumber)) {
+      newErrors.dlNumber = 'Enter a valid Indian DL Number (e.g. RJ1420210000123)';
+    }
+    if (!validateVehicleNo(formData.vehicleNumber)) {
+      newErrors.vehicleNumber = 'Enter a valid Vehicle Registration No. (e.g. RJ14GB1234)';
+    }
+    if (!formData.vehicleType) {
+      newErrors.vehicleType = 'Please select a Vehicle Type';
+    }
+    if (formData.vehicleType === 'Other' && (!formData.customVehicleType || formData.customVehicleType.trim().length < 2)) {
+      newErrors.customVehicleType = 'Please specify your custom vehicle type';
+    }
+    if (!validateCapacity(formData.capacity)) {
+      newErrors.capacity = 'Enter a valid capacity (e.g. 5 Ton or 20 Ton)';
+    }
+    if (!validateLocation(formData.location)) {
+      newErrors.location = 'Enter a valid current location (e.g. Jaipur)';
+    }
+    if (!formData.isOwner && !validateName(formData.ownerName)) {
+      newErrors.ownerName = 'Enter a valid owner full name';
+    }
+
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
+
+  const validateStep2 = (): boolean => {
+    const newErrors: Record<string, string> = {};
+    if (formData.emergencyContact && !validatePhone(formData.emergencyContact)) {
+      newErrors.emergencyContact = 'Enter a valid 10-digit mobile number starting with 6-9';
+    }
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
+
+  const handleNext = () => {
+    if (validateStep1()) {
+      setCurrentStep(2);
+    }
+  };
+
+  const handleBack = () => {
+    setCurrentStep(1);
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!formData.name || !formData.phone || !formData.vehicleNumber || !formData.vehicleType || !formData.location) {
-      alert('Please fill in all required fields.');
+    if (!validateStep1()) {
+      setCurrentStep(1);
+      return;
+    }
+    if (!validateStep2()) {
       return;
     }
 
-    const result = await sendAutomatedForm('SHREE KRISHNA TRANSPORT — DRIVER REGISTRATION', {
-      'Name': formData.name,
-      'Mobile': formData.phone,
+    const payload: Record<string, string> = {
+      'Full Name': formData.name,
+      'Mobile Number': formData.phone,
+      'Driving Licence No': formData.dlNumber,
       'Vehicle Number': formData.vehicleNumber,
-      'Vehicle Type': formData.vehicleType,
+      'Vehicle Type': formData.vehicleType === 'Other' ? (formData.customVehicleType || 'Other') : formData.vehicleType,
       'Capacity': formData.capacity,
       'Current Location': formData.location,
-      'Preferred Routes': formData.routes,
-    });
+      'Driver is Owner': formData.isOwner ? 'Yes' : 'No',
+    };
+
+    if (!formData.isOwner && formData.ownerName) {
+      payload['Vehicle Owner Name'] = formData.ownerName;
+    }
+
+    if (formData.routes) payload['Preferred Routes'] = formData.routes;
+    if (formData.permitExpiry) payload['Permit Valid Until'] = formData.permitExpiry;
+    if (formData.fitnessExpiry) payload['Fitness Valid Until'] = formData.fitnessExpiry;
+    if (formData.insuranceExpiry) payload['Insurance Valid Until'] = formData.insuranceExpiry;
+    if (formData.pucExpiry) payload['PUC Valid Until'] = formData.pucExpiry;
+    if (formData.emergencyContact) payload['Emergency Contact'] = formData.emergencyContact;
+
+    const result = await sendAutomatedForm('SHREE KRISHNA TRANSPORT — DRIVER REGISTRATION', payload);
 
     setWaUrl(result.waUrl);
     setSubmitted(true);
 
-    sendWhatsAppMessage('SHREE KRISHNA TRANSPORT — DRIVER REGISTRATION', {
-      'Name': formData.name,
-      'Mobile': formData.phone,
-      'Vehicle Number': formData.vehicleNumber,
-      'Vehicle Type': formData.vehicleType,
-      'Capacity': formData.capacity,
-      'Current Location': formData.location,
-      'Preferred Routes': formData.routes,
-    });
+    sendWhatsAppMessage('SHREE KRISHNA TRANSPORT — DRIVER REGISTRATION', payload);
   };
 
   return (
     <div>
       <div className="flex items-center gap-2 mb-2">
-        <div className="w-8 h-8 rounded-lg bg-[#F1F5F2] border border-[#e5ebe7] flex items-center justify-center text-[#3d4a3f]">
+        <div className="w-8 h-8 rounded-lg bg-[#EBF5EE] flex items-center justify-center text-[#0F6A37]">
           <Navigation size={18} />
         </div>
         <p className="font-['Manrope'] text-[10px] font-bold text-[#6b786d] uppercase tracking-widest">Truck Owner / Driver</p>
       </div>
-      <h2 className="font-['Archivo_Narrow'] text-2xl md:text-3xl font-bold mb-6 uppercase text-[#1a1f1b]">
-        Register for Loads
+      <h2 className="font-['Archivo_Narrow'] text-2xl md:text-3xl font-bold mb-4 uppercase text-[#1a1f1b]">
+        Register Vehicle
       </h2>
 
-      <form onSubmit={handleSubmit} className="space-y-5 border-t-2 border-[#e5ebe7] pt-6">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <div>
-            <label className={labelClass}>Name<span className="text-[#0F6A37] ml-0.5">*</span></label>
-            <input type="text" name="name" value={formData.name} onChange={handleChange} placeholder="FULL NAME" required className={inputClass} />
-          </div>
-          <div>
-            <label className={labelClass}>Mobile Number<span className="text-[#0F6A37] ml-0.5">*</span></label>
-            <input type="tel" name="phone" value={formData.phone} onChange={handleChange} placeholder="10-DIGIT NUMBER" inputMode="tel" required className={inputClass} />
-          </div>
-        </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <div>
-            <label className={labelClass}>Vehicle Number<span className="text-[#0F6A37] ml-0.5">*</span></label>
-            <input type="text" name="vehicleNumber" value={formData.vehicleNumber} onChange={handleChange} placeholder="RJ14XX0000" required className={inputClass} />
-          </div>
-          <div>
-            <label className={labelClass}>Vehicle Type<span className="text-[#0F6A37] ml-0.5">*</span></label>
-            <input type="text" name="vehicleType" value={formData.vehicleType} onChange={handleChange} placeholder="E.G., 14 FT" required className={inputClass} />
-          </div>
-        </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <div>
-            <label className={labelClass}>Capacity</label>
-            <input type="text" name="capacity" value={formData.capacity} onChange={handleChange} placeholder="E.G., 5 TON" className={inputClass} />
-          </div>
-          <div>
-            <label className={labelClass}>Current Location<span className="text-[#0F6A37] ml-0.5">*</span></label>
-            <input type="text" name="location" value={formData.location} onChange={handleChange} placeholder="E.G., JAIPUR" required className={inputClass} />
-          </div>
-        </div>
-        <div>
-          <label className={labelClass}>Preferred Routes</label>
-          <input type="text" name="routes" value={formData.routes} onChange={handleChange} placeholder="E.G., JAIPUR–JODHPUR, JAIPUR–DELHI" className={inputClass} />
-        </div>
+      {/* 2-Step Progress Tabs */}
+      <div className="flex items-center gap-3 mb-6 bg-[#f4f0ea] p-1.5 rounded-xl border border-[#e2dad0]">
+        <button
+          type="button"
+          onClick={() => setCurrentStep(1)}
+          className={`flex-1 py-2 px-3 rounded-lg font-['Manrope'] text-xs font-extrabold uppercase tracking-wider transition-all flex items-center justify-center gap-2 ${
+            currentStep === 1
+              ? 'bg-[#0F6A37] text-white shadow-sm'
+              : 'text-[#5a665c] hover:text-[#1a1f1b]'
+          }`}
+        >
+          <span className={`w-5 h-5 rounded-full text-[11px] flex items-center justify-center font-bold ${currentStep === 1 ? 'bg-white text-[#0F6A37]' : 'bg-[#e2dad0] text-[#5a665c]'}`}>
+            1
+          </span>
+          <span>1. Driver &amp; Vehicle Essentials</span>
+        </button>
 
-        {submitted && (
-          <div className="bg-[#EBF5EE] border border-[#0F6A37]/30 rounded-lg p-4 flex flex-col gap-3">
-            <div className="flex items-center gap-2 font-['Manrope'] text-xs font-bold text-[#0F6A37]">
-              <CheckCircle2 size={18} className="shrink-0" />
-              <span>Registration details automatically sent to email &amp; WhatsApp! We will reach out shortly.</span>
+        <button
+          type="button"
+          onClick={() => {
+            if (validateStep1()) {
+              setCurrentStep(2);
+            }
+          }}
+          className={`flex-1 py-2 px-3 rounded-lg font-['Manrope'] text-xs font-extrabold uppercase tracking-wider transition-all flex items-center justify-center gap-2 ${
+            currentStep === 2
+              ? 'bg-[#0F6A37] text-white shadow-sm'
+              : 'text-[#5a665c] hover:text-[#1a1f1b]'
+          }`}
+        >
+          <span className={`w-5 h-5 rounded-full text-[11px] flex items-center justify-center font-bold ${currentStep === 2 ? 'bg-white text-[#0F6A37]' : 'bg-[#e2dad0] text-[#5a665c]'}`}>
+            2
+          </span>
+          <span>2. Routes &amp; Documents (Optional)</span>
+        </button>
+      </div>
+
+      <form onSubmit={handleSubmit} className="space-y-5">
+        {/* STEP 1: Non-Negotiable Core Driver & Vehicle Fields */}
+        {currentStep === 1 && (
+          <div className="space-y-4 animate-fadeIn">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div>
+                <label htmlFor="driver_name" className={labelClass}>Full Name<span className="text-[#0F6A37] ml-0.5">*</span></label>
+                <input id="driver_name" type="text" name="name" value={formData.name} onChange={handleChange} placeholder="DRIVER / OWNER NAME" required className={`${inputClass} ${errors.name ? 'border-red-500 bg-red-50/40' : ''}`} />
+                {errors.name && <p className="mt-1 text-[11px] font-['Manrope'] font-bold text-red-600 flex items-center gap-1"><AlertCircle size={12} /><span>{errors.name}</span></p>}
+              </div>
+              <div>
+                <label htmlFor="driver_phone" className={labelClass}>Mobile Number<span className="text-[#0F6A37] ml-0.5">*</span></label>
+                <input id="driver_phone" type="tel" name="phone" value={formData.phone} onChange={handleChange} placeholder="10-DIGIT WHATSAPP NO." inputMode="tel" required className={`${inputClass} ${errors.phone ? 'border-red-500 bg-red-50/40' : ''}`} />
+                {errors.phone && <p className="mt-1 text-[11px] font-['Manrope'] font-bold text-red-600 flex items-center gap-1"><AlertCircle size={12} /><span>{errors.phone}</span></p>}
+              </div>
             </div>
-            {waUrl && (
-              <a
-                href={waUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-1.5 font-['Manrope'] text-xs font-bold text-[#0F6A37] hover:underline"
-              >
-                <MessageCircle size={14} />
-                Click here if WhatsApp didn't open automatically
-              </a>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div>
+                <label htmlFor="driver_dlNumber" className={labelClass}>Driving Licence Number<span className="text-[#0F6A37] ml-0.5">*</span></label>
+                <input id="driver_dlNumber" type="text" name="dlNumber" value={formData.dlNumber} onChange={handleChange} placeholder="E.G., RJ1420210000000" required className={`${inputClass} ${errors.dlNumber ? 'border-red-500 bg-red-50/40' : ''}`} />
+                {errors.dlNumber && <p className="mt-1 text-[11px] font-['Manrope'] font-bold text-red-600 flex items-center gap-1"><AlertCircle size={12} /><span>{errors.dlNumber}</span></p>}
+              </div>
+              <div>
+                <label htmlFor="driver_vehicleNumber" className={labelClass}>Vehicle Number<span className="text-[#0F6A37] ml-0.5">*</span></label>
+                <input id="driver_vehicleNumber" type="text" name="vehicleNumber" value={formData.vehicleNumber} onChange={handleChange} placeholder="E.G., RJ14GB1234" required className={`${inputClass} ${errors.vehicleNumber ? 'border-red-500 bg-red-50/40' : ''}`} />
+                {errors.vehicleNumber && <p className="mt-1 text-[11px] font-['Manrope'] font-bold text-red-600 flex items-center gap-1"><AlertCircle size={12} /><span>{errors.vehicleNumber}</span></p>}
+              </div>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div>
+                <label htmlFor="driver_vehicleType" className={labelClass}>Vehicle Type<span className="text-[#0F6A37] ml-0.5">*</span></label>
+                <select id="driver_vehicleType" name="vehicleType" value={formData.vehicleType} onChange={handleChange} required className={`${inputClass} ${errors.vehicleType ? 'border-red-500 bg-red-50/40' : ''}`}>
+                  <option value="">SELECT VEHICLE TYPE</option>
+                  <option value="Mini Truck / Pickup">Mini Truck / Pickup</option>
+                  <option value="Tata 407 / 14 ft">Tata 407 / 14 ft</option>
+                  <option value="17–20 ft Container">17–20 ft Container</option>
+                  <option value="22–24 ft Container">22–24 ft Container</option>
+                  <option value="32 ft MXL / Multi-Axle">32 ft MXL / Multi-Axle</option>
+                  <option value="Open Body Trailer">Open Body Trailer</option>
+                  <option value="Tanker / Tipper">Tanker / Tipper</option>
+                  <option value="Other">Other (Specify below)</option>
+                </select>
+                {errors.vehicleType && <p className="mt-1 text-[11px] font-['Manrope'] font-bold text-red-600 flex items-center gap-1"><AlertCircle size={12} /><span>{errors.vehicleType}</span></p>}
+              </div>
+              <div>
+                <label htmlFor="driver_capacity" className={labelClass}>Capacity (in Tons)<span className="text-[#0F6A37] ml-0.5">*</span></label>
+                <input id="driver_capacity" type="text" name="capacity" value={formData.capacity} onChange={handleChange} placeholder="E.G., 5 TON / 20 TON" required className={`${inputClass} ${errors.capacity ? 'border-red-500 bg-red-50/40' : ''}`} />
+                {errors.capacity && <p className="mt-1 text-[11px] font-['Manrope'] font-bold text-red-600 flex items-center gap-1"><AlertCircle size={12} /><span>{errors.capacity}</span></p>}
+              </div>
+            </div>
+
+            {formData.vehicleType === 'Other' && (
+              <div>
+                <label htmlFor="driver_customVehicleType" className={labelClass}>Specify Vehicle Type<span className="text-[#0F6A37] ml-0.5">*</span></label>
+                <input id="driver_customVehicleType" type="text" name="customVehicleType" value={formData.customVehicleType} onChange={handleChange} placeholder="ENTER YOUR VEHICLE TYPE" required className={`${inputClass} ${errors.customVehicleType ? 'border-red-500 bg-red-50/40' : ''}`} />
+                {errors.customVehicleType && <p className="mt-1 text-[11px] font-['Manrope'] font-bold text-red-600 flex items-center gap-1"><AlertCircle size={12} /><span>{errors.customVehicleType}</span></p>}
+              </div>
             )}
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div>
+                <label htmlFor="driver_location" className={labelClass}>Current Location<span className="text-[#0F6A37] ml-0.5">*</span></label>
+                <input id="driver_location" type="text" name="location" value={formData.location} onChange={handleChange} placeholder="E.G., JAIPUR, KOTA" required className={`${inputClass} ${errors.location ? 'border-red-500 bg-red-50/40' : ''}`} />
+                {errors.location && <p className="mt-1 text-[11px] font-['Manrope'] font-bold text-red-600 flex items-center gap-1"><AlertCircle size={12} /><span>{errors.location}</span></p>}
+              </div>
+
+              <div className="flex flex-col justify-end">
+                <label className="flex items-center gap-2 text-xs font-['Manrope'] font-bold text-[#3d4a3f] cursor-pointer py-3">
+                  <input
+                    type="checkbox"
+                    name="isOwner"
+                    checked={formData.isOwner}
+                    onChange={handleChange}
+                    className="w-4 h-4 rounded text-[#0F6A37] focus:ring-[#0F6A37]"
+                  />
+                  <span>I am the owner of this vehicle</span>
+                </label>
+              </div>
+            </div>
+
+            {/* Conditional Vehicle Owner Name field if driver != owner */}
+            {!formData.isOwner && (
+              <div>
+                <label htmlFor="driver_ownerName" className={labelClass}>Vehicle Owner Name<span className="text-[#0F6A37] ml-0.5">*</span></label>
+                <input id="driver_ownerName" type="text" name="ownerName" value={formData.ownerName} onChange={handleChange} placeholder="OWNER FULL NAME" required className={`${inputClass} ${errors.ownerName ? 'border-red-500 bg-red-50/40' : ''}`} />
+                {errors.ownerName && <p className="mt-1 text-[11px] font-['Manrope'] font-bold text-red-600 flex items-center gap-1"><AlertCircle size={12} /><span>{errors.ownerName}</span></p>}
+              </div>
+            )}
+
+            <button
+              type="button"
+              onClick={handleNext}
+              className="btn-brand w-full justify-center py-4 text-sm mt-4 uppercase tracking-wider"
+            >
+              <span>Next: Routes &amp; Documents (Optional)</span>
+              <ArrowRight size={16} />
+            </button>
           </div>
         )}
 
-        <button
-          type="submit"
-          className="w-full bg-[#F8FAF9] text-[#1a1f1b] font-['Manrope'] text-xs font-bold uppercase py-4 rounded-xs flex items-center justify-center gap-2 hover:bg-[#EBF5EE] hover:text-[#0F6A37] hover:-translate-y-0.5 hover:shadow-md transition-all duration-200 border-2 border-[#2a2f2b] hover:border-[#0F6A37] cursor-pointer tracking-wider"
-        >
-          <Navigation size={16} />
-          Register on WhatsApp
-        </button>
+        {/* STEP 2: Optional Routes & Deferred Compliance Documents */}
+        {currentStep === 2 && (
+          <div className="space-y-4 animate-fadeIn">
+            <div>
+              <label htmlFor="driver_routes" className={labelClass}>Preferred Routes (Optional)</label>
+              <input id="driver_routes" type="text" name="routes" value={formData.routes} onChange={handleChange} placeholder="E.G., JAIPUR–DELHI, ALL INDIA" className={inputClass} />
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div>
+                <label htmlFor="driver_permit" className={labelClass}>Permit Valid Until (Optional)</label>
+                <input id="driver_permit" type="date" name="permitExpiry" value={formData.permitExpiry} onChange={handleChange} className={inputClass} />
+              </div>
+              <div>
+                <label htmlFor="driver_fitness" className={labelClass}>Fitness Valid Until (Optional)</label>
+                <input id="driver_fitness" type="date" name="fitnessExpiry" value={formData.fitnessExpiry} onChange={handleChange} className={inputClass} />
+              </div>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div>
+                <label htmlFor="driver_insurance" className={labelClass}>Insurance Valid Until (Optional)</label>
+                <input id="driver_insurance" type="date" name="insuranceExpiry" value={formData.insuranceExpiry} onChange={handleChange} className={inputClass} />
+              </div>
+              <div>
+                <label htmlFor="driver_puc" className={labelClass}>PUC Valid Until (Optional)</label>
+                <input id="driver_puc" type="date" name="pucExpiry" value={formData.pucExpiry} onChange={handleChange} className={inputClass} />
+              </div>
+            </div>
+
+            <div>
+              <label htmlFor="driver_emergencyContact" className={labelClass}>Emergency Contact Number (Optional)</label>
+              <input id="driver_emergencyContact" type="tel" name="emergencyContact" value={formData.emergencyContact} onChange={handleChange} placeholder="EMERGENCY MOBILE NO." inputMode="tel" className={`${inputClass} ${errors.emergencyContact ? 'border-red-500 bg-red-50/40' : ''}`} />
+              {errors.emergencyContact && <p className="mt-1 text-[11px] font-['Manrope'] font-bold text-red-600 flex items-center gap-1"><AlertCircle size={12} /><span>{errors.emergencyContact}</span></p>}
+            </div>
+
+            {submitted && (
+              <div className="bg-[#EBF5EE] border border-[#0F6A37]/30 rounded-lg p-4 flex flex-col gap-3">
+                <div className="flex items-center gap-2 font-['Manrope'] text-xs font-bold text-[#0F6A37]">
+                  <CheckCircle2 size={18} className="shrink-0" />
+                  <span>Registration details automatically sent to email &amp; WhatsApp! We will reach out shortly.</span>
+                </div>
+                {waUrl && (
+                  <a
+                    href={waUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-1.5 font-['Manrope'] text-xs font-bold text-[#0F6A37] hover:underline"
+                  >
+                    <MessageCircle size={14} />
+                    Click here if WhatsApp didn't open automatically
+                  </a>
+                )}
+              </div>
+            )}
+
+            <div className="flex flex-col sm:flex-row gap-3 pt-2">
+              <button
+                type="button"
+                onClick={handleBack}
+                className="inline-flex items-center justify-center gap-2 px-5 py-3.5 rounded-lg border-2 border-[#d0c8be] hover:border-[#1a1f1b] font-['Manrope'] font-bold text-xs uppercase tracking-wider text-[#3d4a3f] transition-all"
+              >
+                <ArrowLeft size={16} />
+                <span>Back to Step 1</span>
+              </button>
+
+              <button
+                type="submit"
+                className="btn-brand flex-1 justify-center py-4 text-sm uppercase tracking-wider"
+              >
+                <Navigation size={16} />
+                <span>Register Vehicle on WhatsApp</span>
+              </button>
+            </div>
+          </div>
+        )}
       </form>
     </div>
   );

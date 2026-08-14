@@ -41,8 +41,8 @@
   --color-surface-container: #eaf0ec;
   --color-surface-variant:   #dde5de;
 
-  --color-outline:           #6b786d;
-  --color-outline-variant:   #b8c9bb;
+  --color-outline:           #4A554C;
+  --color-outline-variant:   #A3B0A5;
 
   --color-inverse-surface:   #2a2f2b;
   --color-inverse-on-surface: #eef3ef;
@@ -53,7 +53,7 @@
   html { scroll-behavior: smooth; }
 
   body {
-    font-family: 'Inter', 'Manrope', sans-serif;
+    font-family: 'Manrope', 'Inter', sans-serif;
     background-color: #ECE6DD;
     color: #1a1f1b;
     -webkit-font-smoothing: antialiased;
@@ -149,7 +149,7 @@
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.05em;
-  color: #6b786d;
+  color: #4A554C;
   transition: all 0.2s ease;
   pointer-events: none;
   padding: 0 2px;
@@ -166,24 +166,24 @@
   background: transparent;
 }
 
-/* ─── Input base ─────────────────────────────────── */
+/* ─── Input base (Box design) ───────────────────── */
 .sk-input {
   width: 100%;
-  background: transparent;
-  border: none;
-  border-bottom: 2px solid #b8c9bb;
-  border-radius: 0;
-  padding: 10px 0 6px;
+  background-color: #F7F5F0;
+  border: 1.5px solid #C5BEB4;
+  border-radius: 8px;
+  padding: 12px 14px;
   font-family: 'Space Mono', monospace;
   font-size: 0.875rem;
   color: #1a1f1b;
-  transition: border-color 0.25s ease, box-shadow 0.25s ease;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
   outline: none;
 }
 
 .sk-input:focus {
-  border-bottom-color: #0F6A37;
-  box-shadow: 0 2px 0 0 rgba(15, 106, 55, 0.2);
+  border-color: #0F6A37;
+  background-color: #ffffff;
+  box-shadow: 0 0 0 3px rgba(15, 106, 55, 0.15);
 }
 
 /* ─── Gradient buttons ────────────────────────────── */

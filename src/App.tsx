@@ -48,7 +48,7 @@ export function App() {
               {/* Image Right */}
               <div className="w-full h-full flex items-center justify-center">
                 <img
-                  src="/images/dropdelivery.png"
+                  src="/images/dropdelivery.webp"
                   alt="Book a Truck Delivery - Shree Krishna Transport"
                   className="w-full h-auto max-h-[500px] object-cover rounded-2xl border border-[#c5beB4] shadow-lg transition-all duration-300 hover:shadow-xl"
                 />
@@ -64,7 +64,7 @@ export function App() {
               {/* Image Left */}
               <div className="w-full h-full order-2 lg:order-1 flex items-center justify-center">
                 <img
-                  src="/images/register-truck.png"
+                  src="/images/register-truck.webp"
                   alt="Register Your Truck - Shree Krishna Transport Fleet"
                   className="w-full h-auto max-h-[500px] object-cover rounded-2xl border border-[#c5beB4] shadow-lg transition-all duration-300 hover:shadow-xl"
                 />

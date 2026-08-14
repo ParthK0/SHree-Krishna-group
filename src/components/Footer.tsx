@@ -3,7 +3,7 @@ import { WHATSAPP_NUMBER, PHONE_DISPLAY, CONTACT_EMAIL } from '../lib/whatsapp';
 
 export const Footer: React.FC = () => {
   return (
-    <footer className="w-full px-4 md:px-12 bg-[#31312c] border-t border-[#bfc9be]/20">
+    <footer id="contact" className="w-full px-4 md:px-12 bg-[#31312c] border-t border-[#bfc9be]/20">
       {/* Main footer row */}
       <div className="py-10 md:py-12 flex flex-col md:flex-row justify-between items-start gap-8">
 
