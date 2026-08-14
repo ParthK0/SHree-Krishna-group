@@ -32,17 +32,17 @@ export const Header: React.FC = () => {
     <>
       <header
         className={`sticky top-0 z-50 w-full flex items-center justify-between px-4 md:px-12 bg-[#ECE6DD]/95 backdrop-blur-md border-b border-[#e5ebe7] transition-all duration-300 ${
-          scrolled ? 'py-2.5 shadow-md' : 'py-4'
+          scrolled ? 'py-1.5 shadow-md' : 'py-2.5'
         }`}
       >
         {/* Brand */}
-        <a href="#" className="flex items-center gap-3 group shrink-0">
+        <a href="#" className="flex items-center gap-2.5 group shrink-0">
           <img
             alt="Shree Krishna Transport Logo"
-            className={`object-contain transition-all duration-300 ${scrolled ? 'h-9 md:h-10' : 'h-10 md:h-12'}`}
+            className={`object-contain transition-all duration-300 ${scrolled ? 'h-7 md:h-8' : 'h-8 md:h-9.5'}`}
             src="/images/logo.png"
           />
-          <span className={`font-['Archivo_Narrow'] font-bold tracking-tight text-[#1a1f1b] uppercase transition-all duration-300 ${scrolled ? 'text-base sm:text-lg' : 'text-lg sm:text-xl'}`}>
+          <span className={`font-['Archivo_Narrow'] font-bold tracking-tight text-[#1a1f1b] uppercase transition-all duration-300 ${scrolled ? 'text-sm sm:text-base' : 'text-base sm:text-lg'}`}>
             SHREE KRISHNA TRANSPORT
           </span>
         </a>
