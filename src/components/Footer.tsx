@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { WHATSAPP_NUMBER, PHONE_DISPLAY, CONTACT_EMAIL } from '../lib/whatsapp';
 
 export const Footer: React.FC = () => {
@@ -9,7 +10,7 @@ export const Footer: React.FC = () => {
 
         {/* Brand */}
         <div className="flex flex-col gap-3">
-          <div className="flex items-center gap-3">
+          <Link to="/" className="flex items-center gap-3">
             <img
               alt="Shree Krishna Transport Logo"
               className="h-10 w-auto object-contain"
@@ -18,9 +19,9 @@ export const Footer: React.FC = () => {
             <span className="font-['Archivo_Narrow'] text-xl font-bold text-[#fcf9f2] uppercase tracking-tight">
               SHREE KRISHNA TRANSPORT
             </span>
-          </div>
+          </Link>
           <span className="font-['Manrope'] text-xs text-[#f3f0e9]/60 max-w-xs leading-relaxed">
-            Connecting businesses with truck owners &amp; drivers across North India.
+            Connecting businesses across Rajasthan with reliable trucking to destinations all over India.
             Quote within 1 hour via WhatsApp.
           </span>
         </div>
@@ -56,9 +57,10 @@ export const Footer: React.FC = () => {
         {/* Quick Links */}
         <div className="flex flex-col gap-3">
           <p className="font-['Manrope'] text-[10px] font-bold text-[#f3f0e9]/50 uppercase tracking-wider mb-1">Quick Links</p>
-          <a href="#forms" className="font-['Manrope'] text-xs text-[#e5e2db] hover:text-[#fcc019] transition-colors uppercase tracking-wider">Book a Truck</a>
-          <a href="#forms" className="font-['Manrope'] text-xs text-[#e5e2db] hover:text-[#fcc019] transition-colors uppercase tracking-wider">Register Loads</a>
-          <a href="#contact" className="font-['Manrope'] text-xs text-[#e5e2db] hover:text-[#fcc019] transition-colors uppercase tracking-wider">Contact Us</a>
+          <Link to="/book-truck" className="font-['Manrope'] text-xs text-[#e5e2db] hover:text-[#fcc019] transition-colors uppercase tracking-wider">Book a Truck</Link>
+          <Link to="/register-truck" className="font-['Manrope'] text-xs text-[#e5e2db] hover:text-[#fcc019] transition-colors uppercase tracking-wider">Register Vehicle</Link>
+          <Link to="/#about-us" className="font-['Manrope'] text-xs text-[#e5e2db] hover:text-[#fcc019] transition-colors uppercase tracking-wider">About Us</Link>
+          <Link to="/enquiry" className="font-['Manrope'] text-xs text-[#e5e2db] hover:text-[#fcc019] transition-colors uppercase tracking-wider">General Enquiry</Link>
         </div>
       </div>
 

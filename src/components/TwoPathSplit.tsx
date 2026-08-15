@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { Truck, Navigation, ArrowRight } from 'lucide-react';
 
@@ -10,6 +11,7 @@ const cards = [
     title: 'Need a truck?',
     desc: "Tell us where the goods are going, what you're moving, and when you need it. We'll source the right vehicle for the job.",
     cta: 'Book a Truck',
+    link: '/book-truck',
   },
   {
     icon: <Navigation size={24} />,
@@ -18,6 +20,7 @@ const cards = [
     title: 'Have a truck?',
     desc: 'Register your vehicle details and preferred routes. Get notified when matching loads are available to minimize empty running.',
     cta: 'Register Vehicle',
+    link: '/register-truck',
   },
 ];
 
@@ -55,8 +58,8 @@ export const TwoPathSplit: React.FC = () => {
                 {card.desc}
               </p>
             </div>
-            <a
-              href={card.cta === 'Book a Truck' ? '#book-truck' : '#register-truck'}
+            <Link
+              to={card.link}
               className={
                 card.cta === 'Book a Truck'
                   ? "inline-flex items-center justify-center gap-2 bg-[#F4B400] hover:bg-[#e0a500] text-[#6c5000] font-['Manrope'] font-extrabold text-xs px-5 py-3 rounded-lg shadow-sm transition-all duration-200 uppercase tracking-wider self-start"
@@ -65,7 +68,7 @@ export const TwoPathSplit: React.FC = () => {
             >
               {card.cta}
               <ArrowRight size={14} className="transition-transform group-hover:translate-x-1" />
-            </a>
+            </Link>
           </motion.div>
         ))}
       </div>
