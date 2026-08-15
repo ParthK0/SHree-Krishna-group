@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { sendAutomatedForm } from '../lib/whatsapp';
-import { Truck, Loader2, CheckCircle2, ArrowRight, ArrowLeft, AlertCircle } from 'lucide-react';
+import { Truck, Loader2, CheckCircle2, ArrowRight, ArrowLeft, AlertCircle, Clock } from 'lucide-react';
 
 type LoadingStep = 'idle' | 'checking' | 'matching' | 'preparing' | 'done';
 
@@ -48,19 +49,6 @@ const Field: React.FC<FieldProps> = ({ label, name, value, onChange, placeholder
   </div>
 );
 
-const stepMessages: Record<LoadingStep, string> = {
-  idle: '',
-  checking: 'Checking available trucks...',
-  matching: 'Sending booking details to dispatcher...',
-  preparing: 'Sending notification to email...',
-  done: '',
-};
-
-const stepIcons: Partial<Record<LoadingStep, React.ReactNode>> = {
-  checking: <Loader2 size={16} className="spinner text-[#0F6A37]" />,
-  matching: <CheckCircle2 size={16} className="text-[#0F6A37]" />,
-  preparing: <CheckCircle2 size={16} className="text-[#0F6A37]" />,
-};
 
 // Validation helpers
 const validatePhone = (phone: string) => /^[6-9]\d{9}$/.test(phone.trim());
@@ -89,6 +77,7 @@ export const BookingForm: React.FC = () => {
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [loadingStep, setLoadingStep] = useState<LoadingStep>('idle');
   const [declared, setDeclared] = useState(false);
+  const [refId, setRefId] = useState('');
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
@@ -181,10 +170,75 @@ export const BookingForm: React.FC = () => {
 
     await sendAutomatedForm('SHREE KRISHNA TRANSPORT — NEW BOOKING', payload);
 
+    setRefId('SKT-BK-' + Math.floor(10000 + Math.random() * 90000));
     setLoadingStep('done');
   };
 
   const isLoading = loadingStep !== 'idle' && loadingStep !== 'done';
+
+  if (loadingStep === 'done') {
+    return (
+      <div className="bg-white border border-[#c5beb4] rounded-2xl p-6 sm:p-10 shadow-lg text-center space-y-6 animate-fadeIn">
+        <div className="w-16 h-16 rounded-full bg-[#EBF5EE] border border-[#0F6A37]/30 flex items-center justify-center text-[#0F6A37] mx-auto">
+          <CheckCircle2 size={36} />
+        </div>
+
+        <div className="space-y-2">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#0F6A37]/10 border border-[#0F6A37]/30 text-[#0F6A37] font-['Space_Mono'] text-xs font-bold">
+            <span>Reference ID: {refId}</span>
+          </div>
+          <h2 className="font-['Archivo_Narrow'] text-2xl sm:text-3xl font-bold uppercase text-[#1a1f1b]">
+            Booking Request Received!
+          </h2>
+          <p className="font-['Manrope'] text-xs sm:text-sm text-[#4A554C] max-w-md mx-auto">
+            Thank you, <strong className="text-[#1a1f1b]">{formData.name}</strong>. Your freight booking request has been submitted directly to our dispatch desk via email.
+          </p>
+        </div>
+
+        {/* Summary Box */}
+        <div className="bg-[#f9f6f2] border border-[#e2dad0] rounded-xl p-4 text-left max-w-lg mx-auto space-y-2.5 font-['Manrope'] text-xs text-[#3d4a3f]">
+          <div className="font-['Archivo_Narrow'] text-xs font-bold text-[#1a1f1b] uppercase tracking-wider border-b border-[#e2dad0] pb-1.5">
+            Booking Request Summary
+          </div>
+          <div className="grid grid-cols-2 gap-2">
+            <div><span className="text-neutral-500">Route:</span> <strong className="text-[#1a1f1b] block font-['Space_Mono']">{formData.pickup} → {formData.drop}</strong></div>
+            <div><span className="text-neutral-500">Goods Type:</span> <strong className="text-[#1a1f1b] block">{formData.goods}</strong></div>
+            <div><span className="text-neutral-500">Truck Type:</span> <strong className="text-[#1a1f1b] block">{formData.truck === 'Other' ? formData.customTruck : formData.truck}</strong></div>
+            <div><span className="text-neutral-500">Contact Number:</span> <strong className="text-[#1a1f1b] block font-['Space_Mono']">{formData.phone}</strong></div>
+          </div>
+        </div>
+
+        {/* Response Promise Callout */}
+        <div className="bg-[#EBF5EE] border border-[#0F6A37]/30 rounded-xl p-4 max-w-lg mx-auto flex items-center gap-3 text-left">
+          <Clock size={20} className="text-[#0F6A37] shrink-0" />
+          <p className="font-['Manrope'] text-xs text-[#134E3A] leading-snug">
+            <strong>1-Hour Response Promise:</strong> Our team is calculating vehicle availability. We will call you at <span className="font-['Space_Mono'] font-bold">{formData.phone}</span> within 60 minutes with pricing details.
+          </p>
+        </div>
+
+        {/* Action Buttons */}
+        <div className="flex flex-col sm:flex-row gap-3 justify-center pt-2 max-w-md mx-auto">
+          <button
+            onClick={() => {
+              setFormData({ pickup: '', drop: '', goods: '', weight: '', materialValue: '', loadType: 'Full Load (FTL)', truck: 'Not sure', customTruck: '', date: '', name: '', phone: '', company: '', gst: '' });
+              setCurrentStep(1);
+              setLoadingStep('idle');
+              setDeclared(false);
+            }}
+            className="btn-brand justify-center py-3 px-6 text-xs uppercase tracking-wider"
+          >
+            Book Another Truck
+          </button>
+          <Link
+            to="/"
+            className="inline-flex items-center justify-center px-6 py-3 rounded-lg border border-[#c5beb4] font-['Manrope'] font-bold text-xs uppercase tracking-wider text-[#3d4a3f] hover:bg-[#f4f0ea] transition-colors"
+          >
+            Back to Home
+          </Link>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div>
@@ -306,31 +360,15 @@ export const BookingForm: React.FC = () => {
             </div>
 
             {/* Loading status */}
-            {loadingStep !== 'idle' && loadingStep !== 'done' && (
+            {isLoading && (
               <div className="bg-[#EBF5EE] border border-[#b8c9bb] rounded-lg px-4 py-3 flex flex-col gap-2">
-                {(['checking', 'matching', 'preparing'] as LoadingStep[]).map((step, i) => {
-                  const stepOrder = ['checking', 'matching', 'preparing'];
-                  const currentIdx = stepOrder.indexOf(loadingStep);
-                  const isActive = i === currentIdx;
-                  const isDone = i < currentIdx;
-                  return (
-                    <div key={step} className={`flex items-center gap-2.5 font-[#Manrope] text-xs font-bold transition-all duration-300 ${isActive ? 'text-[#0F6A37]' : isDone ? 'text-[#6b786d]' : 'text-[#b8c9bb]'}`}>
-                      {isDone ? <CheckCircle2 size={14} className="text-[#0F6A37]" /> : isActive ? stepIcons[step] : <div className="w-3.5 h-3.5 rounded-full border-2 border-current" />}
-                      {stepMessages[step]}
-                    </div>
-                  );
-                })}
+                <div className="flex items-center gap-2.5 font-['Manrope'] text-xs font-bold text-[#0F6A37]">
+                  <Loader2 size={16} className="spinner text-[#0F6A37]" />
+                  <span>Submitting booking request to dispatch desk...</span>
+                </div>
               </div>
             )}
 
-            {loadingStep === 'done' && (
-              <div className="bg-[#EBF5EE] border border-[#0F6A37]/30 rounded-lg p-4 flex items-center gap-2 font-[#Manrope] text-xs font-bold text-[#0F6A37]">
-                <CheckCircle2 size={18} className="text-[#0F6A37] shrink-0" />
-                <span>Booking request submitted successfully via email! Our team will contact you shortly.</span>
-              </div>
-            )}
-
-            {/* Declaration Checkbox */}
             <label className="flex items-start gap-3 p-4 rounded-xl border border-[#e2dad0] bg-[#f9f6f2] cursor-pointer hover:border-[#0F6A37] transition-colors">
               <input
                 type="checkbox"
@@ -364,10 +402,6 @@ export const BookingForm: React.FC = () => {
                 {isLoading ? 'Submitting Booking...' : 'Submit Booking Request'}
               </button>
             </div>
-
-            <p className="font-['Inter'] text-xs text-[#6b786d] text-center">
-              No payment is collected through this form. Submission is sent directly via email.
-            </p>
           </div>
         )}
       </form>

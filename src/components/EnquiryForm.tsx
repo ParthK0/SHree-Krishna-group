@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { sendAutomatedForm } from '../lib/whatsapp';
-import { MessageSquare, Loader2, CheckCircle2, AlertCircle, Paperclip, FileText, Send } from 'lucide-react';
+import { MessageSquare, Loader2, CheckCircle2, AlertCircle, Paperclip, FileText, Send, Clock } from 'lucide-react';
 
 type LoadingStep = 'idle' | 'preparing' | 'done';
 
@@ -37,6 +38,7 @@ export const EnquiryForm: React.FC = () => {
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [loadingStep, setLoadingStep] = useState<LoadingStep>('idle');
+  const [refId, setRefId] = useState('');
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>
@@ -109,10 +111,74 @@ export const EnquiryForm: React.FC = () => {
 
     await sendAutomatedForm('SHREE KRISHNA TRANSPORT — NEW GENERAL ENQUIRY', payload);
 
+    setRefId('SKT-EN-' + Math.floor(10000 + Math.random() * 90000));
     setLoadingStep('done');
   };
 
   const isLoading = loadingStep === 'preparing';
+
+  if (loadingStep === 'done') {
+    return (
+      <div className="w-full max-w-4xl mx-auto bg-white border border-[#c5beb4] rounded-2xl p-6 sm:p-10 shadow-lg text-center space-y-6 animate-fadeIn">
+        <div className="w-16 h-16 rounded-full bg-[#EBF5EE] border border-[#0F6A37]/30 flex items-center justify-center text-[#0F6A37] mx-auto">
+          <CheckCircle2 size={36} />
+        </div>
+
+        <div className="space-y-2">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#0F6A37]/10 border border-[#0F6A37]/30 text-[#0F6A37] font-['Space_Mono'] text-xs font-bold">
+            <span>Reference ID: {refId}</span>
+          </div>
+          <h2 className="font-['Archivo_Narrow'] text-2xl sm:text-3xl font-bold uppercase text-[#1a1f1b]">
+            Enquiry Submitted Successfully!
+          </h2>
+          <p className="font-['Manrope'] text-xs sm:text-sm text-[#4A554C] max-w-md mx-auto">
+            Thank you, <strong className="text-[#1a1f1b]">{formData.name}</strong>. Your enquiry has been routed directly to our support desk.
+          </p>
+        </div>
+
+        {/* Summary Box */}
+        <div className="bg-[#f9f6f2] border border-[#e2dad0] rounded-xl p-4 text-left max-w-lg mx-auto space-y-2.5 font-['Manrope'] text-xs text-[#3d4a3f]">
+          <div className="font-['Archivo_Narrow'] text-xs font-bold text-[#1a1f1b] uppercase tracking-wider border-b border-[#e2dad0] pb-1.5">
+            Enquiry Details Summary
+          </div>
+          <div className="grid grid-cols-2 gap-2">
+            <div><span className="text-neutral-500">Category:</span> <strong className="text-[#1a1f1b] block">{formData.enquiryType}</strong></div>
+            <div><span className="text-neutral-500">Preferred Contact:</span> <strong className="text-[#1a1f1b] block">{formData.preferredContact}</strong></div>
+            <div><span className="text-neutral-500">Mobile Number:</span> <strong className="text-[#1a1f1b] block font-['Space_Mono']">{formData.phone}</strong></div>
+            <div><span className="text-neutral-500">Email:</span> <strong className="text-[#1a1f1b] block truncate">{formData.email || 'N/A'}</strong></div>
+          </div>
+        </div>
+
+        {/* Response Callout */}
+        <div className="bg-[#EBF5EE] border border-[#0F6A37]/30 rounded-xl p-4 max-w-lg mx-auto flex items-center gap-3 text-left">
+          <Clock size={20} className="text-[#0F6A37] shrink-0" />
+          <p className="font-['Manrope'] text-xs text-[#134E3A] leading-snug">
+            <strong>Guaranteed 1-Hour Response:</strong> Our support desk is reviewing your message details and will get back to you via <span className="font-bold">{formData.preferredContact}</span> shortly.
+          </p>
+        </div>
+
+        {/* Action Buttons */}
+        <div className="flex flex-col sm:flex-row gap-3 justify-center pt-2 max-w-md mx-auto">
+          <button
+            onClick={() => {
+              setFormData({ name: '', company: '', phone: '', email: '', enquiryType: 'General Enquiry', message: '', preferredContact: 'WhatsApp', consent: false });
+              setSelectedFile(null);
+              setLoadingStep('idle');
+            }}
+            className="btn-brand justify-center py-3 px-6 text-xs uppercase tracking-wider"
+          >
+            Submit Another Enquiry
+          </button>
+          <Link
+            to="/"
+            className="inline-flex items-center justify-center px-6 py-3 rounded-lg border border-[#c5beb4] font-['Manrope'] font-bold text-xs uppercase tracking-wider text-[#3d4a3f] hover:bg-[#f4f0ea] transition-colors"
+          >
+            Back to Home
+          </Link>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="w-full max-w-4xl mx-auto bg-white border border-[#c5beB4] rounded-2xl p-6 sm:p-10 shadow-lg">
@@ -364,12 +430,6 @@ export const EnquiryForm: React.FC = () => {
           </div>
         )}
 
-        {loadingStep === 'done' && (
-          <div className="bg-[#EBF5EE] border border-[#0F6A37]/30 rounded-lg p-4 flex items-center gap-2 font-['Manrope'] text-xs font-bold text-[#0F6A37]">
-            <CheckCircle2 size={18} className="text-[#0F6A37] shrink-0" />
-            <span>Thank you! Your enquiry has been sent to our team via email. We will get back to you within 1 hour.</span>
-          </div>
-        )}
 
         {/* Submit button */}
         <button

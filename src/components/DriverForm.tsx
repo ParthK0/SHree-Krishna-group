@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { sendAutomatedForm } from '../lib/whatsapp';
-import { Navigation, CheckCircle2, ArrowRight, ArrowLeft, AlertCircle } from 'lucide-react';
+import { Navigation, CheckCircle2, ArrowRight, ArrowLeft, AlertCircle, Clock } from 'lucide-react';
 
 const inputClass = 'sk-input';
 const labelClass = "block font-['Manrope'] text-[10px] font-bold text-[#4A554C] uppercase tracking-widest mb-1.5";
@@ -45,6 +46,7 @@ export const DriverForm: React.FC = () => {
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [submitted, setSubmitted] = useState(false);
   const [declared, setDeclared] = useState(false);
+  const [refId, setRefId] = useState('');
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const { name, value, type } = e.target;
@@ -146,8 +148,73 @@ export const DriverForm: React.FC = () => {
 
     await sendAutomatedForm('SHREE KRISHNA TRANSPORT — DRIVER REGISTRATION', payload);
 
+    setRefId('SKT-DR-' + Math.floor(10000 + Math.random() * 90000));
     setSubmitted(true);
   };
+
+  if (submitted) {
+    return (
+      <div className="bg-white border border-[#c5beb4] rounded-2xl p-6 sm:p-10 shadow-lg text-center space-y-6 animate-fadeIn">
+        <div className="w-16 h-16 rounded-full bg-[#EBF5EE] border border-[#0F6A37]/30 flex items-center justify-center text-[#0F6A37] mx-auto">
+          <CheckCircle2 size={36} />
+        </div>
+
+        <div className="space-y-2">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#0F6A37]/10 border border-[#0F6A37]/30 text-[#0F6A37] font-['Space_Mono'] text-xs font-bold">
+            <span>Reference ID: {refId}</span>
+          </div>
+          <h2 className="font-['Archivo_Narrow'] text-2xl sm:text-3xl font-bold uppercase text-[#1a1f1b]">
+            Vehicle Registration Submitted!
+          </h2>
+          <p className="font-['Manrope'] text-xs sm:text-sm text-[#4A554C] max-w-md mx-auto">
+            Thank you, <strong className="text-[#1a1f1b]">{formData.name}</strong>. Your truck registration has been received by our fleet onboarding desk.
+          </p>
+        </div>
+
+        {/* Summary Box */}
+        <div className="bg-[#f9f6f2] border border-[#e2dad0] rounded-xl p-4 text-left max-w-lg mx-auto space-y-2.5 font-['Manrope'] text-xs text-[#3d4a3f]">
+          <div className="font-['Archivo_Narrow'] text-xs font-bold text-[#1a1f1b] uppercase tracking-wider border-b border-[#e2dad0] pb-1.5">
+            Registration Summary
+          </div>
+          <div className="grid grid-cols-2 gap-2">
+            <div><span className="text-neutral-500">Vehicle No:</span> <strong className="text-[#1a1f1b] block font-['Space_Mono'] uppercase">{formData.vehicleNumber}</strong></div>
+            <div><span className="text-neutral-500">Vehicle Type:</span> <strong className="text-[#1a1f1b] block">{formData.vehicleType === 'Other' ? formData.customVehicleType : formData.vehicleType} ({formData.capacity})</strong></div>
+            <div><span className="text-neutral-500">Base Location:</span> <strong className="text-[#1a1f1b] block">{formData.location}</strong></div>
+            <div><span className="text-neutral-500">Mobile Number:</span> <strong className="text-[#1a1f1b] block font-['Space_Mono']">{formData.phone}</strong></div>
+          </div>
+        </div>
+
+        {/* Response Callout */}
+        <div className="bg-[#EBF5EE] border border-[#0F6A37]/30 rounded-xl p-4 max-w-lg mx-auto flex items-center gap-3 text-left">
+          <Clock size={20} className="text-[#0F6A37] shrink-0" />
+          <p className="font-['Manrope'] text-xs text-[#134E3A] leading-snug">
+            <strong>Onboarding Desk:</strong> Our load dispatchers will review your truck specs and contact you at <span className="font-['Space_Mono'] font-bold">{formData.phone}</span> to assign available freight loads.
+          </p>
+        </div>
+
+        {/* Action Buttons */}
+        <div className="flex flex-col sm:flex-row gap-3 justify-center pt-2 max-w-md mx-auto">
+          <button
+            onClick={() => {
+              setFormData({ name: '', phone: '', dlNumber: '', vehicleNumber: '', vehicleType: '', customVehicleType: '', capacity: '', location: '', isOwner: true, ownerName: '', routes: '', permitExpiry: '', fitnessExpiry: '', insuranceExpiry: '', pucExpiry: '', emergencyContact: '' });
+              setCurrentStep(1);
+              setSubmitted(false);
+              setDeclared(false);
+            }}
+            className="btn-brand justify-center py-3 px-6 text-xs uppercase tracking-wider"
+          >
+            Register Another Vehicle
+          </button>
+          <Link
+            to="/"
+            className="inline-flex items-center justify-center px-6 py-3 rounded-lg border border-[#c5beb4] font-['Manrope'] font-bold text-xs uppercase tracking-wider text-[#3d4a3f] hover:bg-[#f4f0ea] transition-colors"
+          >
+            Back to Home
+          </Link>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div>
