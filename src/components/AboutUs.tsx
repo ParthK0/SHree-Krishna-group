@@ -1,6 +1,5 @@
 import React from 'react';
-import { Building2, Award, MapPin, Users, Shield } from 'lucide-react';
-import { GSTIN, ADDRESS_LINE1, ADDRESS_LINE2, ADDRESS_CITY, ADDRESS_STATE, ADDRESS_PIN } from '../lib/constants';
+import { Building2, Award, MapPin, Users } from 'lucide-react';
 
 export const AboutUs: React.FC = () => {
   return (
@@ -38,11 +37,11 @@ export const AboutUs: React.FC = () => {
 
             <div className="space-y-4 font-['Manrope'] text-sm md:text-base text-neutral-300 leading-relaxed">
               <p>
-                Shree Krishna Transport is a new venture from <strong className="text-white">Shree Krishna Buildtech</strong>, a commercial and government contracting company founded by <strong className="text-white">Deepesh Kumar in 2022</strong>. Buildtech has spent the last few years delivering on construction contracts across Rajasthan — Shree Krishna Transport extends that same business into logistics, connecting businesses across Rajasthan with reliable trucking to destinations all over India.
+                Shree Krishna Transport is a logistics venture from <strong className="text-white">Shree Krishna Buildtech</strong>, a commercial and government contracting firm founded by <strong className="text-white">Deepesh Kumar in 2022</strong>. Building on years of project execution across Rajasthan, we connect regional businesses with reliable freight transport to destinations nationwide.
               </p>
 
               <p>
-                As a newly launched transport line, we're building our network of trucks and drivers from the ground up. What we bring from day one is the operational discipline of a company that already runs commercial and government contracts — transparent pricing, straight communication, and a promise we hold ourselves to: a freight quote within 1 hour, every time.
+                As a growing transport network built from the ground up, we bring proven contracting discipline to logistics — transparent pricing, direct communication, and a guaranteed freight quote within 1 hour, every time.
               </p>
             </div>
           </div>
@@ -93,31 +92,6 @@ export const AboutUs: React.FC = () => {
         </div>
 
       </div>
-
-      {/* Business Information Card */}
-      <div className="max-w-6xl mx-auto relative z-10 mt-10 pt-8 border-t border-neutral-700/60">
-        <div className="flex items-center gap-2 mb-4">
-          <Shield size={16} className="text-[#8ad7a0]" />
-          <p className="font-['Manrope'] text-[10px] font-bold text-[#8ad7a0] uppercase tracking-widest">
-            Business Information
-          </p>
-        </div>
-        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3">
-          {[
-            { label: 'Business Name', value: 'Shree Krishna Transport' },
-            { label: 'GSTIN', value: GSTIN, highlight: true },
-            { label: 'Registered Office', value: `${ADDRESS_LINE1}, ${ADDRESS_LINE2}, ${ADDRESS_CITY}, ${ADDRESS_STATE} ${ADDRESS_PIN}` },
-            { label: 'Operating Area', value: 'Rajasthan → All India' },
-            { label: 'Business Type', value: 'Road Transportation Services' },
-          ].map(({ label, value, highlight }) => (
-            <div key={label} className="bg-neutral-900/60 border border-neutral-800 rounded-xl p-3">
-              <div className="font-['Manrope'] text-[9px] font-bold text-neutral-500 uppercase tracking-widest mb-1">{label}</div>
-              <div className={`font-['Space_Mono'] text-[10px] font-bold leading-snug ${highlight ? 'text-[#8ad7a0]' : 'text-white'}`}>{value}</div>
-            </div>
-          ))}
-        </div>
-      </div>
-
     </section>
   );
 };
