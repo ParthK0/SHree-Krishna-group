@@ -1,5 +1,6 @@
 import React from 'react';
-import { Building2, Award, MapPin, Users } from 'lucide-react';
+import { Building2, Award, MapPin, Users, Shield } from 'lucide-react';
+import { GSTIN, ADDRESS_LINE1, ADDRESS_LINE2, ADDRESS_CITY, ADDRESS_STATE, ADDRESS_PIN } from '../lib/constants';
 
 export const AboutUs: React.FC = () => {
   return (
@@ -92,6 +93,31 @@ export const AboutUs: React.FC = () => {
         </div>
 
       </div>
+
+      {/* Business Information Card */}
+      <div className="max-w-6xl mx-auto relative z-10 mt-10 pt-8 border-t border-neutral-700/60">
+        <div className="flex items-center gap-2 mb-4">
+          <Shield size={16} className="text-[#8ad7a0]" />
+          <p className="font-['Manrope'] text-[10px] font-bold text-[#8ad7a0] uppercase tracking-widest">
+            Business Information
+          </p>
+        </div>
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3">
+          {[
+            { label: 'Business Name', value: 'Shree Krishna Transport' },
+            { label: 'GSTIN', value: GSTIN, highlight: true },
+            { label: 'Registered Office', value: `${ADDRESS_LINE1}, ${ADDRESS_LINE2}, ${ADDRESS_CITY}, ${ADDRESS_STATE} ${ADDRESS_PIN}` },
+            { label: 'Operating Area', value: 'Rajasthan → All India' },
+            { label: 'Business Type', value: 'Road Transportation Services' },
+          ].map(({ label, value, highlight }) => (
+            <div key={label} className="bg-neutral-900/60 border border-neutral-800 rounded-xl p-3">
+              <div className="font-['Manrope'] text-[9px] font-bold text-neutral-500 uppercase tracking-widest mb-1">{label}</div>
+              <div className={`font-['Space_Mono'] text-[10px] font-bold leading-snug ${highlight ? 'text-[#8ad7a0]' : 'text-white'}`}>{value}</div>
+            </div>
+          ))}
+        </div>
+      </div>
+
     </section>
   );
 };
