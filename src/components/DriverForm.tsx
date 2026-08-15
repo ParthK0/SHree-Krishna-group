@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { sendAutomatedForm, sendWhatsAppMessage } from '../lib/whatsapp';
-import { Navigation, CheckCircle2, MessageCircle, ArrowRight, ArrowLeft, AlertCircle } from 'lucide-react';
+import { sendAutomatedForm } from '../lib/whatsapp';
+import { Navigation, CheckCircle2, ArrowRight, ArrowLeft, AlertCircle } from 'lucide-react';
 
 const inputClass = 'sk-input';
 const labelClass = "block font-['Manrope'] text-[10px] font-bold text-[#4A554C] uppercase tracking-widest mb-1.5";
@@ -44,7 +44,6 @@ export const DriverForm: React.FC = () => {
   });
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [submitted, setSubmitted] = useState(false);
-  const [waUrl, setWaUrl] = useState<string>('');
   const [declared, setDeclared] = useState(false);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
@@ -145,12 +144,9 @@ export const DriverForm: React.FC = () => {
     if (formData.pucExpiry) payload['PUC Valid Until'] = formData.pucExpiry;
     if (formData.emergencyContact) payload['Emergency Contact'] = formData.emergencyContact;
 
-    const result = await sendAutomatedForm('SHREE KRISHNA TRANSPORT — DRIVER REGISTRATION', payload);
+    await sendAutomatedForm('SHREE KRISHNA TRANSPORT — DRIVER REGISTRATION', payload);
 
-    setWaUrl(result.waUrl);
     setSubmitted(true);
-
-    sendWhatsAppMessage('SHREE KRISHNA TRANSPORT — DRIVER REGISTRATION', payload);
   };
 
   return (
@@ -341,22 +337,9 @@ export const DriverForm: React.FC = () => {
             </div>
 
             {submitted && (
-              <div className="bg-[#EBF5EE] border border-[#0F6A37]/30 rounded-lg p-4 flex flex-col gap-3">
-                <div className="flex items-center gap-2 font-['Manrope'] text-xs font-bold text-[#0F6A37]">
-                  <CheckCircle2 size={18} className="shrink-0" />
-                  <span>Registration details automatically sent to email &amp; WhatsApp! We will reach out shortly.</span>
-                </div>
-                {waUrl && (
-                  <a
-                    href={waUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center gap-1.5 font-['Manrope'] text-xs font-bold text-[#0F6A37] hover:underline"
-                  >
-                    <MessageCircle size={14} />
-                    Click here if WhatsApp didn't open automatically
-                  </a>
-                )}
+              <div className="bg-[#EBF5EE] border border-[#0F6A37]/30 rounded-lg p-4 flex items-center gap-2 font-['Manrope'] text-xs font-bold text-[#0F6A37]">
+                <CheckCircle2 size={18} className="shrink-0" />
+                <span>Vehicle registration details submitted successfully via email! Our team will reach out shortly.</span>
               </div>
             )}
 
@@ -391,7 +374,7 @@ export const DriverForm: React.FC = () => {
                 className="btn-brand flex-1 justify-center py-4 text-sm uppercase tracking-wider disabled:opacity-70 disabled:cursor-not-allowed"
               >
                 <Navigation size={16} />
-                <span>Register Vehicle on WhatsApp</span>
+                <span>Submit Vehicle Registration</span>
               </button>
             </div>
           </div>

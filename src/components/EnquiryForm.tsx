@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { sendAutomatedForm, sendWhatsAppMessage } from '../lib/whatsapp';
-import { MessageSquare, Loader2, CheckCircle2, MessageCircle, AlertCircle, Paperclip, FileText, Send } from 'lucide-react';
+import { sendAutomatedForm } from '../lib/whatsapp';
+import { MessageSquare, Loader2, CheckCircle2, AlertCircle, Paperclip, FileText, Send } from 'lucide-react';
 
 type LoadingStep = 'idle' | 'preparing' | 'done';
 
@@ -37,7 +37,6 @@ export const EnquiryForm: React.FC = () => {
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [loadingStep, setLoadingStep] = useState<LoadingStep>('idle');
-  const [waUrl, setWaUrl] = useState<string>('');
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>
@@ -108,12 +107,9 @@ export const EnquiryForm: React.FC = () => {
     // TODO: LEGAL COPY GUIDANCE TO BE ADDED LATER
     payload['Legal Consent'] = 'Confirmed accurate details and consent to contact.';
 
-    const result = await sendAutomatedForm('SHREE KRISHNA TRANSPORT — NEW GENERAL ENQUIRY', payload);
+    await sendAutomatedForm('SHREE KRISHNA TRANSPORT — NEW GENERAL ENQUIRY', payload);
 
-    setWaUrl(result.waUrl);
     setLoadingStep('done');
-
-    sendWhatsAppMessage('SHREE KRISHNA TRANSPORT — NEW GENERAL ENQUIRY', payload);
   };
 
   const isLoading = loadingStep === 'preparing';
@@ -369,22 +365,9 @@ export const EnquiryForm: React.FC = () => {
         )}
 
         {loadingStep === 'done' && (
-          <div className="bg-[#EBF5EE] border border-[#0F6A37]/30 rounded-lg p-4 flex flex-col gap-3">
-            <div className="flex items-center gap-2 font-['Manrope'] text-xs font-bold text-[#0F6A37]">
-              <CheckCircle2 size={18} className="text-[#0F6A37] shrink-0" />
-              <span>Thank you! Your enquiry has been dispatched. Our team will get back within 1 hour.</span>
-            </div>
-            {waUrl && (
-              <a
-                href={waUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-1.5 font-['Manrope'] text-xs font-bold text-[#0F6A37] hover:underline"
-              >
-                <MessageCircle size={14} />
-                Click here to open WhatsApp directly with your enquiry details
-              </a>
-            )}
+          <div className="bg-[#EBF5EE] border border-[#0F6A37]/30 rounded-lg p-4 flex items-center gap-2 font-['Manrope'] text-xs font-bold text-[#0F6A37]">
+            <CheckCircle2 size={18} className="text-[#0F6A37] shrink-0" />
+            <span>Thank you! Your enquiry has been sent to our team via email. We will get back to you within 1 hour.</span>
           </div>
         )}
 
@@ -399,7 +382,7 @@ export const EnquiryForm: React.FC = () => {
         </button>
 
         <p className="font-['Inter'] text-xs text-[#6b786d] text-center">
-          Guaranteed response within 1 hour. Direct WhatsApp &amp; Email notification sent immediately.
+          Guaranteed response within 1 hour. Direct email notification sent immediately.
         </p>
       </form>
     </div>

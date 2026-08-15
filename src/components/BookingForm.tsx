@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { sendAutomatedForm, sendWhatsAppMessage } from '../lib/whatsapp';
-import { Truck, Loader2, CheckCircle2, MessageCircle, ArrowRight, ArrowLeft, AlertCircle } from 'lucide-react';
+import { sendAutomatedForm } from '../lib/whatsapp';
+import { Truck, Loader2, CheckCircle2, ArrowRight, ArrowLeft, AlertCircle } from 'lucide-react';
 
 type LoadingStep = 'idle' | 'checking' | 'matching' | 'preparing' | 'done';
 
@@ -88,7 +88,6 @@ export const BookingForm: React.FC = () => {
   });
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [loadingStep, setLoadingStep] = useState<LoadingStep>('idle');
-  const [waUrl, setWaUrl] = useState<string>('');
   const [declared, setDeclared] = useState(false);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
@@ -180,12 +179,9 @@ export const BookingForm: React.FC = () => {
       payload['GST Number'] = formData.gst;
     }
 
-    const result = await sendAutomatedForm('SHREE KRISHNA TRANSPORT — NEW BOOKING', payload);
+    await sendAutomatedForm('SHREE KRISHNA TRANSPORT — NEW BOOKING', payload);
 
-    setWaUrl(result.waUrl);
     setLoadingStep('done');
-
-    sendWhatsAppMessage('SHREE KRISHNA TRANSPORT — NEW BOOKING', payload);
   };
 
   const isLoading = loadingStep !== 'idle' && loadingStep !== 'done';
@@ -328,22 +324,9 @@ export const BookingForm: React.FC = () => {
             )}
 
             {loadingStep === 'done' && (
-              <div className="bg-[#EBF5EE] border border-[#0F6A37]/30 rounded-lg p-4 flex flex-col gap-3">
-                <div className="flex items-center gap-2 font-[#Manrope] text-xs font-bold text-[#0F6A37]">
-                  <CheckCircle2 size={18} className="text-[#0F6A37] shrink-0" />
-                  <span>Booking details automatically sent to email &amp; WhatsApp! We will call you shortly.</span>
-                </div>
-                {waUrl && (
-                  <a
-                    href={waUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center gap-1.5 font-[#Manrope] text-xs font-bold text-[#0F6A37] hover:underline"
-                  >
-                    <MessageCircle size={14} />
-                    Click here if WhatsApp didn't open automatically
-                  </a>
-                )}
+              <div className="bg-[#EBF5EE] border border-[#0F6A37]/30 rounded-lg p-4 flex items-center gap-2 font-[#Manrope] text-xs font-bold text-[#0F6A37]">
+                <CheckCircle2 size={18} className="text-[#0F6A37] shrink-0" />
+                <span>Booking request submitted successfully via email! Our team will contact you shortly.</span>
               </div>
             )}
 
@@ -378,12 +361,12 @@ export const BookingForm: React.FC = () => {
                 className="btn-brand flex-1 justify-center py-4 text-sm disabled:opacity-70 disabled:cursor-not-allowed disabled:transform-none uppercase tracking-wider"
               >
                 {isLoading ? <Loader2 size={16} className="spinner" /> : <Truck size={16} />}
-                {isLoading ? 'Processing...' : 'Send Booking on WhatsApp'}
+                {isLoading ? 'Submitting Booking...' : 'Submit Booking Request'}
               </button>
             </div>
 
             <p className="font-['Inter'] text-xs text-[#6b786d] text-center">
-              No payment is collected through this form.
+              No payment is collected through this form. Submission is sent directly via email.
             </p>
           </div>
         )}
