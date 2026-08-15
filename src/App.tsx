@@ -7,6 +7,10 @@ import { HomePage } from './pages/HomePage';
 import { BookTruckPage } from './pages/BookTruckPage';
 import { RegisterTruckPage } from './pages/RegisterTruckPage';
 import { EnquiryPage } from './pages/EnquiryPage';
+import { ContactPage } from './pages/ContactPage';
+import { TermsPage } from './pages/TermsPage';
+import { PrivacyPage } from './pages/PrivacyPage';
+import { RefundPage } from './pages/RefundPage';
 
 export function App() {
   return (
@@ -21,6 +25,10 @@ export function App() {
             <Route path="/book-truck" element={<BookTruckPage />} />
             <Route path="/register-truck" element={<RegisterTruckPage />} />
             <Route path="/enquiry" element={<EnquiryPage />} />
+            <Route path="/contact" element={<ContactPage />} />
+            <Route path="/terms-and-conditions" element={<TermsPage />} />
+            <Route path="/privacy-policy" element={<PrivacyPage />} />
+            <Route path="/cancellation-refund-policy" element={<RefundPage />} />
           </Routes>
         </main>
 
