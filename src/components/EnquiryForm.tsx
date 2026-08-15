@@ -336,7 +336,7 @@ export const EnquiryForm: React.FC = () => {
 
           {/* Legal Consent Checkbox */}
           <div className="flex flex-col justify-end">
-            <label className="flex items-start gap-2.5 cursor-pointer">
+            <label className="flex items-start gap-2.5 cursor-pointer p-3 rounded-xl border border-[#e2dad0] bg-[#f9f6f2] hover:border-[#0F6A37] transition-colors">
               <input
                 type="checkbox"
                 name="consent"
@@ -344,12 +344,11 @@ export const EnquiryForm: React.FC = () => {
                 onChange={handleChange}
                 className="mt-0.5 rounded border-[#C5BEB4] text-[#0F6A37] focus:ring-[#0F6A37] h-4 w-4 shrink-0"
               />
-              <span className="font-['Manrope'] text-xs text-[#3d4a3f] leading-snug">
-                I declare that the information provided is accurate and consent to Shree Krishna Transport contacting me regarding this enquiry.{' '}
-                {/* TODO: legal guidance i will add later */}
-                <span className="text-neutral-400 text-[10px] block mt-0.5 italic">
-                  (Legal terms &amp; declaration placeholder)
-                </span>
+              <span className="font-['Manrope'] text-xs text-[#3d4a3f] leading-relaxed">
+                I confirm that the information provided is accurate and I agree to the{' '}
+                <a href="/terms-and-conditions" target="_blank" rel="noopener noreferrer" className="text-[#0F6A37] underline font-bold">Terms & Conditions</a>{' '}and{' '}
+                <a href="/privacy-policy" target="_blank" rel="noopener noreferrer" className="text-[#0F6A37] underline font-bold">Privacy Policy</a>.{' '}
+                I authorize Shree Krishna Transport to contact me regarding this enquiry.
               </span>
             </label>
             {errors.consent && (

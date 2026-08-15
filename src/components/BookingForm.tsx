@@ -89,6 +89,7 @@ export const BookingForm: React.FC = () => {
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [loadingStep, setLoadingStep] = useState<LoadingStep>('idle');
   const [waUrl, setWaUrl] = useState<string>('');
+  const [declared, setDeclared] = useState(false);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
@@ -346,6 +347,21 @@ export const BookingForm: React.FC = () => {
               </div>
             )}
 
+            {/* Declaration Checkbox */}
+            <label className="flex items-start gap-3 p-4 rounded-xl border border-[#e2dad0] bg-[#f9f6f2] cursor-pointer hover:border-[#0F6A37] transition-colors">
+              <input
+                type="checkbox"
+                checked={declared}
+                onChange={(e) => setDeclared(e.target.checked)}
+                className="mt-0.5 w-4 h-4 rounded text-[#0F6A37] focus:ring-[#0F6A37] shrink-0"
+              />
+              <span className="font-['Manrope'] text-xs text-[#3d4a3f] leading-relaxed">
+                I confirm that: the shipment details provided are correct; the goods are legal for transportation; any GST / E-Way Bill required is my responsibility. I agree to the{' '}
+                <a href="/terms-and-conditions" target="_blank" rel="noopener noreferrer" className="text-[#0F6A37] underline font-bold">Terms & Conditions</a>{' '}and{' '}
+                <a href="/privacy-policy" target="_blank" rel="noopener noreferrer" className="text-[#0F6A37] underline font-bold">Privacy Policy</a>.
+              </span>
+            </label>
+
             <div className="flex flex-col sm:flex-row gap-3 pt-2">
               <button
                 type="button"
@@ -358,7 +374,7 @@ export const BookingForm: React.FC = () => {
 
               <button
                 type="submit"
-                disabled={isLoading}
+                disabled={isLoading || !declared}
                 className="btn-brand flex-1 justify-center py-4 text-sm disabled:opacity-70 disabled:cursor-not-allowed disabled:transform-none uppercase tracking-wider"
               >
                 {isLoading ? <Loader2 size={16} className="spinner" /> : <Truck size={16} />}

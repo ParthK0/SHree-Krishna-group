@@ -45,6 +45,7 @@ export const DriverForm: React.FC = () => {
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [submitted, setSubmitted] = useState(false);
   const [waUrl, setWaUrl] = useState<string>('');
+  const [declared, setDeclared] = useState(false);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const { name, value, type } = e.target;
@@ -359,6 +360,21 @@ export const DriverForm: React.FC = () => {
               </div>
             )}
 
+            {/* Declaration Checkbox */}
+            <label className="flex items-start gap-3 p-4 rounded-xl border border-[#e2dad0] bg-[#f9f6f2] cursor-pointer hover:border-[#0F6A37] transition-colors">
+              <input
+                type="checkbox"
+                checked={declared}
+                onChange={(e) => setDeclared(e.target.checked)}
+                className="mt-0.5 w-4 h-4 rounded text-[#0F6A37] focus:ring-[#0F6A37] shrink-0"
+              />
+              <span className="font-['Manrope'] text-xs text-[#3d4a3f] leading-relaxed">
+                I declare that: I am the owner or authorized operator of this vehicle; my RC, Insurance, Permit, Fitness and Driving Licence are valid. I agree to the{' '}
+                <a href="/terms-and-conditions" target="_blank" rel="noopener noreferrer" className="text-[#0F6A37] underline font-bold">Terms & Conditions</a>{' '}and{' '}
+                <a href="/privacy-policy" target="_blank" rel="noopener noreferrer" className="text-[#0F6A37] underline font-bold">Privacy Policy</a>.
+              </span>
+            </label>
+
             <div className="flex flex-col sm:flex-row gap-3 pt-2">
               <button
                 type="button"
@@ -371,7 +387,8 @@ export const DriverForm: React.FC = () => {
 
               <button
                 type="submit"
-                className="btn-brand flex-1 justify-center py-4 text-sm uppercase tracking-wider"
+                disabled={!declared}
+                className="btn-brand flex-1 justify-center py-4 text-sm uppercase tracking-wider disabled:opacity-70 disabled:cursor-not-allowed"
               >
                 <Navigation size={16} />
                 <span>Register Vehicle on WhatsApp</span>
