@@ -1,9 +1,9 @@
 // Business constants — Shree Krishna Transport
 export const BUSINESS_NAME = 'Shree Krishna Transport';
-export const PHONE_NUMBER = '8079086274';
-export const PHONE_DISPLAY = '+91 80790 86274';
-export const WHATSAPP_NUMBER = '918079086274';
-export const CONTACT_EMAIL = 'parthkhowal222@gmail.com';
+export const PHONE_NUMBER = '9784800833';
+export const PHONE_DISPLAY = '+91 97848 00833';
+export const WHATSAPP_NUMBER = '919784800833';
+export const CONTACT_EMAIL = 'deepesh3052@gmail.com';
 
 export const GSTIN = '08KEYPK3684A1ZV';
 

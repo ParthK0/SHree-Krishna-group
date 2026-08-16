@@ -1,6 +1,6 @@
-export const WHATSAPP_NUMBER = "918079086274";
-export const PHONE_DISPLAY  = "+91 80790 86274";
-export const CONTACT_EMAIL  = "parthkhowal222@gmail.com";
+export const WHATSAPP_NUMBER = "919784800833";
+export const PHONE_DISPLAY  = "+91 97848 00833";
+export const CONTACT_EMAIL  = "deepesh3052@gmail.com";
 
 // Optional WhatsApp Gateway API keys (e.g. UltraMsg.com) for 100% silent background WhatsApp sending
 export const ULTRAMSG_INSTANCE_ID = ""; // e.g. "instance12345"

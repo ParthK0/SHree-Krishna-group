@@ -9,8 +9,8 @@ High-performance, modern industrial logistics web application for **Shree Krishn
 - **Registered Business:** Shree Krishna Transport (Parent: Shree Krishna Buildtech)
 - **GSTIN:** `08KEYPK3684A1ZV`
 - **Registered Office:** 1D, Lalita Colony, Nahari Ka Naka, Shastri Nagar, Jaipur, Rajasthan 302016
-- **Contact Phone / WhatsApp:** +91 80790 86274
-- **Email:** parthkhowal222@gmail.com
+- **Contact Phone / WhatsApp:** +91 97848 00833
+- **Email:** deepesh3052@gmail.com
 - **Operating Area:** Rajasthan → All India Connectivity
 
 ---

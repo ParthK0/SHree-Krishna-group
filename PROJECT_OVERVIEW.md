@@ -30,7 +30,7 @@ The primary objective of the platform is to **bridge cargo shippers (customers w
 
 ### C. Automated Dual-Dispatch Notification Engine (`src/lib/whatsapp.ts`)
 - **Zero-Redirect Direct Email Dispatch:** Automatically sends formatted booking and driver registration leads directly to personal Gmail via **EmailJS API** (with **FormSubmit.co** fallback).
-- **Instant WhatsApp Redirection:** Formats form data into a structured WhatsApp message (`wa.me/+918079086274`) and opens WhatsApp for instant 1-click customer support.
+- **Instant WhatsApp Redirection:** Formats form data into a structured WhatsApp message (`wa.me/+919784800833`) and opens WhatsApp for instant 1-click customer support.
 - **Background WhatsApp API Integration:** Configured to support UltraMsg silent background sending.
 
 ---
