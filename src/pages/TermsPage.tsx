@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowLeft } from 'lucide-react';
-import { BUSINESS_NAME, CONTACT_EMAIL, PHONE_DISPLAY, ADDRESS_FULL } from '../lib/constants';
+import { BUSINESS_NAME, CONTACT_EMAIL, PHONE_DISPLAY, ADDRESS_FULL, GSTIN } from '../lib/constants';
 
 const Section: React.FC<{ title: string; children: React.ReactNode }> = ({ title, children }) => (
   <div className="space-y-3 pb-6 border-b border-[#e2dad0] last:border-0 last:pb-0">
@@ -30,58 +30,82 @@ export const TermsPage: React.FC = () => {
             <h1 className="font-['Archivo_Narrow'] text-3xl md:text-4xl font-bold uppercase text-[#1a1f1b]">
               Terms & Conditions
             </h1>
-            <p className="font-['Manrope'] text-xs text-[#6b786d] mt-2">Last updated: August 2025</p>
+            <p className="font-['Manrope'] text-xs text-[#6b786d] mt-2">Last updated: February 2026</p>
           </div>
 
-          <Section title="1. About Us">
-            <p>{BUSINESS_NAME} ("we", "us", "our") is a road transportation service provider based in Jaipur, Rajasthan, operating under the parent entity Shree Krishna Buildtech. We provide freight booking, vehicle registration, and logistics enquiry services across Rajasthan and Pan India.</p>
-            <p>Registered Address: {ADDRESS_FULL}</p>
+          <Section title="1. About Shree Krishna Transport">
+            <p>
+              <strong>Shree Krishna Transport</strong> is a transportation service provider and freight facilitator based in Jaipur, Rajasthan (GSTIN: <span className="font-['Space_Mono'] font-bold text-[#0F6A37]">{GSTIN}</span>). We connect customers with our network of independent transport partners to arrange transportation services across India. Unless expressly agreed otherwise in writing, Shree Krishna Transport does not own or operate the vehicles used for transportation.
+            </p>
+            <p className="text-xs text-[#6b786d]">Registered Address: {ADDRESS_FULL}</p>
           </Section>
 
-          <Section title="2. Quotations">
-            <p>All quotations provided through our website or WhatsApp are estimates based on information submitted. Final pricing is subject to vehicle availability, route conditions, load type, and confirmation by our operations team.</p>
-            <p>No payment is collected through this website. Pricing is agreed directly between the customer and {BUSINESS_NAME} before any transportation begins.</p>
+          <Section title="2. Quotations & Pricing">
+            <p>All freight quotations provided through our website, telephone, or WhatsApp are estimates based on details submitted. Final pricing is subject to vehicle availability, route conditions, cargo weight/volume verification, and confirmation by our operations team.</p>
+            <p>No payment is collected directly on this website. Pricing and terms are agreed upon directly between the customer and {BUSINESS_NAME} prior to vehicle dispatch.</p>
           </Section>
 
-          <Section title="3. Customer Responsibilities">
+          <Section title="3. Customer Responsibilities & Dangerous Goods">
             <p>By submitting a booking request, you confirm that:</p>
             <ul className="list-disc pl-5 space-y-1">
-              <li>The shipment details provided are accurate and complete.</li>
-              <li>The goods are legal for road transportation under applicable Indian laws.</li>
-              <li>Any GST, E-Way Bill, or government documentation required for the shipment is your responsibility.</li>
-              <li>You have the legal right to ship the goods specified.</li>
+              <li>The shipment details, weight, and goods classification provided are accurate and complete.</li>
+              <li>The goods are legal for road transportation under applicable state and central Indian laws.</li>
+              <li>Applicable GST, E-Way Bill, and government transportation documentation requirements have been fulfilled.</li>
+              <li>You have full authority to request transportation of the specified consignment.</li>
             </ul>
+            <p className="font-semibold text-[#1a1f1b] pt-1">Prohibited & Restricted Cargo:</p>
+            <p className="bg-[#FFF8E1] border border-[#FFE082] p-3 rounded-lg text-xs font-['Manrope'] text-[#5D4037]">
+              <strong>Dangerous Goods Notice:</strong> We currently do not arrange transportation of hazardous, explosive, illegal, or restricted goods unless specifically agreed in writing.
+            </p>
           </Section>
 
-          <Section title="4. Transporter Responsibilities">
-            <p>Truck owners and drivers registering on this platform confirm that:</p>
+          <Section title="4. Lorry Receipt (LR) & Booking Reference">
+            <p>
+              <strong>Consignment Note / LR:</strong> The independent transporter assigned to your shipment issues the Lorry Receipt (LR) / consignment note for cargo delivery.
+            </p>
+            <p>
+              <strong>Booking Reference ID:</strong> Shree Krishna Transport provides a unique Booking Reference ID (e.g., <code className="bg-[#f4f0ea] px-1.5 py-0.5 rounded font-['Space_Mono'] text-xs text-[#0F6A37]">SKT-BK-12345</code>) for your request to facilitate direct tracking and communication with our dispatch desk.
+            </p>
+          </Section>
+
+          <Section title="5. Vehicle Availability & Cancellation">
+            <p>Cancellations requested before vehicle dispatch/confirmation are free of charge.</p>
+            <p>If a confirmed transporter becomes unavailable due to unforeseen operational issues, Shree Krishna Transport will make reasonable efforts to arrange an alternate vehicle. Availability cannot be guaranteed.</p>
+            <p>See our full <Link to="/cancellation-refund-policy" className="text-[#0F6A37] underline font-bold">Cancellation & Refund Policy</Link> for details.</p>
+          </Section>
+
+          <Section title="6. Force Majeure">
+            <p>Neither party shall be liable for delays, failure in performance, or loss caused by natural disasters, strikes, severe weather, road closures, government restrictions, accidents, or other events beyond reasonable control.</p>
+          </Section>
+
+          <Section title="7. Transporter & Driver Obligations">
+            <p>Truck owners and fleet operators registering on this platform confirm that:</p>
             <ul className="list-disc pl-5 space-y-1">
-              <li>They are the owner or duly authorized operator of the registered vehicle.</li>
-              <li>All vehicle documents (RC, Insurance, Permit, Fitness Certificate, PUC) are valid and current.</li>
-              <li>Their Driving Licence is valid for the vehicle class operated.</li>
-              <li>{BUSINESS_NAME} reserves the right to verify submitted documents before assigning loads.</li>
+              <li>They are the owner or authorized operator of the registered vehicle.</li>
+              <li>All statutory vehicle documentation (RC, Commercial Permit, Fitness Certificate, PUC, and Insurance) is valid and compliant.</li>
+              <li>Drivers hold a valid Commercial Driving Licence for the vehicle class operated.</li>
             </ul>
           </Section>
 
-          <Section title="5. Cancellation">
-            <p>Cancellations before vehicle confirmation are free of charge.</p>
-            <p>Cancellations after vehicle confirmation may attract a cancellation fee depending on the distance committed by the transporter. Details will be communicated at the time of booking confirmation.</p>
-            <p>See our full <Link to="/cancellation-refund-policy" className="text-[#0F6A37] underline">Cancellation & Refund Policy</Link> for details.</p>
+          <Section title="8. Liability & Insurance">
+            <p>{BUSINESS_NAME} acts as a freight service facilitator and is not liable for loss, damage, delay, or transit claims unless a separate written agreement specifying liability is executed.</p>
+            <p>Shippers are advised to obtain transit insurance for valuable or fragile cargo.</p>
           </Section>
 
-          <Section title="6. Liability">
-            <p>{BUSINESS_NAME} acts as a freight intermediary and is not liable for loss, damage, delay, or any claim arising from the actual transportation of goods unless a separate written agreement specifying liability is in place.</p>
-            <p>We recommend shippers obtain appropriate cargo insurance for high-value consignments.</p>
+          <Section title="9. Terms Updates">
+            <p>We may update these Terms & Conditions from time to time. Updated versions will be published on this website.</p>
           </Section>
 
-          <Section title="7. Governing Law">
-            <p>These Terms & Conditions are governed by the laws of India. Any disputes shall be subject to the exclusive jurisdiction of courts in Jaipur, Rajasthan.</p>
+          <Section title="10. Governing Law">
+            <p>These Terms & Conditions are governed by the laws of India. Any legal disputes shall be subject to the exclusive jurisdiction of courts in Jaipur, Rajasthan.</p>
           </Section>
 
-          <Section title="8. Contact">
-            <p>For any queries regarding these terms, contact us:</p>
-            <p>Email: <a href={`mailto:${CONTACT_EMAIL}`} className="text-[#0F6A37] underline">{CONTACT_EMAIL}</a></p>
-            <p>Phone: {PHONE_DISPLAY}</p>
+          <Section title="11. Contact & Legal Details">
+            <p>For any operational or legal inquiries regarding these terms:</p>
+            <p><strong>Business Name:</strong> {BUSINESS_NAME} (Parent Entity: Shree Krishna Buildtech)</p>
+            <p><strong>GSTIN:</strong> <span className="font-['Space_Mono'] font-bold text-[#0F6A37]">{GSTIN}</span></p>
+            <p><strong>Email:</strong> <a href={`mailto:${CONTACT_EMAIL}`} className="text-[#0F6A37] underline">{CONTACT_EMAIL}</a></p>
+            <p><strong>Phone / WhatsApp:</strong> {PHONE_DISPLAY}</p>
           </Section>
         </div>
 
@@ -89,3 +113,4 @@ export const TermsPage: React.FC = () => {
     </div>
   );
 };
+

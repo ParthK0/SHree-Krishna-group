@@ -376,11 +376,19 @@ export const BookingForm: React.FC = () => {
                 onChange={(e) => setDeclared(e.target.checked)}
                 className="mt-0.5 w-4 h-4 rounded text-[#0F6A37] focus:ring-[#0F6A37] shrink-0"
               />
-              <span className="font-['Manrope'] text-xs text-[#3d4a3f] leading-relaxed">
-                I confirm that: the shipment details provided are correct; the goods are legal for transportation; any GST / E-Way Bill required is my responsibility. I agree to the{' '}
-                <a href="/terms-and-conditions" target="_blank" rel="noopener noreferrer" className="text-[#0F6A37] underline font-bold">Terms & Conditions</a>{' '}and{' '}
-                <a href="/privacy-policy" target="_blank" rel="noopener noreferrer" className="text-[#0F6A37] underline font-bold">Privacy Policy</a>.
-              </span>
+              <div className="font-['Manrope'] text-xs text-[#3d4a3f] leading-relaxed space-y-1">
+                <p className="font-bold text-[#1a1f1b]">I confirm that:</p>
+                <ul className="list-disc pl-4 space-y-0.5 text-[11px]">
+                  <li>Shipment information is correct.</li>
+                  <li>Goods are legal for transportation.</li>
+                  <li>Applicable GST / E-Way Bill requirements have been fulfilled.</li>
+                  <li>
+                    I agree to the{' '}
+                    <Link to="/terms-and-conditions" target="_blank" rel="noopener noreferrer" className="text-[#0F6A37] underline font-bold">Terms &amp; Conditions</Link>{' '}and{' '}
+                    <Link to="/privacy-policy" target="_blank" rel="noopener noreferrer" className="text-[#0F6A37] underline font-bold">Privacy Policy</Link>.
+                  </li>
+                </ul>
+              </div>
             </label>
 
             <div className="flex flex-col sm:flex-row gap-3 pt-2">

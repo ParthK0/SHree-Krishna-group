@@ -64,16 +64,21 @@ export const PrivacyPage: React.FC = () => {
             </ul>
           </Section>
 
-          <Section title="Data Security">
-            <p>Your data is transmitted to our team via WhatsApp Business and email. We do not maintain a database of customer submissions on this website.</p>
-            <p>We recommend you do not submit sensitive documents through the website's general enquiry form. For document sharing, use our WhatsApp number directly.</p>
+          <Section title="Data Security & Retention">
+            <p>Your data is transmitted securely to our operations desk via email and WhatsApp Business. We retain customer booking details and enquiry records only as long as necessary to process freight requests, comply with statutory tax/GST requirements, and resolve customer service queries.</p>
+            <p>We do not maintain an publicly exposed online database of customer submissions on this website.</p>
           </Section>
 
-          <Section title="Contact">
-            <p>For any privacy-related queries or to request deletion of your data, contact us:</p>
-            <p>Email: <a href={`mailto:${CONTACT_EMAIL}`} className="text-[#0F6A37] underline">{CONTACT_EMAIL}</a></p>
-            <p>Phone: {PHONE_DISPLAY}</p>
-            <p>{BUSINESS_NAME} is committed to handling your personal data responsibly and in accordance with applicable Indian data protection laws.</p>
+          <Section title="Correction & Deletion Requests">
+            <p>Shippers and transport partners may request access to, correction of, or deletion of their submitted contact information at any time by sending a request to our support email or phone number.</p>
+          </Section>
+
+          <Section title="Grievance Officer & Contact">
+            <p>In accordance with Indian Information Technology laws and Data Protection guidelines, any privacy concerns or grievances may be addressed to our Grievance Officer:</p>
+            <p><strong>Grievance Officer:</strong> Deepesh Kumar ({BUSINESS_NAME})</p>
+            <p><strong>Email:</strong> <a href={`mailto:${CONTACT_EMAIL}`} className="text-[#0F6A37] underline">{CONTACT_EMAIL}</a></p>
+            <p><strong>Phone / WhatsApp:</strong> {PHONE_DISPLAY}</p>
+            <p>{BUSINESS_NAME} is committed to handling your personal data responsibly and transparently.</p>
           </Section>
         </div>
 

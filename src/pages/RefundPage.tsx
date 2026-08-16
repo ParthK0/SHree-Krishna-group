@@ -47,6 +47,10 @@ export const RefundPage: React.FC = () => {
             </ul>
           </Section>
 
+          <Section title="Transporter Unavailability">
+            <p>If a confirmed transporter becomes unavailable due to unexpected vehicle breakdowns or emergencies, Shree Krishna Transport will make reasonable efforts to arrange an alternate vehicle. Availability cannot be guaranteed.</p>
+          </Section>
+
           <Section title="Refund Timelines">
             <p>Since {BUSINESS_NAME} does not collect any advance payment through this website, refunds are only applicable in cases where payment was agreed and collected directly during a trip confirmation.</p>
             <p>Refund queries are handled on a case-by-case basis. Please contact us directly to initiate any refund request.</p>

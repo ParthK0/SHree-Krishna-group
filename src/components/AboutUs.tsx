@@ -1,5 +1,6 @@
 import React from 'react';
-import { Building2, Award, MapPin, Users } from 'lucide-react';
+import { Building2, Award, MapPin, Shield } from 'lucide-react';
+import { GSTIN } from '../lib/constants';
 
 export const AboutUs: React.FC = () => {
   return (
@@ -28,15 +29,21 @@ export const AboutUs: React.FC = () => {
               Operational Discipline <span className="text-[#F4B400]">From Day One</span>
             </h2>
 
-            {/* Route Pill Tag */}
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#0F6A37]/20 border border-[#0F6A37]/50 text-[#8ad7a0] font-['Space_Mono'] text-xs font-bold">
-              <MapPin size={13} className="text-[#F4B400]" />
-              <span>Rajasthan → All India Connectivity</span>
+            {/* Route Pill Tag & GSTIN Tag */}
+            <div className="flex flex-wrap items-center gap-2">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#0F6A37]/20 border border-[#0F6A37]/50 text-[#8ad7a0] font-['Space_Mono'] text-xs font-bold">
+                <MapPin size={13} className="text-[#F4B400]" />
+                <span>Rajasthan → All India Connectivity</span>
+              </div>
+              <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-neutral-900 border border-[#0F6A37]/50 text-[#8ad7a0] font-['Space_Mono'] text-xs font-bold">
+                <Shield size={13} className="text-[#0F6A37]" />
+                <span>GSTIN: {GSTIN}</span>
+              </div>
             </div>
 
             <div className="space-y-3 font-['Manrope'] text-sm text-neutral-300 leading-relaxed">
               <p>
-                Shree Krishna Transport is a logistics venture from <strong className="text-white">Shree Krishna Buildtech</strong>, a commercial and government contracting firm founded by <strong className="text-white">Deepesh Kumar in 2022</strong>. Building on years of project execution across Rajasthan, we connect regional businesses with reliable freight transport to destinations nationwide.
+                Shree Krishna Transport is a transportation service provider and freight facilitator based in Jaipur, Rajasthan (GSTIN: <strong className="text-white font-['Space_Mono']">{GSTIN}</strong>). We connect regional businesses and cargo shippers with our network of independent transport partners across India.
               </p>
 
               <p>
@@ -57,22 +64,22 @@ export const AboutUs: React.FC = () => {
                   Backed by Buildtech
                 </div>
                 <div className="font-['Manrope'] text-[11px] text-neutral-400">
-                  Commercial & Govt Contractor (est. 2022)
+                  Commercial &amp; Govt Contractor (est. 2022)
                 </div>
               </div>
             </div>
 
-            {/* Building Our Network Card */}
+            {/* GST Registered Business Card */}
             <div className="flex items-center gap-3 p-3.5 rounded-xl bg-neutral-900/80 border border-neutral-800 shadow-md">
               <div className="w-9 h-9 rounded-lg bg-[#0F6A37]/20 border border-[#0F6A37]/40 flex items-center justify-center text-[#8ad7a0] shrink-0">
-                <Users size={18} />
+                <Shield size={18} />
               </div>
               <div>
                 <div className="font-['Archivo_Narrow'] font-bold text-sm uppercase text-white tracking-wide">
-                  Building Our Network
+                  GST Registered Business
                 </div>
-                <div className="font-['Manrope'] text-[11px] text-neutral-400">
-                  Trucks & drivers, ground up
+                <div className="font-['Space_Mono'] text-[11px] text-[#8ad7a0] font-bold">
+                  {GSTIN}
                 </div>
               </div>
             </div>
