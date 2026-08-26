@@ -10,7 +10,7 @@ const labelClass =
   "block font-['Manrope'] text-[10px] font-bold text-[#4A554C] uppercase tracking-widest mb-1.5";
 
 const validatePhone = (phone: string) => /^[6-9]\d{9}$/.test(phone.trim());
-const validateName = (name: string) => /^[a-zA-Z\s\.]{3,50}$/.test(name.trim());
+const validateName = (name: string) => /^[a-zA-Z\s.]{3,50}$/.test(name.trim());
 const validateEmail = (email: string) => !email || /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim());
 
 const ENQUIRY_TYPES = [

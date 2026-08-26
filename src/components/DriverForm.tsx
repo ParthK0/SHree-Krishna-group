@@ -8,12 +8,12 @@ const labelClass = "block font-['Manrope'] text-[10px] font-bold text-[#4A554C] 
 
 // Validation helpers
 const validatePhone = (phone: string) => /^[6-9]\d{9}$/.test(phone.trim());
-const validateName = (name: string) => /^[a-zA-Z\s\.]{3,50}$/.test(name.trim());
+const validateName = (name: string) => /^[a-zA-Z\s.]{3,50}$/.test(name.trim());
 const validateLocation = (loc: string) => loc.trim().length >= 2 && /[a-zA-Z]/.test(loc);
 
 // Indian Driving Licence (DL) format validator (e.g., RJ14 2021 0000123 or RJ14-20210000123)
 const validateDL = (dl: string) => {
-  const cleanDL = dl.trim().replace(/[\s\-]/g, '').toUpperCase();
+  const cleanDL = dl.trim().replace(/[\s-]/g, '').toUpperCase();
   const indianStateCodes = /^(AN|AP|AR|AS|BR|CG|CH|DD|DL|DN|GA|GJ|HR|HP|JH|JK|KA|KL|LA|LD|MH|ML|MN|MP|MZ|NL|OD|PB|PY|RJ|SK|TN|TR|TS|UK|UP|WB)/;
   if (!indianStateCodes.test(cleanDL)) return false;
   return cleanDL.length >= 13 && cleanDL.length <= 16 && /^[A-Z]{2}[0-9]{11,14}$/.test(cleanDL);
