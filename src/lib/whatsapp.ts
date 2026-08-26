@@ -1,13 +1,40 @@
+import emailjs from '@emailjs/browser';
+
 export const WHATSAPP_NUMBER = "919784800833";
 export const PHONE_DISPLAY  = "+91 97848 00833";
 export const CONTACT_EMAIL  = "deepesh3052@gmail.com";
 
-// Optional WhatsApp Gateway API keys (e.g. UltraMsg.com) for 100% silent background WhatsApp sending
+// Optional WhatsApp Gateway API keys (e.g. UltraMsg.com) for silent background WhatsApp sending
 export const ULTRAMSG_INSTANCE_ID = ""; // e.g. "instance12345"
 export const ULTRAMSG_TOKEN = "";       // e.g. "abcdef123456"
 
+// EmailJS credentials for 100% direct, zero-spam Gmail delivery via official browser SDK
+export const EMAILJS_SERVICE_ID  = "service_tf9b0lo";
+export const EMAILJS_TEMPLATE_ID = "template_6ju4zft";
+export const EMAILJS_PUBLIC_KEY  = "tckkT8QZp1MrQSKCL";
+
+// Optional Web3Forms Access Key for instant secondary fallback (get free at web3forms.com)
+export const WEB3FORMS_ACCESS_KEY = "";
+
 export interface WhatsAppData {
   [key: string]: string | undefined;
+}
+
+/**
+ * Returns formatted current timestamp in Indian Standard Time (IST).
+ */
+export function getISTTimestamp(): string {
+  const now = new Date();
+  return now.toLocaleString('en-IN', {
+    timeZone: 'Asia/Kolkata',
+    day: '2-digit',
+    month: 'short',
+    year: 'numeric',
+    hour: '2-digit',
+    minute: '2-digit',
+    second: '2-digit',
+    hour12: true
+  }) + ' (IST)';
 }
 
 export function formatFormMessage(title: string, data: WhatsAppData): string {
@@ -32,43 +59,78 @@ export function sendWhatsAppMessage(title: string, data: WhatsAppData): void {
   window.open(encodedUrl, "_blank", "noopener,noreferrer");
 }
 
-// EmailJS keys for 100% direct, zero-redirect, zero-spam Gmail delivery
-export const EMAILJS_SERVICE_ID  = "service_tf9b0lo";
-export const EMAILJS_TEMPLATE_ID = "template_6ju4zft";
-export const EMAILJS_PUBLIC_KEY  = "tckkT8QZp1MrQSKCL";
+export async function sendAutomatedForm(title: string, rawData: WhatsAppData): Promise<{ success: boolean; waUrl: string }> {
+  const istTimestamp = getISTTimestamp();
+  
+  // Inject submission timestamp
+  const data: WhatsAppData = {
+    'Submission Time (IST)': istTimestamp,
+    ...rawData,
+  };
 
-export async function sendAutomatedForm(title: string, data: WhatsAppData): Promise<{ success: boolean; waUrl: string }> {
   const waUrl = getWhatsAppUrl(title, data);
   const formattedMessage = formatFormMessage(title, data);
 
   let emailSuccess = false;
 
-  // 1A. Direct EmailJS API Dispatch (Zero-Spam, Zero-Redirect via personal Gmail)
+  // 1A. Primary Dispatch: Official EmailJS Browser SDK (Direct, Instant, Zero-Redirect)
   if (EMAILJS_SERVICE_ID && EMAILJS_TEMPLATE_ID && EMAILJS_PUBLIC_KEY) {
     try {
-      const response = await fetch("https://api.emailjs.com/api/v1.0/email/send", {
+      const templateParams = {
+        subject: title,
+        to_email: CONTACT_EMAIL,
+        message: formattedMessage,
+        submission_time: istTimestamp,
+        ...data,
+      };
+
+      const result = await emailjs.send(
+        EMAILJS_SERVICE_ID,
+        EMAILJS_TEMPLATE_ID,
+        templateParams,
+        {
+          publicKey: EMAILJS_PUBLIC_KEY,
+        }
+      );
+
+      if (result.status === 200 || result.text === "OK") {
+        emailSuccess = true;
+        console.log("EmailJS dispatch succeeded instantly (Status 200).");
+      }
+    } catch (err) {
+      console.warn("EmailJS SDK dispatch encountered an issue, trying backup relays:", err);
+    }
+  }
+
+  // 1B. Backup Dispatch: Web3Forms (Instant 2-second delivery)
+  if (!emailSuccess && WEB3FORMS_ACCESS_KEY) {
+    try {
+      const response = await fetch("https://api.web3forms.com/submit", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: {
+          "Content-Type": "application/json",
+          "Accept": "application/json",
+        },
         body: JSON.stringify({
-          service_id: EMAILJS_SERVICE_ID,
-          template_id: EMAILJS_TEMPLATE_ID,
-          user_id: EMAILJS_PUBLIC_KEY,
-          template_params: {
-            subject: title,
-            to_email: CONTACT_EMAIL,
-            message: formattedMessage,
-            ...data,
-          },
+          access_key: WEB3FORMS_ACCESS_KEY,
+          subject: `${title} - ${istTimestamp}`,
+          from_name: "Shree Krishna Transport Portal",
+          to: CONTACT_EMAIL,
+          ...data,
         }),
       });
 
-      emailSuccess = response.ok;
-    } catch (err) {
-      console.error("EmailJS dispatch error:", err);
+      const resJson = await response.json();
+      if (resJson.success) {
+        emailSuccess = true;
+        console.log("Web3Forms backup dispatch succeeded.");
+      }
+    } catch (w3Err) {
+      console.warn("Web3Forms backup error:", w3Err);
     }
-  } 
-  
-  // 1B. Fallback Direct Silent Email Dispatch (FormSubmit.co)
+  }
+
+  // 1C. Backup Dispatch: FormSubmit.co Relay
   if (!emailSuccess) {
     try {
       const response = await fetch(`https://formsubmit.co/ajax/${CONTACT_EMAIL}`, {
@@ -78,17 +140,19 @@ export async function sendAutomatedForm(title: string, data: WhatsAppData): Prom
           "Accept": "application/json",
         },
         body: JSON.stringify({
-          _subject: title,
+          _subject: `${title} [${istTimestamp}]`,
           _template: "table",
           _captcha: "false",
           "Form Type": title,
-          "Details": formattedMessage,
+          "Submission Time (IST)": istTimestamp,
+          "Full Details": formattedMessage,
           ...data,
         }),
       });
 
       const resData = await response.json();
       emailSuccess = resData.success === "true" || response.ok;
+      console.log("FormSubmit relay dispatch status:", emailSuccess);
     } catch (error) {
       console.error("FormSubmit email form error:", error);
     }
@@ -114,6 +178,7 @@ export async function sendAutomatedForm(title: string, data: WhatsAppData): Prom
 
   return { success: emailSuccess, waUrl };
 }
+
 
 
 
