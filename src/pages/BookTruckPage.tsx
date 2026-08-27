@@ -18,9 +18,8 @@ export const BookTruckPage: React.FC = () => {
             <ArrowLeft size={16} />
             <span>Back to Home</span>
           </Link>
-          
-          <div className="font-['Space_Mono'] text-xs text-[#5a665c]">
-            <span>Home</span> / <span className="text-[#0F6A37] font-bold">Book a Truck</span>
+                    <div className="font-['Space_Mono'] text-xs text-[#5a665c]">
+            <span>Home</span> / <span className="text-[#0F6A37] font-bold">Book Freight &amp; Parcel</span>
           </div>
         </div>
 
@@ -31,14 +30,14 @@ export const BookTruckPage: React.FC = () => {
               <Truck size={18} />
             </div>
             <span className="font-['Manrope'] text-xs font-bold text-[#0F6A37] uppercase tracking-widest">
-              Instant Freight Dispatch
+              Instant Freight &amp; Parcel Dispatch
             </span>
           </div>
           <h1 className="font-['Archivo_Narrow'] text-3xl md:text-4xl font-bold uppercase text-[#1a1f1b]">
-            Book Freight Transportation
+            Book Freight &amp; Parcel Delivery
           </h1>
           <p className="font-['Manrope'] text-xs md:text-sm text-[#4A554C] mt-1 max-w-2xl">
-            Fill in your pickup, drop, and cargo details. Receive an accurate freight quote within 1 hour directly via WhatsApp or Phone.
+            Choose Full Load (FTL), Part Load (PTL), or express Parcel Delivery (0 to 150 kg). Receive an accurate freight quote within 1 hour directly via WhatsApp or Phone.
           </p>
         </div>
 
@@ -64,7 +63,7 @@ export const BookTruckPage: React.FC = () => {
                     Rajasthan to All-India Route Network
                   </h3>
                   <p className="font-['Manrope'] text-xs text-[#5a665c] leading-relaxed">
-                    Full Truck Load (FTL) and Part Truck Load (PTL) available across Jaipur, Jodhpur, Udaipur, Kota, and all major interstate industrial corridors.
+                    Full Truck Load (FTL), Part Truck Load (PTL), and Express Parcel Service (0–150 kg) available across Jaipur, Jodhpur, Udaipur, Kota, and all major interstate industrial corridors.
                   </p>
                 </div>
               </div>

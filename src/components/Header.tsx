@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Menu, X, Truck, Phone, Info, Wrench, Building2, MessageSquare, Calendar } from 'lucide-react';
+import { Menu, X, Truck, Phone, Info, Wrench, Building2, MessageSquare, Calendar, Package } from 'lucide-react';
 
 export const Header: React.FC = () => {
   const [scrolled, setScrolled] = React.useState(false);
@@ -35,6 +35,7 @@ export const Header: React.FC = () => {
     { name: 'Services', href: '/#services', icon: Wrench },
     { name: 'How It Works', href: '/#how-it-works', icon: Info },
     { name: 'Book a Truck', href: '/book-truck', icon: Truck },
+    { name: 'Book a Parcel', href: '/book-truck?type=parcel', icon: Package, badge: '0–150 kg' },
     { name: 'Register Vehicle', href: '/register-truck', icon: Calendar },
     { name: 'Enquiry', href: '/enquiry', icon: MessageSquare },
     { name: 'About Us', href: '/#about-us', icon: Building2 },
@@ -59,19 +60,24 @@ export const Header: React.FC = () => {
           </span>
         </Link>
 
-        <nav className="hidden lg:flex items-center justify-center gap-6 xl:gap-10 mx-auto">
+        <nav className="hidden lg:flex items-center justify-center gap-4 xl:gap-7 mx-auto">
           {navLinks.map((link) => {
-            const isActive = location.pathname === link.href;
+            const isActive = location.pathname + location.search === link.href || (link.href === '/book-truck' && location.pathname === '/book-truck' && !location.search);
             return (
               <Link
                 key={link.name}
                 to={link.href}
                 onClick={() => handleNavClick(link.href)}
-                className={`font-['Manrope'] text-[11px] font-bold transition-colors uppercase tracking-wider whitespace-nowrap ${
+                className={`font-['Manrope'] text-[11px] font-bold transition-colors uppercase tracking-wider whitespace-nowrap inline-flex items-center gap-1.5 ${
                   isActive ? 'text-[#0F6A37]' : 'text-[#3d4a3f] hover:text-[#0F6A37]'
                 }`}
               >
-                {link.name}
+                <span>{link.name}</span>
+                {link.badge && (
+                  <span className="text-[9px] px-1.5 py-0.2 rounded font-['Space_Mono'] font-bold bg-[#0F6A37]/10 text-[#0F6A37] border border-[#0F6A37]/30">
+                    {link.badge}
+                  </span>
+                )}
               </Link>
             );
           })}
@@ -114,7 +120,7 @@ export const Header: React.FC = () => {
           <nav className="flex flex-col gap-1.5">
             {navLinks.map((link) => {
               const Icon = link.icon;
-              const isActive = location.pathname === link.href;
+              const isActive = location.pathname + location.search === link.href || (link.href === '/book-truck' && location.pathname === '/book-truck' && !location.search);
               return (
                 <Link
                   key={link.name}
@@ -123,31 +129,49 @@ export const Header: React.FC = () => {
                     setMobileMenuOpen(false);
                     handleNavClick(link.href);
                   }}
-                  className={`flex items-center gap-3.5 px-4 py-3 rounded-lg font-['Manrope'] font-bold text-sm transition-all uppercase tracking-wider ${
+                  className={`flex items-center justify-between px-4 py-3 rounded-lg font-['Manrope'] font-bold text-sm transition-all uppercase tracking-wider ${
                     isActive
                       ? 'bg-[#0F6A37] text-white'
                       : 'text-neutral-200 hover:text-white hover:bg-[#0F6A37]/30'
                   }`}
                 >
-                  <Icon size={18} className={isActive ? 'text-white' : 'text-[#8ad7a0]'} />
-                  <span>{link.name}</span>
+                  <div className="flex items-center gap-3.5">
+                    <Icon size={18} className={isActive ? 'text-white' : 'text-[#8ad7a0]'} />
+                    <span>{link.name}</span>
+                  </div>
+                  {link.badge && (
+                    <span className={`text-[10px] px-2 py-0.5 rounded font-['Space_Mono'] font-bold ${
+                      isActive ? 'bg-[#F4B400] text-[#6c5000]' : 'bg-[#0F6A37]/30 text-[#8ad7a0]'
+                    }`}>
+                      {link.badge}
+                    </span>
+                  )}
                 </Link>
               );
             })}
           </nav>
         </div>
 
-        <div className="pt-6 border-t border-neutral-800">
+        <div className="pt-6 border-t border-neutral-800 space-y-2">
           <Link
             to="/book-truck"
             onClick={() => setMobileMenuOpen(false)}
-            className="w-full flex items-center justify-center gap-2 bg-[#F4B400] text-[#6c5000] font-['Manrope'] font-extrabold text-sm py-3 rounded-lg uppercase tracking-wider shadow-md hover:bg-[#e0a500] transition-colors"
+            className="w-full flex items-center justify-center gap-2 bg-[#F4B400] text-[#6c5000] font-['Manrope'] font-extrabold text-xs py-3 rounded-lg uppercase tracking-wider shadow-md hover:bg-[#e0a500] transition-colors"
           >
-            <Truck size={18} />
-            <span>Book a Truck</span>
+            <Truck size={16} />
+            <span>Book a Truck (FTL/PTL)</span>
+          </Link>
+          <Link
+            to="/book-truck?type=parcel"
+            onClick={() => setMobileMenuOpen(false)}
+            className="w-full flex items-center justify-center gap-2 bg-[#0F6A37] text-white font-['Manrope'] font-extrabold text-xs py-3 rounded-lg uppercase tracking-wider shadow-md hover:bg-[#0c562c] transition-colors"
+          >
+            <Package size={16} />
+            <span>Book a Parcel (0–150 kg)</span>
           </Link>
         </div>
       </aside>
     </>
   );
 };
+

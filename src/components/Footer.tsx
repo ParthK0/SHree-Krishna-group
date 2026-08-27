@@ -10,6 +10,7 @@ import {
 export const Footer: React.FC = () => {
   const quickLinks = [
     { label: 'Book a Truck', href: '/book-truck' },
+    { label: 'Book a Parcel (0–150 kg)', href: '/book-truck?type=parcel' },
     { label: 'Register Vehicle', href: '/register-truck' },
     { label: 'General Enquiry', href: '/enquiry' },
     { label: 'About Us', href: '/#about-us' },

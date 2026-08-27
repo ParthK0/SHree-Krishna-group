@@ -15,6 +15,7 @@ const validateEmail = (email: string) => !email || /^[^\s@]+@[^\s@]+\.[^\s@]+$/.
 
 const ENQUIRY_TYPES = [
   'General Enquiry',
+  'Book a Parcel / Courier (0–150 kg)',
   'Bulk & Corporate Booking',
   'Route/Service Availability',
   'Vendor/Partnership',
