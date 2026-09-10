@@ -1,0 +1,82 @@
+[
+  {
+    "fromCity": "Jaipur",
+    "toCity": "Delhi",
+    "slug": "jaipur-to-delhi-transport",
+    "heroHeading": "Jaipur to Delhi Transport Service",
+    "heroSubheading": "Reliable Truck Transportation from Jaipur to Delhi (NCR)",
+    "distanceKm": 280,
+    "transitTime": "1 Day (Next Morning Delivery)",
+    "status": "published"
+  },
+  {
+    "fromCity": "Jaipur",
+    "toCity": "Mumbai",
+    "slug": "jaipur-to-mumbai-transport",
+    "heroHeading": "Jaipur to Mumbai Transport Service",
+    "heroSubheading": "Heavy Industrial Freight & Daily FTL Trucking from Jaipur to Mumbai",
+    "distanceKm": 1150,
+    "transitTime": "2–3 Days",
+    "status": "published"
+  },
+  {
+    "fromCity": "Jaipur",
+    "toCity": "Ahmedabad",
+    "slug": "jaipur-to-ahmedabad-transport",
+    "heroHeading": "Jaipur to Ahmedabad Transport Service",
+    "heroSubheading": "Direct Industrial Logistics & Daily Trucking between Jaipur and Ahmedabad",
+    "distanceKm": 660,
+    "transitTime": "1–2 Days",
+    "status": "published"
+  },
+  {
+    "fromCity": "Jaipur",
+    "toCity": "Jodhpur",
+    "slug": "jaipur-to-jodhpur-transport",
+    "heroHeading": "Jaipur to Jodhpur Transport Service",
+    "heroSubheading": "Daily Scheduled FTL & Industrial Trucking from Jaipur to Jodhpur Hub",
+    "distanceKm": 340,
+    "transitTime": "Same / Next Day",
+    "status": "published"
+  },
+  {
+    "fromCity": "Jaipur",
+    "toCity": "Ajmer",
+    "slug": "jaipur-to-ajmer-transport",
+    "heroHeading": "Jaipur to Ajmer & Kishangarh Transport Service",
+    "heroSubheading": "Express Same-Day Commercial Truck Transport between Jaipur and Ajmer / Kishangarh",
+    "distanceKm": 135,
+    "transitTime": "Same Day (3–5 Hours)",
+    "status": "published"
+  },
+  {
+    "fromCity": "Jaipur",
+    "toCity": "Pune",
+    "slug": "jaipur-to-pune-transport",
+    "heroHeading": "Jaipur to Pune Transport Service",
+    "heroSubheading": "Full Truck Load & Industrial Freight from Jaipur to Pune Industrial Corridor",
+    "distanceKm": 1220,
+    "transitTime": "3 Days",
+    "status": "published"
+  },
+  {
+    "fromCity": "Jaipur",
+    "toCity": "Surat",
+    "slug": "jaipur-to-surat-transport",
+    "heroHeading": "Jaipur to Surat Transport Service",
+    "heroSubheading": "Reliable Textile, Machinery & Industrial Freight from Jaipur to Surat",
+    "distanceKm": 850,
+    "transitTime": "2 Days",
+    "status": "published"
+  },
+  {
+    "fromCity": "Delhi",
+    "toCity": "Jaipur",
+    "slug": "delhi-to-jaipur-transport",
+    "heroHeading": "Delhi to Jaipur Transport Service",
+    "heroSubheading": "Reliable Inbound Trucking from Delhi NCR to Jaipur & Rajasthan",
+    "distanceKm": 280,
+    "transitTime": "1 Day",
+    "status": "published"
+  }
+]

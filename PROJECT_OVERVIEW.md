@@ -57,24 +57,36 @@ The primary objective of the platform is to **bridge cargo shippers (customers w
 - **Gold Accent:** `#F4B400` (Industrial Transport Gold)
 - **Light Green Tint:** `#EBF5EE` (Success / Card Highlight)
 
-### Component Hierarchy:
+### Directory & Component Hierarchy:
 ```
-src/
-├── App.tsx                # Master page layout and section assembler
-├── index.css              # Design tokens, custom inputs (.sk-input), and global styles
-├── lib/
-│   └── whatsapp.ts        # Automated EmailJS & WhatsApp lead delivery service
-└── components/
-    ├── Header.tsx         # Fixed navigation bar with branding badge & call button
-    ├── Hero.tsx           # High-converting Hero section with animated vehicle visuals
-    ├── Stats.tsx          # Live counter metrics (Trips completed, fleet size, client rating)
-    ├── TwoPathSplit.tsx   # Dual pathway cards: "Book Freight" vs "Register Truck"
-    ├── HowItWorks.tsx     # 3-step interactive booking workflow guide
-    ├── VisualBreak.tsx    # Full-width high-resolution fleet break banner
-    ├── BookingForm.tsx    # Customer transport booking form
-    ├── DriverForm.tsx     # Fleet owner & driver onboarding form
-    ├── FadeUp.tsx         # Framer Motion scroll animation wrapper
-    └── Footer.tsx         # Contact info, office location, and copyright notice
+shree-krishna-group-transportation/
+├── frontend/
+│   ├── src/
+│   │   ├── App.tsx            # Master page layout and section assembler
+│   │   ├── index.css          # Design tokens, custom inputs (.sk-input), and global styles
+│   │   ├── lib/
+│   │   │   └── whatsapp.ts    # Automated EmailJS & WhatsApp lead delivery service
+│   │   ├── pages/             # All routed pages (Home, Book, Register, Contact, Legal)
+│   │   └── components/
+│   │       ├── Header.tsx     # Fixed navigation bar with branding badge & call button
+│   │       ├── Hero.tsx       # High-converting Hero section with animated vehicle visuals
+│   │       ├── Stats.tsx      # Live counter metrics (Trips completed, fleet size, client rating)
+│   │       ├── TwoPathSplit.tsx # Dual pathway cards: "Book Freight" vs "Register Truck"
+│   │       ├── HowItWorks.tsx # 3-step interactive booking workflow guide
+│   │       ├── VisualBreak.tsx # Full-width high-resolution fleet break banner
+│   │       ├── BookingForm.tsx # Customer transport booking form
+│   │       ├── DriverForm.tsx # Fleet owner & driver onboarding form
+│   │       ├── FadeUp.tsx     # Framer Motion scroll animation wrapper
+│   │       └── Footer.tsx     # Contact info, office location, and copyright notice
+│   └── package.json
+│
+└── backend/
+    ├── src/
+    │   ├── controllers/       # Business logic (bookings, drivers, enquiries)
+    │   ├── routes/            # Express REST endpoints (/api/*)
+    │   ├── middleware/        # Request logger & error handlers
+    │   └── server.ts          # Express application initialization
+    └── package.json
 ```
 
 ---
