@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Menu, X, Truck, Phone, Info, Wrench, Building2, MessageSquare, Calendar, Package } from 'lucide-react';
+import { Menu, X, Truck, Phone, Info, Wrench, Building2, MessageSquare, Calendar, Package, MapPin, BookOpen } from 'lucide-react';
 
 export const Header: React.FC = () => {
   const [scrolled, setScrolled] = React.useState(false);
@@ -32,6 +32,8 @@ export const Header: React.FC = () => {
   };
 
   const navLinks = [
+    { name: 'Routes', href: '/routes', icon: MapPin },
+    { name: 'Blog', href: '/blog', icon: BookOpen },
     { name: 'Services', href: '/#services', icon: Wrench },
     { name: 'How It Works', href: '/#how-it-works', icon: Info },
     { name: 'Book a Truck', href: '/book-truck', icon: Truck },

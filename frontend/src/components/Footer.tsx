@@ -9,6 +9,8 @@ import {
 
 export const Footer: React.FC = () => {
   const quickLinks = [
+    { label: 'Transport Routes', href: '/routes' },
+    { label: 'Logistics Blog & Rates', href: '/blog' },
     { label: 'Book a Truck', href: '/book-truck' },
     { label: 'Book a Parcel (0–150 kg)', href: '/book-truck?type=parcel' },
     { label: 'Register Vehicle', href: '/register-truck' },
@@ -176,9 +178,45 @@ export const Footer: React.FC = () => {
                   </Link>
                 ))}
               </nav>
+
+              <div className="pt-2 border-t border-neutral-800">
+                <Link
+                  to="/admin/routes"
+                  className="inline-flex items-center gap-1.5 text-[10px] text-neutral-500 hover:text-neutral-300 font-['Space_Mono'] uppercase tracking-wider"
+                >
+                  <span>Route Manager (Admin)</span>
+                </Link>
+              </div>
             </div>
           </div>
 
+        </div>
+      </div>
+
+      {/* Popular Freight Corridors SEO Interlinking Bar */}
+      <div className="border-t border-neutral-800/80 bg-black/20">
+        <div className="max-w-7xl mx-auto px-4 md:px-12 py-4">
+          <div className="flex items-center justify-between mb-2">
+            <span className="font-['Archivo_Narrow'] text-[11px] font-bold text-white uppercase tracking-wider">
+              Popular Transport Corridors (FTL & PTL)
+            </span>
+            <Link to="/routes" className="text-[10px] text-[#F4B400] hover:underline font-bold uppercase tracking-wider">
+              View All Routes →
+            </Link>
+          </div>
+          <div className="flex flex-wrap gap-x-4 gap-y-1.5 text-[11px] font-['Manrope'] text-neutral-400">
+            <Link to="/jaipur-to-delhi-transport" className="hover:text-white transition-colors">Jaipur to Delhi Transport</Link>
+            <span className="text-neutral-700">•</span>
+            <Link to="/jaipur-to-mumbai-transport" className="hover:text-white transition-colors">Jaipur to Mumbai Transport</Link>
+            <span className="text-neutral-700">•</span>
+            <Link to="/jaipur-to-ahmedabad-transport" className="hover:text-white transition-colors">Jaipur to Ahmedabad Transport</Link>
+            <span className="text-neutral-700">•</span>
+            <Link to="/jaipur-to-pune-transport" className="hover:text-white transition-colors">Jaipur to Pune Transport</Link>
+            <span className="text-neutral-700">•</span>
+            <Link to="/jaipur-to-surat-transport" className="hover:text-white transition-colors">Jaipur to Surat Transport</Link>
+            <span className="text-neutral-700">•</span>
+            <Link to="/delhi-to-jaipur-transport" className="hover:text-white transition-colors">Delhi to Jaipur Transport</Link>
+          </div>
         </div>
       </div>
 

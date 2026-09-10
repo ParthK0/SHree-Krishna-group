@@ -4,6 +4,7 @@ export const PHONE_NUMBER = '9784800833';
 export const PHONE_DISPLAY = '+91 97848 00833';
 export const WHATSAPP_NUMBER = '919784800833';
 export const CONTACT_EMAIL = 'deepesh3052@gmail.com';
+export const WEBSITE_URL = 'www.shree-krishna-transport.org';
 
 export const GSTIN = '08KEYPK3684A1ZV';
 

@@ -12,6 +12,11 @@ import { ContactPage } from './pages/ContactPage';
 import { TermsPage } from './pages/TermsPage';
 import { PrivacyPage } from './pages/PrivacyPage';
 import { RefundPage } from './pages/RefundPage';
+import { RouteTemplatePage } from './pages/RouteTemplatePage';
+import { RoutesIndexPage } from './pages/RoutesIndexPage';
+import { AdminRoutesPage } from './pages/AdminRoutesPage';
+import { BlogIndexPage } from './pages/BlogIndexPage';
+import { BlogPostPage } from './pages/BlogPostPage';
 
 export function App() {
   return (
@@ -31,6 +36,18 @@ export function App() {
             <Route path="/terms-and-conditions" element={<TermsPage />} />
             <Route path="/privacy-policy" element={<PrivacyPage />} />
             <Route path="/cancellation-refund-policy" element={<RefundPage />} />
+
+            {/* Route Directory & Master Route Templates */}
+            <Route path="/routes" element={<RoutesIndexPage />} />
+            <Route path="/routes/:slug" element={<RouteTemplatePage />} />
+            <Route path="/admin/routes" element={<AdminRoutesPage />} />
+
+            {/* Logistics Intelligence Blog */}
+            <Route path="/blog" element={<BlogIndexPage />} />
+            <Route path="/blog/:slug" element={<BlogPostPage />} />
+            
+            {/* Direct clean SEO route slug (e.g. /jaipur-to-delhi-transport) */}
+            <Route path="/:slug" element={<RouteTemplatePage />} />
           </Routes>
         </main>
 
