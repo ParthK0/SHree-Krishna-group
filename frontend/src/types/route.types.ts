@@ -113,6 +113,7 @@ export interface RouteConfig {
   }[];
   rateCardHighlights?: {
     loadCapacityBadge?: string;
+    delhiRates5Ton?: { vehicle: string; rate: string; capacity?: string }[];
     delhiRates7Ton?: { vehicle: string; rate: string; capacity?: string }[];
     delhiRates15Ton?: { vehicle: string; rate: string; capacity?: string }[];
     panIndiaRate?: {

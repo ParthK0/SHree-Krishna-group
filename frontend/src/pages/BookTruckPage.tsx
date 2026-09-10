@@ -22,7 +22,7 @@ export const BookTruckPage: React.FC = () => {
             <span>Home</span> / <span className="text-[#0F6A37] font-bold">Book Freight &amp; Parcel</span>
           </div>
         </div>
-
+        
         {/* Page Header */}
         <div className="bg-white border border-[#c5beB4] rounded-2xl p-6 md:p-8 shadow-sm">
           <div className="flex items-center gap-2 mb-2">

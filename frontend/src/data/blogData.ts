@@ -8,7 +8,7 @@ export interface BlogPostSection {
     text: string;
     badge?: string;
   };
-  rateTableType?: 'delhi-7ton' | 'delhi-15ton' | 'pan-india';
+  rateTableType?: 'delhi-7ton' | 'delhi-5ton' | 'delhi-15ton' | 'pan-india' | 'parcel-courier';
 }
 
 export interface BlogPost {
@@ -69,30 +69,30 @@ export const BLOG_POSTS: BlogPost[] = [
         },
       },
       {
-        heading: '2. Official Rate Card: Load Up to 7 Ton (Jaipur ➔ Delhi NCR)',
+        heading: '2. Table A: Delhi NCR Official Rate Card (Load Up to 5 Ton)',
         paragraphs: [
           'For light to medium industrial freight, retail packaged goods, textile bales, and light machinery, vehicles from 14 feet to 32 feet containers offer the most cost-effective solution. Below is our verified standard rate schedule:',
         ],
         rateTableType: 'delhi-7ton',
         bulletPoints: [
           '14 ft Truck (up to 4.5 Tons): ₹11,500 – ₹12,500 — Ideal for FMCG goods, hardware samples, electrical panels.',
-          '17 ft Truck (up to 6.5 Tons): ₹12,500 – ₹14,000 — Best for machine components, ceramic tiles, PVC pipes.',
-          '20 ft & 22 ft Open Trucks: ₹13,500 – ₹16,000 — Perfect for steel bars, fabrication frames, packaging rolls.',
-          '19 ft & 22 ft Containers: ₹14,000 – ₹16,500 — All-weather sealed for export garments, high-value cartons, solar gear.',
-          '32 ft High-Cube Container: ₹20,000 – ₹22,000 — Maximum volumetric capacity for e-commerce, foam, and retail merchandise.',
+          '17 ft Truck (up to 5 Tons): ₹12,500 – ₹14,000 — Best for machine components, ceramic tiles, PVC pipes.',
+          '20 ft & 22 ft Open Trucks (up to 5 Tons): ₹13,500 – ₹16,000 — Perfect for steel bars, fabrication frames, packaging rolls.',
+          '19 ft & 22 ft Containers (up to 5 Tons): ₹14,000 – ₹16,500 — All-weather sealed for export garments, high-value cartons, solar gear.',
+          '32 ft High-Cube Container (up to 5 Tons): ₹20,000 – ₹22,000 — Maximum volumetric capacity for e-commerce, foam, and retail merchandise.',
         ],
       },
       {
-        heading: '3. Official Rate Card: Load Up to 15 Ton (Heavy Freight & Multi-Axle)',
+        heading: '3. Table B: Delhi NCR Heavy Freight Rate Card (Load Up to 15 Ton)',
         paragraphs: [
-          'Heavy industrial consignments such as structural steel, raw granite/marble slabs, heavy transformers, and large manufacturing equipment require multi-axle 10, 12, or 14 tyre trucks. Our verified heavy load tariff is structured below:',
+          'Heavy industrial consignments such as structural steel, raw granite/marble slabs, heavy transformers, and large manufacturing equipment require multi-axle 10, 12, or 14 tyre trucks or 32ft heavy containers. Our verified heavy load tariff is structured below:',
         ],
         rateTableType: 'delhi-15ton',
         bulletPoints: [
           '10 Tyre Truck (10–12 Tons): ₹20,000 – ₹22,000 — Sturdy open chassis for industrial tools, dense stone tiles, and castings.',
           '12 Tyre Truck (14–16 Tons): ₹26,000 – ₹28,000 — High-capacity multi-axle for heavy structural steel and machinery.',
           '14 Tyre Truck (16–20 Tons): ₹28,000 – ₹30,000 — Ultimate commercial payload for bridge steel, transformers, and raw coils.',
-          '32 ft Multi-Axle Container: ₹24,000 – ₹26,000 — Heavyweight sealed container for weather-sensitive industrial machinery.',
+          '32 ft Multi-Axle Container (12–15 Tons): ₹24,000 – ₹26,000 — Heavyweight sealed container for weather-sensitive industrial machinery.',
         ],
       },
       {
@@ -108,7 +108,19 @@ export const BLOG_POSTS: BlogPost[] = [
         ],
       },
       {
-        heading: '5. How to Book Your Truck in Under 5 Minutes',
+        heading: '5. Table C: Parcel / Courier & Freight Rates (Road, Air & Rail)',
+        paragraphs: [
+          'For shipments smaller than a full vehicle, Shree Krishna Transport provides transparent door-to-door per-kg parcel delivery across surface and express modes:',
+        ],
+        rateTableType: 'parcel-courier',
+        bulletPoints: [
+          'Basic Freight Parcel (Road): ₹20–40 per kg — Economical surface dispatch for commercial cartons and general freight.',
+          'Heavy Special Freight Parcel (Air / Rail / Delicate): ₹40–120 per kg — Priority multimodal transit for urgent or delicate goods.',
+          'Documents / Small Box Light Parcel: ₹15–25 per kg — Fast courier dispatches for corporate documentation and lightweight boxes.',
+        ],
+      },
+      {
+        heading: '6. How to Book Your Truck or Parcel in Under 5 Minutes',
         paragraphs: [
           'Shree Krishna Transport has streamlined commercial truck booking so factory dispatch managers never lose valuable production time waiting for brokers.',
           'Simply send your consignment details (pickup area in Jaipur, delivery hub in NCR, payload weight, and preferred vehicle size) via WhatsApp to +91 97848 00833 or complete our quick booking form online. Our freight desk returns a confirmed, all-inclusive rate with driver assignment details within 60 minutes.',
@@ -172,9 +184,9 @@ export const BLOG_POSTS: BlogPost[] = [
         ],
       },
       {
-        heading: '2. Complete 18-City Rate Matrix (Up to 7 Ton Load)',
+        heading: '2. Left Rate Table: Jaipur ➔ Pan India (Service | Load Upto 7 Ton)',
         paragraphs: [
-          'The table below shows our verified rates for 19 ft and 22 ft trucks from Jaipur across 18 high-volume trade destinations:',
+          'The table below shows our verified rates for 19 ft and 22 ft trucks from Jaipur across 18 high-volume trade destinations with clear rate ranges:',
         ],
         rateTableType: 'pan-india',
         bulletPoints: [

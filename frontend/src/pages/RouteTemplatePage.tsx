@@ -629,11 +629,15 @@ export const RouteTemplatePage: React.FC = () => {
         </div>
       </section>
 
+
       {/* 10. TRANSIT TIME & 12. HOW BOOKING WORKS */}
       <section className="py-14 px-4 md:px-12 max-w-7xl mx-auto border-t border-[#d8d0c3]">
         <div className="text-center max-w-2xl mx-auto mb-12">
           <span className="text-xs font-bold uppercase tracking-wider text-[#0F6A37] font-['Space_Mono'] block mb-2">
             Execution Roadmap
+          </span>
+          <span className ="text-centremax">
+            
           </span>
           <h2 className="text-2xl sm:text-3xl font-extrabold uppercase font-['Archivo_Narrow'] text-[#1a1f1b]">
             How Booking & Transit Works
@@ -702,6 +706,7 @@ export const RouteTemplatePage: React.FC = () => {
               ))}
             </div>
           </div>
+-         
 
           {/* 13. Documents Required */}
           <div className="lg:col-span-5 bg-white rounded-3xl p-6 md:p-8 border border-[#e2dacd]">

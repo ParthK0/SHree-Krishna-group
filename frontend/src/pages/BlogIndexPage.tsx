@@ -26,6 +26,7 @@ export const BlogIndexPage: React.FC = () => {
       post.keyTakeaways.some((k) => k.toLowerCase().includes(query));
     return matchesCategory && matchesQuery;
   });
+  
 
   const featuredPost = posts[0];
 

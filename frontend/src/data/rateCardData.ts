@@ -1,7 +1,7 @@
 export interface DelhiNcrVehicleRate {
   sNo: number;
   vehicleType: string;
-  category: '7 Ton' | '15 Ton';
+  category: '5 Ton' | '7 Ton' | '15 Ton';
   rateRange: string;
   minRate: number;
   maxRate: number;
@@ -16,6 +16,7 @@ export interface PanIndiaRouteRate {
   region: 'North' | 'West' | 'Central' | 'East' | 'Rajasthan';
   distanceKm: number;
   transitTime: string;
+  rateRange: string; // e.g. "₹24k – ₹26k"
   rate19ft: number;
   rate22ft: number;
   rate19ftFormatted: string;
@@ -23,11 +24,21 @@ export interface PanIndiaRouteRate {
   popularGoods: string[];
 }
 
-export const DELHI_NCR_7_TON_RATES: DelhiNcrVehicleRate[] = [
+export interface ParcelFreightRate {
+  sNo: number;
+  serviceType: string;
+  rate: string;
+  unit: string;
+  idealFor: string;
+  badge: string;
+}
+
+// Table A: Delhi NCR — Service | Load Upto 5 Ton
+export const DELHI_NCR_5_TON_RATES: DelhiNcrVehicleRate[] = [
   {
     sNo: 1,
     vehicleType: '14 ft Truck',
-    category: '7 Ton',
+    category: '5 Ton',
     rateRange: '11,500 – 12,500',
     minRate: 11500,
     maxRate: 12500,
@@ -37,65 +48,69 @@ export const DELHI_NCR_7_TON_RATES: DelhiNcrVehicleRate[] = [
   {
     sNo: 2,
     vehicleType: '17 ft Truck',
-    category: '7 Ton',
+    category: '5 Ton',
     rateRange: '12,500 – 14,000',
     minRate: 12500,
     maxRate: 14000,
-    capacity: 'Up to 6.5 Tons',
+    capacity: 'Up to 5 Tons',
     idealFor: 'Machinery components, tiles, light fabrication, PVC pipes',
   },
   {
     sNo: 3,
     vehicleType: '20 ft Truck',
-    category: '7 Ton',
+    category: '5 Ton',
     rateRange: '13,500 – 15,500',
     minRate: 13500,
     maxRate: 15500,
-    capacity: 'Up to 7 Tons',
+    capacity: 'Up to 5 Tons',
     idealFor: 'Sanitaryware, chemicals, granite tiles, commercial hardware',
   },
   {
     sNo: 4,
     vehicleType: '22 ft Truck',
-    category: '7 Ton',
+    category: '5 Ton',
     rateRange: '14,000 – 16,000',
     minRate: 14000,
     maxRate: 16000,
-    capacity: 'Up to 7 Tons',
+    capacity: 'Up to 5 Tons',
     idealFor: 'Steel pipes, structural frames, industrial packaging',
   },
   {
     sNo: 5,
     vehicleType: 'Container 19 ft',
-    category: '7 Ton',
+    category: '5 Ton',
     rateRange: '14,000 – 16,000',
     minRate: 14000,
     maxRate: 16000,
-    capacity: 'Up to 7 Tons (Closed)',
+    capacity: 'Up to 5 Tons (Closed)',
     idealFor: 'Garments, high-value electronics, sealed cartons, FMCG',
   },
   {
     sNo: 6,
     vehicleType: 'Container 22 ft',
-    category: '7 Ton',
+    category: '5 Ton',
     rateRange: '14,500 – 16,500',
     minRate: 14500,
     maxRate: 16500,
-    capacity: 'Up to 7 Tons (Closed HQ)',
+    capacity: 'Up to 5 Tons (Closed HQ)',
     idealFor: 'Weather-sensitive industrial cargo, furniture, solar parts',
   },
   {
     sNo: 7,
     vehicleType: 'Container 32 ft',
-    category: '7 Ton',
+    category: '5 Ton',
     rateRange: '20,000 – 22,000',
     minRate: 20000,
     maxRate: 22000,
-    capacity: 'Up to 7.5 Tons (High Volume)',
+    capacity: 'Up to 5 Tons (High Volume)',
     idealFor: 'Volumetric goods, e-commerce, plastics, foam, large cartons',
   },
 ];
 
+// Alias for backwards compatibility
+export const DELHI_NCR_7_TON_RATES = DELHI_NCR_5_TON_RATES;
+
+// Table B: Load Upto 15 Ton
 export const DELHI_NCR_15_TON_RATES: DelhiNcrVehicleRate[] = [
   {
     sNo: 1,
@@ -129,7 +144,7 @@ export const DELHI_NCR_15_TON_RATES: DelhiNcrVehicleRate[] = [
   },
   {
     sNo: 4,
-    vehicleType: 'Container 32 ft (Heavy)',
+    vehicleType: 'Container 32 ft',
     category: '15 Ton',
     rateRange: '24,000 – 26,000',
     minRate: 24000,
@@ -139,6 +154,35 @@ export const DELHI_NCR_15_TON_RATES: DelhiNcrVehicleRate[] = [
   },
 ];
 
+// Table C: Parcel / Courier & Freight Rates
+export const PARCEL_COURIER_FREIGHT_RATES: ParcelFreightRate[] = [
+  {
+    sNo: 1,
+    serviceType: 'Basic Freight Parcel (Road)',
+    rate: '₹20–40 per kg',
+    unit: 'per kg',
+    idealFor: 'Standard surface packages, commercial carton parcels, warehouse cargo',
+    badge: 'Surface Road Freight',
+  },
+  {
+    sNo: 2,
+    serviceType: 'Heavy Special Freight Parcel (Air / Rail / Delicate etc.)',
+    rate: '₹40–120 per kg',
+    unit: 'per kg',
+    idealFor: 'High-value items, fragile & delicate cargo, express multimodal transit',
+    badge: 'Express Air / Rail',
+  },
+  {
+    sNo: 3,
+    serviceType: 'Documents / Small Box Light Parcel',
+    rate: '₹15–25 per kg',
+    unit: 'per kg',
+    idealFor: 'Business documentation, samples, lightweight boxed dispatches',
+    badge: 'Light Cargo & Courier',
+  },
+];
+
+// Left Rate Table: Jaipur → Pan India — Service | Load Upto 7 Ton
 export const PAN_INDIA_RATES: PanIndiaRouteRate[] = [
   {
     sNo: 1,
@@ -147,6 +191,7 @@ export const PAN_INDIA_RATES: PanIndiaRouteRate[] = [
     region: 'West',
     distanceKm: 660,
     transitTime: '1–2 Days',
+    rateRange: '₹24k – ₹26k',
     rate19ft: 24000,
     rate22ft: 26000,
     rate19ftFormatted: '₹24,000',
@@ -160,6 +205,7 @@ export const PAN_INDIA_RATES: PanIndiaRouteRate[] = [
     region: 'Rajasthan',
     distanceKm: 340,
     transitTime: 'Same / Next Day',
+    rateRange: '₹17k – ₹19k',
     rate19ft: 17000,
     rate22ft: 19000,
     rate19ftFormatted: '₹17,000',
@@ -173,6 +219,7 @@ export const PAN_INDIA_RATES: PanIndiaRouteRate[] = [
     region: 'Rajasthan',
     distanceKm: 135,
     transitTime: 'Same Day',
+    rateRange: '₹10.5k – ₹11.5k',
     rate19ft: 10500,
     rate22ft: 11500,
     rate19ftFormatted: '₹10,500',
@@ -186,6 +233,7 @@ export const PAN_INDIA_RATES: PanIndiaRouteRate[] = [
     region: 'West',
     distanceKm: 850,
     transitTime: '2 Days',
+    rateRange: '₹26.5k – ₹28.5k',
     rate19ft: 26500,
     rate22ft: 28500,
     rate19ftFormatted: '₹26,500',
@@ -199,6 +247,7 @@ export const PAN_INDIA_RATES: PanIndiaRouteRate[] = [
     region: 'West',
     distanceKm: 880,
     transitTime: '2 Days',
+    rateRange: '₹27k – ₹29k',
     rate19ft: 27000,
     rate22ft: 29000,
     rate19ftFormatted: '₹27,000',
@@ -212,6 +261,7 @@ export const PAN_INDIA_RATES: PanIndiaRouteRate[] = [
     region: 'West',
     distanceKm: 730,
     transitTime: '2 Days',
+    rateRange: '₹24.5k – ₹26.5k',
     rate19ft: 24500,
     rate22ft: 26500,
     rate19ftFormatted: '₹24,500',
@@ -225,6 +275,7 @@ export const PAN_INDIA_RATES: PanIndiaRouteRate[] = [
     region: 'West',
     distanceKm: 1150,
     transitTime: '2–3 Days',
+    rateRange: '₹35.5k – ₹37.5k',
     rate19ft: 35500,
     rate22ft: 37500,
     rate19ftFormatted: '₹35,500',
@@ -238,6 +289,7 @@ export const PAN_INDIA_RATES: PanIndiaRouteRate[] = [
     region: 'East',
     distanceKm: 240,
     transitTime: '1 Day',
+    rateRange: '₹14k – ₹16k',
     rate19ft: 14000,
     rate22ft: 16000,
     rate19ftFormatted: '₹14,000',
@@ -251,6 +303,7 @@ export const PAN_INDIA_RATES: PanIndiaRouteRate[] = [
     region: 'Central',
     distanceKm: 590,
     transitTime: '1–2 Days',
+    rateRange: '₹25.5k – ₹27.5k',
     rate19ft: 25500,
     rate22ft: 27500,
     rate19ftFormatted: '₹25,500',
@@ -264,6 +317,7 @@ export const PAN_INDIA_RATES: PanIndiaRouteRate[] = [
     region: 'Central',
     distanceKm: 600,
     transitTime: '1–2 Days',
+    rateRange: '₹27.5k – ₹29.5k',
     rate19ft: 27500,
     rate22ft: 29500,
     rate19ftFormatted: '₹27,500',
@@ -277,6 +331,7 @@ export const PAN_INDIA_RATES: PanIndiaRouteRate[] = [
     region: 'East',
     distanceKm: 570,
     transitTime: '1–2 Days',
+    rateRange: '₹27.5k – ₹29.5k',
     rate19ft: 27500,
     rate22ft: 29500,
     rate19ftFormatted: '₹27,500',
@@ -290,6 +345,7 @@ export const PAN_INDIA_RATES: PanIndiaRouteRate[] = [
     region: 'East',
     distanceKm: 510,
     transitTime: '1–2 Days',
+    rateRange: '₹25.5k – ₹27.5k',
     rate19ft: 25500,
     rate22ft: 27500,
     rate19ftFormatted: '₹25,500',
@@ -303,6 +359,7 @@ export const PAN_INDIA_RATES: PanIndiaRouteRate[] = [
     region: 'Rajasthan',
     distanceKm: 150,
     transitTime: 'Same Day',
+    rateRange: '₹11k – ₹13k',
     rate19ft: 11000,
     rate22ft: 13000,
     rate19ftFormatted: '₹11,000',
@@ -316,6 +373,7 @@ export const PAN_INDIA_RATES: PanIndiaRouteRate[] = [
     region: 'Rajasthan',
     distanceKm: 250,
     transitTime: 'Same / Next Day',
+    rateRange: '₹14k – ₹15.5k',
     rate19ft: 14000,
     rate22ft: 15500,
     rate19ftFormatted: '₹14,000',
@@ -329,6 +387,7 @@ export const PAN_INDIA_RATES: PanIndiaRouteRate[] = [
     region: 'Rajasthan',
     distanceKm: 200,
     transitTime: 'Same / Next Day',
+    rateRange: '₹13.5k – ₹15.5k',
     rate19ft: 13500,
     rate22ft: 15500,
     rate19ftFormatted: '₹13,500',
@@ -342,6 +401,7 @@ export const PAN_INDIA_RATES: PanIndiaRouteRate[] = [
     region: 'Rajasthan',
     distanceKm: 185,
     transitTime: 'Same Day',
+    rateRange: '₹13.5k – ₹15.5k',
     rate19ft: 13500,
     rate22ft: 15500,
     rate19ftFormatted: '₹13,500',
@@ -355,6 +415,7 @@ export const PAN_INDIA_RATES: PanIndiaRouteRate[] = [
     region: 'Rajasthan',
     distanceKm: 115,
     transitTime: 'Same Day',
+    rateRange: '₹13.5k – ₹15.5k',
     rate19ft: 13500,
     rate22ft: 15500,
     rate19ftFormatted: '₹13,500',
@@ -368,6 +429,7 @@ export const PAN_INDIA_RATES: PanIndiaRouteRate[] = [
     region: 'North',
     distanceKm: 320,
     transitTime: '1 Day',
+    rateRange: '₹15.5k – ₹17.5k',
     rate19ft: 15500,
     rate22ft: 17500,
     rate19ftFormatted: '₹15,500',
@@ -395,6 +457,6 @@ export const RATE_CARD_META = {
   services: [
     { name: 'Full Truck Load (FTL)', desc: 'Dedicated non-stop trucks directly from factory to destination.' },
     { name: 'Part Truck Load (PTL)', desc: 'Economical shared cargo space for consignments from 100 kg to 5 Tons.' },
-    { name: 'Parcel Delivery', desc: 'Fast express parcels with door-to-door transit.' },
+    { name: 'Parcel / Courier Delivery', desc: 'Fast express parcels (Road, Rail, Air) with door-to-door per-kg rates.' },
   ],
 };

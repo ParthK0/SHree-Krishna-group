@@ -19,6 +19,7 @@ import {
   DELHI_NCR_7_TON_RATES,
   DELHI_NCR_15_TON_RATES,
   PAN_INDIA_RATES,
+  PARCEL_COURIER_FREIGHT_RATES,
   RATE_CARD_META,
 } from '../data/rateCardData';
 
@@ -296,7 +297,8 @@ export const BlogPostPage: React.FC = () => {
                       <thead>
                         <tr className="bg-[#FFF9E6] border-b border-[#F4B400]/40 text-xs font-['Space_Mono'] uppercase text-[#8a6500]">
                           <th className="py-3 px-4">S. No.</th>
-                          <th className="py-3 px-4">Destination (From Jaipur)</th>
+                          <th className="py-3 px-4">Destination (City)</th>
+                          <th className="py-3 px-4">Rate (Load Upto 7 Ton)</th>
                           <th className="py-3 px-4">State</th>
                           <th className="py-3 px-4 text-right">19 ft Rate (₹)</th>
                           <th className="py-3 px-4 text-right">22 ft Rate (₹)</th>
@@ -311,6 +313,11 @@ export const BlogPostPage: React.FC = () => {
                               <MapPin size={14} className="text-[#F4B400]" />
                               <span>{item.destination}</span>
                             </td>
+                            <td className="py-3 px-4">
+                              <span className="px-2.5 py-0.5 rounded-lg bg-[#EBF5EE] text-[#0F6A37] font-['Space_Mono'] font-bold text-xs">
+                                {item.rateRange}
+                              </span>
+                            </td>
                             <td className="py-3 px-4 text-xs font-['Manrope'] text-neutral-600">{item.state}</td>
                             <td className="py-3 px-4 text-right font-bold text-[#1a1f1b] font-['Space_Mono'] text-xs sm:text-sm">
                               {item.rate19ftFormatted}
@@ -320,7 +327,7 @@ export const BlogPostPage: React.FC = () => {
                             </td>
                             <td className="py-3 px-4 text-center">
                               <a
-                                href={generateWhatsAppUrl(`Hi Shree Krishna Transport, I need freight quotation for Jaipur to ${item.destination}.`)}
+                                href={generateWhatsAppUrl(`Hi Shree Krishna Transport, I need freight quotation for Jaipur to ${item.destination} (Rate: ${item.rateRange}).`)}
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 className="px-3 py-1 rounded-lg bg-[#0F6A37] text-white text-xs font-bold font-['Manrope'] hover:bg-[#0c532b]"
@@ -335,6 +342,58 @@ export const BlogPostPage: React.FC = () => {
                   </div>
                   <p className="text-[11px] text-neutral-500 font-['Manrope'] mt-2 italic">
                     *{RATE_CARD_META.termsNote}
+                  </p>
+                </div>
+              )}
+
+              {/* Embedded Rate Table: Table C: Parcel / Courier & Freight */}
+              {section.rateTableType === 'parcel-courier' && (
+                <div className="pt-4">
+                  <div className="overflow-x-auto rounded-2xl border border-[#e2dacd]">
+                    <table className="w-full text-left font-['Manrope'] text-sm">
+                      <thead>
+                        <tr className="bg-[#FFF9E6] border-b border-[#F4B400]/40 text-xs font-['Space_Mono'] uppercase text-[#8a6500]">
+                          <th className="py-3 px-4">S. No.</th>
+                          <th className="py-3 px-4">Service Type</th>
+                          <th className="py-3 px-4">Category</th>
+                          <th className="py-3 px-4">Recommended Freight</th>
+                          <th className="py-3 px-4 text-right">Official Rate</th>
+                          <th className="py-3 px-4 text-center">Action</th>
+                        </tr>
+                      </thead>
+                      <tbody className="divide-y divide-[#ece6dd]">
+                        {PARCEL_COURIER_FREIGHT_RATES.map((item) => (
+                          <tr key={item.sNo} className="hover:bg-[#fbf9f6]">
+                            <td className="py-3 px-4 font-['Space_Mono'] text-xs text-neutral-500">{item.sNo}.</td>
+                            <td className="py-3 px-4 font-bold text-[#1a1f1b]">
+                              <span>{item.serviceType}</span>
+                            </td>
+                            <td className="py-3 px-4 text-xs font-['Space_Mono']">
+                              <span className="px-2 py-0.5 rounded bg-[#EBF5EE] text-[#0F6A37] font-semibold">
+                                {item.badge}
+                              </span>
+                            </td>
+                            <td className="py-3 px-4 text-xs text-neutral-600 max-w-xs">{item.idealFor}</td>
+                            <td className="py-3 px-4 text-right font-extrabold text-[#0F6A37] font-['Space_Mono'] text-sm sm:text-base whitespace-nowrap">
+                              {item.rate}
+                            </td>
+                            <td className="py-3 px-4 text-center">
+                              <a
+                                href={generateWhatsAppUrl(`Hi Shree Krishna Transport, I want to book parcel/courier service: ${item.serviceType} (${item.rate}).`)}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="px-3 py-1 rounded-lg bg-[#0F6A37] text-white text-xs font-bold font-['Manrope'] hover:bg-[#0c532b]"
+                              >
+                                Book
+                              </a>
+                            </td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  </div>
+                  <p className="text-[11px] text-neutral-500 font-['Manrope'] mt-2 italic">
+                    *Parcel rates are door-to-door per-kg surface or express transit. Minimum billable weight may apply based on destination.
                   </p>
                 </div>
               )}
