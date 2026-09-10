@@ -17,6 +17,7 @@ import { RoutesIndexPage } from './pages/RoutesIndexPage';
 import { AdminRoutesPage } from './pages/AdminRoutesPage';
 import { BlogIndexPage } from './pages/BlogIndexPage';
 import { BlogPostPage } from './pages/BlogPostPage';
+import { NotFoundPage } from './pages/NotFoundPage';
 
 export function App() {
   return (
@@ -48,6 +49,9 @@ export function App() {
             
             {/* Direct clean SEO route slug (e.g. /jaipur-to-delhi-transport) */}
             <Route path="/:slug" element={<RouteTemplatePage />} />
+
+            {/* 404 Catch-all */}
+            <Route path="*" element={<NotFoundPage />} />
           </Routes>
         </main>
 

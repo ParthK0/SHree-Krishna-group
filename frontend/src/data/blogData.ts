@@ -165,7 +165,7 @@ export const BLOG_POSTS: BlogPost[] = [
     publishDate: 'September 2026',
     author: 'Deepesh Sharma',
     authorRole: 'Head of Freight Logistics & Dispatch, Shree Krishna Transport',
-    bannerImage: '/images/hero-truck-1.webp',
+    bannerImage: '/images/home.webp',
     summary:
       'Explore Shree Krishna Transport’s official Pan-India rate matrix connecting Jaipur to 18 major commercial hubs across Gujarat, Maharashtra, Madhya Pradesh, Uttar Pradesh, Haryana, and Rajasthan. Compare 19ft vs 22ft container rates up to 7 Tons.',
     keyTakeaways: [
@@ -258,7 +258,7 @@ export const BLOG_POSTS: BlogPost[] = [
     publishDate: 'September 2026',
     author: 'Deepesh Sharma',
     authorRole: 'Head of Freight Logistics & Dispatch, Shree Krishna Transport',
-    bannerImage: '/images/hero-truck-1.webp',
+    bannerImage: '/images/register-truck.webp',
     summary:
       'Choosing the wrong truck size leads to either paying for wasted vehicle capacity or facing highway overloading challans. This practical guide breaks down payload capacities, cubic volume specs, and optimal cargo categories for 7 Ton and 15 Ton commercial vehicles.',
     keyTakeaways: [
@@ -329,7 +329,7 @@ export const BLOG_POSTS: BlogPost[] = [
     publishDate: 'September 2026',
     author: 'Deepesh Sharma',
     authorRole: 'Head of Freight Logistics & Dispatch, Shree Krishna Transport',
-    bannerImage: '/images/hero-truck-1.webp',
+    bannerImage: '/images/dropdelivery.webp',
     summary:
       'Transporting commercial goods across state borders from Rajasthan to Delhi, Gujarat, Maharashtra, or MP requires strict GST compliance. This operational guide explains E-Way Bill thresholds, vehicle number updates, validity periods, and required transporter documentation.',
     keyTakeaways: [

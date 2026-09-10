@@ -1,12 +1,13 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowLeft, Phone, MessageCircle, Mail, MapPin, Clock, Building2, Shield } from 'lucide-react';
+import { ArrowLeft, Phone, MessageCircle, Mail, MapPin, Clock, Building2, Shield, Send } from 'lucide-react';
 import {
   BUSINESS_NAME, PHONE_DISPLAY, WHATSAPP_NUMBER, CONTACT_EMAIL,
   GSTIN, ADDRESS_LINE1, ADDRESS_LINE2, ADDRESS_CITY, ADDRESS_STATE, ADDRESS_PIN,
   BUSINESS_HOURS,
 } from '../lib/constants';
 import { useMetaSEO } from '../lib/useMetaSEO';
+import { EnquiryForm } from '../components/EnquiryForm';
 
 export const ContactPage: React.FC = () => {
   useMetaSEO({
@@ -156,6 +157,24 @@ export const ContactPage: React.FC = () => {
             </div>
           </div>
 
+        </div>
+
+        {/* Inline Enquiry & Quotation Form */}
+        <div className="space-y-3">
+          <div className="flex items-center gap-2">
+            <div className="w-8 h-8 rounded-lg bg-[#EBF5EE] flex items-center justify-center text-[#0F6A37]">
+              <Send size={16} />
+            </div>
+            <div>
+              <h2 className="font-['Archivo_Narrow'] text-xl font-bold uppercase text-[#1a1f1b]">
+                Send an Online Freight Enquiry
+              </h2>
+              <p className="font-['Manrope'] text-xs text-[#4A554C]">
+                Prefer a callback or written quote? Fill in your consignment details below and our team will get back to you within 60 minutes.
+              </p>
+            </div>
+          </div>
+          <EnquiryForm />
         </div>
 
         {/* Google Maps placeholder */}

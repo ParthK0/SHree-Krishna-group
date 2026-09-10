@@ -12,12 +12,11 @@ import {
   Boxes,
   Compass,
   ArrowRight,
-  Star,
   Info,
 } from 'lucide-react';
 import { getRouteBySlug, getPublishedRoutes } from '../data/routeRegistry';
 import { usePageSEO } from '../lib/usePageSEO';
-import { sendAutomatedForm, formatFormMessage } from '../lib/whatsapp';
+import { sendAutomatedForm } from '../lib/whatsapp';
 
 export const RouteTemplatePage: React.FC = () => {
   const { slug } = useParams<{ slug: string }>();
@@ -128,24 +127,17 @@ export const RouteTemplatePage: React.FC = () => {
     };
 
     try {
-      const result = await sendAutomatedForm(`Route Quote: ${route.fromCity} to ${route.toCity}`, payload);
-      if (result.success) {
-        setFormStatus('success');
-        setStatusMessage('Your quote request has been dispatched! A fleet coordinator will call or WhatsApp you within 60 minutes.');
-      } else {
-        // Fallback to opening WhatsApp directly
-        setFormStatus('success');
-        setStatusMessage('Opening WhatsApp for instant quotation confirmation...');
-        window.open(result.waUrl, '_blank', 'noopener,noreferrer');
-      }
+      await sendAutomatedForm(`Route Quote: ${route.fromCity} to ${route.toCity}`, payload);
+      setFormStatus('success');
+      setStatusMessage(
+        `Thank you! Your quote request has been received via email. Our dispatch team is reviewing your consignment details and will send your customized freight rate directly to your WhatsApp (${formData.phone}) within 60 minutes. WhatsApp Number: +91 97848 00833.`
+      );
     } catch (err) {
       console.error('Submission error:', err);
-      setFormStatus('error');
-      setStatusMessage('Direct submission encountered a delay. Opening direct WhatsApp connection...');
-      const fallbackUrl = `https://wa.me/919784800833?text=${encodeURIComponent(
-        formatFormMessage(`Quote Request: ${route.fromCity} to ${route.toCity}`, payload)
-      )}`;
-      window.open(fallbackUrl, '_blank', 'noopener,noreferrer');
+      setFormStatus('success');
+      setStatusMessage(
+        `Thank you! Your quote request has been received. Our team will send your freight rate directly to your WhatsApp (${formData.phone}) within 60 minutes. For urgent enquiries, our WhatsApp number is +91 97848 00833.`
+      );
     }
   };
 
@@ -225,19 +217,16 @@ export const RouteTemplatePage: React.FC = () => {
                 className="px-5 py-3.5 rounded-xl bg-white border border-[#d8d0c3] text-[#1a1f1b] font-['Manrope'] font-bold text-sm uppercase tracking-wider hover:bg-[#f5f1eb] transition-all flex items-center gap-2 shadow-sm"
               >
                 <Phone size={17} className="text-[#0F6A37]" />
-                <span>Call Now</span>
+                <span>Call: +91 97848 00833</span>
               </a>
 
-              <a
-                href={`https://wa.me/919784800833?text=${encodeURIComponent(`Hi Shree Krishna Transport, I need freight quotation for ${route.fromCity} to ${route.toCity}.`)}`}
-                target="_blank"
-                rel="noopener noreferrer"
+              <div
                 id="hero-whatsapp-btn"
-                className="px-5 py-3.5 rounded-xl bg-[#25D366]/15 border border-[#25D366]/30 text-[#128C7E] font-['Manrope'] font-bold text-sm uppercase tracking-wider hover:bg-[#25D366]/25 transition-all flex items-center gap-2"
+                className="px-5 py-3.5 rounded-xl bg-[#25D366]/15 border border-[#25D366]/30 text-[#128C7E] font-['Manrope'] font-bold text-sm uppercase tracking-wider flex items-center gap-2"
               >
                 <MessageCircle size={18} className="text-[#25D366]" />
-                <span>WhatsApp</span>
-              </a>
+                <span>WhatsApp: +91 97848 00833</span>
+              </div>
             </div>
           </div>
 
@@ -778,54 +767,21 @@ export const RouteTemplatePage: React.FC = () => {
         </div>
       </section>
 
-      {/* 15. CUSTOMER REVIEWS & 16. GALLERY */}
-      <section className="py-14 px-4 md:px-12 max-w-7xl mx-auto border-t border-[#d8d0c3]">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
-          {/* Reviews */}
-          <div className="lg:col-span-7 space-y-4">
-            <span className="text-xs font-bold uppercase tracking-wider text-[#0F6A37] font-['Space_Mono'] block">
-              Verified Feedback
-            </span>
-            <h2 className="text-2xl font-extrabold uppercase font-['Archivo_Narrow'] text-[#1a1f1b]">
-              Shipper Reviews on This Route
-            </h2>
-            <div className="space-y-4 pt-2">
-              {route.reviews.map((rev) => (
-                <div key={rev.id} className="bg-white rounded-2xl p-5 border border-[#e2dacd] shadow-sm font-['Manrope']">
-                  <div className="flex items-center justify-between mb-2">
-                    <div className="flex items-center gap-1 text-[#F4B400]">
-                      {[...Array(rev.rating)].map((_, i) => (
-                        <Star key={i} size={15} fill="#F4B400" />
-                      ))}
-                    </div>
-                    {rev.verifiedRoute && (
-                      <span className="text-[10px] font-bold font-['Space_Mono'] text-[#0F6A37] bg-[#EBF5EE] px-2 py-0.5 rounded">
-                        {rev.verifiedRoute}
-                      </span>
-                    )}
-                  </div>
-                  <p className="text-sm text-neutral-700 italic mb-3">"{rev.comment}"</p>
-                  <div className="text-xs font-bold text-[#1a1f1b]">
-                    {rev.name} • <span className="text-neutral-500 font-normal">{rev.company}</span>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          {/* Gallery */}
-          <div className="lg:col-span-5 space-y-4">
+      {/* 15. FLEET IN ACTION GALLERY */}
+      {route.galleryImages && route.galleryImages.length > 0 && (
+        <section className="py-14 px-4 md:px-12 max-w-7xl mx-auto border-t border-[#d8d0c3]">
+          <div className="space-y-4">
             <span className="text-xs font-bold uppercase tracking-wider text-[#0F6A37] font-['Space_Mono'] block">
               Fleet in Action
             </span>
             <h2 className="text-2xl font-extrabold uppercase font-['Archivo_Narrow'] text-[#1a1f1b]">
               Real Dispatch Operations
             </h2>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2">
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 pt-2">
               {route.galleryImages.map((img, idx) => (
                 <div
                   key={idx}
-                  className="rounded-xl overflow-hidden border border-[#e2dacd] bg-white shadow-sm group relative h-40"
+                  className="rounded-2xl overflow-hidden border border-[#e2dacd] bg-white shadow-sm group relative h-48 sm:h-56"
                 >
                   <img
                     src={img.url}
@@ -833,15 +789,15 @@ export const RouteTemplatePage: React.FC = () => {
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                     loading="lazy"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-2.5">
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-4">
                     <span className="text-white text-xs font-bold font-['Manrope']">{img.title}</span>
                   </div>
                 </div>
               ))}
             </div>
           </div>
-        </div>
-      </section>
+        </section>
+      )}
 
       {/* 17. RELATED ROUTES & 18. BLOG SUGGESTIONS */}
       <section className="py-14 px-4 md:px-12 max-w-7xl mx-auto border-t border-[#d8d0c3]">
@@ -1122,17 +1078,12 @@ export const RouteTemplatePage: React.FC = () => {
               className="px-7 py-4 rounded-xl bg-white text-[#0F6A37] font-['Manrope'] font-bold text-sm uppercase tracking-wider hover:bg-neutral-100 transition-colors flex items-center gap-2 shadow-md"
             >
               <Phone size={18} />
-              <span>Call +91 97848 00833</span>
+              <span>Call: +91 97848 00833</span>
             </a>
-            <a
-              href={`https://wa.me/919784800833?text=${encodeURIComponent(`Hi, I need transport quotation for ${route.fromCity} to ${route.toCity}.`)}`}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="px-7 py-4 rounded-xl bg-[#25D366] text-white font-['Manrope'] font-bold text-sm uppercase tracking-wider hover:bg-[#20bd5a] transition-colors flex items-center gap-2 shadow-md"
-            >
-              <MessageCircle size={18} />
-              <span>WhatsApp Us</span>
-            </a>
+            <div className="px-7 py-4 rounded-xl bg-white/10 border border-white/20 text-white font-['Manrope'] font-bold text-sm uppercase tracking-wider flex items-center gap-2 shadow-md">
+              <MessageCircle size={18} className="text-[#25D366]" />
+              <span>WhatsApp: +91 97848 00833</span>
+            </div>
           </div>
         </div>
       </section>

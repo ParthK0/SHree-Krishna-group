@@ -285,7 +285,7 @@ export const BookingForm: React.FC = () => {
         <div className="bg-[#EBF5EE] border border-[#0F6A37]/30 rounded-xl p-4 max-w-lg mx-auto flex items-center gap-3 text-left">
           <Clock size={20} className="text-[#0F6A37] shrink-0" />
           <p className="font-['Manrope'] text-xs text-[#134E3A] leading-snug">
-            <strong>1-Hour Response Promise:</strong> Our dispatch team is reviewing your route &amp; {isParcel ? 'parcel capacity' : 'vehicle availability'}. We will contact you at <span className="font-['Space_Mono'] font-bold">{formData.phone}</span> within 60 minutes with the best rate.
+            <strong>1-Hour Quote on WhatsApp:</strong> Your booking request has been delivered to our dispatch team via email. We will calculate the verified freight tariff and send your quote directly to your WhatsApp at <span className="font-['Space_Mono'] font-bold">{formData.phone}</span> within 60 minutes. For urgent enquiries, our WhatsApp number is <span className="font-['Space_Mono'] font-bold">+91 97848 00833</span>.
           </p>
         </div>
 

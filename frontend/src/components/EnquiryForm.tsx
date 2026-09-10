@@ -154,7 +154,7 @@ export const EnquiryForm: React.FC = () => {
         <div className="bg-[#EBF5EE] border border-[#0F6A37]/30 rounded-xl p-4 max-w-lg mx-auto flex items-center gap-3 text-left">
           <Clock size={20} className="text-[#0F6A37] shrink-0" />
           <p className="font-['Manrope'] text-xs text-[#134E3A] leading-snug">
-            <strong>Guaranteed 1-Hour Response:</strong> Our support desk is reviewing your message details and will get back to you via <span className="font-bold">{formData.preferredContact}</span> shortly.
+            <strong>1-Hour Response:</strong> Your request has been sent to our dispatch desk via email. We will review your consignment specs and send your quotation directly to your WhatsApp at <span className="font-['Space_Mono'] font-bold">{formData.phone}</span> within 60 minutes. For urgent enquiries, our WhatsApp number is <span className="font-['Space_Mono'] font-bold">+91 97848 00833</span>.
           </p>
         </div>
 
