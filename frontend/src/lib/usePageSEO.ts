@@ -73,7 +73,7 @@ export function usePageSEO({ route }: PageSEOProps) {
       document.head.appendChild(scriptTag);
     }
 
-    const currentOrigin = typeof window !== 'undefined' ? window.location.origin : 'https://shreekrishnatransport.com';
+    const currentOrigin = typeof window !== 'undefined' ? window.location.origin : 'https://www.shree-krishna-transport.org';
 
     // Build structured schema graph
     const schemaGraph = {

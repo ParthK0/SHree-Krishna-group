@@ -108,7 +108,7 @@ export const AdminRoutesPage: React.FC = () => {
       metaDescription: 'Book Jaipur to New City Transport Service with Shree Krishna Transport. FTL, PTL, Container & Parcel. GST Billing. Fast 1-Hour Quote.',
       h1: 'Jaipur to New City Transport Service',
       keywords: ['Jaipur Transport', 'Truck Booking Jaipur', 'Logistics'],
-      canonicalUrl: 'https://shreekrishnatransport.com/jaipur-to-new-city-transport',
+      canonicalUrl: 'https://www.shree-krishna-transport.org/jaipur-to-new-city-transport',
       ogTitle: 'Jaipur to New City Transport Service | Shree Krishna Transport',
       ogDescription: 'Reliable truck transport service from Jaipur to New City.',
       sitemapStatus: true,
@@ -551,7 +551,7 @@ export const AdminRoutesPage: React.FC = () => {
                         Google Search (SERP) Live Simulation
                       </span>
                       <div className="text-[11px] text-neutral-600 truncate flex items-center gap-1">
-                        <span className="text-neutral-800 font-bold">shreekrishnatransport.com</span>
+                        <span className="text-neutral-800 font-bold">shree-krishna-transport.org</span>
                         <span>› routes › {selectedRoute.slug}</span>
                       </div>
                       <div className="text-base text-[#1a0dab] hover:underline cursor-pointer font-medium font-sans truncate">

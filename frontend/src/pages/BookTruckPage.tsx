@@ -3,8 +3,15 @@ import { Link } from 'react-router-dom';
 import { BookingForm } from '../components/BookingForm';
 import { FadeUp } from '../components/FadeUp';
 import { ArrowLeft, Truck } from 'lucide-react';
+import { useMetaSEO } from '../lib/useMetaSEO';
 
 export const BookTruckPage: React.FC = () => {
+  useMetaSEO({
+    title: 'Book a Truck Online in Jaipur | Instant Rates & Verified Drivers | Shree Krishna Transport',
+    description: 'Book Full Truck Load (FTL) and Part Truck Load (PTL) online. 14ft to 32ft container trucks available on call across Rajasthan and North India.',
+    canonicalPath: '/book-truck',
+  });
+
   return (
     <div className="min-h-screen bg-[#ECE6DD] py-10 md:py-16 px-4 md:px-12">
       <div className="max-w-6xl mx-auto space-y-8">

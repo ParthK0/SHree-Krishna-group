@@ -1,0 +1,9 @@
+# Robots.txt for Shree Krishna Transport
+User-agent: *
+Allow: /
+
+# Disallow admin panel from search engine indexing
+Disallow: /admin/
+
+# Sitemap location
+Sitemap: https://www.shree-krishna-transport.org/sitemap.xml

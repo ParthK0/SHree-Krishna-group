@@ -2,8 +2,16 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Search, Clock, ArrowRight, User, Sparkles, MessageCircle, Truck } from 'lucide-react';
 import { getAllBlogPosts } from '../data/blogData';
+import { useMetaSEO } from '../lib/useMetaSEO';
 
 export const BlogIndexPage: React.FC = () => {
+  useMetaSEO({
+    title: 'Logistics Intelligence Blog & Freight Rate Guides | Shree Krishna Transport',
+    description: 'Expert guides on truck transport rates, FTL vs PTL vehicle selection, and inter-state E-Way bill rules by Shree Krishna Transport Jaipur.',
+    canonicalPath: '/blog',
+    ogImage: '/images/hero-truck-1.webp',
+  });
+
   const posts = getAllBlogPosts();
   const [selectedCategory, setSelectedCategory] = useState<string>('all');
   const [searchQuery, setSearchQuery] = useState<string>('');

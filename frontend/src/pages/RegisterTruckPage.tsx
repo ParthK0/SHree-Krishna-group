@@ -3,8 +3,15 @@ import { Link } from 'react-router-dom';
 import { DriverForm } from '../components/DriverForm';
 import { FadeUp } from '../components/FadeUp';
 import { ArrowLeft, Calendar } from 'lucide-react';
+import { useMetaSEO } from '../lib/useMetaSEO';
 
 export const RegisterTruckPage: React.FC = () => {
+  useMetaSEO({
+    title: 'Register Your Truck & Get Daily Loads | Driver & Fleet Enrollment | Shree Krishna Transport',
+    description: 'Join Shree Krishna Transport network. Register your truck (14ft to trailer) for daily verified commercial loads from Jaipur and Rajasthan.',
+    canonicalPath: '/register-truck',
+  });
+
   return (
     <div className="min-h-screen bg-[#ECE6DD] py-10 md:py-16 px-4 md:px-12">
       <div className="max-w-6xl mx-auto space-y-8">

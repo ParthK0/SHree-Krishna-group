@@ -15,6 +15,7 @@ import {
   Info,
 } from 'lucide-react';
 import { getBlogPostBySlug, getAllBlogPosts } from '../data/blogData';
+import { useMetaSEO } from '../lib/useMetaSEO';
 import {
   DELHI_NCR_7_TON_RATES,
   DELHI_NCR_15_TON_RATES,
@@ -28,6 +29,55 @@ export const BlogPostPage: React.FC = () => {
   const post = slug ? getBlogPostBySlug(slug) : undefined;
   const [openFaqIndex, setOpenFaqIndex] = useState<number | null>(0);
   const [copiedLink, setCopiedLink] = useState(false);
+
+  // Dynamic SEO meta tags and Article + FAQ schema
+  useMetaSEO({
+    title: post ? post.seoTitle : 'Article Not Found | Shree Krishna Transport',
+    description: post ? post.metaDescription : 'Logistics blog article by Shree Krishna Transport.',
+    canonicalPath: post ? `/blog/${post.slug}` : '/blog',
+    ogImage: post?.bannerImage || '/images/new home.webp',
+    type: 'article',
+    structuredData: post
+      ? {
+          '@context': 'https://schema.org',
+          '@graph': [
+            {
+              '@type': 'BlogPosting',
+              headline: post.title,
+              description: post.metaDescription,
+              image: post.bannerImage.startsWith('http')
+                ? post.bannerImage
+                : `https://www.shree-krishna-transport.org${post.bannerImage}`,
+              author: {
+                '@type': 'Person',
+                name: post.author,
+              },
+              publisher: {
+                '@type': 'Organization',
+                name: 'Shree Krishna Transport',
+                url: 'https://www.shree-krishna-transport.org',
+              },
+              mainEntityOfPage: `https://www.shree-krishna-transport.org/blog/${post.slug}`,
+            },
+            ...(post.faqs && post.faqs.length > 0
+              ? [
+                  {
+                    '@type': 'FAQPage',
+                    mainEntity: post.faqs.map((faq) => ({
+                      '@type': 'Question',
+                      name: faq.question,
+                      acceptedAnswer: {
+                        '@type': 'Answer',
+                        text: faq.answer,
+                      },
+                    })),
+                  },
+                ]
+              : []),
+          ],
+        }
+      : undefined,
+  });
 
   if (!post) {
     const allPosts = getAllBlogPosts();

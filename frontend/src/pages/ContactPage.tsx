@@ -6,8 +6,15 @@ import {
   GSTIN, ADDRESS_LINE1, ADDRESS_LINE2, ADDRESS_CITY, ADDRESS_STATE, ADDRESS_PIN,
   BUSINESS_HOURS,
 } from '../lib/constants';
+import { useMetaSEO } from '../lib/useMetaSEO';
 
 export const ContactPage: React.FC = () => {
+  useMetaSEO({
+    title: 'Contact Shree Krishna Transport | Jaipur Logistics Office & 24/7 Helpline',
+    description: 'Contact Shree Krishna Transport Jaipur. Office address in Sitapura / VKI, direct WhatsApp support (+91 97848 00833), phone booking, and GST invoicing.',
+    canonicalPath: '/contact',
+  });
+
   return (
     <div className="min-h-screen bg-[#ECE6DD] py-10 md:py-16 px-4 md:px-12">
       <div className="max-w-4xl mx-auto space-y-8">

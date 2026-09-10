@@ -3,8 +3,16 @@ import { Link } from 'react-router-dom';
 import { Truck, ArrowRight, Search, Sparkles } from 'lucide-react';
 import { getPublishedRoutes } from '../data/routeRegistry';
 import { RouteMapSection } from '../components/RouteMapSection';
+import { useMetaSEO } from '../lib/useMetaSEO';
 
 export const RoutesIndexPage: React.FC = () => {
+  useMetaSEO({
+    title: 'Verified Freight Corridors & Truck Transport Routes | Shree Krishna Transport',
+    description: 'Browse scheduled daily freight routes from Jaipur to Delhi, Mumbai, Ahmedabad, Pune, Surat, Jodhpur & Pan-India. FTL & PTL trucks with instant booking.',
+    canonicalPath: '/routes',
+    ogImage: '/images/hero-truck-1.webp',
+  });
+
   const routes = getPublishedRoutes();
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedCity, setSelectedCity] = useState('all');
