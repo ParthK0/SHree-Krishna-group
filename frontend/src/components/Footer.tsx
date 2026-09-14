@@ -14,7 +14,7 @@ export const Footer: React.FC = () => {
     { label: 'Book a Truck', href: '/book-truck' },
     { label: 'Book a Parcel (0–150 kg)', href: '/book-truck?type=parcel' },
     { label: 'Register Vehicle', href: '/register-truck' },
-    { label: 'General Enquiry', href: '/enquiry' },
+    { label: 'General Enquiry', href: '/contact#enquiry' },
     { label: 'About Us', href: '/#about-us' },
     { label: 'Contact', href: '/contact' },
   ];
@@ -178,15 +178,6 @@ export const Footer: React.FC = () => {
                   </Link>
                 ))}
               </nav>
-
-              <div className="pt-2 border-t border-neutral-800">
-                <Link
-                  to="/admin/routes"
-                  className="inline-flex items-center gap-1.5 text-[10px] text-neutral-500 hover:text-neutral-300 font-['Space_Mono'] uppercase tracking-wider"
-                >
-                  <span>Route Manager (Admin)</span>
-                </Link>
-              </div>
             </div>
           </div>
 

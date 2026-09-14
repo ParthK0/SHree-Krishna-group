@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { Analytics } from '@vercel/analytics/react';
 import { Header } from './components/Header';
 import { Footer } from './components/Footer';
@@ -7,7 +7,6 @@ import { ScrollToTop } from './components/ScrollToTop';
 import { HomePage } from './pages/HomePage';
 import { BookTruckPage } from './pages/BookTruckPage';
 import { RegisterTruckPage } from './pages/RegisterTruckPage';
-import { EnquiryPage } from './pages/EnquiryPage';
 import { ContactPage } from './pages/ContactPage';
 import { TermsPage } from './pages/TermsPage';
 import { PrivacyPage } from './pages/PrivacyPage';
@@ -18,6 +17,7 @@ import { AdminRoutesPage } from './pages/AdminRoutesPage';
 import { BlogIndexPage } from './pages/BlogIndexPage';
 import { BlogPostPage } from './pages/BlogPostPage';
 import { NotFoundPage } from './pages/NotFoundPage';
+import { FloatingWhatsApp } from './components/FloatingWhatsApp';
 
 export function App() {
   return (
@@ -32,7 +32,7 @@ export function App() {
             <Route path="/" element={<HomePage />} />
             <Route path="/book-truck" element={<BookTruckPage />} />
             <Route path="/register-truck" element={<RegisterTruckPage />} />
-            <Route path="/enquiry" element={<EnquiryPage />} />
+            <Route path="/enquiry" element={<Navigate to="/contact#enquiry" replace />} />
             <Route path="/contact" element={<ContactPage />} />
             <Route path="/terms-and-conditions" element={<TermsPage />} />
             <Route path="/privacy-policy" element={<PrivacyPage />} />
@@ -56,6 +56,7 @@ export function App() {
         </main>
 
         <Footer />
+        <FloatingWhatsApp />
       </div>
     </BrowserRouter>
   );

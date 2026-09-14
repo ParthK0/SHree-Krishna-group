@@ -1,5 +1,5 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useEffect } from 'react';
+import { Link, useLocation } from 'react-router-dom';
 import { ArrowLeft, Phone, MessageCircle, Mail, MapPin, Clock, Building2, Shield, Send } from 'lucide-react';
 import {
   BUSINESS_NAME, PHONE_DISPLAY, WHATSAPP_NUMBER, CONTACT_EMAIL,
@@ -10,11 +10,24 @@ import { useMetaSEO } from '../lib/useMetaSEO';
 import { EnquiryForm } from '../components/EnquiryForm';
 
 export const ContactPage: React.FC = () => {
+  const location = useLocation();
+
   useMetaSEO({
     title: 'Contact Shree Krishna Transport | Jaipur Logistics Office & 24/7 Helpline',
     description: 'Contact Shree Krishna Transport Jaipur. Office address in Sitapura / VKI, direct WhatsApp support (+91 97848 00833), phone booking, and GST invoicing.',
     canonicalPath: '/contact',
   });
+
+  useEffect(() => {
+    if (location.hash === '#enquiry' || location.hash === '#enquiry-form') {
+      const el = document.getElementById('enquiry');
+      if (el) {
+        setTimeout(() => {
+          el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }, 100);
+      }
+    }
+  }, [location]);
 
   return (
     <div className="min-h-screen bg-[#ECE6DD] py-10 md:py-16 px-4 md:px-12">
@@ -160,7 +173,7 @@ export const ContactPage: React.FC = () => {
         </div>
 
         {/* Inline Enquiry & Quotation Form */}
-        <div className="space-y-3">
+        <div id="enquiry" className="space-y-3 scroll-mt-24">
           <div className="flex items-center gap-2">
             <div className="w-8 h-8 rounded-lg bg-[#EBF5EE] flex items-center justify-center text-[#0F6A37]">
               <Send size={16} />
@@ -177,22 +190,40 @@ export const ContactPage: React.FC = () => {
           <EnquiryForm />
         </div>
 
-        {/* Google Maps placeholder */}
+        {/* Google Maps Real Interactive Embed */}
         <div className="bg-white border border-[#c5beb4] rounded-2xl p-6 shadow-sm">
-          <h2 className="font-['Archivo_Narrow'] text-lg font-bold uppercase text-[#1a1f1b] mb-3">Our Location</h2>
-          <div className="w-full h-48 bg-[#f4f0ea] rounded-xl border border-[#e2dad0] flex items-center justify-center">
-            <div className="text-center">
-              <MapPin size={28} className="text-[#0F6A37] mx-auto mb-2" />
-              <p className="font-['Manrope'] text-xs text-[#6b786d]">Shastri Nagar, Jaipur, Rajasthan</p>
-              <a
-                href="https://maps.google.com/?q=Shastri+Nagar+Jaipur+Rajasthan"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="mt-2 inline-block font-['Manrope'] text-xs font-bold text-[#0F6A37] hover:underline"
-              >
-                Open in Google Maps →
-              </a>
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-4">
+            <div>
+              <h2 className="font-['Archivo_Narrow'] text-xl font-bold uppercase text-[#1a1f1b]">
+                Jaipur Registered Office Location
+              </h2>
+              <p className="font-['Manrope'] text-xs text-[#5a665c]">
+                1D, Lalita Colony, Nahari Ka Naka, Shastri Nagar, Jaipur, Rajasthan 302016
+              </p>
             </div>
+            <a
+              href="https://maps.google.com/?q=1D,+Lalita+Colony,+Nahari+Ka+Naka,+Shastri+Nagar,+Jaipur,+Rajasthan+302016"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-1.5 font-['Manrope'] text-xs font-bold text-[#0F6A37] hover:underline shrink-0"
+            >
+              <span>Get Driving Directions →</span>
+            </a>
+          </div>
+
+          <div className="w-full h-72 sm:h-80 rounded-xl overflow-hidden border border-[#e2dad0] shadow-inner relative bg-[#f4f0ea]">
+            <iframe
+              title="Shree Krishna Transport Office Map"
+              width="100%"
+              height="100%"
+              frameBorder="0"
+              scrolling="no"
+              marginHeight={0}
+              marginWidth={0}
+              src="https://maps.google.com/maps?q=1D,+Lalita+Colony,+Nahari+Ka+Naka,+Shastri+Nagar,+Jaipur,+Rajasthan+302016&t=&z=15&ie=UTF8&iwloc=&output=embed"
+              className="w-full h-full border-0"
+              loading="lazy"
+            />
           </div>
         </div>
 
