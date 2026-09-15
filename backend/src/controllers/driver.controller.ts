@@ -11,45 +11,52 @@ export interface DriverPayload {
 }
 
 export const registerDriver = async (req: Request, res: Response): Promise<void> => {
-  const {
-    driverName,
-    phone,
-    vehicleNumber,
-    vehicleType,
-    capacity,
-    currentLocation,
-    preferredRoutes
-  }: DriverPayload = req.body;
+  try {
+    const {
+      driverName,
+      phone,
+      vehicleNumber,
+      vehicleType,
+      capacity,
+      currentLocation,
+      preferredRoutes
+    }: DriverPayload = req.body;
 
-  if (!driverName || !phone || !vehicleNumber || !vehicleType) {
-    res.status(400).json({
-      success: false,
-      message: 'Missing required fields: driverName, phone, vehicleNumber, and vehicleType are required.'
-    });
-    return;
-  }
-
-  const driverId = `SKG-DRV-${Date.now().toString().slice(-6)}`;
-  const timestamp = new Date().toISOString();
-
-  // In future: Save to database or alert fleet manager
-  console.log(`[Driver Registered] ID: ${driverId}, Name: ${driverName}, Vehicle: ${vehicleNumber} (${vehicleType})`);
-
-  res.status(201).json({
-    success: true,
-    message: 'Driver registration submitted successfully',
-    data: {
-      driverId,
-      timestamp,
-      driver: {
-        driverName,
-        phone,
-        vehicleNumber,
-        vehicleType,
-        capacity,
-        currentLocation,
-        preferredRoutes
-      }
+    if (!driverName || !phone || !vehicleNumber || !vehicleType) {
+      res.status(400).json({
+        success: false,
+        message: 'Missing required fields: driverName, phone, vehicleNumber, and vehicleType are required.'
+      });
+      return;
     }
-  });
+
+    const driverId = `SKG-DRV-${Date.now().toString().slice(-6)}`;
+    const timestamp = new Date().toISOString();
+
+    console.log(`[Driver Registered] ID: ${driverId}, Name: ${driverName}, Vehicle: ${vehicleNumber} (${vehicleType})`);
+
+    res.status(201).json({
+      success: true,
+      message: 'Driver registration submitted successfully',
+      data: {
+        driverId,
+        timestamp,
+        driver: {
+          driverName,
+          phone,
+          vehicleNumber,
+          vehicleType,
+          capacity: capacity || 'Standard',
+          currentLocation: currentLocation || 'Jaipur',
+          preferredRoutes: preferredRoutes || 'All Rajasthan & North India'
+        }
+      }
+    });
+  } catch (error: any) {
+    console.error('[DriverController Error]:', error);
+    res.status(500).json({
+      success: false,
+      message: 'An unexpected internal error occurred while registering vehicle and driver.'
+    });
+  }
 };

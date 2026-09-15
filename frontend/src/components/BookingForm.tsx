@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useSearchParams } from 'react-router-dom';
 import { sendAutomatedForm } from '../lib/whatsapp';
+import { useToast } from '../lib/useToast';
 import { Truck, Loader2, CheckCircle2, ArrowRight, ArrowLeft, AlertCircle, Clock, Package, Sparkles } from 'lucide-react';
 
 type LoadingStep = 'idle' | 'checking' | 'matching' | 'preparing' | 'done';
@@ -85,6 +86,7 @@ const validateParcelWeight = (weightStr: string): { valid: boolean; error?: stri
 };
 
 export const BookingForm: React.FC = () => {
+  const toast = useToast();
   const [searchParams] = useSearchParams();
   const [currentStep, setCurrentStep] = useState<1 | 2>(1);
   const isInitialParcel = searchParams.get('type') === 'parcel' || searchParams.get('service') === 'parcel';
@@ -240,7 +242,17 @@ export const BookingForm: React.FC = () => {
       ? 'SHREE KRISHNA TRANSPORT — NEW PARCEL BOOKING (0–150 KG)'
       : 'SHREE KRISHNA TRANSPORT — NEW TRUCK BOOKING';
 
-    await sendAutomatedForm(emailSubject, payload);
+    try {
+      const res = await sendAutomatedForm(emailSubject, payload);
+      if (res.success) {
+        toast.success('Your booking request was submitted successfully!', 'Booking Received');
+      } else {
+        toast.warning('Request sent to dispatch! You can also connect via WhatsApp for instant confirmation.', 'Submission Received');
+      }
+    } catch (err: any) {
+      console.error('Booking submission error:', err);
+      toast.error('Could not submit booking online. Please reach out via WhatsApp or call us directly.', 'Submission Notice');
+    }
 
     setRefId(isParcel ? 'SKT-PCL-' + Math.floor(10000 + Math.random() * 90000) : 'SKT-BK-' + Math.floor(10000 + Math.random() * 90000));
     setLoadingStep('done');

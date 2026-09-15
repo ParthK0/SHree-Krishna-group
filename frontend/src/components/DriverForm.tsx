@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { sendAutomatedForm } from '../lib/whatsapp';
+import { useToast } from '../lib/useToast';
 import { Navigation, CheckCircle2, ArrowRight, ArrowLeft, AlertCircle, Clock } from 'lucide-react';
 
 const inputClass = 'sk-input';
@@ -23,6 +24,7 @@ const validateVehicleNo = (vNo: string) => /^[A-Z]{2}[0-9]{1,2}[A-Z]{1,3}[0-9]{4
 const validateCapacity = (cap: string) => cap.trim().length >= 1 && /\d/.test(cap);
 
 export const DriverForm: React.FC = () => {
+  const toast = useToast();
   const [currentStep, setCurrentStep] = useState<1 | 2>(1);
   const [formData, setFormData] = useState({
     name: '',
@@ -146,7 +148,17 @@ export const DriverForm: React.FC = () => {
     if (formData.pucExpiry) payload['PUC Valid Until'] = formData.pucExpiry;
     if (formData.emergencyContact) payload['Emergency Contact'] = formData.emergencyContact;
 
-    await sendAutomatedForm('SHREE KRISHNA TRANSPORT — DRIVER REGISTRATION', payload);
+    try {
+      const res = await sendAutomatedForm('SHREE KRISHNA TRANSPORT — DRIVER REGISTRATION', payload);
+      if (res.success) {
+        toast.success('Registration details received! Our fleet desk will call you shortly.', 'Registered Successfully');
+      } else {
+        toast.warning('Registration logged! Feel free to connect directly on WhatsApp.', 'Registration Received');
+      }
+    } catch (err: any) {
+      console.error('Driver registration error:', err);
+      toast.error('Unable to send registration automatically. Please call or WhatsApp us.', 'Submission Notice');
+    }
 
     setRefId('SKT-DR-' + Math.floor(10000 + Math.random() * 90000));
     setSubmitted(true);

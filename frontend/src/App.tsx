@@ -1,8 +1,10 @@
+import { useState } from 'react';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { Analytics } from '@vercel/analytics/react';
 import { Header } from './components/Header';
 import { Footer } from './components/Footer';
 import { ScrollToTop } from './components/ScrollToTop';
+import { TruckPreloader } from './components/TruckPreloader';
 
 import { HomePage } from './pages/HomePage';
 import { BookTruckPage } from './pages/BookTruckPage';
@@ -18,14 +20,19 @@ import { BlogIndexPage } from './pages/BlogIndexPage';
 import { BlogPostPage } from './pages/BlogPostPage';
 import { NotFoundPage } from './pages/NotFoundPage';
 import { FloatingWhatsApp } from './components/FloatingWhatsApp';
+import { ToastProvider } from './components/ToastProvider';
 
 export function App() {
+  const [isLoading, setIsLoading] = useState(true);
+
   return (
     <BrowserRouter>
-      <ScrollToTop />
-      <Analytics />
-      <div className="min-h-screen bg-[#ECE6DD] text-[#1a1f1b] flex flex-col font-['Inter'] antialiased selection:bg-[#F4B400] selection:text-[#6c5000]">
-        <Header />
+      <ToastProvider>
+        <ScrollToTop />
+        <Analytics />
+        {isLoading && <TruckPreloader onComplete={() => setIsLoading(false)} durationMs={3000} />}
+        <div className="min-h-screen bg-[#ECE6DD] text-[#1a1f1b] flex flex-col font-['Inter'] antialiased selection:bg-[#F4B400] selection:text-[#6c5000]">
+          <Header />
 
         <main className="flex-grow">
           <Routes>
@@ -55,9 +62,10 @@ export function App() {
           </Routes>
         </main>
 
-        <Footer />
-        <FloatingWhatsApp />
-      </div>
+          <Footer />
+          <FloatingWhatsApp />
+        </div>
+      </ToastProvider>
     </BrowserRouter>
   );
 }

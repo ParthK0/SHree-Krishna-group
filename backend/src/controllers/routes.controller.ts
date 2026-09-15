@@ -37,91 +37,139 @@ function saveRoutesToFile(routes: any[]): void {
 loadRoutesFromFile();
 
 export const getAllRoutes = async (req: Request, res: Response): Promise<void> => {
-  const includeDrafts = req.query.includeDrafts === 'true';
-  const routes = loadRoutesFromFile();
+  try {
+    const includeDrafts = req.query.includeDrafts === 'true';
+    const routes = loadRoutesFromFile();
 
-  const filtered = includeDrafts
-    ? routes
-    : routes.filter((r: any) => r.status === 'published');
+    const filtered = includeDrafts
+      ? routes
+      : routes.filter((r: any) => r.status === 'published');
 
-  res.status(200).json({
-    success: true,
-    count: filtered.length,
-    data: filtered,
-  });
+    res.status(200).json({
+      success: true,
+      count: filtered.length,
+      data: filtered,
+    });
+  } catch (error: any) {
+    console.error('[RoutesController getAllRoutes Error]:', error);
+    res.status(500).json({
+      success: false,
+      message: 'Failed to retrieve transport routes.'
+    });
+  }
 };
 
 export const getRouteBySlug = async (req: Request, res: Response): Promise<void> => {
-  const { slug } = req.params;
-  const routes = loadRoutesFromFile();
+  try {
+    const { slug } = req.params;
+    if (!slug) {
+      res.status(400).json({
+        success: false,
+        message: 'Route slug parameter is required.'
+      });
+      return;
+    }
 
-  const normalized = slug.toLowerCase().replace(/^\/+|\/+$/g, '');
-  const route = routes.find(
-    (r: any) =>
-      r.slug.toLowerCase() === normalized ||
-      r.slug.toLowerCase() === `${normalized}-transport`
-  );
+    const routes = loadRoutesFromFile();
 
-  if (!route) {
-    res.status(404).json({
-      success: false,
-      message: `Route '${slug}' not found`,
+    const normalized = slug.toLowerCase().replace(/^\/+|\/+$/g, '');
+    const route = routes.find(
+      (r: any) =>
+        r.slug?.toLowerCase() === normalized ||
+        r.slug?.toLowerCase() === `${normalized}-transport`
+    );
+
+    if (!route) {
+      res.status(404).json({
+        success: false,
+        message: `Route '${slug}' not found`,
+      });
+      return;
+    }
+
+    res.status(200).json({
+      success: true,
+      data: route,
     });
-    return;
+  } catch (error: any) {
+    console.error('[RoutesController getRouteBySlug Error]:', error);
+    res.status(500).json({
+      success: false,
+      message: 'Failed to retrieve route details.'
+    });
   }
-
-  res.status(200).json({
-    success: true,
-    data: route,
-  });
 };
 
 export const upsertRoute = async (req: Request, res: Response): Promise<void> => {
-  const routeData = req.body;
+  try {
+    const routeData = req.body;
 
-  if (!routeData.slug || !routeData.fromCity || !routeData.toCity) {
-    res.status(400).json({
-      success: false,
-      message: 'Missing required fields: slug, fromCity, and toCity are mandatory.',
+    if (!routeData || !routeData.slug || !routeData.fromCity || !routeData.toCity) {
+      res.status(400).json({
+        success: false,
+        message: 'Missing required fields: slug, fromCity, and toCity are mandatory.',
+      });
+      return;
+    }
+
+    const routes = loadRoutesFromFile();
+    const index = routes.findIndex((r: any) => r.slug?.toLowerCase() === routeData.slug.toLowerCase());
+
+    if (index >= 0) {
+      routes[index] = { ...routes[index], ...routeData, updatedAt: new Date().toISOString() };
+    } else {
+      routes.push({ ...routeData, createdAt: new Date().toISOString() });
+    }
+
+    saveRoutesToFile(routes);
+
+    res.status(200).json({
+      success: true,
+      message: `Route '${routeData.slug}' saved successfully`,
+      data: routeData,
     });
-    return;
+  } catch (error: any) {
+    console.error('[RoutesController upsertRoute Error]:', error);
+    res.status(500).json({
+      success: false,
+      message: 'Failed to save route information.'
+    });
   }
-
-  const routes = loadRoutesFromFile();
-  const index = routes.findIndex((r: any) => r.slug.toLowerCase() === routeData.slug.toLowerCase());
-
-  if (index >= 0) {
-    routes[index] = { ...routes[index], ...routeData, updatedAt: new Date().toISOString() };
-  } else {
-    routes.push({ ...routeData, createdAt: new Date().toISOString() });
-  }
-
-  saveRoutesToFile(routes);
-
-  res.status(200).json({
-    success: true,
-    message: `Route '${routeData.slug}' saved successfully`,
-    data: routeData,
-  });
 };
 
 export const deleteRoute = async (req: Request, res: Response): Promise<void> => {
-  const { slug } = req.params;
-  const routes = loadRoutesFromFile();
+  try {
+    const { slug } = req.params;
+    if (!slug) {
+      res.status(400).json({
+        success: false,
+        message: 'Route slug parameter is required to delete.'
+      });
+      return;
+    }
 
-  const filtered = routes.filter((r: any) => r.slug.toLowerCase() !== slug.toLowerCase());
-  if (filtered.length === routes.length) {
-    res.status(404).json({
-      success: false,
-      message: `Route '${slug}' not found to delete`,
+    const routes = loadRoutesFromFile();
+
+    const filtered = routes.filter((r: any) => r.slug?.toLowerCase() !== slug.toLowerCase());
+    if (filtered.length === routes.length) {
+      res.status(404).json({
+        success: false,
+        message: `Route '${slug}' not found to delete`,
+      });
+      return;
+    }
+
+    saveRoutesToFile(filtered);
+
+    res.status(200).json({
+      success: true,
+      message: `Route '${slug}' deleted successfully`,
     });
-    return;
+  } catch (error: any) {
+    console.error('[RoutesController deleteRoute Error]:', error);
+    res.status(500).json({
+      success: false,
+      message: 'Failed to delete route.'
+    });
   }
-
-  saveRoutesToFile(filtered);
-
-  res.status(200).json({
-    success: true,
-    message: `Route '${slug}' deleted successfully`,
-  });
 };

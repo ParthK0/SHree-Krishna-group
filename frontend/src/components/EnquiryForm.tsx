@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { sendAutomatedForm } from '../lib/whatsapp';
+import { useToast } from '../lib/useToast';
 import { MessageSquare, Loader2, CheckCircle2, AlertCircle, Paperclip, FileText, Send, Clock } from 'lucide-react';
 
 type LoadingStep = 'idle' | 'preparing' | 'done';
@@ -25,6 +26,7 @@ const ENQUIRY_TYPES = [
 ];
 
 export const EnquiryForm: React.FC = () => {
+  const toast = useToast();
   const [formData, setFormData] = useState({
     name: '',
     company: '',
@@ -110,7 +112,17 @@ export const EnquiryForm: React.FC = () => {
     // TODO: LEGAL COPY GUIDANCE TO BE ADDED LATER
     payload['Legal Consent'] = 'Confirmed accurate details and consent to contact.';
 
-    await sendAutomatedForm('SHREE KRISHNA TRANSPORT — NEW GENERAL ENQUIRY', payload);
+    try {
+      const res = await sendAutomatedForm('SHREE KRISHNA TRANSPORT — NEW GENERAL ENQUIRY', payload);
+      if (res.success) {
+        toast.success('Your enquiry was sent successfully!', 'Enquiry Received');
+      } else {
+        toast.warning('Enquiry logged! If urgent, you can also reach us directly via WhatsApp.', 'Enquiry Submitted');
+      }
+    } catch (err: any) {
+      console.error('Enquiry dispatch error:', err);
+      toast.error('Unable to send enquiry automatically. Please contact us via phone or WhatsApp.', 'Submission Notice');
+    }
 
     setRefId('SKT-EN-' + Math.floor(10000 + Math.random() * 90000));
     setLoadingStep('done');
