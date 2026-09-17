@@ -6,27 +6,27 @@ import { Truck, Navigation, ArrowRight, Package } from 'lucide-react';
 const cards = [
   {
     icon: <Truck size={24} />,
-    iconBg: 'bg-[#1c6b3e]',
-    iconColor: 'text-[#9be9b0]',
+    iconBg: 'bg-[#0C3A6D]',
+    iconColor: 'text-[#93C5FD]',
     badge: 'FTL / PTL',
-    badgeColor: 'bg-[#0F6A37]/15 text-[#0F6A37]',
+    badgeColor: 'bg-[#062448]/10 text-[#062448]',
     title: 'Book a Truck',
     desc: "Moving full truckloads (FTL) or partial freight (PTL)? Tell us your route and cargo — we'll dispatch verified vehicles within 1 hour.",
     cta: 'Book a Truck',
     link: '/book-truck',
-    buttonClass: "bg-[#F4B400] hover:bg-[#e0a500] text-[#6c5000]",
+    buttonClass: "bg-[#E9A015] hover:bg-[#D08C0A] text-[#4A2E00]",
   },
   {
     icon: <Package size={24} />,
-    iconBg: 'bg-[#0F6A37]',
-    iconColor: 'text-[#F4B400]',
+    iconBg: 'bg-[#062448]',
+    iconColor: 'text-[#E9A015]',
     badge: '0–150 KG EXPRESS',
-    badgeColor: 'bg-[#F4B400] text-[#6c5000]',
+    badgeColor: 'bg-[#E9A015] text-[#4A2E00]',
     title: 'Book a Parcel',
     desc: 'Need fast delivery for cartons, spare parts, commercial samples, or boxes up to 150 kg? Enjoy quick dispatch and live WhatsApp coordination.',
     cta: 'Book a Parcel (0-150 kg)',
     link: '/book-truck?type=parcel',
-    buttonClass: "bg-[#0F6A37] hover:bg-[#0c562c] text-white",
+    buttonClass: "bg-[#062448] hover:bg-[#0A3366] text-white",
   },
   {
     icon: <Navigation size={24} />,
@@ -62,8 +62,8 @@ export const TwoPathSplit: React.FC = () => {
             className="border-2 border-[#e5ebe7] bg-white rounded-xl p-6 sm:p-7 flex flex-col justify-between group cursor-default shadow-sm hover:shadow-xl transition-all duration-300"
             whileHover={{
               y: -6,
-              borderColor: '#0F6A37',
-              boxShadow: '0 20px 40px rgba(15,106,55,0.12)',
+              borderColor: '#062448',
+              boxShadow: '0 20px 40px rgba(6,36,72,0.12)',
             }}
             transition={{ duration: 0.25, ease: 'easeOut' }}
           >

@@ -115,12 +115,12 @@ export const Header: React.FC = () => {
                 to={link.href}
                 onClick={() => handleNavClick(link.href)}
                 className={`font-['Manrope'] text-xs font-bold transition-colors uppercase tracking-wider whitespace-nowrap inline-flex items-center gap-1.5 ${
-                  isActive ? 'text-[#0F6A37]' : 'text-[#3d4a3f] hover:text-[#0F6A37]'
+                  isActive ? 'text-[#062448]' : 'text-[#3d4a3f] hover:text-[#062448]'
                 }`}
               >
                 <span>{link.name}</span>
                 {link.badge && (
-                  <span className="text-[9px] px-1.5 py-0.2 rounded font-['Space_Mono'] font-bold bg-[#0F6A37]/10 text-[#0F6A37] border border-[#0F6A37]/30">
+                  <span className="text-[9px] px-1.5 py-0.2 rounded font-['Space_Mono'] font-bold bg-[#062448]/10 text-[#062448] border border-[#062448]/30">
                     {link.badge}
                   </span>
                 )}
@@ -136,14 +136,14 @@ export const Header: React.FC = () => {
               aria-expanded={moreDropdownOpen}
               className={`font-['Manrope'] text-xs font-bold uppercase tracking-wider whitespace-nowrap inline-flex items-center gap-1 py-1 px-2 rounded-md transition-colors ${
                 isMoreActive || moreDropdownOpen
-                  ? 'text-[#0F6A37] bg-[#0F6A37]/10'
-                  : 'text-[#3d4a3f] hover:text-[#0F6A37]'
+                  ? 'text-[#062448] bg-[#062448]/10'
+                  : 'text-[#3d4a3f] hover:text-[#062448]'
               }`}
             >
               <span>More</span>
               <ChevronDown 
                 size={14} 
-                className={`transition-transform duration-200 ${moreDropdownOpen ? 'rotate-180 text-[#0F6A37]' : ''}`} 
+                className={`transition-transform duration-200 ${moreDropdownOpen ? 'rotate-180 text-[#062448]' : ''}`} 
               />
             </button>
 
@@ -163,9 +163,9 @@ export const Header: React.FC = () => {
                         setMoreDropdownOpen(false);
                         handleNavClick(link.href);
                       }}
-                      className="flex items-center gap-2.5 px-4 py-2.5 text-xs font-['Manrope'] font-bold text-[#3d4a3f] hover:text-[#0F6A37] hover:bg-[#F4EFE6] transition-colors uppercase tracking-wider"
+                      className="flex items-center gap-2.5 px-4 py-2.5 text-xs font-['Manrope'] font-bold text-[#3d4a3f] hover:text-[#062448] hover:bg-[#F4EFE6] transition-colors uppercase tracking-wider"
                     >
-                      <Icon size={15} className="text-[#0F6A37]/70 shrink-0" />
+                      <Icon size={15} className="text-[#062448]/70 shrink-0" />
                       <span>{link.name}</span>
                     </Link>
                   );
@@ -206,7 +206,7 @@ export const Header: React.FC = () => {
             </span>
             <button
               onClick={() => setMobileMenuOpen(false)}
-              className="p-1 rounded-lg text-neutral-400 hover:text-[#0F6A37] transition-colors"
+              className="p-1 rounded-lg text-neutral-400 hover:text-[#062448] transition-colors"
             >
               <X size={22} />
             </button>
@@ -214,7 +214,7 @@ export const Header: React.FC = () => {
 
           {/* Primary Navigation Section */}
           <div>
-            <div className="text-[10px] font-['Space_Mono'] uppercase tracking-widest text-[#8ad7a0] font-bold mb-2">
+            <div className="text-[10px] font-['Space_Mono'] uppercase tracking-widest text-[#85B7EB] font-bold mb-2">
               Primary Quick Links
             </div>
             <nav className="flex flex-col gap-1">
@@ -234,17 +234,17 @@ export const Header: React.FC = () => {
                     }}
                     className={`flex items-center justify-between px-3 py-2.5 rounded-lg font-['Manrope'] font-bold text-xs transition-all uppercase tracking-wider ${
                       isActive
-                        ? 'bg-[#0F6A37] text-white'
-                        : 'text-neutral-200 hover:text-white hover:bg-[#0F6A37]/30'
+                        ? 'bg-[#062448] text-white'
+                        : 'text-neutral-200 hover:text-white hover:bg-[#062448]/30'
                     }`}
                   >
                     <div className="flex items-center gap-3">
-                      <Icon size={16} className={isActive ? 'text-white' : 'text-[#8ad7a0]'} />
+                      <Icon size={16} className={isActive ? 'text-white' : 'text-[#85B7EB]'} />
                       <span>{link.name}</span>
                     </div>
                     {link.badge && (
                       <span className={`text-[9px] px-1.5 py-0.5 rounded font-['Space_Mono'] font-bold ${
-                        isActive ? 'bg-[#F4B400] text-[#6c5000]' : 'bg-[#0F6A37]/30 text-[#8ad7a0]'
+                        isActive ? 'bg-[#E9A015] text-[#4A2E00]' : 'bg-[#062448]/30 text-[#85B7EB]'
                       }`}>
                         {link.badge}
                       </span>
@@ -287,7 +287,7 @@ export const Header: React.FC = () => {
           <Link
             to="/book-truck"
             onClick={() => setMobileMenuOpen(false)}
-            className="w-full flex items-center justify-center gap-2 bg-[#F4B400] text-[#6c5000] font-['Manrope'] font-extrabold text-xs py-2.5 rounded-lg uppercase tracking-wider shadow-md hover:bg-[#e0a500] transition-colors"
+            className="w-full flex items-center justify-center gap-2 bg-[#E9A015] text-[#4A2E00] font-['Manrope'] font-extrabold text-xs py-2.5 rounded-lg uppercase tracking-wider shadow-md hover:bg-[#D08C0A] transition-colors"
           >
             <Truck size={15} />
             <span>Book a Truck (FTL/PTL)</span>
@@ -295,7 +295,7 @@ export const Header: React.FC = () => {
           <Link
             to="/book-truck?type=parcel"
             onClick={() => setMobileMenuOpen(false)}
-            className="w-full flex items-center justify-center gap-2 bg-[#0F6A37] text-white font-['Manrope'] font-extrabold text-xs py-2.5 rounded-lg uppercase tracking-wider shadow-md hover:bg-[#0c562c] transition-colors"
+            className="w-full flex items-center justify-center gap-2 bg-[#062448] text-white font-['Manrope'] font-extrabold text-xs py-2.5 rounded-lg uppercase tracking-wider shadow-md hover:bg-[#0A3366] transition-colors"
           >
             <Package size={15} />
             <span>Book a Parcel (0–150 kg)</span>

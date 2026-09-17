@@ -1,18 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ShieldCheck, Clock, Zap, ArrowRight } from 'lucide-react';
 
 interface TruckPreloaderProps {
   onComplete?: () => void;
-  durationMs?: number; // default 3000ms (3 seconds)
+  durationMs?: number; // ~1600ms (1.6s fast & snappy)
 }
 
 export const TruckPreloader: React.FC<TruckPreloaderProps> = ({
   onComplete,
-  durationMs = 3000,
+  durationMs = 1600,
 }) => {
   const [progress, setProgress] = useState(0);
-  const [timeLeft, setTimeLeft] = useState((durationMs / 1000).toFixed(1));
   const [isExiting, setIsExiting] = useState(false);
 
   useEffect(() => {
@@ -22,23 +20,19 @@ export const TruckPreloader: React.FC<TruckPreloaderProps> = ({
     const updateProgress = (currentTime: number) => {
       const elapsed = currentTime - startTime;
       const pct = Math.min(100, Math.round((elapsed / durationMs) * 100));
-      const remainingSeconds = Math.max(0, (durationMs - elapsed) / 1000).toFixed(1);
 
       setProgress(pct);
-      setTimeLeft(remainingSeconds);
 
       if (elapsed < durationMs) {
         animationFrameId = requestAnimationFrame(updateProgress);
       } else {
         setProgress(100);
-        setTimeLeft('0.0');
-        // Brief pause at 100% for satisfying visual closure before smooth fade-out
         setTimeout(() => {
           setIsExiting(true);
           setTimeout(() => {
             if (onComplete) onComplete();
-          }, 450);
-        }, 200);
+          }, 350);
+        }, 150);
       }
     };
 
@@ -51,368 +45,245 @@ export const TruckPreloader: React.FC<TruckPreloaderProps> = ({
     setIsExiting(true);
     setTimeout(() => {
       if (onComplete) onComplete();
-    }, 200);
+    }, 150);
   };
 
-  // Dynamic status messages based on percentage
-  const getStatusText = (pct: number) => {
-    if (pct < 25) return 'Initializing Fleet Management Systems...';
-    if (pct < 55) return 'Connecting Pan-India Route Network...';
-    if (pct < 85) return 'Syncing Freight Rates & Live GPS...';
-    if (pct < 100) return 'Finalizing Real-time Dispatch Board...';
-    return 'Welcome to Shree Krishna Group!';
+  // Dynamic cycle requested by user
+  const getCycleText = (pct: number) => {
+    if (pct < 28) return 'BUILDING THE ROUTE';
+    if (pct < 55) return 'MATCHING THE LOAD';
+    if (pct < 82) return 'CONNECTING THE NETWORK';
+    return 'GETTING YOU MOVING';
   };
+
+  // Progression phases for the network drawing (0 to 1)
+  const trunkProgress = Math.min(1, progress / 45); // 0 to 45% draws Jaipur to junction
+  const branchProgress = Math.max(0, Math.min(1, (progress - 40) / 45)); // 40% to 85% branches to cities
+  const truckX = 80 + (progress / 100) * 380; // travels from x=80 to x=460
 
   return (
     <AnimatePresence>
       {!isExiting && (
         <motion.div
+          key="skt-preloader"
           initial={{ opacity: 1 }}
-          exit={{ opacity: 0, scale: 1.02 }}
-          transition={{ duration: 0.45, ease: 'easeInOut' }}
-          className="fixed inset-0 z-[99999] flex flex-col justify-between bg-gradient-to-b from-[#111814] via-[#0b120e] to-[#060a08] text-white select-none overflow-hidden"
-          role="dialog"
-          aria-label="Loading Shree Krishna Group Transport"
+          exit={{ opacity: 0, transition: { duration: 0.35, ease: 'easeInOut' } }}
+          className="fixed inset-0 z-[9999] flex flex-col justify-between items-center bg-[#101412] text-[#F2EFEB] select-none overflow-hidden p-6 sm:p-10 font-['Inter']"
         >
-          {/* Subtle Ambient Background Gradients */}
-          <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[600px] h-[350px] bg-[#0F6A37]/20 rounded-full blur-[120px] pointer-events-none" />
-          <div className="absolute bottom-10 right-10 w-[300px] h-[300px] bg-[#F4B400]/10 rounded-full blur-[100px] pointer-events-none" />
-
-          {/* Top Header Bar */}
-          <div className="w-full px-6 py-6 sm:px-12 flex items-center justify-between z-10">
-            <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[#0F6A37] to-[#15803d] flex items-center justify-center shadow-lg shadow-[#0F6A37]/30 border border-[#22c55e]/30">
-                <img
-                  src="/images/logo.png"
-                  alt="SKG Logo"
-                  className="w-7 h-7 object-contain drop-shadow"
-                  onError={(e) => {
-                    // Fallback to text icon if logo image fails
-                    (e.target as HTMLElement).style.display = 'none';
-                  }}
-                />
-              </div>
-              <div>
-                <div className="flex items-center gap-2">
-                  <span className="font-['Archivo_Narrow'] font-extrabold tracking-wider text-white text-base sm:text-lg uppercase">
-                    Shree Krishna Group
-                  </span>
-                  <span className="hidden sm:inline-flex items-center gap-1 text-[10px] font-semibold bg-[#F4B400]/15 text-[#F4B400] border border-[#F4B400]/30 px-2 py-0.5 rounded-full">
-                    <ShieldCheck size={11} /> 100% Verified
-                  </span>
-                </div>
-                <p className="text-xs text-gray-400 font-medium">Pan-India Heavy Logistics & Transportation</p>
-              </div>
+          {/* Top Bar: Minimal Badge + Instant Skip */}
+          <div className="w-full max-w-4xl flex items-center justify-between">
+            <div className="flex items-center gap-2 font-['Space_Mono'] text-[11px] uppercase tracking-widest text-[#85B7EB]">
+              <span className="w-2 h-2 rounded-full bg-[#062448]" />
+              <span>RAJASTHAN FREIGHT COMMAND</span>
             </div>
 
-            {/* Skip Button */}
             <button
               onClick={handleSkip}
-              className="group flex items-center gap-1.5 text-xs font-semibold text-gray-400 hover:text-white bg-white/5 hover:bg-white/10 px-3.5 py-1.5 rounded-full border border-white/10 transition-all duration-200 cursor-pointer"
+              className="font-['Space_Mono'] text-[11px] text-neutral-400 hover:text-[#E9A015] transition-colors uppercase tracking-widest py-1 px-2.5 rounded border border-[#232B25] hover:border-[#E9A015] cursor-pointer"
             >
-              Skip
-              <ArrowRight size={13} className="group-hover:translate-x-0.5 transition-transform duration-200" />
+              SKIP [ESC] &rarr;
             </button>
           </div>
 
-          {/* Main Visual Stage: Animated Truck, Road, and Side Percentage Display */}
-          <div className="flex-1 flex flex-col items-center justify-center px-4 z-10">
-            <div className="w-full max-w-2xl">
-              
-              {/* Truck Animation Arena */}
-              <div className="relative w-full h-44 flex items-end justify-center overflow-hidden">
-                
-                {/* Speed lines in background */}
-                <div className="absolute inset-x-0 top-6 h-20 overflow-hidden pointer-events-none opacity-40">
-                  <div className="speed-line speed-line-1" />
-                  <div className="speed-line speed-line-2" />
-                  <div className="speed-line speed-line-3" />
-                </div>
-
-                {/* Animated Truck Container */}
-                <div className="relative z-10 flex flex-col items-center truck-suspension">
-                  
-                  {/* Headlight beam */}
-                  <div className="absolute -right-28 bottom-7 w-32 h-14 bg-gradient-to-r from-[#F4B400]/40 to-transparent blur-[6px] transform -skew-y-3 pointer-events-none rounded-r-full" />
-
-                  {/* SVG Heavy Cargo Truck */}
-                  <svg
-                    width="260"
-                    height="100"
-                    viewBox="0 0 260 100"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                    className="drop-shadow-[0_12px_20px_rgba(0,0,0,0.6)]"
-                  >
-                    {/* Cargo Box (Trailer) */}
-                    <rect x="10" y="18" width="155" height="58" rx="4" fill="#0F6A37" stroke="#15803d" strokeWidth="2" />
-                    
-                    {/* Trailer Corrugation Lines */}
-                    <line x1="28" y1="24" x2="28" y2="70" stroke="#0b522a" strokeWidth="2.5" />
-                    <line x1="46" y1="24" x2="46" y2="70" stroke="#0b522a" strokeWidth="2.5" />
-                    <line x1="64" y1="24" x2="64" y2="70" stroke="#0b522a" strokeWidth="2.5" />
-                    <line x1="82" y1="24" x2="82" y2="70" stroke="#0b522a" strokeWidth="2.5" />
-                    <line x1="100" y1="24" x2="100" y2="70" stroke="#0b522a" strokeWidth="2.5" />
-                    <line x1="118" y1="24" x2="118" y2="70" stroke="#0b522a" strokeWidth="2.5" />
-                    <line x1="136" y1="24" x2="136" y2="70" stroke="#0b522a" strokeWidth="2.5" />
-                    <line x1="154" y1="24" x2="154" y2="70" stroke="#0b522a" strokeWidth="2.5" />
-
-                    {/* Gold Brand Striping on Trailer */}
-                    <rect x="10" y="44" width="155" height="7" fill="#F4B400" />
-                    <text x="87" y="49.5" fill="#1a1f1b" fontSize="5.5" fontWeight="900" fontFamily="sans-serif" textAnchor="middle" letterSpacing="1">
-                      SHREE KRISHNA GROUP
-                    </text>
-
-                    {/* Skirts & Underbody */}
-                    <rect x="15" y="74" width="145" height="5" fill="#1f2937" rx="1" />
-
-                    {/* Truck Cabin Connection */}
-                    <rect x="165" y="52" width="8" height="24" fill="#374151" />
-
-                    {/* Cabin Body */}
-                    <path
-                      d="M172 32 C172 26 176 22 182 22 L212 22 C222 22 232 29 237 38 L246 54 C248 57 249 60 249 64 L249 76 C249 78 247 80 245 80 L172 80 Z"
-                      fill="#ECE6DD"
-                      stroke="#d1d5db"
-                      strokeWidth="1.5"
-                    />
-
-                    {/* Cabin Aerodynamic Top Fairing */}
-                    <path d="M172 22 L165 14 L175 12 L198 22 Z" fill="#0F6A37" />
-
-                    {/* Cabin Front Windshield */}
-                    <path
-                      d="M214 26 L233 42 C235 44 235 46 235 48 L210 48 C208 48 206 46 206 44 L206 28 C206 26.5 208 26 210 26 Z"
-                      fill="#1E293B"
-                      stroke="#475569"
-                      strokeWidth="1"
-                    />
-
-                    {/* Side Door Window */}
-                    <path
-                      d="M180 28 L202 28 C203 28 204 29 204 30 L204 46 C204 47 203 48 202 48 L180 48 C179 48 178 47 178 46 L178 30 C178 29 179 28 180 28 Z"
-                      fill="#334155"
-                    />
-
-                    {/* Side Mirror */}
-                    <rect x="206" y="36" width="3" height="9" rx="1" fill="#111827" />
-
-                    {/* Headlight Housing & Bulb */}
-                    <rect x="242" y="60" width="7" height="8" rx="2" fill="#F4B400" />
-                    <circle cx="245" cy="64" r="2.5" fill="#FFFBEB" />
-
-                    {/* Front Chrome Bumper & Grille */}
-                    <rect x="238" y="70" width="13" height="8" rx="2" fill="#9CA3AF" />
-                    <line x1="240" y1="72" x2="249" y2="72" stroke="#4B5563" strokeWidth="1" />
-                    <line x1="240" y1="75" x2="249" y2="75" stroke="#4B5563" strokeWidth="1" />
-
-                    {/* Wheels Assembly with Spinning Rims */}
-                    {/* Rear Wheel 1 */}
-                    <g className="wheel-spin" style={{ transformOrigin: '38px 80px' }}>
-                      <circle cx="38" cy="80" r="14" fill="#111827" stroke="#374151" strokeWidth="2" />
-                      <circle cx="38" cy="80" r="8" fill="#4B5563" />
-                      <circle cx="38" cy="80" r="3" fill="#D1D5DB" />
-                      <line x1="38" y1="72" x2="38" y2="88" stroke="#9CA3AF" strokeWidth="1.5" />
-                      <line x1="30" y1="80" x2="46" y2="80" stroke="#9CA3AF" strokeWidth="1.5" />
-                    </g>
-
-                    {/* Rear Wheel 2 */}
-                    <g className="wheel-spin" style={{ transformOrigin: '68px 80px' }}>
-                      <circle cx="68" cy="80" r="14" fill="#111827" stroke="#374151" strokeWidth="2" />
-                      <circle cx="68" cy="80" r="8" fill="#4B5563" />
-                      <circle cx="68" cy="80" r="3" fill="#D1D5DB" />
-                      <line x1="68" y1="72" x2="68" y2="88" stroke="#9CA3AF" strokeWidth="1.5" />
-                      <line x1="60" y1="80" x2="76" y2="80" stroke="#9CA3AF" strokeWidth="1.5" />
-                    </g>
-
-                    {/* Trailer Tandem Wheel 3 */}
-                    <g className="wheel-spin" style={{ transformOrigin: '136px 80px' }}>
-                      <circle cx="136" cy="80" r="14" fill="#111827" stroke="#374151" strokeWidth="2" />
-                      <circle cx="136" cy="80" r="8" fill="#4B5563" />
-                      <circle cx="136" cy="80" r="3" fill="#D1D5DB" />
-                      <line x1="136" y1="72" x2="136" y2="88" stroke="#9CA3AF" strokeWidth="1.5" />
-                      <line x1="128" y1="80" x2="144" y2="80" stroke="#9CA3AF" strokeWidth="1.5" />
-                    </g>
-
-                    {/* Front Steer Wheel */}
-                    <g className="wheel-spin" style={{ transformOrigin: '216px 80px' }}>
-                      <circle cx="216" cy="80" r="14" fill="#111827" stroke="#374151" strokeWidth="2" />
-                      <circle cx="216" cy="80" r="8" fill="#4B5563" />
-                      <circle cx="216" cy="80" r="3" fill="#D1D5DB" />
-                      <line x1="216" y1="72" x2="216" y2="88" stroke="#9CA3AF" strokeWidth="1.5" />
-                      <line x1="208" y1="80" x2="224" y2="80" stroke="#9CA3AF" strokeWidth="1.5" />
-                    </g>
-                  </svg>
-                </div>
+          {/* Main Content Area */}
+          <div className="w-full max-w-2xl flex flex-col items-center text-center my-auto">
+            
+            {/* 1. SKT Brand Block (Solid & Clean) */}
+            <motion.div
+              initial={{ opacity: 0, y: -10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.3 }}
+              className="flex flex-col items-center mb-6 sm:mb-8"
+            >
+              <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-xl bg-[#18201B] border border-[#2D3A30] flex items-center justify-center p-2 mb-3.5 shadow-sm">
+                <img
+                  src="/images/logo.png"
+                  alt="Shree Krishna Transport"
+                  className="w-full h-full object-contain"
+                />
               </div>
 
-              {/* Moving Road Track */}
-              <div className="relative w-full h-8 bg-gradient-to-b from-[#1c2420] to-[#121815] rounded-xl overflow-hidden border-t border-[#374151]/50 shadow-inner flex items-center">
-                {/* Moving Road Dashed Line */}
-                <div className="road-stripes" />
+              <h1 className="font-['Archivo_Narrow'] text-2xl sm:text-4xl font-bold tracking-tight uppercase text-white leading-tight">
+                SHREE KRISHNA TRANSPORT
+              </h1>
+
+              <div className="font-['Space_Mono'] text-xs sm:text-sm font-bold tracking-[0.25em] uppercase text-[#E9A015] mt-1.5">
+                ROAD &bull; LOAD &bull; ROUTE
               </div>
 
-              {/* Percentage & Time Indicator Side-by-Side Panel */}
-              <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 gap-4 items-center bg-white/[0.03] p-5 rounded-2xl border border-white/10 backdrop-blur-md">
-                
-                {/* Left Side: Live Percentage Counter */}
-                <div className="flex items-center gap-4">
-                  <div className="flex flex-col">
-                    <span className="text-[11px] font-bold uppercase tracking-wider text-gray-400">Loading Experience</span>
-                    <div className="flex items-baseline gap-1">
-                      <span className="font-['Archivo_Narrow'] text-5xl sm:text-6xl font-extrabold tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-white via-white to-[#F4B400] tabular-nums">
-                        {progress}
-                      </span>
-                      <span className="text-2xl sm:text-3xl font-bold text-[#F4B400]">%</span>
-                    </div>
-                  </div>
-                </div>
+              <p className="font-['Manrope'] text-xs text-neutral-400 mt-1">
+                Connecting Rajasthan to India
+              </p>
+            </motion.div>
 
-                {/* Right Side: Live Countdown & ETA Badge */}
-                <div className="flex flex-col sm:items-end justify-center">
-                  <div className="inline-flex items-center gap-2 bg-[#0F6A37]/30 border border-[#0F6A37]/60 text-emerald-300 px-3.5 py-1.5 rounded-full text-xs font-semibold shadow-sm">
-                    <Clock size={13} className="text-[#F4B400] animate-spin" style={{ animationDuration: '3s' }} />
-                    <span>Opening in <strong className="text-white font-mono text-sm">{timeLeft}s</strong></span>
-                  </div>
-                  <div className="flex items-center gap-1.5 mt-2 text-xs text-gray-400">
-                    <Zap size={12} className="text-[#F4B400]" />
-                    <span>Optimized 3s Fast-Start Engine</span>
-                  </div>
-                </div>
+            {/* 2. "The Road Is Loading" — Solid Interactive Route Canvas */}
+            <div className="w-full max-w-xl bg-[#141A16] border border-[#232B25] rounded-xl p-4 sm:p-6 mb-6">
+              <div className="relative w-full aspect-[2.7/1]">
+                <svg
+                  viewBox="0 0 580 210"
+                  className="w-full h-full"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  {/* Background Grid Accent Lines (Solid Dark) */}
+                  <line x1="0" y1="105" x2="580" y2="105" stroke="#1A221C" strokeWidth="1" strokeDasharray="4 4" />
+                  <line x1="280" y1="20" x2="280" y2="190" stroke="#1A221C" strokeWidth="1" strokeDasharray="4 4" />
 
-              </div>
+                  {/* Highway Base Rails */}
+                  <line x1="80" y1="100" x2="280" y2="100" stroke="#1E2821" strokeWidth="2" />
+                  <line x1="80" y1="110" x2="280" y2="110" stroke="#1E2821" strokeWidth="2" />
 
-              {/* Glowing Visual Progress Bar */}
-              <div className="mt-4">
-                <div className="w-full h-2 bg-white/10 rounded-full overflow-hidden p-[1px]">
-                  <motion.div
-                    className="h-full bg-gradient-to-r from-[#F4B400] via-[#22c55e] to-[#0F6A37] rounded-full shadow-[0_0_12px_rgba(34,197,94,0.6)]"
-                    style={{ width: `${progress}%` }}
-                    transition={{ ease: 'linear' }}
+                  {/* 1. Main Trunk Route: Jaipur -> Junction (x: 80 to 280, y: 105) */}
+                  <line
+                    x1="80"
+                    y1="105"
+                    x2={80 + trunkProgress * 200}
+                    y2="105"
+                    stroke="#062448"
+                    strokeWidth="4"
+                    strokeLinecap="round"
                   />
-                </div>
 
-                {/* Dynamic Status Notification */}
-                <div className="mt-3 flex items-center justify-between text-xs text-gray-400">
-                  <p className="flex items-center gap-2 font-medium">
-                    <span className="w-2 h-2 rounded-full bg-[#F4B400] animate-pulse" />
-                    <span>{getStatusText(progress)}</span>
-                  </p>
-                  <span className="hidden sm:inline-block font-mono text-gray-500">
-                    {progress === 100 ? 'Ready!' : `${progress}/100`}
-                  </span>
-                </div>
+                  {/* 2. Branch Route North: Junction (280, 105) -> DELHI (480, 45) */}
+                  {trunkProgress >= 0.9 && (
+                    <path
+                      d="M 280 105 Q 360 105, 480 45"
+                      stroke={progress >= 50 ? '#062448' : '#232B25'}
+                      strokeWidth="3"
+                      strokeDasharray="250"
+                      strokeDashoffset={250 - branchProgress * 250}
+                      fill="none"
+                    />
+                  )}
+
+                  {/* 3. Branch Route Central: Junction (280, 105) -> MUMBAI (480, 105) */}
+                  {trunkProgress >= 0.9 && (
+                    <line
+                      x1="280"
+                      y1="105"
+                      x2={280 + branchProgress * 200}
+                      y2="105"
+                      stroke={progress >= 45 ? '#062448' : '#232B25'}
+                      strokeWidth="3"
+                      strokeLinecap="round"
+                    />
+                  )}
+
+                  {/* 4. Branch Route South: Junction (280, 105) -> AHMEDABAD (480, 165) */}
+                  {trunkProgress >= 0.9 && (
+                    <path
+                      d="M 280 105 Q 360 105, 480 165"
+                      stroke={progress >= 55 ? '#062448' : '#232B25'}
+                      strokeWidth="3"
+                      strokeDasharray="250"
+                      strokeDashoffset={250 - branchProgress * 250}
+                      fill="none"
+                    />
+                  )}
+
+                  {/* Origin Node: JAIPUR (Solid Green + Amber Hub) */}
+                  <g>
+                    <circle cx="80" cy="105" r="9" fill="#062448" />
+                    <circle cx="80" cy="105" r="4" fill="#E9A015" />
+                    {/* Pulsing ring without blur/glow (pure solid border) */}
+                    <circle cx="80" cy="105" r="14" stroke="#062448" strokeWidth="1.5" opacity="0.6" />
+                    
+                    <text x="80" y="80" textAnchor="middle" fill="#FFFFFF" fontSize="12" fontWeight="bold" fontFamily="Space Mono">
+                      JAIPUR
+                    </text>
+                    <text x="80" y="133" textAnchor="middle" fill="#85B7EB" fontSize="9" fontWeight="bold" fontFamily="Space Mono">
+                      [ORIGIN]
+                    </text>
+                  </g>
+
+                  {/* Junction Node (appears as trunk finishes) */}
+                  {trunkProgress >= 0.8 && (
+                    <circle cx="280" cy="105" r="5" fill="#E9A015" />
+                  )}
+
+                  {/* Destination Node: DELHI */}
+                  <g opacity={progress > 60 ? 1 : 0.25} style={{ transition: 'opacity 0.2s' }}>
+                    <circle cx="480" cy="45" r="7" fill={progress > 60 ? '#062448' : '#232B25'} />
+                    <circle cx="480" cy="45" r="3" fill="#E9A015" />
+                    <text x="496" y="49" fill={progress > 60 ? '#FFFFFF' : '#68776D'} fontSize="11" fontWeight="bold" fontFamily="Space Mono">
+                      DELHI
+                    </text>
+                  </g>
+
+                  {/* Destination Node: MUMBAI */}
+                  <g opacity={progress > 70 ? 1 : 0.25} style={{ transition: 'opacity 0.2s' }}>
+                    <circle cx="480" cy="105" r="7" fill={progress > 70 ? '#062448' : '#232B25'} />
+                    <circle cx="480" cy="105" r="3" fill="#E9A015" />
+                    <text x="496" y="109" fill={progress > 70 ? '#FFFFFF' : '#68776D'} fontSize="11" fontWeight="bold" fontFamily="Space Mono">
+                      MUMBAI
+                    </text>
+                  </g>
+
+                  {/* Destination Node: AHMEDABAD */}
+                  <g opacity={progress > 80 ? 1 : 0.25} style={{ transition: 'opacity 0.2s' }}>
+                    <circle cx="480" cy="165" r="7" fill={progress > 80 ? '#062448' : '#232B25'} />
+                    <circle cx="480" cy="165" r="3" fill="#E9A015" />
+                    <text x="496" y="169" fill={progress > 80 ? '#FFFFFF' : '#68776D'} fontSize="11" fontWeight="bold" fontFamily="Space Mono">
+                      AHMEDABAD
+                    </text>
+                  </g>
+
+                  {/* Minimal Solid Vector Truck Travelling Along Route */}
+                  <g transform={`translate(${truckX}, 93)`}>
+                    {/* Cargo Box */}
+                    <rect x="0" y="2" width="26" height="15" rx="1.5" fill="#E9A015" />
+                    {/* Cabin */}
+                    <path d="M 26 7 L 34 7 L 37 12 L 37 17 L 26 17 Z" fill="#062448" />
+                    {/* Window */}
+                    <polygon points="28,9 33,9 35,12 28,12" fill="#101412" />
+                    {/* Wheels */}
+                    <circle cx="6" cy="18" r="3" fill="#101412" stroke="#FFFFFF" strokeWidth="1" />
+                    <circle cx="18" cy="18" r="3" fill="#101412" stroke="#FFFFFF" strokeWidth="1" />
+                    <circle cx="32" cy="18" r="3" fill="#101412" stroke="#FFFFFF" strokeWidth="1" />
+                  </g>
+                </svg>
               </div>
 
+              {/* Highway Route Meta Bar */}
+              <div className="flex items-center justify-between border-t border-[#232B25] pt-3 mt-1 text-[10px] sm:text-xs font-['Space_Mono'] text-neutral-400">
+                <div className="flex items-center gap-1.5">
+                  <span className="text-white font-bold">FROM RAJASTHAN</span>
+                  <span className="text-[#E9A015]">&rarr;</span>
+                  <span className="text-white font-bold">ACROSS INDIA</span>
+                </div>
+                <div className="text-[#85B7EB] font-bold">
+                  NH-48 &bull; NH-52 CORRIDORS
+                </div>
+              </div>
             </div>
+
+            {/* 3. Dynamic Cycling Text & Percentage */}
+            <div className="w-full max-w-xl flex items-center justify-between text-xs font-['Space_Mono'] mb-2">
+              <span className="text-[#85B7EB] font-bold tracking-wider">
+                {getCycleText(progress)}
+              </span>
+              <span className="text-white font-bold">
+                {progress}%
+              </span>
+            </div>
+
+            {/* 4. Solid Progress Bar (No Glow, Clean Precision Fill) */}
+            <div className="w-full max-w-xl h-1.5 bg-[#1A221C] rounded-full overflow-hidden border border-[#232B25]">
+              <div
+                className="h-full bg-[#062448] transition-all duration-75 ease-out rounded-full"
+                style={{ width: `${progress}%` }}
+              />
+            </div>
+
           </div>
 
-          {/* Bottom Footer Info */}
-          <div className="w-full px-6 py-4 sm:px-12 flex flex-col sm:flex-row items-center justify-between gap-2 border-t border-white/5 text-[11px] text-gray-500 z-10">
-            <p>© {new Date().getFullYear()} Shree Krishna Group. All rights reserved.</p>
-            <p className="flex items-center gap-2">
-              <span>GPS Fleet Tracking</span>
-              <span>•</span>
-              <span>Full Truckload & Parcel</span>
-              <span>•</span>
-              <span>Verified Drivers</span>
-            </p>
+          {/* Bottom Dispatch Footer */}
+          <div className="w-full max-w-4xl flex items-center justify-between text-[10px] font-['Space_Mono'] text-neutral-500 border-t border-[#1C251F] pt-3">
+            <span>DISPATCH DESK &bull; JAIPUR CENTRAL</span>
+            <span>DIRECT FTL &bull; PTL &bull; PARCEL SERVICES</span>
           </div>
-
-          {/* Embedded Custom Styles for Road & Suspension Motion */}
-          <style>{`
-            /* Suspension Bouncing */
-            @keyframes truckBounce {
-              0%, 100% {
-                transform: translateY(0px);
-              }
-              50% {
-                transform: translateY(-2px);
-              }
-            }
-            .truck-suspension {
-              animation: truckBounce 0.28s infinite ease-in-out;
-            }
-
-            /* Wheel Spinning */
-            @keyframes wheelRotate {
-              0% {
-                transform: rotate(0deg);
-              }
-              100% {
-                transform: rotate(360deg);
-              }
-            }
-            .wheel-spin {
-              animation: wheelRotate 0.35s infinite linear;
-            }
-
-            /* Road Movement */
-            @keyframes roadMove {
-              0% {
-                background-position: 0 0;
-              }
-              100% {
-                background-position: -80px 0;
-              }
-            }
-            .road-stripes {
-              width: 100%;
-              height: 4px;
-              background-image: repeating-linear-gradient(
-                90deg,
-                #ffffff,
-                #ffffff 35px,
-                transparent 35px,
-                transparent 70px
-              );
-              background-size: 80px 4px;
-              animation: roadMove 0.25s infinite linear;
-            }
-
-            /* Speed lines in air */
-            @keyframes speedMove {
-              0% {
-                transform: translateX(120%);
-                opacity: 0;
-              }
-              30% {
-                opacity: 0.8;
-              }
-              70% {
-                opacity: 0.8;
-              }
-              100% {
-                transform: translateX(-120%);
-                opacity: 0;
-              }
-            }
-            .speed-line {
-              position: absolute;
-              height: 1.5px;
-              background: linear-gradient(90deg, transparent, #ffffff, transparent);
-              border-radius: 9999px;
-            }
-            .speed-line-1 {
-              top: 20%;
-              width: 120px;
-              animation: speedMove 0.6s infinite linear;
-            }
-            .speed-line-2 {
-              top: 50%;
-              width: 160px;
-              animation: speedMove 0.45s infinite linear 0.15s;
-            }
-            .speed-line-3 {
-              top: 75%;
-              width: 90px;
-              animation: speedMove 0.5s infinite linear 0.3s;
-            }
-          `}</style>
         </motion.div>
       )}
     </AnimatePresence>
   );
 };
-
-export default TruckPreloader;

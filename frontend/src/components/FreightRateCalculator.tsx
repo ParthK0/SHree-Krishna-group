@@ -80,8 +80,8 @@ export const FreightRateCalculator: React.FC<FreightRateCalculatorProps> = ({
       {/* Header Eyebrow */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-[#e5ded5] pb-6">
         <div>
-          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#0F6A37]/10 text-[#0F6A37] font-['Space_Mono'] text-xs font-bold uppercase tracking-wider mb-2">
-            <Calculator size={14} className="text-[#F4B400]" />
+          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#062448]/10 text-[#062448] font-['Space_Mono'] text-xs font-bold uppercase tracking-wider mb-2">
+            <Calculator size={14} className="text-[#E9A015]" />
             <span>Instant Rate Estimation Tool</span>
           </div>
           <h2 className="font-['Archivo_Narrow'] text-2xl sm:text-3xl md:text-4xl font-extrabold uppercase text-[#1a1f1b] tracking-tight">
@@ -98,7 +98,7 @@ export const FreightRateCalculator: React.FC<FreightRateCalculatorProps> = ({
             type="button"
             onClick={() => setMode('truck')}
             className={`flex items-center gap-2 px-4 py-2.5 rounded-lg text-xs font-['Manrope'] font-bold uppercase tracking-wider transition-all duration-200 ${mode === 'truck'
-                ? 'bg-[#0F6A37] text-white shadow-md'
+                ? 'bg-[#062448] text-white shadow-md'
                 : 'text-[#3d4a3f] hover:text-[#1a1f1b]'
               }`}
           >
@@ -110,7 +110,7 @@ export const FreightRateCalculator: React.FC<FreightRateCalculatorProps> = ({
             type="button"
             onClick={() => setMode('parcel')}
             className={`flex items-center gap-2 px-4 py-2.5 rounded-lg text-xs font-['Manrope'] font-bold uppercase tracking-wider transition-all duration-200 ${mode === 'parcel'
-                ? 'bg-[#0F6A37] text-white shadow-md'
+                ? 'bg-[#062448] text-white shadow-md'
                 : 'text-[#3d4a3f] hover:text-[#1a1f1b]'
               }`}
           >
@@ -128,13 +128,13 @@ export const FreightRateCalculator: React.FC<FreightRateCalculatorProps> = ({
           <div className="space-y-4">
             <div className="flex items-center justify-between">
               <label className="font-['Archivo_Narrow'] text-xs font-bold uppercase tracking-wider text-[#1a1f1b] flex items-center gap-1.5">
-                <MapPin size={15} className="text-[#0F6A37]" />
+                <MapPin size={15} className="text-[#062448]" />
                 <span>Route Corridor</span>
               </label>
               <button
                 type="button"
                 onClick={handleSwapCities}
-                className="text-xs text-[#0F6A37] hover:text-[#0c562c] font-bold font-['Space_Mono'] underline flex items-center gap-1"
+                className="text-xs text-[#062448] hover:text-[#0A3366] font-bold font-['Space_Mono'] underline flex items-center gap-1"
                 title="Swap Origin and Destination"
               >
                 <span>⇄ Swap Cities</span>
@@ -153,7 +153,7 @@ export const FreightRateCalculator: React.FC<FreightRateCalculatorProps> = ({
                   value={fromCity}
                   onChange={(e) => setFromCity(e.target.value)}
                   placeholder="e.g. Jaipur"
-                  className="w-full px-3.5 py-2.5 rounded-xl border border-[#c5beb4] bg-[#fdfcfb] font-['Manrope'] text-sm font-semibold text-[#1a1f1b] focus:outline-none focus:ring-2 focus:ring-[#0F6A37]"
+                  className="w-full px-3.5 py-2.5 rounded-xl border border-[#c5beb4] bg-[#fdfcfb] font-['Manrope'] text-sm font-semibold text-[#1a1f1b] focus:outline-none focus:ring-2 focus:ring-[#062448]"
                 />
                 <datalist id="origins-list">
                   {POPULAR_ORIGINS.map((city) => (
@@ -173,7 +173,7 @@ export const FreightRateCalculator: React.FC<FreightRateCalculatorProps> = ({
                   value={toCity}
                   onChange={(e) => setToCity(e.target.value)}
                   placeholder="e.g. Delhi"
-                  className="w-full px-3.5 py-2.5 rounded-xl border border-[#c5beb4] bg-[#fdfcfb] font-['Manrope'] text-sm font-semibold text-[#1a1f1b] focus:outline-none focus:ring-2 focus:ring-[#0F6A37]"
+                  className="w-full px-3.5 py-2.5 rounded-xl border border-[#c5beb4] bg-[#fdfcfb] font-['Manrope'] text-sm font-semibold text-[#1a1f1b] focus:outline-none focus:ring-2 focus:ring-[#062448]"
                 />
                 <datalist id="destinations-list">
                   {POPULAR_DESTINATIONS.map((city) => (
@@ -201,7 +201,7 @@ export const FreightRateCalculator: React.FC<FreightRateCalculatorProps> = ({
                     setToCity(dst);
                   }}
                   className={`text-[11px] px-2.5 py-1 rounded-lg border font-['Space_Mono'] font-medium transition-colors ${fromCity.toLowerCase() === org.toLowerCase() && toCity.toLowerCase() === dst.toLowerCase()
-                      ? 'bg-[#0F6A37] text-white border-[#0F6A37]'
+                      ? 'bg-[#062448] text-white border-[#062448]'
                       : 'bg-[#f4f0ea] border-[#d8d0c5] text-[#3d4a3f] hover:bg-[#e8e2d8]'
                     }`}
                 >
@@ -215,7 +215,7 @@ export const FreightRateCalculator: React.FC<FreightRateCalculatorProps> = ({
           {mode === 'truck' ? (
             <div className="space-y-3">
               <label className="font-['Archivo_Narrow'] text-xs font-bold uppercase tracking-wider text-[#1a1f1b] flex items-center gap-1.5">
-                <Truck size={15} className="text-[#0F6A37]" />
+                <Truck size={15} className="text-[#062448]" />
                 <span>Select Commercial Vehicle Type</span>
               </label>
 
@@ -227,7 +227,7 @@ export const FreightRateCalculator: React.FC<FreightRateCalculatorProps> = ({
                       key={v.id}
                       onClick={() => setSelectedVehicleId(v.id)}
                       className={`p-3.5 rounded-xl border cursor-pointer transition-all duration-150 flex items-center justify-between gap-3 ${isSelected
-                          ? 'bg-[#EBF5EE] border-[#0F6A37] shadow-sm'
+                          ? 'bg-[#EBF2F9] border-[#062448] shadow-sm'
                           : 'bg-[#fdfcfb] border-[#e2dad0] hover:border-[#c5beb4]'
                         }`}
                     >
@@ -242,7 +242,7 @@ export const FreightRateCalculator: React.FC<FreightRateCalculatorProps> = ({
                       </div>
 
                       <div
-                        className={`w-5 h-5 rounded-full border flex items-center justify-center shrink-0 ${isSelected ? 'border-[#0F6A37] bg-[#0F6A37] text-white' : 'border-[#c5beb4]'
+                        className={`w-5 h-5 rounded-full border flex items-center justify-center shrink-0 ${isSelected ? 'border-[#062448] bg-[#062448] text-white' : 'border-[#c5beb4]'
                           }`}
                       >
                         {isSelected && <div className="w-2 h-2 rounded-full bg-white" />}
@@ -257,7 +257,7 @@ export const FreightRateCalculator: React.FC<FreightRateCalculatorProps> = ({
             <div className="space-y-4 bg-[#f9f6f2] border border-[#e2dad0] rounded-xl p-5">
               <div className="flex items-center justify-between">
                 <label className="font-['Archivo_Narrow'] text-xs font-bold uppercase tracking-wider text-[#1a1f1b] flex items-center gap-1.5">
-                  <Package size={15} className="text-[#0F6A37]" />
+                  <Package size={15} className="text-[#062448]" />
                   <span>Parcel Consignment Weight</span>
                 </label>
                 <div className="flex items-center gap-1">
@@ -271,7 +271,7 @@ export const FreightRateCalculator: React.FC<FreightRateCalculatorProps> = ({
                       const val = parseFloat(e.target.value) || 1;
                       setParcelWeight(Math.max(0.5, Math.min(150, val)));
                     }}
-                    className="w-20 px-2.5 py-1 text-center font-['Space_Mono'] font-bold text-base rounded-lg border border-[#c5beb4] bg-white text-[#0F6A37] focus:outline-none focus:ring-2 focus:ring-[#0F6A37]"
+                    className="w-20 px-2.5 py-1 text-center font-['Space_Mono'] font-bold text-base rounded-lg border border-[#c5beb4] bg-white text-[#062448] focus:outline-none focus:ring-2 focus:ring-[#062448]"
                   />
                   <span className="font-['Space_Mono'] text-xs font-bold text-neutral-600">kg</span>
                 </div>
@@ -285,7 +285,7 @@ export const FreightRateCalculator: React.FC<FreightRateCalculatorProps> = ({
                 step="1"
                 value={parcelWeight}
                 onChange={(e) => setParcelWeight(parseInt(e.target.value, 10))}
-                className="w-full accent-[#0F6A37] cursor-pointer"
+                className="w-full accent-[#062448] cursor-pointer"
               />
 
               <div className="flex justify-between text-[11px] font-['Space_Mono'] text-neutral-500">
@@ -295,7 +295,7 @@ export const FreightRateCalculator: React.FC<FreightRateCalculatorProps> = ({
               </div>
 
               <div className="p-3 bg-white border border-[#e2dad0] rounded-lg text-xs text-[#3d4a3f] font-['Manrope'] flex items-start gap-2">
-                <Info size={16} className="text-[#0F6A37] shrink-0 mt-0.5" />
+                <Info size={16} className="text-[#062448] shrink-0 mt-0.5" />
                 <p>
                   Express parcel consignments (0–150 kg) travel via our daily express hub-to-hub network. For weights exceeding 150 kg, please switch to <strong>Full / Part Load</strong> above.
                 </p>
@@ -309,8 +309,8 @@ export const FreightRateCalculator: React.FC<FreightRateCalculatorProps> = ({
           <div className="bg-[#181d19] text-white rounded-2xl p-6 sm:p-7 shadow-xl border border-neutral-800 flex flex-col justify-between h-full space-y-6">
             {/* Top Badge */}
             <div className="flex items-center justify-between border-b border-neutral-800 pb-4">
-              <span className="font-['Space_Mono'] text-[11px] font-bold text-[#8ad7a0] uppercase tracking-wider flex items-center gap-1.5">
-                <CheckCircle2 size={15} className="text-[#F4B400]" />
+              <span className="font-['Space_Mono'] text-[11px] font-bold text-[#85B7EB] uppercase tracking-wider flex items-center gap-1.5">
+                <CheckCircle2 size={15} className="text-[#E9A015]" />
                 {mode === 'truck' && freightEstimate.isCorridorVerified
                   ? 'Verified Master Corridor'
                   : 'Indicative Mileage Rate'}
@@ -325,7 +325,7 @@ export const FreightRateCalculator: React.FC<FreightRateCalculatorProps> = ({
               <span className="font-['Space_Mono'] text-[11px] text-neutral-400 uppercase tracking-widest block">
                 Estimated Freight Tariff
               </span>
-              <div className="font-['Space_Mono'] text-3xl sm:text-4xl font-extrabold text-[#F4B400] tracking-tight">
+              <div className="font-['Space_Mono'] text-3xl sm:text-4xl font-extrabold text-[#E9A015] tracking-tight">
                 {mode === 'truck' ? freightEstimate.priceFormatted : parcelEstimate.priceFormatted}
               </div>
               <p className="font-['Manrope'] text-xs text-neutral-400 pt-1">
@@ -345,7 +345,7 @@ export const FreightRateCalculator: React.FC<FreightRateCalculatorProps> = ({
               </div>
               <div>
                 <span className="text-neutral-400 block text-[10px] uppercase">Transit Time</span>
-                <span className="text-[#8ad7a0] font-bold text-sm">
+                <span className="text-[#85B7EB] font-bold text-sm">
                   {mode === 'truck' ? freightEstimate.transitTime : parcelEstimate.transitTime}
                 </span>
               </div>
@@ -354,15 +354,15 @@ export const FreightRateCalculator: React.FC<FreightRateCalculatorProps> = ({
             {/* Trust Inclusions */}
             <div className="space-y-2 text-xs font-['Manrope'] text-neutral-300">
               <div className="flex items-center gap-2">
-                <FileCheck size={14} className="text-[#8ad7a0] shrink-0" />
+                <FileCheck size={14} className="text-[#85B7EB] shrink-0" />
                 <span>100% Tax Invoice with GSTIN: 08KEYPK3684A1ZV</span>
               </div>
               <div className="flex items-center gap-2">
-                <ShieldCheck size={14} className="text-[#F4B400] shrink-0" />
+                <ShieldCheck size={14} className="text-[#E9A015] shrink-0" />
                 <span>Transit Insurance Assistance on Demand</span>
               </div>
               <div className="flex items-center gap-2">
-                <Clock size={14} className="text-[#8ad7a0] shrink-0" />
+                <Clock size={14} className="text-[#85B7EB] shrink-0" />
                 <span>Confirmed Quotation within 60 Mins on WhatsApp</span>
               </div>
             </div>
@@ -372,7 +372,7 @@ export const FreightRateCalculator: React.FC<FreightRateCalculatorProps> = ({
               <button
                 type="button"
                 onClick={handleProceedToBooking}
-                className="w-full flex items-center justify-center gap-2 bg-[#F4B400] hover:bg-[#e0a500] text-[#6c5000] font-['Manrope'] font-extrabold text-sm py-4 px-6 rounded-xl shadow-lg transition-all duration-200 uppercase tracking-wider group"
+                className="w-full flex items-center justify-center gap-2 bg-[#E9A015] hover:bg-[#D08C0A] text-[#4A2E00] font-['Manrope'] font-extrabold text-sm py-4 px-6 rounded-xl shadow-lg transition-all duration-200 uppercase tracking-wider group"
               >
                 <span>Request 1-Hour WhatsApp Quote</span>
                 <ArrowRight size={18} className="arrow-slide ml-0.5 transition-transform group-hover:translate-x-1.5" />

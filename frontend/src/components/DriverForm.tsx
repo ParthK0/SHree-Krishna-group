@@ -167,12 +167,12 @@ export const DriverForm: React.FC = () => {
   if (submitted) {
     return (
       <div className="bg-white border border-[#c5beb4] rounded-2xl p-6 sm:p-10 shadow-lg text-center space-y-6 animate-fadeIn">
-        <div className="w-16 h-16 rounded-full bg-[#EBF5EE] border border-[#0F6A37]/30 flex items-center justify-center text-[#0F6A37] mx-auto">
+        <div className="w-16 h-16 rounded-full bg-[#EBF2F9] border border-[#062448]/30 flex items-center justify-center text-[#062448] mx-auto">
           <CheckCircle2 size={36} />
         </div>
 
         <div className="space-y-2">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#0F6A37]/10 border border-[#0F6A37]/30 text-[#0F6A37] font-['Space_Mono'] text-xs font-bold">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#062448]/10 border border-[#062448]/30 text-[#062448] font-['Space_Mono'] text-xs font-bold">
             <span>Reference ID: {refId}</span>
           </div>
           <h2 className="font-['Archivo_Narrow'] text-2xl sm:text-3xl font-bold uppercase text-[#1a1f1b]">
@@ -197,9 +197,9 @@ export const DriverForm: React.FC = () => {
         </div>
 
         {/* Response Callout */}
-        <div className="bg-[#EBF5EE] border border-[#0F6A37]/30 rounded-xl p-4 max-w-lg mx-auto flex items-center gap-3 text-left">
-          <Clock size={20} className="text-[#0F6A37] shrink-0" />
-          <p className="font-['Manrope'] text-xs text-[#134E3A] leading-snug">
+        <div className="bg-[#EBF2F9] border border-[#062448]/30 rounded-xl p-4 max-w-lg mx-auto flex items-center gap-3 text-left">
+          <Clock size={20} className="text-[#062448] shrink-0" />
+          <p className="font-['Manrope'] text-xs text-[#03162C] leading-snug">
             <strong>Onboarding Desk:</strong> Our load dispatchers will review your truck specs and contact you at <span className="font-['Space_Mono'] font-bold">{formData.phone}</span> to assign available freight loads.
           </p>
         </div>
@@ -231,7 +231,7 @@ export const DriverForm: React.FC = () => {
   return (
     <div>
       <div className="flex items-center gap-2 mb-2">
-        <div className="w-8 h-8 rounded-lg bg-[#EBF5EE] flex items-center justify-center text-[#0F6A37]">
+        <div className="w-8 h-8 rounded-lg bg-[#EBF2F9] flex items-center justify-center text-[#062448]">
           <Navigation size={18} />
         </div>
         <p className="font-['Manrope'] text-[10px] font-bold text-[#6b786d] uppercase tracking-widest">Truck Owner / Driver</p>
@@ -247,11 +247,11 @@ export const DriverForm: React.FC = () => {
           onClick={() => setCurrentStep(1)}
           className={`flex-1 py-2 px-3 rounded-lg font-['Manrope'] text-xs font-extrabold uppercase tracking-wider transition-all flex items-center justify-center gap-2 ${
             currentStep === 1
-              ? 'bg-[#0F6A37] text-white shadow-sm'
+              ? 'bg-[#062448] text-white shadow-sm'
               : 'text-[#5a665c] hover:text-[#1a1f1b]'
           }`}
         >
-          <span className={`w-5 h-5 rounded-full text-[11px] flex items-center justify-center font-bold ${currentStep === 1 ? 'bg-white text-[#0F6A37]' : 'bg-[#e2dad0] text-[#5a665c]'}`}>
+          <span className={`w-5 h-5 rounded-full text-[11px] flex items-center justify-center font-bold ${currentStep === 1 ? 'bg-white text-[#062448]' : 'bg-[#e2dad0] text-[#5a665c]'}`}>
             1
           </span>
           <span>1. Driver &amp; Vehicle Essentials</span>
@@ -266,11 +266,11 @@ export const DriverForm: React.FC = () => {
           }}
           className={`flex-1 py-2 px-3 rounded-lg font-['Manrope'] text-xs font-extrabold uppercase tracking-wider transition-all flex items-center justify-center gap-2 ${
             currentStep === 2
-              ? 'bg-[#0F6A37] text-white shadow-sm'
+              ? 'bg-[#062448] text-white shadow-sm'
               : 'text-[#5a665c] hover:text-[#1a1f1b]'
           }`}
         >
-          <span className={`w-5 h-5 rounded-full text-[11px] flex items-center justify-center font-bold ${currentStep === 2 ? 'bg-white text-[#0F6A37]' : 'bg-[#e2dad0] text-[#5a665c]'}`}>
+          <span className={`w-5 h-5 rounded-full text-[11px] flex items-center justify-center font-bold ${currentStep === 2 ? 'bg-white text-[#062448]' : 'bg-[#e2dad0] text-[#5a665c]'}`}>
             2
           </span>
           <span>2. Routes &amp; Documents (Optional)</span>
@@ -283,12 +283,12 @@ export const DriverForm: React.FC = () => {
           <div className="space-y-4 animate-fadeIn">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div>
-                <label htmlFor="driver_name" className={labelClass}>Full Name<span className="text-[#0F6A37] ml-0.5">*</span></label>
+                <label htmlFor="driver_name" className={labelClass}>Full Name<span className="text-[#062448] ml-0.5">*</span></label>
                 <input id="driver_name" type="text" name="name" value={formData.name} onChange={handleChange} placeholder="DRIVER / OWNER NAME" required className={`${inputClass} ${errors.name ? 'border-red-500 bg-red-50/40' : ''}`} />
                 {errors.name && <p className="mt-1 text-[11px] font-['Manrope'] font-bold text-red-600 flex items-center gap-1"><AlertCircle size={12} /><span>{errors.name}</span></p>}
               </div>
               <div>
-                <label htmlFor="driver_phone" className={labelClass}>Mobile Number<span className="text-[#0F6A37] ml-0.5">*</span></label>
+                <label htmlFor="driver_phone" className={labelClass}>Mobile Number<span className="text-[#062448] ml-0.5">*</span></label>
                 <input id="driver_phone" type="tel" name="phone" value={formData.phone} onChange={handleChange} placeholder="10-DIGIT WHATSAPP NO." inputMode="tel" required className={`${inputClass} ${errors.phone ? 'border-red-500 bg-red-50/40' : ''}`} />
                 {errors.phone && <p className="mt-1 text-[11px] font-['Manrope'] font-bold text-red-600 flex items-center gap-1"><AlertCircle size={12} /><span>{errors.phone}</span></p>}
               </div>
@@ -296,12 +296,12 @@ export const DriverForm: React.FC = () => {
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div>
-                <label htmlFor="driver_dlNumber" className={labelClass}>Driving Licence Number<span className="text-[#0F6A37] ml-0.5">*</span></label>
+                <label htmlFor="driver_dlNumber" className={labelClass}>Driving Licence Number<span className="text-[#062448] ml-0.5">*</span></label>
                 <input id="driver_dlNumber" type="text" name="dlNumber" value={formData.dlNumber} onChange={handleChange} placeholder="E.G., RJ1420210000000" required className={`${inputClass} ${errors.dlNumber ? 'border-red-500 bg-red-50/40' : ''}`} />
                 {errors.dlNumber && <p className="mt-1 text-[11px] font-['Manrope'] font-bold text-red-600 flex items-center gap-1"><AlertCircle size={12} /><span>{errors.dlNumber}</span></p>}
               </div>
               <div>
-                <label htmlFor="driver_vehicleNumber" className={labelClass}>Vehicle Number<span className="text-[#0F6A37] ml-0.5">*</span></label>
+                <label htmlFor="driver_vehicleNumber" className={labelClass}>Vehicle Number<span className="text-[#062448] ml-0.5">*</span></label>
                 <input id="driver_vehicleNumber" type="text" name="vehicleNumber" value={formData.vehicleNumber} onChange={handleChange} placeholder="E.G., RJ14GB1234" required className={`${inputClass} ${errors.vehicleNumber ? 'border-red-500 bg-red-50/40' : ''}`} />
                 {errors.vehicleNumber && <p className="mt-1 text-[11px] font-['Manrope'] font-bold text-red-600 flex items-center gap-1"><AlertCircle size={12} /><span>{errors.vehicleNumber}</span></p>}
               </div>
@@ -309,7 +309,7 @@ export const DriverForm: React.FC = () => {
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div>
-                <label htmlFor="driver_vehicleType" className={labelClass}>Vehicle Type<span className="text-[#0F6A37] ml-0.5">*</span></label>
+                <label htmlFor="driver_vehicleType" className={labelClass}>Vehicle Type<span className="text-[#062448] ml-0.5">*</span></label>
                 <select id="driver_vehicleType" name="vehicleType" value={formData.vehicleType} onChange={handleChange} required className={`${inputClass} ${errors.vehicleType ? 'border-red-500 bg-red-50/40' : ''}`}>
                   <option value="">SELECT VEHICLE TYPE</option>
                   <option value="Mini Truck / Pickup">Mini Truck / Pickup</option>
@@ -324,7 +324,7 @@ export const DriverForm: React.FC = () => {
                 {errors.vehicleType && <p className="mt-1 text-[11px] font-['Manrope'] font-bold text-red-600 flex items-center gap-1"><AlertCircle size={12} /><span>{errors.vehicleType}</span></p>}
               </div>
               <div>
-                <label htmlFor="driver_capacity" className={labelClass}>Capacity (in Tons)<span className="text-[#0F6A37] ml-0.5">*</span></label>
+                <label htmlFor="driver_capacity" className={labelClass}>Capacity (in Tons)<span className="text-[#062448] ml-0.5">*</span></label>
                 <input id="driver_capacity" type="text" name="capacity" value={formData.capacity} onChange={handleChange} placeholder="E.G., 5 TON / 20 TON" required className={`${inputClass} ${errors.capacity ? 'border-red-500 bg-red-50/40' : ''}`} />
                 {errors.capacity && <p className="mt-1 text-[11px] font-['Manrope'] font-bold text-red-600 flex items-center gap-1"><AlertCircle size={12} /><span>{errors.capacity}</span></p>}
               </div>
@@ -332,7 +332,7 @@ export const DriverForm: React.FC = () => {
 
             {formData.vehicleType === 'Other' && (
               <div>
-                <label htmlFor="driver_customVehicleType" className={labelClass}>Specify Vehicle Type<span className="text-[#0F6A37] ml-0.5">*</span></label>
+                <label htmlFor="driver_customVehicleType" className={labelClass}>Specify Vehicle Type<span className="text-[#062448] ml-0.5">*</span></label>
                 <input id="driver_customVehicleType" type="text" name="customVehicleType" value={formData.customVehicleType} onChange={handleChange} placeholder="ENTER YOUR VEHICLE TYPE" required className={`${inputClass} ${errors.customVehicleType ? 'border-red-500 bg-red-50/40' : ''}`} />
                 {errors.customVehicleType && <p className="mt-1 text-[11px] font-['Manrope'] font-bold text-red-600 flex items-center gap-1"><AlertCircle size={12} /><span>{errors.customVehicleType}</span></p>}
               </div>
@@ -340,7 +340,7 @@ export const DriverForm: React.FC = () => {
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div>
-                <label htmlFor="driver_location" className={labelClass}>Current Location<span className="text-[#0F6A37] ml-0.5">*</span></label>
+                <label htmlFor="driver_location" className={labelClass}>Current Location<span className="text-[#062448] ml-0.5">*</span></label>
                 <input id="driver_location" type="text" name="location" value={formData.location} onChange={handleChange} placeholder="E.G., JAIPUR, KOTA" required className={`${inputClass} ${errors.location ? 'border-red-500 bg-red-50/40' : ''}`} />
                 {errors.location && <p className="mt-1 text-[11px] font-['Manrope'] font-bold text-red-600 flex items-center gap-1"><AlertCircle size={12} /><span>{errors.location}</span></p>}
               </div>
@@ -352,7 +352,7 @@ export const DriverForm: React.FC = () => {
                     name="isOwner"
                     checked={formData.isOwner}
                     onChange={handleChange}
-                    className="w-4 h-4 rounded text-[#0F6A37] focus:ring-[#0F6A37]"
+                    className="w-4 h-4 rounded text-[#062448] focus:ring-[#062448]"
                   />
                   <span>I am the owner of this vehicle</span>
                 </label>
@@ -362,7 +362,7 @@ export const DriverForm: React.FC = () => {
             {/* Conditional Vehicle Owner Name field if driver != owner */}
             {!formData.isOwner && (
               <div>
-                <label htmlFor="driver_ownerName" className={labelClass}>Vehicle Owner Name<span className="text-[#0F6A37] ml-0.5">*</span></label>
+                <label htmlFor="driver_ownerName" className={labelClass}>Vehicle Owner Name<span className="text-[#062448] ml-0.5">*</span></label>
                 <input id="driver_ownerName" type="text" name="ownerName" value={formData.ownerName} onChange={handleChange} placeholder="OWNER FULL NAME" required className={`${inputClass} ${errors.ownerName ? 'border-red-500 bg-red-50/40' : ''}`} />
                 {errors.ownerName && <p className="mt-1 text-[11px] font-['Manrope'] font-bold text-red-600 flex items-center gap-1"><AlertCircle size={12} /><span>{errors.ownerName}</span></p>}
               </div>
@@ -416,24 +416,24 @@ export const DriverForm: React.FC = () => {
             </div>
 
             {submitted && (
-              <div className="bg-[#EBF5EE] border border-[#0F6A37]/30 rounded-lg p-4 flex items-center gap-2 font-['Manrope'] text-xs font-bold text-[#0F6A37]">
+              <div className="bg-[#EBF2F9] border border-[#062448]/30 rounded-lg p-4 flex items-center gap-2 font-['Manrope'] text-xs font-bold text-[#062448]">
                 <CheckCircle2 size={18} className="shrink-0" />
                 <span>Vehicle registration details submitted successfully via email! Our team will reach out shortly.</span>
               </div>
             )}
 
             {/* Declaration Checkbox */}
-            <label className="flex items-start gap-3 p-4 rounded-xl border border-[#e2dad0] bg-[#f9f6f2] cursor-pointer hover:border-[#0F6A37] transition-colors">
+            <label className="flex items-start gap-3 p-4 rounded-xl border border-[#e2dad0] bg-[#f9f6f2] cursor-pointer hover:border-[#062448] transition-colors">
               <input
                 type="checkbox"
                 checked={declared}
                 onChange={(e) => setDeclared(e.target.checked)}
-                className="mt-0.5 w-4 h-4 rounded text-[#0F6A37] focus:ring-[#0F6A37] shrink-0"
+                className="mt-0.5 w-4 h-4 rounded text-[#062448] focus:ring-[#062448] shrink-0"
               />
               <span className="font-['Manrope'] text-xs text-[#3d4a3f] leading-relaxed">
                 I declare that: I am the owner or authorized operator of this vehicle; my RC, Insurance, Permit, Fitness and Driving Licence are valid. I agree to the{' '}
-                <a href="/terms-and-conditions" target="_blank" rel="noopener noreferrer" className="text-[#0F6A37] underline font-bold">Terms & Conditions</a>{' '}and{' '}
-                <a href="/privacy-policy" target="_blank" rel="noopener noreferrer" className="text-[#0F6A37] underline font-bold">Privacy Policy</a>.
+                <a href="/terms-and-conditions" target="_blank" rel="noopener noreferrer" className="text-[#062448] underline font-bold">Terms & Conditions</a>{' '}and{' '}
+                <a href="/privacy-policy" target="_blank" rel="noopener noreferrer" className="text-[#062448] underline font-bold">Privacy Policy</a>.
               </span>
             </label>
 

@@ -16,12 +16,12 @@ export const PrivacyPage: React.FC = () => {
       <div className="max-w-3xl mx-auto space-y-8">
 
         <div className="flex items-center justify-between">
-          <Link to="/" className="inline-flex items-center gap-2 font-['Manrope'] text-xs font-bold text-[#0F6A37] hover:text-[#134E3A] uppercase tracking-wider transition-colors">
+          <Link to="/" className="inline-flex items-center gap-2 font-['Manrope'] text-xs font-bold text-[#062448] hover:text-[#03162C] uppercase tracking-wider transition-colors">
             <ArrowLeft size={16} />
             <span>Back to Home</span>
           </Link>
           <div className="font-['Space_Mono'] text-xs text-[#5a665c]">
-            Home / <span className="text-[#0F6A37] font-bold">Privacy Policy</span>
+            Home / <span className="text-[#062448] font-bold">Privacy Policy</span>
           </div>
         </div>
 
@@ -76,7 +76,7 @@ export const PrivacyPage: React.FC = () => {
           <Section title="Grievance Officer & Contact">
             <p>In accordance with Indian Information Technology laws and Data Protection guidelines, any privacy concerns or grievances may be addressed to our Grievance Officer:</p>
             <p><strong>Grievance Officer:</strong> Deepesh Kumar ({BUSINESS_NAME})</p>
-            <p><strong>Email:</strong> <a href={`mailto:${CONTACT_EMAIL}`} className="text-[#0F6A37] underline">{CONTACT_EMAIL}</a></p>
+            <p><strong>Email:</strong> <a href={`mailto:${CONTACT_EMAIL}`} className="text-[#062448] underline">{CONTACT_EMAIL}</a></p>
             <p><strong>Phone / WhatsApp:</strong> {PHONE_DISPLAY}</p>
             <p>{BUSINESS_NAME} is committed to handling your personal data responsibly and transparently.</p>
           </Section>

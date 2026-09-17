@@ -20,24 +20,24 @@ export const RegisterTruckPage: React.FC = () => {
         <div className="flex items-center justify-between">
           <Link
             to="/"
-            className="inline-flex items-center gap-2 font-['Manrope'] text-xs font-bold text-[#0F6A37] hover:text-[#134E3A] uppercase tracking-wider transition-colors"
+            className="inline-flex items-center gap-2 font-['Manrope'] text-xs font-bold text-[#062448] hover:text-[#03162C] uppercase tracking-wider transition-colors"
           >
             <ArrowLeft size={16} />
             <span>Back to Home</span>
           </Link>
           
           <div className="font-['Space_Mono'] text-xs text-[#5a665c]">
-            <span>Home</span> / <span className="text-[#0F6A37] font-bold">Register Vehicle</span>
+            <span>Home</span> / <span className="text-[#062448] font-bold">Register Vehicle</span>
           </div>
         </div>
 
         {/* Page Header */}
         <div className="bg-white border border-[#c5beB4] rounded-2xl p-6 md:p-8 shadow-sm">
           <div className="flex items-center gap-2 mb-2">
-            <div className="w-8 h-8 rounded-lg bg-[#EBF5EE] flex items-center justify-center text-[#0F6A37]">
+            <div className="w-8 h-8 rounded-lg bg-[#EBF2F9] flex items-center justify-center text-[#062448]">
               <Calendar size={18} />
             </div>
-            <span className="font-['Manrope'] text-xs font-bold text-[#0F6A37] uppercase tracking-widest">
+            <span className="font-['Manrope'] text-xs font-bold text-[#062448] uppercase tracking-widest">
               Fleet Partner Network
             </span>
           </div>

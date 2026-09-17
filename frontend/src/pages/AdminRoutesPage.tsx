@@ -197,7 +197,7 @@ export const AdminRoutesPage: React.FC = () => {
             <Link to="/" className="text-neutral-400 hover:text-white transition-colors" title="Back to Website">
               <ArrowLeft size={20} />
             </Link>
-            <div className="p-2 rounded-lg bg-[#0F6A37] text-white">
+            <div className="p-2 rounded-lg bg-[#062448] text-white">
               <Truck size={20} />
             </div>
             <div>
@@ -213,7 +213,7 @@ export const AdminRoutesPage: React.FC = () => {
           <div className="flex items-center gap-2 flex-wrap">
             <button
               onClick={handleCreateNew}
-              className="px-3.5 py-2 rounded-lg bg-[#0F6A37] text-white text-xs font-bold uppercase tracking-wider hover:bg-[#0c562c] transition-colors flex items-center gap-1.5 shadow"
+              className="px-3.5 py-2 rounded-lg bg-[#062448] text-white text-xs font-bold uppercase tracking-wider hover:bg-[#0A3366] transition-colors flex items-center gap-1.5 shadow"
             >
               <Plus size={15} />
               <span>New Route</span>
@@ -251,7 +251,7 @@ export const AdminRoutesPage: React.FC = () => {
       {/* Alert Notification */}
       {saveAlert && (
         <div className="max-w-7xl mx-auto px-4 mt-4">
-          <div className="p-3 bg-[#EBF5EE] border border-[#0F6A37]/30 text-[#0F6A37] font-bold text-xs rounded-xl flex items-center gap-2">
+          <div className="p-3 bg-[#EBF2F9] border border-[#062448]/30 text-[#062448] font-bold text-xs rounded-xl flex items-center gap-2">
             <CheckCircle2 size={16} />
             <span>{saveAlert}</span>
           </div>
@@ -289,7 +289,7 @@ export const AdminRoutesPage: React.FC = () => {
                       onClick={() => setSelectedRoute(r)}
                       className={`p-3.5 rounded-xl border transition-all cursor-pointer ${
                         isSelected
-                          ? 'border-[#0F6A37] bg-[#EBF5EE]'
+                          ? 'border-[#062448] bg-[#EBF2F9]'
                           : 'border-[#ECE6DD] bg-[#fbf9f6] hover:border-neutral-300'
                       }`}
                     >
@@ -300,7 +300,7 @@ export const AdminRoutesPage: React.FC = () => {
                         <span
                           className={`text-[9px] font-bold font-['Space_Mono'] px-1.5 py-0.5 rounded ${
                             r.status === 'published'
-                              ? 'bg-[#0F6A37]/10 text-[#0F6A37]'
+                              ? 'bg-[#062448]/10 text-[#062448]'
                               : 'bg-amber-100 text-amber-800'
                           }`}
                         >
@@ -319,7 +319,7 @@ export const AdminRoutesPage: React.FC = () => {
                             to={`/${r.slug}`}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="text-neutral-400 hover:text-[#0F6A37]"
+                            className="text-neutral-400 hover:text-[#062448]"
                             title="Preview Live Page"
                           >
                             <Eye size={13} />
@@ -383,7 +383,7 @@ export const AdminRoutesPage: React.FC = () => {
                   <button
                     type="button"
                     onClick={handleSave}
-                    className="px-4 py-1.5 rounded-lg bg-[#0F6A37] text-white text-xs font-bold uppercase tracking-wider flex items-center gap-1.5 shadow hover:bg-[#0c562c]"
+                    className="px-4 py-1.5 rounded-lg bg-[#062448] text-white text-xs font-bold uppercase tracking-wider flex items-center gap-1.5 shadow hover:bg-[#0A3366]"
                   >
                     <Save size={14} />
                     <span>Save Changes</span>
@@ -406,7 +406,7 @@ export const AdminRoutesPage: React.FC = () => {
                       onClick={() => setActiveTab(tab.id as any)}
                       className={`px-4 py-2.5 font-bold text-xs uppercase tracking-wider flex items-center gap-2 border-b-2 transition-all ${
                         isActive
-                          ? 'border-[#0F6A37] text-[#0F6A37]'
+                          ? 'border-[#062448] text-[#062448]'
                           : 'border-transparent text-neutral-500 hover:text-neutral-800'
                       }`}
                     >
@@ -534,7 +534,7 @@ export const AdminRoutesPage: React.FC = () => {
                             faqItems: [...selectedRoute.faqItems, { question: q, answer: a }],
                           });
                         }}
-                        className="px-2.5 py-1 rounded bg-[#0F6A37] text-white text-xs font-bold"
+                        className="px-2.5 py-1 rounded bg-[#062448] text-white text-xs font-bold"
                       >
                         + Add FAQ
                       </button>
@@ -547,7 +547,7 @@ export const AdminRoutesPage: React.FC = () => {
                   <div className="space-y-5 text-xs">
                     {/* Live Google Search Preview Card */}
                     <div className="p-4 bg-white rounded-xl border border-[#d8d0c3] shadow-sm space-y-1">
-                      <span className="text-[10px] font-bold font-['Space_Mono'] uppercase text-[#0F6A37] block mb-1">
+                      <span className="text-[10px] font-bold font-['Space_Mono'] uppercase text-[#062448] block mb-1">
                         Google Search (SERP) Live Simulation
                       </span>
                       <div className="text-[11px] text-neutral-600 truncate flex items-center gap-1">
@@ -649,7 +649,7 @@ export const AdminRoutesPage: React.FC = () => {
                           id="sitemapStatus"
                           checked={selectedRoute.sitemapStatus}
                           onChange={(e) => setSelectedRoute({ ...selectedRoute, sitemapStatus: e.target.checked })}
-                          className="w-4 h-4 text-[#0F6A37] rounded"
+                          className="w-4 h-4 text-[#062448] rounded"
                         />
                         <label htmlFor="sitemapStatus" className="font-bold text-neutral-800">
                           Include in sitemap.xml & Google Indexing
@@ -725,7 +725,7 @@ export const AdminRoutesPage: React.FC = () => {
                               ],
                             });
                           }}
-                          className="px-2 py-1 rounded bg-[#0F6A37] text-white text-[11px] font-bold"
+                          className="px-2 py-1 rounded bg-[#062448] text-white text-[11px] font-bold"
                         >
                           + Add Truck Rate
                         </button>
@@ -746,7 +746,7 @@ export const AdminRoutesPage: React.FC = () => {
                                 copy[idx].priceRange = e.target.value;
                                 setSelectedRoute({ ...selectedRoute, priceEstimates: copy });
                               }}
-                              className="w-36 px-2 py-1 rounded border border-[#d8d0c3] bg-white text-xs font-['Space_Mono'] font-bold text-[#F4B400]"
+                              className="w-36 px-2 py-1 rounded border border-[#d8d0c3] bg-white text-xs font-['Space_Mono'] font-bold text-[#E9A015]"
                             />
                             <button
                               type="button"
@@ -808,7 +808,7 @@ export const AdminRoutesPage: React.FC = () => {
                   </div>
                   <button
                     type="submit"
-                    className="px-6 py-2.5 rounded-xl bg-[#0F6A37] text-white font-bold text-xs uppercase tracking-wider hover:bg-[#0c562c] shadow flex items-center gap-1.5"
+                    className="px-6 py-2.5 rounded-xl bg-[#062448] text-white font-bold text-xs uppercase tracking-wider hover:bg-[#0A3366] shadow flex items-center gap-1.5"
                   >
                     <Save size={15} />
                     <span>Save All Changes</span>
@@ -827,7 +827,7 @@ export const AdminRoutesPage: React.FC = () => {
               </p>
               <button
                 onClick={handleCreateNew}
-                className="px-4 py-2 rounded-lg bg-[#0F6A37] text-white font-bold text-xs uppercase tracking-wider"
+                className="px-4 py-2 rounded-lg bg-[#062448] text-white font-bold text-xs uppercase tracking-wider"
               >
                 + Create New Corridor
               </button>

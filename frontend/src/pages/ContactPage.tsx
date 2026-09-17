@@ -36,23 +36,23 @@ export const ContactPage: React.FC = () => {
         <div className="flex items-center justify-between">
           <Link
             to="/"
-            className="inline-flex items-center gap-2 font-['Manrope'] text-xs font-bold text-[#0F6A37] hover:text-[#134E3A] uppercase tracking-wider transition-colors"
+            className="inline-flex items-center gap-2 font-['Manrope'] text-xs font-bold text-[#062448] hover:text-[#03162C] uppercase tracking-wider transition-colors"
           >
             <ArrowLeft size={16} />
             <span>Back to Home</span>
           </Link>
           <div className="font-['Space_Mono'] text-xs text-[#5a665c]">
-            <span>Home</span> / <span className="text-[#0F6A37] font-bold">Contact</span>
+            <span>Home</span> / <span className="text-[#062448] font-bold">Contact</span>
           </div>
         </div>
 
         {/* Page Header */}
         <div className="bg-white border border-[#c5beb4] rounded-2xl p-6 md:p-8 shadow-sm">
           <div className="flex items-center gap-2 mb-2">
-            <div className="w-8 h-8 rounded-lg bg-[#EBF5EE] flex items-center justify-center text-[#0F6A37]">
+            <div className="w-8 h-8 rounded-lg bg-[#EBF2F9] flex items-center justify-center text-[#062448]">
               <Phone size={18} />
             </div>
-            <span className="font-['Manrope'] text-xs font-bold text-[#0F6A37] uppercase tracking-widest">
+            <span className="font-['Manrope'] text-xs font-bold text-[#062448] uppercase tracking-widest">
               Get In Touch
             </span>
           </div>
@@ -72,14 +72,14 @@ export const ContactPage: React.FC = () => {
 
             <a
               href={`tel:+91${PHONE_DISPLAY.replace(/\D/g,'').slice(-10)}`}
-              className="flex items-start gap-4 p-4 rounded-xl bg-[#f4f0ea] border border-[#e2dad0] hover:border-[#0F6A37] transition-colors group"
+              className="flex items-start gap-4 p-4 rounded-xl bg-[#f4f0ea] border border-[#e2dad0] hover:border-[#062448] transition-colors group"
             >
-              <div className="w-10 h-10 rounded-lg bg-[#EBF5EE] flex items-center justify-center text-[#0F6A37] shrink-0">
+              <div className="w-10 h-10 rounded-lg bg-[#EBF2F9] flex items-center justify-center text-[#062448] shrink-0">
                 <Phone size={18} />
               </div>
               <div>
                 <div className="font-['Manrope'] text-[10px] font-bold text-[#6b786d] uppercase tracking-widest mb-0.5">Phone</div>
-                <div className="font-['Space_Mono'] text-sm font-bold text-[#1a1f1b] group-hover:text-[#0F6A37] transition-colors">{PHONE_DISPLAY}</div>
+                <div className="font-['Space_Mono'] text-sm font-bold text-[#1a1f1b] group-hover:text-[#062448] transition-colors">{PHONE_DISPLAY}</div>
               </div>
             </a>
 
@@ -101,19 +101,19 @@ export const ContactPage: React.FC = () => {
 
             <a
               href={`mailto:${CONTACT_EMAIL}`}
-              className="flex items-start gap-4 p-4 rounded-xl bg-[#f4f0ea] border border-[#e2dad0] hover:border-[#0F6A37] transition-colors group"
+              className="flex items-start gap-4 p-4 rounded-xl bg-[#f4f0ea] border border-[#e2dad0] hover:border-[#062448] transition-colors group"
             >
-              <div className="w-10 h-10 rounded-lg bg-[#EBF5EE] flex items-center justify-center text-[#0F6A37] shrink-0">
+              <div className="w-10 h-10 rounded-lg bg-[#EBF2F9] flex items-center justify-center text-[#062448] shrink-0">
                 <Mail size={18} />
               </div>
               <div>
                 <div className="font-['Manrope'] text-[10px] font-bold text-[#6b786d] uppercase tracking-widest mb-0.5">Email</div>
-                <div className="font-['Space_Mono'] text-sm font-bold text-[#1a1f1b] group-hover:text-[#0F6A37] transition-colors break-all">{CONTACT_EMAIL}</div>
+                <div className="font-['Space_Mono'] text-sm font-bold text-[#1a1f1b] group-hover:text-[#062448] transition-colors break-all">{CONTACT_EMAIL}</div>
               </div>
             </a>
 
             <div className="flex items-start gap-4 p-4 rounded-xl bg-[#f4f0ea] border border-[#e2dad0]">
-              <div className="w-10 h-10 rounded-lg bg-[#FFF8E1] flex items-center justify-center text-[#F4B400] shrink-0">
+              <div className="w-10 h-10 rounded-lg bg-[#FFF8E1] flex items-center justify-center text-[#E9A015] shrink-0">
                 <Clock size={18} />
               </div>
               <div>
@@ -129,7 +129,7 @@ export const ContactPage: React.FC = () => {
 
             <div className="space-y-4 font-['Space_Mono'] text-xs">
               <div className="flex items-start gap-3 p-4 bg-[#f4f0ea] rounded-xl border border-[#e2dad0]">
-                <Building2 size={16} className="text-[#0F6A37] shrink-0 mt-0.5" />
+                <Building2 size={16} className="text-[#062448] shrink-0 mt-0.5" />
                 <div>
                   <div className="font-['Manrope'] text-[10px] font-bold text-[#6b786d] uppercase tracking-widest mb-1">Business Name</div>
                   <div className="text-[#1a1f1b] font-bold">{BUSINESS_NAME}</div>
@@ -137,15 +137,15 @@ export const ContactPage: React.FC = () => {
               </div>
 
               <div className="flex items-start gap-3 p-4 bg-[#f4f0ea] rounded-xl border border-[#e2dad0]">
-                <Shield size={16} className="text-[#0F6A37] shrink-0 mt-0.5" />
+                <Shield size={16} className="text-[#062448] shrink-0 mt-0.5" />
                 <div>
                   <div className="font-['Manrope'] text-[10px] font-bold text-[#6b786d] uppercase tracking-widest mb-1">GSTIN</div>
-                  <div className="text-[#0F6A37] font-bold tracking-wide">{GSTIN}</div>
+                  <div className="text-[#062448] font-bold tracking-wide">{GSTIN}</div>
                 </div>
               </div>
 
               <div className="flex items-start gap-3 p-4 bg-[#f4f0ea] rounded-xl border border-[#e2dad0]">
-                <MapPin size={16} className="text-[#F4B400] shrink-0 mt-0.5" />
+                <MapPin size={16} className="text-[#E9A015] shrink-0 mt-0.5" />
                 <div>
                   <div className="font-['Manrope'] text-[10px] font-bold text-[#6b786d] uppercase tracking-widest mb-1">Registered Office</div>
                   <div className="text-[#1a1f1b] font-bold leading-relaxed">
@@ -175,7 +175,7 @@ export const ContactPage: React.FC = () => {
         {/* Inline Enquiry & Quotation Form */}
         <div id="enquiry" className="space-y-3 scroll-mt-24">
           <div className="flex items-center gap-2">
-            <div className="w-8 h-8 rounded-lg bg-[#EBF5EE] flex items-center justify-center text-[#0F6A37]">
+            <div className="w-8 h-8 rounded-lg bg-[#EBF2F9] flex items-center justify-center text-[#062448]">
               <Send size={16} />
             </div>
             <div>
@@ -205,7 +205,7 @@ export const ContactPage: React.FC = () => {
               href="https://maps.google.com/?q=1D,+Lalita+Colony,+Nahari+Ka+Naka,+Shastri+Nagar,+Jaipur,+Rajasthan+302016"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-1.5 font-['Manrope'] text-xs font-bold text-[#0F6A37] hover:underline shrink-0"
+              className="inline-flex items-center gap-1.5 font-['Manrope'] text-xs font-bold text-[#062448] hover:underline shrink-0"
             >
               <span>Get Driving Directions →</span>
             </a>

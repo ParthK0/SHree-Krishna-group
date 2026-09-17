@@ -26,7 +26,7 @@ interface FieldProps {
 const Field: React.FC<FieldProps> = ({ label, name, value, onChange, placeholder, type = 'text', required, inputMode, error, children }) => (
   <div>
     <label htmlFor={name} className={labelClass}>
-      {label}{required && <span className="text-[#0F6A37] ml-0.5">*</span>}
+      {label}{required && <span className="text-[#062448] ml-0.5">*</span>}
     </label>
     {children ?? (
       <input
@@ -263,12 +263,12 @@ export const BookingForm: React.FC = () => {
   if (loadingStep === 'done') {
     return (
       <div className="bg-white border border-[#c5beb4] rounded-2xl p-6 sm:p-10 shadow-lg text-center space-y-6 animate-fadeIn">
-        <div className="w-16 h-16 rounded-full bg-[#EBF5EE] border border-[#0F6A37]/30 flex items-center justify-center text-[#0F6A37] mx-auto">
+        <div className="w-16 h-16 rounded-full bg-[#EBF2F9] border border-[#062448]/30 flex items-center justify-center text-[#062448] mx-auto">
           <CheckCircle2 size={36} />
         </div>
 
         <div className="space-y-2">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#0F6A37]/10 border border-[#0F6A37]/30 text-[#0F6A37] font-['Space_Mono'] text-xs font-bold">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#062448]/10 border border-[#062448]/30 text-[#062448] font-['Space_Mono'] text-xs font-bold">
             <span>Reference ID: {refId}</span>
           </div>
           <h2 className="font-['Archivo_Narrow'] text-2xl sm:text-3xl font-bold uppercase text-[#1a1f1b]">
@@ -283,7 +283,7 @@ export const BookingForm: React.FC = () => {
         <div className="bg-[#f9f6f2] border border-[#e2dad0] rounded-xl p-4 text-left max-w-lg mx-auto space-y-2.5 font-['Manrope'] text-xs text-[#3d4a3f]">
           <div className="font-['Archivo_Narrow'] text-xs font-bold text-[#1a1f1b] uppercase tracking-wider border-b border-[#e2dad0] pb-1.5 flex items-center justify-between">
             <span>{isParcel ? 'Parcel Booking Summary' : 'Booking Request Summary'}</span>
-            <span className="text-[#0F6A37] font-['Space_Mono'] font-bold text-[11px]">{formData.loadType}</span>
+            <span className="text-[#062448] font-['Space_Mono'] font-bold text-[11px]">{formData.loadType}</span>
           </div>
           <div className="grid grid-cols-2 gap-2">
             <div><span className="text-neutral-500">Route:</span> <strong className="text-[#1a1f1b] block font-['Space_Mono']">{formData.pickup} → {formData.drop}</strong></div>
@@ -294,9 +294,9 @@ export const BookingForm: React.FC = () => {
         </div>
 
         {/* Response Promise Callout */}
-        <div className="bg-[#EBF5EE] border border-[#0F6A37]/30 rounded-xl p-4 max-w-lg mx-auto flex items-center gap-3 text-left">
-          <Clock size={20} className="text-[#0F6A37] shrink-0" />
-          <p className="font-['Manrope'] text-xs text-[#134E3A] leading-snug">
+        <div className="bg-[#EBF2F9] border border-[#062448]/30 rounded-xl p-4 max-w-lg mx-auto flex items-center gap-3 text-left">
+          <Clock size={20} className="text-[#062448] shrink-0" />
+          <p className="font-['Manrope'] text-xs text-[#03162C] leading-snug">
             <strong>1-Hour Quote on WhatsApp:</strong> Your booking request has been delivered to our dispatch team via email. We will calculate the verified freight tariff and send your quote directly to your WhatsApp at <span className="font-['Space_Mono'] font-bold">{formData.phone}</span> within 60 minutes. For urgent enquiries, our WhatsApp number is <span className="font-['Space_Mono'] font-bold">+91 97848 00833</span>.
           </p>
         </div>
@@ -328,7 +328,7 @@ export const BookingForm: React.FC = () => {
   return (
     <div>
       <div className="flex items-center gap-2 mb-2">
-        <div className="w-8 h-8 rounded-lg bg-[#EBF5EE] flex items-center justify-center text-[#0F6A37]">
+        <div className="w-8 h-8 rounded-lg bg-[#EBF2F9] flex items-center justify-center text-[#062448]">
           {isParcel ? <Package size={18} /> : <Truck size={18} />}
         </div>
         <p className="font-['Manrope'] text-[10px] font-bold text-[#6b786d] uppercase tracking-widest">
@@ -348,13 +348,13 @@ export const BookingForm: React.FC = () => {
             onClick={() => handleLoadTypeChange('Full Load (FTL)')}
             className={`p-3 rounded-xl border text-left transition-all flex flex-col justify-between ${
               formData.loadType === 'Full Load (FTL)'
-                ? 'bg-[#0F6A37] border-[#0F6A37] text-white shadow-sm'
+                ? 'bg-[#062448] border-[#062448] text-white shadow-sm'
                 : 'bg-[#f4f0ea] border-[#e2dad0] text-[#3d4a3f] hover:bg-[#eae3d9]'
             }`}
           >
             <div className="flex items-center justify-between w-full mb-1">
               <span className="font-['Archivo_Narrow'] font-bold text-xs uppercase">Full Load (FTL)</span>
-              <Truck size={15} className={formData.loadType === 'Full Load (FTL)' ? 'text-white' : 'text-[#0F6A37]'} />
+              <Truck size={15} className={formData.loadType === 'Full Load (FTL)' ? 'text-white' : 'text-[#062448]'} />
             </div>
             <span className={`text-[10px] font-['Manrope'] ${formData.loadType === 'Full Load (FTL)' ? 'text-[#cbe8d5]' : 'text-neutral-500'}`}>
               Full dedicated truck
@@ -366,13 +366,13 @@ export const BookingForm: React.FC = () => {
             onClick={() => handleLoadTypeChange('Part Load (PTL)')}
             className={`p-3 rounded-xl border text-left transition-all flex flex-col justify-between ${
               formData.loadType === 'Part Load (PTL)'
-                ? 'bg-[#0F6A37] border-[#0F6A37] text-white shadow-sm'
+                ? 'bg-[#062448] border-[#062448] text-white shadow-sm'
                 : 'bg-[#f4f0ea] border-[#e2dad0] text-[#3d4a3f] hover:bg-[#eae3d9]'
             }`}
           >
             <div className="flex items-center justify-between w-full mb-1">
               <span className="font-['Archivo_Narrow'] font-bold text-xs uppercase">Part Load (PTL)</span>
-              <Truck size={15} className={formData.loadType === 'Part Load (PTL)' ? 'text-white' : 'text-[#0F6A37]'} />
+              <Truck size={15} className={formData.loadType === 'Part Load (PTL)' ? 'text-white' : 'text-[#062448]'} />
             </div>
             <span className={`text-[10px] font-['Manrope'] ${formData.loadType === 'Part Load (PTL)' ? 'text-[#cbe8d5]' : 'text-neutral-500'}`}>
               Shared truck space
@@ -384,7 +384,7 @@ export const BookingForm: React.FC = () => {
             onClick={() => handleLoadTypeChange('Book a Parcel (0 to 150 kg)')}
             className={`p-3 rounded-xl border text-left transition-all flex flex-col justify-between relative overflow-hidden ${
               formData.loadType === 'Book a Parcel (0 to 150 kg)'
-                ? 'bg-[#0F6A37] border-[#0F6A37] text-white shadow-sm'
+                ? 'bg-[#062448] border-[#062448] text-white shadow-sm'
                 : 'bg-[#f4f0ea] border-[#e2dad0] text-[#3d4a3f] hover:bg-[#eae3d9]'
             }`}
           >
@@ -392,14 +392,14 @@ export const BookingForm: React.FC = () => {
               <span className="font-['Archivo_Narrow'] font-bold text-xs uppercase flex items-center gap-1">
                 <span>Book a Parcel</span>
                 <span className={`text-[9px] px-1.5 py-0.2 rounded font-['Space_Mono'] font-bold ${
-                  formData.loadType === 'Book a Parcel (0 to 150 kg)' ? 'bg-[#F4B400] text-[#6c5000]' : 'bg-[#0F6A37]/15 text-[#0F6A37]'
+                  formData.loadType === 'Book a Parcel (0 to 150 kg)' ? 'bg-[#E9A015] text-[#4A2E00]' : 'bg-[#062448]/15 text-[#062448]'
                 }`}>
                   0-150 KG
                 </span>
               </span>
-              <Package size={15} className={formData.loadType === 'Book a Parcel (0 to 150 kg)' ? 'text-[#F4B400]' : 'text-[#0F6A37]'} />
+              <Package size={15} className={formData.loadType === 'Book a Parcel (0 to 150 kg)' ? 'text-[#E9A015]' : 'text-[#062448]'} />
             </div>
-            <span className={`text-[10px] font-['Manrope'] ${formData.loadType === 'Book a Parcel (0 to 150 kg)' ? 'text-[#cbe8d5]' : 'text-neutral-500'}`}>
+            <span className={`text-[10px] font-['Manrope'] ${formData.loadType === 'Book a Parcel (0 to 150 kg)' ? 'text-[#93C5FD]' : 'text-neutral-500'}`}>
               Boxes, cartons &amp; small parcels
             </span>
           </button>
@@ -408,10 +408,10 @@ export const BookingForm: React.FC = () => {
 
       {/* Parcel Notice Banner */}
       {isParcel && (
-        <div className="mb-5 bg-[#EBF5EE] border border-[#0F6A37]/30 rounded-xl p-3.5 flex items-start gap-2.5 animate-fadeIn">
-          <Sparkles size={16} className="text-[#0F6A37] shrink-0 mt-0.5" />
-          <div className="font-['Manrope'] text-xs text-[#134E3A] leading-relaxed">
-            <strong className="text-[#0F6A37]">Parcel Service (0 to 150 kg):</strong> Ideal for boxes, machine parts, commercial samples, carton packs, and urgent small shipments across Rajasthan &amp; All-India.
+        <div className="mb-5 bg-[#EBF2F9] border border-[#062448]/30 rounded-xl p-3.5 flex items-start gap-2.5 animate-fadeIn">
+          <Sparkles size={16} className="text-[#062448] shrink-0 mt-0.5" />
+          <div className="font-['Manrope'] text-xs text-[#03162C] leading-relaxed">
+            <strong className="text-[#062448]">Parcel Service (0 to 150 kg):</strong> Ideal for boxes, machine parts, commercial samples, carton packs, and urgent small shipments across Rajasthan &amp; All-India.
           </div>
         </div>
       )}
@@ -423,11 +423,11 @@ export const BookingForm: React.FC = () => {
           onClick={() => setCurrentStep(1)}
           className={`flex-1 py-2 px-3 rounded-lg font-['Manrope'] text-xs font-extrabold uppercase tracking-wider transition-all flex items-center justify-center gap-2 ${
             currentStep === 1
-              ? 'bg-[#0F6A37] text-white shadow-sm'
+              ? 'bg-[#062448] text-white shadow-sm'
               : 'text-[#5a665c] hover:text-[#1a1f1b]'
           }`}
         >
-          <span className={`w-5 h-5 rounded-full text-[11px] flex items-center justify-center font-bold ${currentStep === 1 ? 'bg-white text-[#0F6A37]' : 'bg-[#e2dad0] text-[#5a665c]'}`}>
+          <span className={`w-5 h-5 rounded-full text-[11px] flex items-center justify-center font-bold ${currentStep === 1 ? 'bg-white text-[#062448]' : 'bg-[#e2dad0] text-[#5a665c]'}`}>
             1
           </span>
           <span>1. Pickup &amp; {isParcel ? 'Parcel Info' : 'Goods'}</span>
@@ -442,11 +442,11 @@ export const BookingForm: React.FC = () => {
           }}
           className={`flex-1 py-2 px-3 rounded-lg font-['Manrope'] text-xs font-extrabold uppercase tracking-wider transition-all flex items-center justify-center gap-2 ${
             currentStep === 2
-              ? 'bg-[#0F6A37] text-white shadow-sm'
+              ? 'bg-[#062448] text-white shadow-sm'
               : 'text-[#5a665c] hover:text-[#1a1f1b]'
           }`}
         >
-          <span className={`w-5 h-5 rounded-full text-[11px] flex items-center justify-center font-bold ${currentStep === 2 ? 'bg-white text-[#0F6A37]' : 'bg-[#e2dad0] text-[#5a665c]'}`}>
+          <span className={`w-5 h-5 rounded-full text-[11px] flex items-center justify-center font-bold ${currentStep === 2 ? 'bg-white text-[#062448]' : 'bg-[#e2dad0] text-[#5a665c]'}`}>
             2
           </span>
           <span>2. {isParcel ? 'Delivery & Contact' : 'Vehicle & Contact'}</span>
@@ -553,20 +553,20 @@ export const BookingForm: React.FC = () => {
 
             {/* Loading status */}
             {isLoading && (
-              <div className="bg-[#EBF5EE] border border-[#b8c9bb] rounded-lg px-4 py-3 flex flex-col gap-2">
-                <div className="flex items-center gap-2.5 font-['Manrope'] text-xs font-bold text-[#0F6A37]">
-                  <Loader2 size={16} className="spinner text-[#0F6A37]" />
+              <div className="bg-[#EBF2F9] border border-[#b8c9bb] rounded-lg px-4 py-3 flex flex-col gap-2">
+                <div className="flex items-center gap-2.5 font-['Manrope'] text-xs font-bold text-[#062448]">
+                  <Loader2 size={16} className="spinner text-[#062448]" />
                   <span>Submitting {isParcel ? 'parcel' : 'booking'} request to dispatch desk...</span>
                 </div>
               </div>
             )}
 
-            <label className="flex items-start gap-3 p-4 rounded-xl border border-[#e2dad0] bg-[#f9f6f2] cursor-pointer hover:border-[#0F6A37] transition-colors">
+            <label className="flex items-start gap-3 p-4 rounded-xl border border-[#e2dad0] bg-[#f9f6f2] cursor-pointer hover:border-[#062448] transition-colors">
               <input
                 type="checkbox"
                 checked={declared}
                 onChange={(e) => setDeclared(e.target.checked)}
-                className="mt-0.5 w-4 h-4 rounded text-[#0F6A37] focus:ring-[#0F6A37] shrink-0"
+                className="mt-0.5 w-4 h-4 rounded text-[#062448] focus:ring-[#062448] shrink-0"
               />
               <div className="font-['Manrope'] text-xs text-[#3d4a3f] leading-relaxed space-y-1">
                 <p className="font-bold text-[#1a1f1b]">I confirm that:</p>
@@ -576,8 +576,8 @@ export const BookingForm: React.FC = () => {
                   <li>Applicable invoice / GST / documentation requirements are fulfilled.</li>
                   <li>
                     I agree to the{' '}
-                    <Link to="/terms-and-conditions" target="_blank" rel="noopener noreferrer" className="text-[#0F6A37] underline font-bold">Terms &amp; Conditions</Link>{' '}and{' '}
-                    <Link to="/privacy-policy" target="_blank" rel="noopener noreferrer" className="text-[#0F6A37] underline font-bold">Privacy Policy</Link>.
+                    <Link to="/terms-and-conditions" target="_blank" rel="noopener noreferrer" className="text-[#062448] underline font-bold">Terms &amp; Conditions</Link>{' '}and{' '}
+                    <Link to="/privacy-policy" target="_blank" rel="noopener noreferrer" className="text-[#062448] underline font-bold">Privacy Policy</Link>.
                   </li>
                 </ul>
               </div>

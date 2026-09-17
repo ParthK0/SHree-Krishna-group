@@ -16,12 +16,12 @@ export const RefundPage: React.FC = () => {
       <div className="max-w-3xl mx-auto space-y-8">
 
         <div className="flex items-center justify-between">
-          <Link to="/" className="inline-flex items-center gap-2 font-['Manrope'] text-xs font-bold text-[#0F6A37] hover:text-[#134E3A] uppercase tracking-wider transition-colors">
+          <Link to="/" className="inline-flex items-center gap-2 font-['Manrope'] text-xs font-bold text-[#062448] hover:text-[#03162C] uppercase tracking-wider transition-colors">
             <ArrowLeft size={16} />
             <span>Back to Home</span>
           </Link>
           <div className="font-['Space_Mono'] text-xs text-[#5a665c]">
-            Home / <span className="text-[#0F6A37] font-bold">Cancellation & Refund</span>
+            Home / <span className="text-[#062448] font-bold">Cancellation & Refund</span>
           </div>
         </div>
 
@@ -60,7 +60,7 @@ export const RefundPage: React.FC = () => {
           <Section title="Contact Us for Cancellations">
             <p>To cancel a booking or raise a refund query, please contact us directly:</p>
             <p>WhatsApp / Phone: <strong>{PHONE_DISPLAY}</strong></p>
-            <p>Email: <a href={`mailto:${CONTACT_EMAIL}`} className="text-[#0F6A37] underline">{CONTACT_EMAIL}</a></p>
+            <p>Email: <a href={`mailto:${CONTACT_EMAIL}`} className="text-[#062448] underline">{CONTACT_EMAIL}</a></p>
             <p>Please include your name, booking details, and reason for cancellation in your message.</p>
           </Section>
         </div>

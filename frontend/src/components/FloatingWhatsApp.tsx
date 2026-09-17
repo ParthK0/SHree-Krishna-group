@@ -22,7 +22,7 @@ export const FloatingWhatsApp: React.FC = () => {
             <div className="font-['Manrope'] font-bold text-xs text-white">
               Instant WhatsApp Helpline
             </div>
-            <div className="font-['Space_Mono'] text-[10px] text-[#8ad7a0]">
+            <div className="font-['Space_Mono'] text-[10px] text-[#85B7EB]">
               Active • Average reply &lt; 15 min
             </div>
           </div>

@@ -51,18 +51,18 @@ export const Footer: React.FC = () => {
 
             <div className="space-y-1.5">
               <div className="flex items-center gap-2 text-neutral-300">
-                <Clock size={13} className="text-[#F4B400] shrink-0" />
+                <Clock size={13} className="text-[#E9A015] shrink-0" />
                 <span className="font-['Manrope'] text-[11px] font-semibold">Quote Within 1 Hour</span>
               </div>
               <div className="flex items-center gap-2 text-neutral-300">
-                <Truck size={13} className="text-[#8ad7a0] shrink-0" />
+                <Truck size={13} className="text-[#85B7EB] shrink-0" />
                 <span className="font-['Manrope'] text-[11px] font-semibold">PAN India Network</span>
               </div>
             </div>
 
             {/* GST Badge */}
-            <div className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded border border-[#0F6A37]/50 bg-[#0F6A37]/10">
-              <span className="font-['Manrope'] text-[9px] font-bold text-[#8ad7a0] uppercase tracking-wider">
+            <div className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded border border-[#062448]/60 bg-[#062448]/30">
+              <span className="font-['Manrope'] text-[9px] font-bold text-[#85B7EB] uppercase tracking-wider">
                 GST Registered Business
               </span>
             </div>
@@ -79,7 +79,7 @@ export const Footer: React.FC = () => {
                 href={`tel:+91${PHONE_DISPLAY.replace(/\D/g,'').slice(-10)}`}
                 className="flex items-start gap-2 group"
               >
-                <Phone size={13} className="text-[#F4B400] shrink-0 mt-0.5" />
+                <Phone size={13} className="text-[#E9A015] shrink-0 mt-0.5" />
                 <div>
                   <div className="font-['Manrope'] text-[9px] font-bold text-neutral-500 uppercase tracking-wider">Phone</div>
                   <span className="font-['Space_Mono'] text-xs text-neutral-300 group-hover:text-white transition-colors">{PHONE_DISPLAY}</span>
@@ -103,7 +103,7 @@ export const Footer: React.FC = () => {
                 href={`mailto:${CONTACT_EMAIL}`}
                 className="flex items-start gap-2 group"
               >
-                <Mail size={13} className="text-[#8ad7a0] shrink-0 mt-0.5" />
+                <Mail size={13} className="text-[#85B7EB] shrink-0 mt-0.5" />
                 <div>
                   <div className="font-['Manrope'] text-[9px] font-bold text-neutral-500 uppercase tracking-wider">Email</div>
                   <span className="font-['Space_Mono'] text-xs text-neutral-300 group-hover:text-white transition-colors break-all">{CONTACT_EMAIL}</span>
@@ -111,7 +111,7 @@ export const Footer: React.FC = () => {
               </a>
 
               <div className="flex items-start gap-2">
-                <Clock size={13} className="text-[#F4B400] shrink-0 mt-0.5" />
+                <Clock size={13} className="text-[#E9A015] shrink-0 mt-0.5" />
                 <div>
                   <div className="font-['Manrope'] text-[9px] font-bold text-neutral-500 uppercase tracking-wider">Business Hours</div>
                   <span className="font-['Space_Mono'] text-xs text-neutral-300">{BUSINESS_HOURS}</span>
@@ -127,7 +127,7 @@ export const Footer: React.FC = () => {
             </h3>
 
             <div className="flex items-start gap-2">
-              <MapPin size={13} className="text-[#F4B400] shrink-0 mt-0.5" />
+              <MapPin size={13} className="text-[#E9A015] shrink-0 mt-0.5" />
               <div className="space-y-0.5">
                 <p className="font-['Manrope'] text-xs font-bold text-white">{BUSINESS_NAME}</p>
                 <p className="font-['Manrope'] text-[11px] text-neutral-400 leading-relaxed">
@@ -139,7 +139,7 @@ export const Footer: React.FC = () => {
 
             <div className="pt-1.5 border-t border-neutral-800">
               <div className="font-['Manrope'] text-[9px] font-bold text-neutral-500 uppercase tracking-wider mb-0.5">GSTIN</div>
-              <div className="font-['Space_Mono'] text-xs text-[#8ad7a0] tracking-wide">{GSTIN}</div>
+              <div className="font-['Space_Mono'] text-xs text-[#85B7EB] tracking-wide">{GSTIN}</div>
             </div>
           </div>
 
@@ -156,7 +156,7 @@ export const Footer: React.FC = () => {
                   to={link.href}
                   className="flex items-center gap-1.5 font-['Manrope'] text-[11px] text-neutral-400 hover:text-white transition-colors group"
                 >
-                  <ArrowRight size={11} className="text-[#0F6A37] group-hover:translate-x-0.5 transition-transform" />
+                  <ArrowRight size={11} className="text-[#E9A015] group-hover:translate-x-0.5 transition-transform" />
                   {link.label}
                 </Link>
               ))}
@@ -173,7 +173,7 @@ export const Footer: React.FC = () => {
                     to={link.href}
                     className="flex items-center gap-1.5 font-['Manrope'] text-[11px] text-neutral-400 hover:text-white transition-colors group"
                   >
-                    <ArrowRight size={11} className="text-[#0F6A37] group-hover:translate-x-0.5 transition-transform" />
+                    <ArrowRight size={11} className="text-[#E9A015] group-hover:translate-x-0.5 transition-transform" />
                     {link.label}
                   </Link>
                 ))}
@@ -191,7 +191,7 @@ export const Footer: React.FC = () => {
             <span className="font-['Archivo_Narrow'] text-[11px] font-bold text-white uppercase tracking-wider">
               Popular Transport Corridors (FTL & PTL)
             </span>
-            <Link to="/routes" className="text-[10px] text-[#F4B400] hover:underline font-bold uppercase tracking-wider">
+            <Link to="/routes" className="text-[10px] text-[#E9A015] hover:underline font-bold uppercase tracking-wider">
               View All Routes →
             </Link>
           </div>

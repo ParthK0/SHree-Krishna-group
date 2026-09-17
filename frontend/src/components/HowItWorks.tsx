@@ -68,7 +68,7 @@ export const HowItWorks: React.FC = () => {
             key={step.num}
             variants={cardVariants}
             transition={{ duration: 0.55 }}
-            whileHover={{ y: -8, boxShadow: '0 16px 40px rgba(0,0,0,0.08)', borderColor: '#0F6A37' }}
+            whileHover={{ y: -8, boxShadow: '0 16px 40px rgba(0,0,0,0.08)', borderColor: '#062448' }}
             className="relative z-10 flex flex-col items-start rounded-lg p-6 border-2 cursor-default transition-colors duration-300 bg-white border-[#e5ebe7]"
             style={{ transition: 'box-shadow 0.25s, border-color 0.25s' }}
           >
@@ -81,7 +81,7 @@ export const HowItWorks: React.FC = () => {
             </motion.div>
 
             {/* Icon */}
-            <div className="mb-4 text-[#0F6A37]">
+            <div className="mb-4 text-[#062448]">
               {step.icon}
             </div>
 
