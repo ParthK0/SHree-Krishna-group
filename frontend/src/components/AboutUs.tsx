@@ -1,7 +1,7 @@
 import React, { useState, useMemo, useRef, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { 
-  ArrowUpDown, ArrowRight, ShieldCheck, 
+import {
+  ArrowUpDown, ArrowRight, ShieldCheck,
   MapPin, Sparkles, Truck, CheckCircle2, Search, X
 } from 'lucide-react';
 import { GSTIN } from '../lib/constants';
@@ -129,11 +129,10 @@ const CitySearchDropdown: React.FC<{
                           key={fullValue}
                           type="button"
                           onClick={() => handleSelect(city, s.state)}
-                          className={`w-full text-left px-4 py-2 text-xs font-['Space_Mono'] font-semibold transition-colors flex items-center justify-between gap-2 ${
-                            isSelected
-                              ? 'bg-[#EBF2F9] text-[#0B3A66] font-bold'
-                              : 'text-[#1a1f1b] hover:bg-[#f4f0ea]'
-                          }`}
+                          className={`w-full text-left px-4 py-2 text-xs font-['Space_Mono'] font-semibold transition-colors flex items-center justify-between gap-2 ${isSelected
+                            ? 'bg-[#EBF2F9] text-[#0B3A66] font-bold'
+                            : 'text-[#1a1f1b] hover:bg-[#f4f0ea]'
+                            }`}
                         >
                           <span className="truncate">{city}</span>
                           {isSelected && <CheckCircle2 size={13} className="text-[#0B3A66] shrink-0" />}
@@ -176,14 +175,14 @@ export const AboutUs: React.FC = () => {
     <section id="about-us" className="px-4 sm:px-6 md:px-12 py-8 sm:py-12 bg-[#ECE6DD]">
       <div className="max-w-7xl mx-auto">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-stretch">
-          
+
           {/* Left Column: Brand Story & Twin Value Cards (7 cols) */}
           <div className="lg:col-span-7 flex flex-col justify-between space-y-4">
             <div>
               {/* Badge */}
               <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-white/80 border border-[#c5beb4]/50 text-[#0B3A66] font-['Space_Mono'] text-xs font-bold mb-3 shadow-xs">
                 <Sparkles size={13} className="text-[#F5B51B]" />
-                <span>About Shree Krishna Transport</span>
+                <span>About Shree Krishna Transport Network</span>
               </div>
 
               <h2 className="font-['Archivo_Narrow'] text-3xl sm:text-4xl md:text-5xl font-extrabold uppercase text-[#1a1f1b] tracking-tight leading-tight mb-3">
@@ -191,13 +190,13 @@ export const AboutUs: React.FC = () => {
               </h2>
 
               <p className="font-['Manrope'] text-sm sm:text-base text-[#4A554C] leading-relaxed max-w-2xl mb-4">
-                Shree Krishna Transport delivers more than shipments — we deliver reliability, confidence, and transparent freight solutions that connect Rajasthan's core industrial manufacturing hubs with commercial centers across India.
+                Shree Krishna Transport Network delivers more than shipments — we deliver reliability, confidence, and transparent freight solutions that connect Rajasthan's core industrial manufacturing hubs with commercial centers across India.
               </p>
             </div>
 
             {/* Twin Interactive Cards (Navy & Crisp White) */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-5 pt-2">
-              
+
               {/* Card 1: Solid Navy Brand Card */}
               <div className="bg-[#0B3A66] text-white p-6 sm:p-7 rounded-3xl shadow-lg border border-[#0B3A66] flex flex-col justify-between group hover:-translate-y-1 transition-all duration-300">
                 <div className="w-12 h-12 rounded-2xl bg-white/10 flex items-center justify-center text-[#F5B51B] mb-5">

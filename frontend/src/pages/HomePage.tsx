@@ -5,7 +5,6 @@ import { AboutUs } from '../components/AboutUs';
 import { TwoPathSplit } from '../components/TwoPathSplit';
 import { HowItWorks } from '../components/HowItWorks';
 import { WhyChooseUsVisual } from '../components/WhyChooseUsVisual';
-import { Testimonials } from '../components/Testimonials';
 import { TextTickerMarquee } from '../components/TextTickerMarquee';
 import { TrustStrip } from '../components/TrustStrip';
 import { HomeCTA } from '../components/HomeCTA';
@@ -40,12 +39,7 @@ export const HomePage: React.FC = () => {
         <WhyChooseUsVisual />
       </FadeUp>
 
-      {/* 7. Client Trust & Verified Feedback */}
-      <FadeUp>
-        <Testimonials />
-      </FadeUp>
-
-      {/* 8. Massive Typography Marquee Strip with Photo Badges */}
+      {/* 7. Massive Typography Marquee Strip with Photo Badges */}
       <TextTickerMarquee />
 
       {/* 8. Verified Compliance Trust Bar */}

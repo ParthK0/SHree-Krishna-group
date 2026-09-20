@@ -71,7 +71,7 @@ export const TwoPathSplit: React.FC = () => {
   return (
     <section id="services" className="px-4 sm:px-6 md:px-12 py-8 sm:py-12 bg-[#ECE6DD] border-t border-[#e2dacd]/60">
       <div className="max-w-7xl mx-auto">
-        
+
         {/* Section Header */}
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-6">
           <div>
@@ -97,11 +97,10 @@ export const TwoPathSplit: React.FC = () => {
             return (
               <div
                 key={svc.id}
-                className={`bg-white rounded-2xl sm:rounded-3xl border transition-all duration-300 overflow-hidden ${
-                  isExpanded 
-                    ? 'border-[#0B3A66]/40 shadow-xl ring-1 ring-[#0B3A66]/10' 
+                className={`bg-white rounded-2xl sm:rounded-3xl border transition-all duration-300 overflow-hidden ${isExpanded
+                    ? 'border-[#0B3A66]/40 shadow-xl ring-1 ring-[#0B3A66]/10'
                     : 'border-[#e2dacd] shadow-sm hover:border-[#0B3A66]/30 hover:shadow-md'
-                }`}
+                  }`}
               >
                 {/* Header Bar (Clickable) */}
                 <button
@@ -127,11 +126,10 @@ export const TwoPathSplit: React.FC = () => {
                   </div>
 
                   <div className="flex items-center gap-3 shrink-0">
-                    <div className={`w-9 h-9 sm:w-10 sm:h-10 rounded-full flex items-center justify-center border transition-all duration-300 ${
-                      isExpanded 
-                        ? 'bg-[#0B3A66] text-white border-[#0B3A66]' 
+                    <div className={`w-9 h-9 sm:w-10 sm:h-10 rounded-full flex items-center justify-center border transition-all duration-300 ${isExpanded
+                        ? 'bg-[#0B3A66] text-white border-[#0B3A66]'
                         : 'bg-[#f9f7f4] text-neutral-600 border-[#e2dacd]'
-                    }`}>
+                      }`}>
                       <ChevronDown size={18} className={`transition-transform duration-300 ${isExpanded ? 'rotate-180' : ''}`} />
                     </div>
                   </div>

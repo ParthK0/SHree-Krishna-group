@@ -1,12 +1,12 @@
 import { useState, lazy, Suspense } from 'react';
 import { BrowserRouter, Routes, Route, Navigate, useLocation } from 'react-router-dom';
+import { motion, AnimatePresence } from 'framer-motion';
 import { Analytics } from '@vercel/analytics/react';
 import { Header } from './components/Header';
 import { Footer } from './components/Footer';
 import { ScrollToTop } from './components/ScrollToTop';
 import { TruckPreloader } from './components/TruckPreloader';
 import { ErrorBoundary } from './components/ErrorBoundary';
-import { MobileBottomBar } from './components/MobileBottomBar';
 import { FloatingQuickEnquiry } from './components/FloatingQuickEnquiry';
 import { PageLoadingSpinner } from './components/PageLoadingSpinner';
 import { ToastProvider } from './components/ToastProvider';
@@ -28,14 +28,49 @@ const BlogIndexPage = lazy(() => import('./pages/BlogIndexPage').then(m => ({ de
 const BlogPostPage = lazy(() => import('./pages/BlogPostPage').then(m => ({ default: m.BlogPostPage })));
 const NotFoundPage = lazy(() => import('./pages/NotFoundPage').then(m => ({ default: m.NotFoundPage })));
 
-/**
- * Renders persistent Header on all subpages.
- * The Homepage Hero already features an immersive embedded full-screen nav.
- */
-function ConditionalHeader() {
+
+
+function AnimatedRoutes() {
   const location = useLocation();
-  if (location.pathname === '/') return null;
-  return <Header />;
+
+  return (
+    <AnimatePresence mode="wait" initial={false}>
+      <motion.div
+        key={location.pathname}
+        initial={{ opacity: 0, y: 8 }}
+        animate={{ opacity: 1, y: 0 }}
+        exit={{ opacity: 0, y: -6 }}
+        transition={{ duration: 0.22, ease: [0.22, 1, 0.36, 1] }}
+        className="flex-grow flex flex-col w-full"
+      >
+        <Routes location={location}>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/book-truck" element={<BookTruckPage />} />
+          <Route path="/register-truck" element={<RegisterTruckPage />} />
+          <Route path="/enquiry" element={<Navigate to="/contact#enquiry" replace />} />
+          <Route path="/contact" element={<ContactPage />} />
+          <Route path="/terms-and-conditions" element={<TermsPage />} />
+          <Route path="/privacy-policy" element={<PrivacyPage />} />
+          <Route path="/cancellation-refund-policy" element={<RefundPage />} />
+
+          {/* Route Directory & Master Route Templates */}
+          <Route path="/routes" element={<RoutesIndexPage />} />
+          <Route path="/routes/:slug" element={<RouteTemplatePage />} />
+          <Route path="/admin/routes" element={<AdminRoutesPage />} />
+
+          {/* Logistics Intelligence Blog */}
+          <Route path="/blog" element={<BlogIndexPage />} />
+          <Route path="/blog/:slug" element={<BlogPostPage />} />
+          
+          {/* Direct clean SEO route slug (e.g. /jaipur-to-delhi-transport) */}
+          <Route path="/:slug" element={<RouteTemplatePage />} />
+
+          {/* 404 Catch-all */}
+          <Route path="*" element={<NotFoundPage />} />
+        </Routes>
+      </motion.div>
+    </AnimatePresence>
+  );
 }
 
 export function App() {
@@ -48,46 +83,19 @@ export function App() {
         <Analytics />
         {isLoading && <TruckPreloader onComplete={() => setIsLoading(false)} durationMs={1600} />}
         <div className="min-h-screen bg-[#ECE6DD] text-[#1a1f1b] flex flex-col font-['Inter'] antialiased selection:bg-[#F5B51B] selection:text-[#071F35]">
-          {/* Persistent Header on all subpages */}
-          <ConditionalHeader />
+          {/* Header with floating hero state & expanded full-bar scroll transition */}
+          <Header />
 
-          <main className="flex-grow">
+          <main className="flex-grow flex flex-col">
             <ErrorBoundary>
               <Suspense fallback={<PageLoadingSpinner />}>
-                <Routes>
-                  <Route path="/" element={<HomePage />} />
-                  <Route path="/book-truck" element={<BookTruckPage />} />
-                  <Route path="/register-truck" element={<RegisterTruckPage />} />
-                  <Route path="/enquiry" element={<Navigate to="/contact#enquiry" replace />} />
-                  <Route path="/contact" element={<ContactPage />} />
-                  <Route path="/terms-and-conditions" element={<TermsPage />} />
-                  <Route path="/privacy-policy" element={<PrivacyPage />} />
-                  <Route path="/cancellation-refund-policy" element={<RefundPage />} />
-
-                  {/* Route Directory & Master Route Templates */}
-                  <Route path="/routes" element={<RoutesIndexPage />} />
-                  <Route path="/routes/:slug" element={<RouteTemplatePage />} />
-                  <Route path="/admin/routes" element={<AdminRoutesPage />} />
-
-                  {/* Logistics Intelligence Blog */}
-                  <Route path="/blog" element={<BlogIndexPage />} />
-                  <Route path="/blog/:slug" element={<BlogPostPage />} />
-                  
-                  {/* Direct clean SEO route slug (e.g. /jaipur-to-delhi-transport) */}
-                  <Route path="/:slug" element={<RouteTemplatePage />} />
-
-                  {/* 404 Catch-all */}
-                  <Route path="*" element={<NotFoundPage />} />
-                </Routes>
+                <AnimatedRoutes />
               </Suspense>
             </ErrorBoundary>
           </main>
 
-          {/* Floating Message / Mail Quick Enquiry Icon (Zero WhatsApp permission required) */}
+          {/* Floating Message Quick Enquiry Icon in bottom */}
           <FloatingQuickEnquiry />
-
-          {/* Mobile Bottom Quick Action Bar (Call, Enquiry, Book Truck) */}
-          <MobileBottomBar />
 
           <Footer />
         </div>

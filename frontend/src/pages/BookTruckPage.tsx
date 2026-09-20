@@ -7,7 +7,7 @@ import { useMetaSEO } from '../lib/useMetaSEO';
 
 export const BookTruckPage: React.FC = () => {
   useMetaSEO({
-    title: 'Book a Truck Online in Jaipur | Instant Rates & Verified Drivers | Shree Krishna Transport',
+    title: 'Book a Truck Online in Jaipur | Instant Rates & Verified Drivers | Shree Krishna Transport Network',
     description: 'Book Full Truck Load (FTL) and Part Truck Load (PTL) online. 14ft to 32ft container trucks available on call across Rajasthan and North India.',
     canonicalPath: '/book-truck',
   });

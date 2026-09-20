@@ -1,8 +1,8 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { 
-  Home, Menu, X, Truck, Phone, Info, Wrench, Building2, 
-  MessageSquare, Calendar, Package, MapPin, BookOpen, ChevronDown 
+import {
+  Home, Menu, X, Truck, Phone, Info, Building2,
+  MessageSquare, Calendar, MapPin, BookOpen, ChevronDown
 } from 'lucide-react';
 
 interface NavLinkItem {
@@ -75,22 +75,20 @@ export const Header: React.FC = () => {
     }
   };
 
-  // Primary Links with Home
+  // Primary Links with Home and unified Services option
   const primaryLinks: NavLinkItem[] = [
     { name: 'Home', href: '/', icon: Home },
-    { name: 'Book Truck', href: '/book-truck', icon: Truck },
-    { name: 'Book Parcel', href: '/book-truck?type=parcel', icon: Package, badge: '0–150 kg' },
+    { name: 'Services', href: '/book-truck', icon: Truck },
     { name: 'Routes', href: '/routes', icon: MapPin },
     { name: 'Blog', href: '/blog', icon: BookOpen },
-    { name: 'Contact', href: '/contact', icon: Phone },
+    { name: 'Contact Us', href: '/contact', icon: Phone },
   ];
 
   // Secondary Links for "More" Dropdown
   const moreLinks: NavLinkItem[] = [
-    { name: 'Services', href: '/#services', icon: Wrench },
     { name: 'How It Works', href: '/#how-it-works', icon: Info },
     { name: 'About Us', href: '/#about-us', icon: Building2 },
-    { name: 'Enquiry', href: '/contact#enquiry', icon: MessageSquare },
+    { name: 'Quick Enquiry', href: '/contact#enquiry', icon: MessageSquare },
     { name: 'Register Vehicle', href: '/register-truck', icon: Calendar },
   ];
 
@@ -98,49 +96,84 @@ export const Header: React.FC = () => {
     (link) => location.pathname === link.href.split('#')[0] && (link.href.includes('#') ? location.hash === `#${link.href.split('#')[1]}` : true)
   );
 
+  const isHomePage = location.pathname === '/';
+  const isTransparentHero = isHomePage && !scrolled;
+
   return (
     <>
       <header
-        className={`sticky top-0 z-50 w-full flex items-center justify-between px-4 md:px-12 bg-[#ECE6DD]/95 backdrop-blur-md border-b border-[#e5ebe7] transition-all duration-300 ${
-          scrolled ? 'py-1.5 shadow-md' : 'py-2.5'
-        }`}
+        className={`${isHomePage ? 'fixed top-0 left-0 right-0' : 'sticky top-0'
+          } z-50 w-full flex items-center justify-between transition-all duration-500 ease-out ${isTransparentHero
+            ? 'px-3 sm:px-6 md:px-12 py-3 sm:py-4 bg-transparent border-b border-transparent shadow-none'
+            : `px-4 md:px-12 bg-[#ECE6DD]/95 backdrop-blur-md border-b border-[#c5beb4]/50 shadow-md ${scrolled ? 'py-1.5 md:py-2' : 'py-2 md:py-2.5'
+            }`
+          }`}
       >
         <Link to="/" className="flex items-center gap-2.5 group shrink-0">
           <img
-            alt="Shree Krishna Transport Logo"
-            className={`object-contain transition-all duration-300 ${scrolled ? 'h-7 md:h-8' : 'h-8 md:h-9.5'}`}
+            alt="Shree Krishna Transport Network Logo"
+            className={`object-contain transition-all duration-300 ${scrolled ? 'h-7 md:h-8' : 'h-8 md:h-9.5'
+              } ${isTransparentHero ? 'drop-shadow-md' : ''}`}
             src="/images/logo.png"
           />
-          <span className={`font-['Archivo_Narrow'] font-bold tracking-tight text-[#1a1f1b] uppercase transition-all duration-300 ${scrolled ? 'text-sm sm:text-base' : 'text-base sm:text-lg'}`}>
-            SHREE KRISHNA TRANSPORT
+          <span
+            className={`font-['Archivo_Narrow'] font-bold tracking-tight uppercase transition-all duration-300 ${scrolled ? 'text-sm sm:text-base' : 'text-base sm:text-lg'
+              } ${isTransparentHero ? 'text-white drop-shadow-md' : 'text-[#1a1f1b]'
+              }`}
+          >
+            SHREE KRISHNA TRANSPORT NETWORK
           </span>
         </Link>
 
         {/* Desktop Navigation: Floating Pill Capsule */}
-        <nav className="hidden lg:flex items-center justify-center gap-1.5 px-3 py-1.5 bg-white/90 backdrop-blur-md rounded-full border border-[#c5beb4]/40 shadow-sm mx-auto">
+        <nav
+          className={`hidden lg:flex items-center justify-center gap-1.5 px-3 py-1.5 rounded-full transition-all duration-300 mx-auto ${isTransparentHero
+            ? 'bg-[#071F35]/35 hover:bg-[#071F35]/50 backdrop-blur-md border border-white/20 shadow-sm text-white'
+            : 'bg-white/90 backdrop-blur-md border border-[#c5beb4]/40 shadow-sm text-[#3d4a3f]'
+            }`}
+        >
           {primaryLinks.map((link) => {
             const isActive =
               link.href === '/'
                 ? location.pathname === '/'
-                : location.pathname + location.search === link.href ||
-                  (link.href === '/book-truck' && location.pathname === '/book-truck' && !location.search);
+                : link.href === '/book-truck'
+                  ? location.pathname === '/book-truck'
+                  : location.pathname + location.search === link.href;
+
+            const isHome = link.name === 'Home';
+
+            // User requirement:
+            // 1. While on Hero page at top (isTransparentHero): Home & Contact Us should NOT be highlighted
+            // 2. When scrolled down: ONLY Home button should get blue
+            // 3. When scrolling back to Hero page: Home should NOT be highlighted
+            // 4. On other pages: only the current page is highlighted in blue
+            let linkStyle = '';
+            if (isTransparentHero) {
+              linkStyle = 'text-[#D9E4EE] hover:text-white hover:bg-white/10';
+            } else if (isHomePage) {
+              if (scrolled && isHome) {
+                linkStyle = 'bg-[#0B3A66] text-white shadow-sm';
+              } else {
+                linkStyle = 'text-[#3d4a3f] hover:text-[#0B3A66] hover:bg-neutral-100';
+              }
+            } else if (isActive) {
+              linkStyle = 'bg-[#0B3A66] text-white shadow-sm';
+            } else {
+              linkStyle = 'text-[#3d4a3f] hover:text-[#0B3A66] hover:bg-neutral-100';
+            }
 
             return (
               <Link
                 key={link.name}
                 to={link.href}
                 onClick={() => handleNavClick(link.href)}
-                className={`font-['Manrope'] text-xs font-bold transition-all uppercase tracking-wider whitespace-nowrap inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full ${
-                  isActive 
-                    ? 'bg-[#0B3A66] text-white shadow-sm' 
-                    : 'text-[#3d4a3f] hover:text-[#0B3A66] hover:bg-neutral-100'
-                }`}
+                className={`font-['Manrope'] text-xs font-bold transition-all uppercase tracking-wider whitespace-nowrap inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full ${linkStyle}`}
               >
                 <span>{link.name}</span>
                 {link.badge && (
-                  <span className={`text-[9px] px-1.5 py-0.2 rounded-full font-['Space_Mono'] font-bold ${
-                    isActive ? 'bg-[#F5B51B] text-[#071F35]' : 'bg-[#0B3A66]/10 text-[#0B3A66]'
-                  }`}>
+                  <span
+                    className="text-[9px] px-1.5 py-0.2 rounded-full font-['Space_Mono'] font-bold bg-[#F5B51B] text-[#071F35]"
+                  >
                     {link.badge}
                   </span>
                 )}
@@ -154,22 +187,25 @@ export const Header: React.FC = () => {
               onClick={() => setMoreDropdownOpen(!moreDropdownOpen)}
               onMouseEnter={() => setMoreDropdownOpen(true)}
               aria-expanded={moreDropdownOpen}
-              className={`font-['Manrope'] text-xs font-bold uppercase tracking-wider whitespace-nowrap inline-flex items-center gap-1 px-3 py-1.5 rounded-full transition-colors ${
-                isMoreActive || moreDropdownOpen
-                  ? 'text-white bg-[#0B3A66]'
+              className={`font-['Manrope'] text-xs font-bold uppercase tracking-wider whitespace-nowrap inline-flex items-center gap-1 px-3 py-1.5 rounded-full transition-colors ${isMoreActive || moreDropdownOpen
+                ? isTransparentHero
+                  ? 'bg-[#F5B51B] text-[#071F35]'
+                  : 'text-white bg-[#0B3A66]'
+                : isTransparentHero
+                  ? 'text-[#D9E4EE] hover:text-[#F5B51B] hover:bg-white/10'
                   : 'text-[#3d4a3f] hover:text-[#0B3A66] hover:bg-neutral-100'
-              }`}
+                }`}
             >
               <span>More</span>
-              <ChevronDown 
-                size={13} 
-                className={`transition-transform duration-200 ${moreDropdownOpen ? 'rotate-180' : ''}`} 
+              <ChevronDown
+                size={13}
+                className={`transition-transform duration-200 ${moreDropdownOpen ? 'rotate-180' : ''}`}
               />
             </button>
 
             {/* Dropdown Menu */}
             {moreDropdownOpen && (
-              <div 
+              <div
                 onMouseLeave={() => setMoreDropdownOpen(false)}
                 className="absolute right-0 mt-2 w-52 bg-white rounded-2xl shadow-xl border border-[#c5beb4]/60 py-2 z-50 animate-in fade-in slide-in-from-top-1 duration-150"
               >
@@ -208,7 +244,10 @@ export const Header: React.FC = () => {
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             aria-label="Toggle Navigation Menu"
-            className="lg:hidden p-2 rounded-xl text-[#1a1f1b] hover:bg-[#dcd5c9] transition-colors focus:outline-none"
+            className={`lg:hidden p-2 rounded-xl transition-all focus:outline-none ${isTransparentHero
+              ? 'text-white bg-[#071F35]/35 hover:bg-[#071F35]/60 border border-white/20 backdrop-blur-md'
+              : 'text-[#1a1f1b] bg-white/80 hover:bg-[#dcd5c9] border border-[#c5beb4]/40'
+              }`}
           >
             {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
           </button>
@@ -225,9 +264,8 @@ export const Header: React.FC = () => {
 
       {/* Mobile Drawer */}
       <aside
-        className={`fixed top-0 right-0 z-50 h-full w-72 max-w-[85vw] bg-[#071F35] text-white p-6 shadow-2xl transform transition-transform duration-300 ease-in-out lg:hidden flex flex-col justify-between overflow-y-auto ${
-          mobileMenuOpen ? 'translate-x-0' : 'translate-x-full'
-        }`}
+        className={`fixed top-0 right-0 z-50 h-full w-72 max-w-[85vw] bg-[#071F35] text-white p-6 shadow-2xl transform transition-transform duration-300 ease-in-out lg:hidden flex flex-col justify-between overflow-y-auto ${mobileMenuOpen ? 'translate-x-0' : 'translate-x-full'
+          }`}
       >
         <div className="space-y-6">
           <div className="flex items-center justify-between pb-4 border-b border-neutral-700">
@@ -253,8 +291,17 @@ export const Header: React.FC = () => {
                 const isActive =
                   link.href === '/'
                     ? location.pathname === '/'
-                    : location.pathname + location.search === link.href ||
-                      (link.href === '/book-truck' && location.pathname === '/book-truck' && !location.search);
+                    : link.href === '/book-truck'
+                      ? location.pathname === '/book-truck'
+                      : location.pathname + location.search === link.href;
+
+                const isHome = link.name === 'Home';
+                const isItemActive =
+                  isTransparentHero
+                    ? false
+                    : isHomePage
+                      ? scrolled && isHome
+                      : isActive;
 
                 return (
                   <Link
@@ -264,20 +311,18 @@ export const Header: React.FC = () => {
                       setMobileMenuOpen(false);
                       handleNavClick(link.href);
                     }}
-                    className={`flex items-center justify-between px-3 py-2.5 rounded-lg font-['Manrope'] font-bold text-xs transition-all uppercase tracking-wider ${
-                      isActive
-                        ? 'bg-[#0B3A66] text-white'
-                        : 'text-neutral-200 hover:text-white hover:bg-[#0B3A66]/30'
-                    }`}
+                    className={`flex items-center justify-between px-3 py-2.5 rounded-lg font-['Manrope'] font-bold text-xs transition-all uppercase tracking-wider ${isItemActive
+                      ? 'bg-[#0B3A66] text-white'
+                      : 'text-neutral-200 hover:text-white hover:bg-[#0B3A66]/30'
+                      }`}
                   >
                     <div className="flex items-center gap-3">
-                      <Icon size={16} className={isActive ? 'text-white' : 'text-[#85B7EB]'} />
+                      <Icon size={16} className={isItemActive ? 'text-white' : 'text-[#85B7EB]'} />
                       <span>{link.name}</span>
                     </div>
                     {link.badge && (
-                      <span className={`text-[9px] px-1.5 py-0.5 rounded font-['Space_Mono'] font-bold ${
-                        isActive ? 'bg-[#F5B51B] text-[#071F35]' : 'bg-[#0B3A66]/30 text-[#85B7EB]'
-                      }`}>
+                      <span className={`text-[9px] px-1.5 py-0.5 rounded font-['Space_Mono'] font-bold ${isItemActive ? 'bg-[#F5B51B] text-[#071F35]' : 'bg-[#0B3A66]/30 text-[#85B7EB]'
+                        }`}>
                         {link.badge}
                       </span>
                     )}
@@ -314,23 +359,15 @@ export const Header: React.FC = () => {
           </div>
         </div>
 
-        {/* Bottom Booking CTAs */}
-        <div className="pt-6 border-t border-neutral-800 space-y-2 shrink-0">
+        {/* Bottom Booking CTA */}
+        <div className="pt-6 border-t border-neutral-800 shrink-0">
           <Link
             to="/book-truck"
             onClick={() => setMobileMenuOpen(false)}
             className="w-full flex items-center justify-center gap-2 bg-[#F5B51B] text-[#071F35] font-['Manrope'] font-extrabold text-xs py-2.5 rounded-lg uppercase tracking-wider shadow-md hover:bg-[#E0A212] transition-colors"
           >
             <Truck size={15} />
-            <span>Book a Truck (FTL/PTL)</span>
-          </Link>
-          <Link
-            to="/book-truck?type=parcel"
-            onClick={() => setMobileMenuOpen(false)}
-            className="w-full flex items-center justify-center gap-2 bg-[#0B3A66] text-white font-['Manrope'] font-extrabold text-xs py-2.5 rounded-lg uppercase tracking-wider shadow-md hover:bg-[#072D54] transition-colors"
-          >
-            <Package size={15} />
-            <span>Book a Parcel (0–150 kg)</span>
+            <span>Book Transport Services</span>
           </Link>
         </div>
       </aside>

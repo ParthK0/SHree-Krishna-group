@@ -9,10 +9,9 @@ import {
 
 export const Footer: React.FC = () => {
   const quickLinks = [
+    { label: 'Transport Services', href: '/book-truck' },
     { label: 'Transport Routes', href: '/routes' },
     { label: 'Logistics Blog & Rates', href: '/blog' },
-    { label: 'Book a Truck', href: '/book-truck' },
-    { label: 'Book a Parcel (0–150 kg)', href: '/book-truck?type=parcel' },
     { label: 'Register Vehicle', href: '/register-truck' },
     { label: 'General Enquiry', href: '/contact#enquiry' },
     { label: 'About Us', href: '/#about-us' },
@@ -26,7 +25,7 @@ export const Footer: React.FC = () => {
   ];
 
   return (
-    <footer id="contact" className="w-full bg-[#071F35] border-t border-[#0B3A66]/60 text-white pb-20 md:pb-0">
+    <footer id="contact" className="w-full bg-[#071F35] border-t border-[#0B3A66]/60 text-white">
 
       {/* Main 4-Column Grid */}
       <div className="max-w-7xl mx-auto px-4 md:px-12 py-6 md:py-7">
@@ -36,17 +35,17 @@ export const Footer: React.FC = () => {
           <div className="space-y-2.5">
             <Link to="/" className="flex items-center gap-2">
               <img
-                alt="Shree Krishna Transport Logo"
+                alt="Shree Krishna Transport Network Logo"
                 className="h-7 w-auto object-contain"
                 src="/images/logo.png"
               />
               <span className="font-['Archivo_Narrow'] text-sm sm:text-base font-bold text-white uppercase tracking-tight leading-tight">
-                SHREE KRISHNA<br />TRANSPORT
+                SHREE KRISHNA<br />TRANSPORT NETWORK
               </span>
             </Link>
 
             <p className="font-['Manrope'] text-[11px] text-[#D9E4EE]/80 leading-relaxed">
-              Reliable transportation services from Rajasthan to All India. Backed by Shree Krishna Buildtech.
+              Reliable transportation services from Rajasthan across India. Backed by Shree Krishna Buildtech.
             </p>
 
             <div className="space-y-1">
@@ -76,7 +75,7 @@ export const Footer: React.FC = () => {
 
             <div className="space-y-1.5">
               <a
-                href={`tel:+91${PHONE_DISPLAY.replace(/\D/g,'').slice(-10)}`}
+                href={`tel:+91${PHONE_DISPLAY.replace(/\D/g, '').slice(-10)}`}
                 className="flex items-start gap-2 group"
               >
                 <Phone size={12} className="text-[#F5B51B] shrink-0 mt-0.5" />

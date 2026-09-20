@@ -4,7 +4,7 @@ import { MessageSquareText } from 'lucide-react';
 
 export const FloatingQuickEnquiry: React.FC = () => {
   return (
-    <div className="fixed bottom-20 right-4 md:bottom-6 md:right-6 z-30 group">
+    <div className="fixed bottom-5 right-4 md:bottom-6 md:right-6 z-30 group">
       <Link
         to="/contact#enquiry"
         aria-label="Send Quick Freight Enquiry via Email"

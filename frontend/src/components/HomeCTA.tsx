@@ -10,7 +10,7 @@ export const HomeCTA: React.FC = () => {
     e.preventDefault();
     const cleanPhone = phone.trim() || 'General Freight';
     const msg = encodeURIComponent(
-      `Hello Shree Krishna Transport, I would like to get an instant freight quotation for: ${cleanPhone}`
+      `Hello Shree Krishna Transport Network, I would like to get an instant freight quotation for: ${cleanPhone}`
     );
     window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${msg}`, '_blank');
   };
@@ -104,8 +104,8 @@ export const HomeCTA: React.FC = () => {
 
         {/* Massive Footer Brand Typography (Watermark) */}
         <div className="text-center pt-3 pb-1 select-none overflow-hidden">
-          <div aria-hidden="true" className="font-['Archivo_Narrow'] text-[6.5vw] sm:text-[7vw] font-extrabold text-[#0B3A66]/10 uppercase tracking-tight sm:tracking-tighter leading-none whitespace-nowrap">
-            SHREE KRISHNA TRANSPORT
+          <div aria-hidden="true" className="font-['Archivo_Narrow'] text-[6vw] sm:text-[6.5vw] font-extrabold text-[#0B3A66]/10 uppercase tracking-tight sm:tracking-tighter leading-none whitespace-nowrap">
+            SHREE KRISHNA TRANSPORT NETWORK
           </div>
         </div>
 

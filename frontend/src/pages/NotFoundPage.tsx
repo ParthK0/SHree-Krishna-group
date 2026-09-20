@@ -45,7 +45,7 @@ export const NotFoundPage: React.FC = () => {
           className="px-6 py-3 rounded-2xl bg-[#F5B51B] hover:bg-[#E0A212] text-[#1a1f1b] text-sm font-bold font-['Manrope'] uppercase tracking-wider transition-all flex items-center gap-2 shadow-md hover:scale-105"
         >
           <Truck size={16} />
-          <span>Book a Truck</span>
+          <span>Transport Services</span>
         </Link>
         <Link
           to="/contact"
