@@ -1,53 +1,60 @@
 import React from 'react';
 import { Hero } from '../components/Hero';
-import { LiveActivityFeed } from '../components/LiveActivityFeed';
-import { Stats } from '../components/Stats';
-import { IndustryStrip } from '../components/IndustryStrip';
-import { HowItWorks } from '../components/HowItWorks';
-import { TwoPathSplit } from '../components/TwoPathSplit';
+import { PartnerMarquee } from '../components/PartnerMarquee';
 import { AboutUs } from '../components/AboutUs';
+import { TwoPathSplit } from '../components/TwoPathSplit';
+import { HowItWorks } from '../components/HowItWorks';
+import { WhyChooseUsVisual } from '../components/WhyChooseUsVisual';
+import { Testimonials } from '../components/Testimonials';
+import { TextTickerMarquee } from '../components/TextTickerMarquee';
 import { TrustStrip } from '../components/TrustStrip';
-import { VisualBreak } from '../components/VisualBreak';
+import { HomeCTA } from '../components/HomeCTA';
 import { FadeUp } from '../components/FadeUp';
 
 export const HomePage: React.FC = () => {
   return (
     <>
+      {/* 1. Hero with Curved Card, Inline Photo Pills & Floating Badges */}
       <Hero />
 
-      {/* Real-Time Dispatch Activity Ticker */}
-      <LiveActivityFeed />
+      {/* 2. Trusted Industrial Partners Infinite Marquee */}
+      <PartnerMarquee />
 
-      {/* Command Center Operations Metrics */}
-      <FadeUp>
-        <Stats />
-      </FadeUp>
-
-      {/* Rajasthan Core Specialized Sectors */}
-      <FadeUp>
-        <IndustryStrip />
-      </FadeUp>
-
-      {/* How It Works 4-Step Process */}
-      <FadeUp>
-        <HowItWorks />
-      </FadeUp>
-
-      {/* Dual Path Service Cards */}
-      <FadeUp>
-        <TwoPathSplit />
-      </FadeUp>
-
-      {/* About Shree Krishna Transport */}
+      {/* 3. Split About Us: Brand Value Cards + Quick Route Dispatch Card */}
       <FadeUp>
         <AboutUs />
       </FadeUp>
 
-      {/* Trust Strip */}
+      {/* 4. Numbered Core Services Accordion (01. FTL, 02. PTL, 03. Parcel, 04. Fleet) */}
+      <FadeUp>
+        <TwoPathSplit />
+      </FadeUp>
+
+      {/* 5. How It Works — For Businesses (4-step process) */}
+      <FadeUp>
+        <HowItWorks />
+      </FadeUp>
+
+      {/* 6. Why Choose Us: 3-Card Visual Photo Grid */}
+      <FadeUp>
+        <WhyChooseUsVisual />
+      </FadeUp>
+
+      {/* 7. Client Trust & Verified Feedback */}
+      <FadeUp>
+        <Testimonials />
+      </FadeUp>
+
+      {/* 8. Massive Typography Marquee Strip with Photo Badges */}
+      <TextTickerMarquee />
+
+      {/* 8. Verified Compliance Trust Bar */}
       <TrustStrip />
 
-      {/* Interactive Transit Corridor & Rate Hub */}
-      <VisualBreak />
+      {/* 9. Floating Quote CTA Card & Brand Watermark */}
+      <FadeUp>
+        <HomeCTA />
+      </FadeUp>
     </>
   );
 };

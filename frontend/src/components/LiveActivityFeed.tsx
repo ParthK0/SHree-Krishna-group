@@ -25,7 +25,7 @@ export const LiveActivityFeed: React.FC = () => {
       <div className="max-w-7xl mx-auto flex items-center gap-3">
         
         {/* Live Badge */}
-        <div className="shrink-0 flex items-center gap-2 bg-[#062448]/25 border border-[#062448]/50 px-2.5 py-1 rounded-md text-[#85B7EB] font-['Space_Mono'] text-[10px] font-bold uppercase tracking-wider">
+        <div className="shrink-0 flex items-center gap-2 bg-[#0B3A66]/25 border border-[#0B3A66]/50 px-2.5 py-1 rounded-md text-[#85B7EB] font-['Space_Mono'] text-[10px] font-bold uppercase tracking-wider">
           <span className="w-2 h-2 rounded-full bg-[#25D366] animate-pulse" />
           <span className="hidden sm:inline">LIVE NETWORK</span>
           <span className="sm:hidden">LIVE</span>
@@ -40,7 +40,7 @@ export const LiveActivityFeed: React.FC = () => {
                 key={`${item.id}-${idx}`}
                 className="inline-flex items-center gap-2 text-xs font-['Manrope'] text-neutral-300"
               >
-                {item.icon === 'truck' && <Truck size={13} className="text-[#E9A015] shrink-0" />}
+                {item.icon === 'truck' && <Truck size={13} className="text-[#F5B51B] shrink-0" />}
                 {item.icon === 'parcel' && <PackageCheck size={13} className="text-[#85B7EB] shrink-0" />}
                 {item.icon === 'quote' && <Zap size={13} className="text-[#25D366] shrink-0" />}
                 {item.icon === 'verified' && <CheckCircle size={13} className="text-[#85B7EB] shrink-0" />}

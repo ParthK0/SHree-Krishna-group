@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { 
-  Menu, X, Truck, Phone, Info, Wrench, Building2, 
+  Home, Menu, X, Truck, Phone, Info, Wrench, Building2, 
   MessageSquare, Calendar, Package, MapPin, BookOpen, ChevronDown 
 } from 'lucide-react';
 
@@ -31,6 +31,19 @@ export const Header: React.FC = () => {
     } else {
       document.body.style.overflow = '';
     }
+
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        setMobileMenuOpen(false);
+        setMoreDropdownOpen(false);
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    return () => {
+      document.body.style.overflow = '';
+      window.removeEventListener('keydown', handleKeyDown);
+    };
   }, [mobileMenuOpen]);
 
   // Close dropdown on outside click
@@ -62,8 +75,9 @@ export const Header: React.FC = () => {
     }
   };
 
-  // 5 Primary Links as requested
+  // Primary Links with Home
   const primaryLinks: NavLinkItem[] = [
+    { name: 'Home', href: '/', icon: Home },
     { name: 'Book Truck', href: '/book-truck', icon: Truck },
     { name: 'Book Parcel', href: '/book-truck?type=parcel', icon: Package, badge: '0–150 kg' },
     { name: 'Routes', href: '/routes', icon: MapPin },
@@ -102,25 +116,31 @@ export const Header: React.FC = () => {
           </span>
         </Link>
 
-        {/* Desktop Navigation: 5 Primary + "More" Dropdown */}
-        <nav className="hidden lg:flex items-center justify-center gap-4 xl:gap-6 mx-auto">
+        {/* Desktop Navigation: Floating Pill Capsule */}
+        <nav className="hidden lg:flex items-center justify-center gap-1.5 px-3 py-1.5 bg-white/90 backdrop-blur-md rounded-full border border-[#c5beb4]/40 shadow-sm mx-auto">
           {primaryLinks.map((link) => {
             const isActive =
-              location.pathname + location.search === link.href ||
-              (link.href === '/book-truck' && location.pathname === '/book-truck' && !location.search);
+              link.href === '/'
+                ? location.pathname === '/'
+                : location.pathname + location.search === link.href ||
+                  (link.href === '/book-truck' && location.pathname === '/book-truck' && !location.search);
 
             return (
               <Link
                 key={link.name}
                 to={link.href}
                 onClick={() => handleNavClick(link.href)}
-                className={`font-['Manrope'] text-xs font-bold transition-colors uppercase tracking-wider whitespace-nowrap inline-flex items-center gap-1.5 ${
-                  isActive ? 'text-[#062448]' : 'text-[#3d4a3f] hover:text-[#062448]'
+                className={`font-['Manrope'] text-xs font-bold transition-all uppercase tracking-wider whitespace-nowrap inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full ${
+                  isActive 
+                    ? 'bg-[#0B3A66] text-white shadow-sm' 
+                    : 'text-[#3d4a3f] hover:text-[#0B3A66] hover:bg-neutral-100'
                 }`}
               >
                 <span>{link.name}</span>
                 {link.badge && (
-                  <span className="text-[9px] px-1.5 py-0.2 rounded font-['Space_Mono'] font-bold bg-[#062448]/10 text-[#062448] border border-[#062448]/30">
+                  <span className={`text-[9px] px-1.5 py-0.2 rounded-full font-['Space_Mono'] font-bold ${
+                    isActive ? 'bg-[#F5B51B] text-[#071F35]' : 'bg-[#0B3A66]/10 text-[#0B3A66]'
+                  }`}>
                     {link.badge}
                   </span>
                 )}
@@ -134,16 +154,16 @@ export const Header: React.FC = () => {
               onClick={() => setMoreDropdownOpen(!moreDropdownOpen)}
               onMouseEnter={() => setMoreDropdownOpen(true)}
               aria-expanded={moreDropdownOpen}
-              className={`font-['Manrope'] text-xs font-bold uppercase tracking-wider whitespace-nowrap inline-flex items-center gap-1 py-1 px-2 rounded-md transition-colors ${
+              className={`font-['Manrope'] text-xs font-bold uppercase tracking-wider whitespace-nowrap inline-flex items-center gap-1 px-3 py-1.5 rounded-full transition-colors ${
                 isMoreActive || moreDropdownOpen
-                  ? 'text-[#062448] bg-[#062448]/10'
-                  : 'text-[#3d4a3f] hover:text-[#062448]'
+                  ? 'text-white bg-[#0B3A66]'
+                  : 'text-[#3d4a3f] hover:text-[#0B3A66] hover:bg-neutral-100'
               }`}
             >
               <span>More</span>
               <ChevronDown 
-                size={14} 
-                className={`transition-transform duration-200 ${moreDropdownOpen ? 'rotate-180 text-[#062448]' : ''}`} 
+                size={13} 
+                className={`transition-transform duration-200 ${moreDropdownOpen ? 'rotate-180' : ''}`} 
               />
             </button>
 
@@ -151,7 +171,7 @@ export const Header: React.FC = () => {
             {moreDropdownOpen && (
               <div 
                 onMouseLeave={() => setMoreDropdownOpen(false)}
-                className="absolute right-0 mt-2 w-52 bg-white rounded-xl shadow-xl border border-[#c5beb4] py-2 z-50 animate-in fade-in slide-in-from-top-1 duration-150"
+                className="absolute right-0 mt-2 w-52 bg-white rounded-2xl shadow-xl border border-[#c5beb4]/60 py-2 z-50 animate-in fade-in slide-in-from-top-1 duration-150"
               >
                 {moreLinks.map((link) => {
                   const Icon = link.icon;
@@ -163,9 +183,9 @@ export const Header: React.FC = () => {
                         setMoreDropdownOpen(false);
                         handleNavClick(link.href);
                       }}
-                      className="flex items-center gap-2.5 px-4 py-2.5 text-xs font-['Manrope'] font-bold text-[#3d4a3f] hover:text-[#062448] hover:bg-[#F4EFE6] transition-colors uppercase tracking-wider"
+                      className="flex items-center gap-2.5 px-4 py-2.5 text-xs font-['Manrope'] font-bold text-[#3d4a3f] hover:text-[#0B3A66] hover:bg-[#F4EFE6] transition-colors uppercase tracking-wider"
                     >
-                      <Icon size={15} className="text-[#062448]/70 shrink-0" />
+                      <Icon size={15} className="text-[#0B3A66]/70 shrink-0" />
                       <span>{link.name}</span>
                     </Link>
                   );
@@ -175,14 +195,24 @@ export const Header: React.FC = () => {
           </div>
         </nav>
 
-        {/* Mobile Menu Hamburger */}
-        <button
-          onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-          aria-label="Toggle Navigation Menu"
-          className="lg:hidden p-2 rounded-lg text-[#1a1f1b] hover:bg-[#dcd5c9] transition-colors focus:outline-none"
-        >
-          {mobileMenuOpen ? <X size={26} /> : <Menu size={26} />}
-        </button>
+        {/* Right Actions: Quick Quote pill + Mobile Hamburger */}
+        <div className="flex items-center gap-2.5">
+          <Link
+            to="/book-truck"
+            className="hidden sm:inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-[#F5B51B] hover:bg-[#E0A212] text-[#071F35] font-['Manrope'] font-extrabold text-xs uppercase tracking-wider shadow-sm hover:shadow-md transition-all duration-200"
+          >
+            <span>Get Quote</span>
+            <ChevronDown size={14} className="-rotate-90" />
+          </Link>
+
+          <button
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            aria-label="Toggle Navigation Menu"
+            className="lg:hidden p-2 rounded-xl text-[#1a1f1b] hover:bg-[#dcd5c9] transition-colors focus:outline-none"
+          >
+            {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+          </button>
+        </div>
       </header>
 
       {/* Mobile Backdrop */}
@@ -195,7 +225,7 @@ export const Header: React.FC = () => {
 
       {/* Mobile Drawer */}
       <aside
-        className={`fixed top-0 right-0 z-50 h-full w-72 max-w-[85vw] bg-[#1C201D] text-white p-6 shadow-2xl transform transition-transform duration-300 ease-in-out lg:hidden flex flex-col justify-between overflow-y-auto ${
+        className={`fixed top-0 right-0 z-50 h-full w-72 max-w-[85vw] bg-[#071F35] text-white p-6 shadow-2xl transform transition-transform duration-300 ease-in-out lg:hidden flex flex-col justify-between overflow-y-auto ${
           mobileMenuOpen ? 'translate-x-0' : 'translate-x-full'
         }`}
       >
@@ -206,7 +236,7 @@ export const Header: React.FC = () => {
             </span>
             <button
               onClick={() => setMobileMenuOpen(false)}
-              className="p-1 rounded-lg text-neutral-400 hover:text-[#062448] transition-colors"
+              className="p-1 rounded-lg text-neutral-400 hover:text-[#0B3A66] transition-colors"
             >
               <X size={22} />
             </button>
@@ -221,8 +251,10 @@ export const Header: React.FC = () => {
               {primaryLinks.map((link) => {
                 const Icon = link.icon;
                 const isActive =
-                  location.pathname + location.search === link.href ||
-                  (link.href === '/book-truck' && location.pathname === '/book-truck' && !location.search);
+                  link.href === '/'
+                    ? location.pathname === '/'
+                    : location.pathname + location.search === link.href ||
+                      (link.href === '/book-truck' && location.pathname === '/book-truck' && !location.search);
 
                 return (
                   <Link
@@ -234,8 +266,8 @@ export const Header: React.FC = () => {
                     }}
                     className={`flex items-center justify-between px-3 py-2.5 rounded-lg font-['Manrope'] font-bold text-xs transition-all uppercase tracking-wider ${
                       isActive
-                        ? 'bg-[#062448] text-white'
-                        : 'text-neutral-200 hover:text-white hover:bg-[#062448]/30'
+                        ? 'bg-[#0B3A66] text-white'
+                        : 'text-neutral-200 hover:text-white hover:bg-[#0B3A66]/30'
                     }`}
                   >
                     <div className="flex items-center gap-3">
@@ -244,7 +276,7 @@ export const Header: React.FC = () => {
                     </div>
                     {link.badge && (
                       <span className={`text-[9px] px-1.5 py-0.5 rounded font-['Space_Mono'] font-bold ${
-                        isActive ? 'bg-[#E9A015] text-[#4A2E00]' : 'bg-[#062448]/30 text-[#85B7EB]'
+                        isActive ? 'bg-[#F5B51B] text-[#071F35]' : 'bg-[#0B3A66]/30 text-[#85B7EB]'
                       }`}>
                         {link.badge}
                       </span>
@@ -287,7 +319,7 @@ export const Header: React.FC = () => {
           <Link
             to="/book-truck"
             onClick={() => setMobileMenuOpen(false)}
-            className="w-full flex items-center justify-center gap-2 bg-[#E9A015] text-[#4A2E00] font-['Manrope'] font-extrabold text-xs py-2.5 rounded-lg uppercase tracking-wider shadow-md hover:bg-[#D08C0A] transition-colors"
+            className="w-full flex items-center justify-center gap-2 bg-[#F5B51B] text-[#071F35] font-['Manrope'] font-extrabold text-xs py-2.5 rounded-lg uppercase tracking-wider shadow-md hover:bg-[#E0A212] transition-colors"
           >
             <Truck size={15} />
             <span>Book a Truck (FTL/PTL)</span>
@@ -295,7 +327,7 @@ export const Header: React.FC = () => {
           <Link
             to="/book-truck?type=parcel"
             onClick={() => setMobileMenuOpen(false)}
-            className="w-full flex items-center justify-center gap-2 bg-[#062448] text-white font-['Manrope'] font-extrabold text-xs py-2.5 rounded-lg uppercase tracking-wider shadow-md hover:bg-[#0A3366] transition-colors"
+            className="w-full flex items-center justify-center gap-2 bg-[#0B3A66] text-white font-['Manrope'] font-extrabold text-xs py-2.5 rounded-lg uppercase tracking-wider shadow-md hover:bg-[#072D54] transition-colors"
           >
             <Package size={15} />
             <span>Book a Parcel (0–150 kg)</span>

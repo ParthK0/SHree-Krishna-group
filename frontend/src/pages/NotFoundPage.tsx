@@ -14,12 +14,12 @@ export const NotFoundPage: React.FC = () => {
   const popularRoutes = getPublishedRoutes().slice(0, 4);
 
   return (
-    <div className="min-h-[75vh] flex flex-col items-center justify-center px-4 py-16 text-center max-w-4xl mx-auto">
-      <div className="w-20 h-20 rounded-3xl bg-[#062448]/10 border border-[#062448]/20 flex items-center justify-center text-[#062448] mb-6 shadow-sm">
-        <Compass size={40} className="text-[#062448]" />
+    <div className="min-h-[75vh] flex flex-col items-center justify-center px-4 py-10 text-center max-w-4xl mx-auto">
+      <div className="w-20 h-20 rounded-3xl bg-[#0B3A66]/10 border border-[#0B3A66]/20 flex items-center justify-center text-[#0B3A66] mb-6 shadow-sm">
+        <Compass size={40} className="text-[#0B3A66]" />
       </div>
 
-      <span className="font-['Space_Mono'] text-xs uppercase font-bold tracking-widest text-[#062448] px-3 py-1 rounded-full bg-[#062448]/10 mb-3">
+      <span className="font-['Space_Mono'] text-xs uppercase font-bold tracking-widest text-[#0B3A66] px-3 py-1 rounded-full bg-[#0B3A66]/10 mb-3">
         404 ERROR — PAGE NOT FOUND
       </span>
 
@@ -35,14 +35,14 @@ export const NotFoundPage: React.FC = () => {
       <div className="flex flex-wrap items-center justify-center gap-4 mb-12">
         <Link
           to="/"
-          className="px-6 py-3 rounded-2xl bg-[#062448] hover:bg-[#0c532b] text-white text-sm font-bold font-['Manrope'] uppercase tracking-wider transition-all flex items-center gap-2 shadow-md hover:scale-105"
+          className="px-6 py-3 rounded-2xl bg-[#0B3A66] hover:bg-[#0c532b] text-white text-sm font-bold font-['Manrope'] uppercase tracking-wider transition-all flex items-center gap-2 shadow-md hover:scale-105"
         >
           <Home size={16} />
           <span>Back to Homepage</span>
         </Link>
         <Link
           to="/book-truck"
-          className="px-6 py-3 rounded-2xl bg-[#E9A015] hover:bg-[#d99f00] text-[#1a1f1b] text-sm font-bold font-['Manrope'] uppercase tracking-wider transition-all flex items-center gap-2 shadow-md hover:scale-105"
+          className="px-6 py-3 rounded-2xl bg-[#F5B51B] hover:bg-[#E0A212] text-[#1a1f1b] text-sm font-bold font-['Manrope'] uppercase tracking-wider transition-all flex items-center gap-2 shadow-md hover:scale-105"
         >
           <Truck size={16} />
           <span>Book a Truck</span>
@@ -60,12 +60,12 @@ export const NotFoundPage: React.FC = () => {
       <div className="w-full bg-white rounded-3xl p-6 md:p-8 border border-[#d8d0c3] shadow-sm text-left">
         <div className="flex items-center justify-between mb-4 border-b border-[#e2dacd] pb-3">
           <h2 className="text-base font-extrabold uppercase font-['Archivo_Narrow'] text-[#1a1f1b] flex items-center gap-2">
-            <MapPin size={18} className="text-[#062448]" />
+            <MapPin size={18} className="text-[#0B3A66]" />
             Popular Freight Corridors
           </h2>
           <Link
             to="/routes"
-            className="text-xs font-bold text-[#062448] hover:underline font-['Manrope'] flex items-center gap-1"
+            className="text-xs font-bold text-[#0B3A66] hover:underline font-['Manrope'] flex items-center gap-1"
           >
             <span>View All Routes</span>
             <ArrowRight size={13} />
@@ -77,9 +77,9 @@ export const NotFoundPage: React.FC = () => {
             <Link
               key={route.slug}
               to={`/${route.slug}`}
-              className="p-3.5 rounded-xl border border-neutral-200 hover:border-[#062448] hover:bg-[#EBF2F9]/40 transition-all block group"
+              className="p-3.5 rounded-xl border border-neutral-200 hover:border-[#0B3A66] hover:bg-[#EBF2F9]/40 transition-all block group"
             >
-              <div className="font-['Archivo_Narrow'] font-bold text-sm uppercase text-[#1a1f1b] group-hover:text-[#062448]">
+              <div className="font-['Archivo_Narrow'] font-bold text-sm uppercase text-[#1a1f1b] group-hover:text-[#0B3A66]">
                 {route.fromCity} ➔ {route.toCity}
               </div>
               <div className="text-xs text-neutral-500 font-['Space_Mono'] mt-1">

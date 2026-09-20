@@ -12,16 +12,16 @@ const Section: React.FC<{ title: string; children: React.ReactNode }> = ({ title
 
 export const RefundPage: React.FC = () => {
   return (
-    <div className="min-h-screen bg-[#ECE6DD] py-10 md:py-16 px-4 md:px-12">
+    <div className="min-h-screen bg-[#ECE6DD] py-6 md:py-10 px-4 md:px-12">
       <div className="max-w-3xl mx-auto space-y-8">
 
         <div className="flex items-center justify-between">
-          <Link to="/" className="inline-flex items-center gap-2 font-['Manrope'] text-xs font-bold text-[#062448] hover:text-[#03162C] uppercase tracking-wider transition-colors">
+          <Link to="/" className="inline-flex items-center gap-2 font-['Manrope'] text-xs font-bold text-[#0B3A66] hover:text-[#071F35] uppercase tracking-wider transition-colors">
             <ArrowLeft size={16} />
             <span>Back to Home</span>
           </Link>
           <div className="font-['Space_Mono'] text-xs text-[#5a665c]">
-            Home / <span className="text-[#062448] font-bold">Cancellation & Refund</span>
+            Home / <span className="text-[#0B3A66] font-bold">Cancellation & Refund</span>
           </div>
         </div>
 
@@ -60,7 +60,7 @@ export const RefundPage: React.FC = () => {
           <Section title="Contact Us for Cancellations">
             <p>To cancel a booking or raise a refund query, please contact us directly:</p>
             <p>WhatsApp / Phone: <strong>{PHONE_DISPLAY}</strong></p>
-            <p>Email: <a href={`mailto:${CONTACT_EMAIL}`} className="text-[#062448] underline">{CONTACT_EMAIL}</a></p>
+            <p>Email: <a href={`mailto:${CONTACT_EMAIL}`} className="text-[#0B3A66] underline">{CONTACT_EMAIL}</a></p>
             <p>Please include your name, booking details, and reason for cancellation in your message.</p>
           </Section>
         </div>

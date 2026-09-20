@@ -1,20 +1,24 @@
 import emailjs from '@emailjs/browser';
 
-export const WHATSAPP_NUMBER = "919784800833";
-export const PHONE_DISPLAY  = "+91 97848 00833";
-export const CONTACT_EMAIL  = "deepesh3052@gmail.com";
+import {
+  WHATSAPP_NUMBER,
+  PHONE_DISPLAY,
+  CONTACT_EMAIL,
+} from './constants';
+
+export { WHATSAPP_NUMBER, PHONE_DISPLAY, CONTACT_EMAIL };
 
 // Optional WhatsApp Gateway API keys (e.g. UltraMsg.com) for silent background WhatsApp sending
-export const ULTRAMSG_INSTANCE_ID = ""; // e.g. "instance12345"
-export const ULTRAMSG_TOKEN = "";       // e.g. "abcdef123456"
+export const ULTRAMSG_INSTANCE_ID = import.meta.env.VITE_ULTRAMSG_INSTANCE_ID || "";
+export const ULTRAMSG_TOKEN = import.meta.env.VITE_ULTRAMSG_TOKEN || "";
 
 // EmailJS credentials for 100% direct, zero-spam Gmail delivery via official browser SDK
-export const EMAILJS_SERVICE_ID  = "service_tf9b0lo";
-export const EMAILJS_TEMPLATE_ID = "template_6ju4zft";
-export const EMAILJS_PUBLIC_KEY  = "tckkT8QZp1MrQSKCL";
+export const EMAILJS_SERVICE_ID  = import.meta.env.VITE_EMAILJS_SERVICE_ID || "service_tf9b0lo";
+export const EMAILJS_TEMPLATE_ID = import.meta.env.VITE_EMAILJS_TEMPLATE_ID || "template_6ju4zft";
+export const EMAILJS_PUBLIC_KEY  = import.meta.env.VITE_EMAILJS_PUBLIC_KEY || "tckkT8QZp1MrQSKCL";
 
 // Optional Web3Forms Access Key for instant secondary fallback (get free at web3forms.com)
-export const WEB3FORMS_ACCESS_KEY = "";
+export const WEB3FORMS_ACCESS_KEY = import.meta.env.VITE_WEB3FORMS_ACCESS_KEY || "";
 
 export interface WhatsAppData {
   [key: string]: string | undefined;

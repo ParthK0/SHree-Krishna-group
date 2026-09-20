@@ -470,11 +470,11 @@ export const RouteMapSection: React.FC<RouteMapSectionProps> = ({
     const jaipurHtml = `
       <div class="relative flex items-center justify-center -translate-x-1/2 -translate-y-1/2 cursor-pointer group pointer-events-auto">
         <span class="absolute w-14 h-14 rounded-full bg-[#22c55e] opacity-35 animate-ping"></span>
-        <span class="absolute w-10 h-10 rounded-full bg-[#062448]/50 border border-[#E9A015] animate-pulse"></span>
-        <div class="w-8 h-8 rounded-full bg-[#062448] border-2 border-[#E9A015] text-white flex items-center justify-center shadow-2xl font-black text-[10px] font-mono">
+        <span class="absolute w-10 h-10 rounded-full bg-[#0B3A66]/50 border border-[#F5B51B] animate-pulse"></span>
+        <div class="w-8 h-8 rounded-full bg-[#0B3A66] border-2 border-[#F5B51B] text-white flex items-center justify-center shadow-2xl font-black text-[10px] font-mono">
           RJ14
         </div>
-        <div class="absolute -top-7 whitespace-nowrap px-2.5 py-0.5 rounded-full bg-[#0b100c]/90 border border-[#E9A015] text-[#E9A015] text-[9.5px] font-extrabold font-mono shadow-xl flex items-center gap-1.5">
+        <div class="absolute -top-7 whitespace-nowrap px-2.5 py-0.5 rounded-full bg-[#0b100c]/90 border border-[#F5B51B] text-[#F5B51B] text-[9.5px] font-extrabold font-mono shadow-xl flex items-center gap-1.5">
           <span class="w-1.5 h-1.5 rounded-full bg-[#22c55e] animate-pulse"></span>
           <span>ORIGIN HUB (JAIPUR)</span>
         </div>
@@ -516,7 +516,7 @@ export const RouteMapSection: React.FC<RouteMapSectionProps> = ({
       if (isSelected) {
         // Glowing halo
         const glowLine = L.polyline(curvedPath, {
-          color: '#E9A015',
+          color: '#F5B51B',
           weight: 7,
           opacity: 0.35,
           lineCap: 'round',
@@ -525,7 +525,7 @@ export const RouteMapSection: React.FC<RouteMapSectionProps> = ({
 
         // Active animated line
         const activeLine = L.polyline(curvedPath, {
-          color: '#E9A015',
+          color: '#F5B51B',
           weight: 3.5,
           opacity: 1,
           dashArray: '8, 8',
@@ -545,19 +545,19 @@ export const RouteMapSection: React.FC<RouteMapSectionProps> = ({
       // City Marker
       const cityHtml = `
         <div class="relative flex items-center -translate-x-1/2 -translate-y-1/2 cursor-pointer group pointer-events-auto">
-          ${isSelected ? '<span class="absolute -inset-2 rounded-full bg-[#E9A015] opacity-40 animate-ping"></span>' : ''}
+          ${isSelected ? '<span class="absolute -inset-2 rounded-full bg-[#F5B51B] opacity-40 animate-ping"></span>' : ''}
           <div class="w-3.5 h-3.5 rounded-full ${
             isSelected
-              ? 'bg-[#E9A015] ring-2 ring-white scale-125'
-              : 'bg-[#38bdf8] border border-white/60 hover:bg-[#E9A015]'
+              ? 'bg-[#F5B51B] ring-2 ring-white scale-125'
+              : 'bg-[#38bdf8] border border-white/60 hover:bg-[#F5B51B]'
           } shadow-md transition-all"></div>
           <div class="ml-2 px-2 py-0.5 rounded-md ${
             isSelected
-              ? 'bg-[#062448] text-white border border-[#E9A015]'
-              : 'bg-black/85 text-neutral-200 border border-white/20 group-hover:border-[#E9A015]'
+              ? 'bg-[#0B3A66] text-white border border-[#F5B51B]'
+              : 'bg-black/85 text-neutral-200 border border-white/20 group-hover:border-[#F5B51B]'
           } text-[11px] font-bold font-sans whitespace-nowrap shadow-lg flex items-center gap-1.5 transition-all">
             <span>${city.name}</span>
-            ${isSelected ? `<span class="text-[9px] font-mono text-[#E9A015] font-extrabold">(${city.rateRange})</span>` : ''}
+            ${isSelected ? `<span class="text-[9px] font-mono text-[#F5B51B] font-extrabold">(${city.rateRange})</span>` : ''}
           </div>
         </div>
       `;
@@ -624,12 +624,12 @@ export const RouteMapSection: React.FC<RouteMapSectionProps> = ({
   };
 
   return (
-    <section className={`w-full py-12 md:py-16 ${className}`} id="route-rate-cards">
+    <section className={`w-full py-8 md:py-10 ${className}`} id="route-rate-cards">
       <div className="max-w-7xl mx-auto px-4 md:px-12">
         {/* Header Title & Proof Badges */}
         <div className="text-center max-w-3xl mx-auto mb-10">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#062448]/10 text-[#062448] font-['Space_Mono'] text-xs font-bold border border-[#062448]/20 mb-3">
-            <Sparkles size={14} className="text-[#E9A015]" />
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#0B3A66]/10 text-[#0B3A66] font-['Space_Mono'] text-xs font-bold border border-[#0B3A66]/20 mb-3">
+            <Sparkles size={14} className="text-[#F5B51B]" />
             OFFICIAL FREIGHT RATE CARDS & ROUTE MAP
           </div>
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold uppercase font-['Archivo_Narrow'] text-[#1a1f1b] tracking-tight">
@@ -642,7 +642,7 @@ export const RouteMapSection: React.FC<RouteMapSectionProps> = ({
           {/* 4 Feature Badges */}
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 pt-6">
             <div className="bg-white p-3 rounded-xl border border-[#e2dacd] shadow-sm flex items-center gap-2.5">
-              <div className="w-8 h-8 rounded-lg bg-[#EBF2F9] text-[#062448] flex items-center justify-center shrink-0">
+              <div className="w-8 h-8 rounded-lg bg-[#EBF2F9] text-[#0B3A66] flex items-center justify-center shrink-0">
                 <Truck size={17} />
               </div>
               <div className="text-left">
@@ -654,7 +654,7 @@ export const RouteMapSection: React.FC<RouteMapSectionProps> = ({
             </div>
 
             <div className="bg-white p-3 rounded-xl border border-[#e2dacd] shadow-sm flex items-center gap-2.5">
-              <div className="w-8 h-8 rounded-lg bg-[#EBF2F9] text-[#062448] flex items-center justify-center shrink-0">
+              <div className="w-8 h-8 rounded-lg bg-[#EBF2F9] text-[#0B3A66] flex items-center justify-center shrink-0">
                 <ShieldCheck size={17} />
               </div>
               <div className="text-left">
@@ -666,7 +666,7 @@ export const RouteMapSection: React.FC<RouteMapSectionProps> = ({
             </div>
 
             <div className="bg-white p-3 rounded-xl border border-[#e2dacd] shadow-sm flex items-center gap-2.5">
-              <div className="w-8 h-8 rounded-lg bg-[#EBF2F9] text-[#062448] flex items-center justify-center shrink-0">
+              <div className="w-8 h-8 rounded-lg bg-[#EBF2F9] text-[#0B3A66] flex items-center justify-center shrink-0">
                 <Award size={17} />
               </div>
               <div className="text-left">
@@ -718,10 +718,10 @@ export const RouteMapSection: React.FC<RouteMapSectionProps> = ({
           <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 mb-5 relative z-10">
             <div>
               <div className="flex items-center gap-2 mb-1">
-                <span className="text-xs font-bold uppercase tracking-wider text-[#E9A015] font-['Space_Mono'] block">
+                <span className="text-xs font-bold uppercase tracking-wider text-[#F5B51B] font-['Space_Mono'] block">
                   Logistics Radiating Hub
                 </span>
-                <span className="px-2 py-0.5 rounded-full bg-[#062448]/30 border border-[#062448]/50 text-[#85B7EB] text-[10px] font-['Space_Mono'] font-bold">
+                <span className="px-2 py-0.5 rounded-full bg-[#0B3A66]/30 border border-[#0B3A66]/50 text-[#85B7EB] text-[10px] font-['Space_Mono'] font-bold">
                   RJ-14 ORIGIN HUB
                 </span>
               </div>
@@ -745,7 +745,7 @@ export const RouteMapSection: React.FC<RouteMapSectionProps> = ({
           <div className="flex flex-wrap items-center justify-between gap-3 mb-5 bg-white/5 p-2 rounded-2xl border border-white/5">
             <div className="flex flex-wrap items-center gap-1.5">
               <span className="text-[11px] font-bold text-neutral-400 font-['Space_Mono'] uppercase px-2 flex items-center gap-1">
-                <Filter size={12} className="text-[#E9A015]" />
+                <Filter size={12} className="text-[#F5B51B]" />
                 Region:
               </span>
               {[
@@ -763,7 +763,7 @@ export const RouteMapSection: React.FC<RouteMapSectionProps> = ({
                     onClick={() => setMapRegionFilter(filterItem.id)}
                     className={`px-3 py-1 rounded-xl text-xs font-['Space_Mono'] transition-all ${
                       isActive
-                        ? 'bg-[#E9A015] text-[#111512] font-bold shadow-md'
+                        ? 'bg-[#F5B51B] text-[#111512] font-bold shadow-md'
                         : 'text-neutral-300 hover:text-white hover:bg-white/10'
                     }`}
                   >
@@ -778,7 +778,7 @@ export const RouteMapSection: React.FC<RouteMapSectionProps> = ({
                 onClick={() => setShowAllCorridors(!showAllCorridors)}
                 className="text-[11px] text-neutral-300 hover:text-white font-['Space_Mono'] flex items-center gap-1.5 transition-colors bg-white/5 px-2.5 py-1 rounded-lg border border-white/5"
               >
-                <Radio size={12} className={showAllCorridors ? 'text-[#E9A015]' : 'text-neutral-500'} />
+                <Radio size={12} className={showAllCorridors ? 'text-[#F5B51B]' : 'text-neutral-500'} />
                 <span>{showAllCorridors ? 'Show All Corridors' : 'Focus Selected Line Only'}</span>
               </button>
             </div>
@@ -794,7 +794,7 @@ export const RouteMapSection: React.FC<RouteMapSectionProps> = ({
               {/* Map Telemetry Header Overlay */}
               <div className="absolute top-3 left-3 z-[400] flex items-center gap-2 bg-black/85 px-3 py-1.5 rounded-xl border border-white/15 backdrop-blur-md text-[10px] font-['Space_Mono'] text-neutral-200 shadow-xl">
                 <span className="w-2 h-2 rounded-full bg-[#22c55e] animate-ping" />
-                <span className="text-[#E9A015] font-extrabold">LIVE TELEMETRY:</span>
+                <span className="text-[#F5B51B] font-extrabold">LIVE TELEMETRY:</span>
                 <span>CartoDB Real GIS Linehaul Data</span>
               </div>
 
@@ -816,7 +816,7 @@ export const RouteMapSection: React.FC<RouteMapSectionProps> = ({
                 </button>
                 <button
                   onClick={resetMapView}
-                  className="w-7 h-7 rounded-lg bg-[#062448] hover:bg-[#138043] text-[#E9A015] flex items-center justify-center transition-colors"
+                  className="w-7 h-7 rounded-lg bg-[#0B3A66] hover:bg-[#138043] text-[#F5B51B] flex items-center justify-center transition-colors"
                   title="Reset to Pan-India Overview"
                 >
                   <RotateCcw size={13} />
@@ -842,7 +842,7 @@ export const RouteMapSection: React.FC<RouteMapSectionProps> = ({
                 <div className="flex items-center justify-between gap-2 mb-3 pb-3 border-b border-white/10">
                   <div className="flex items-center gap-2">
                     <span className="w-2.5 h-2.5 rounded-full bg-[#22c55e] animate-pulse" />
-                    <span className="text-[11px] font-bold uppercase tracking-wider text-[#E9A015] font-['Space_Mono']">
+                    <span className="text-[11px] font-bold uppercase tracking-wider text-[#F5B51B] font-['Space_Mono']">
                       Corridor Inspector HUD
                     </span>
                   </div>
@@ -855,11 +855,11 @@ export const RouteMapSection: React.FC<RouteMapSectionProps> = ({
                 <div className="bg-black/50 rounded-xl p-3.5 border border-white/10 mb-4">
                   <div className="flex items-center justify-between text-[11px] font-['Space_Mono'] text-neutral-400 mb-1.5">
                     <span className="text-[#85B7EB] font-bold flex items-center gap-1">
-                      <span className="w-2 h-2 rounded-full bg-[#062448] border border-[#E9A015]" />
+                      <span className="w-2 h-2 rounded-full bg-[#0B3A66] border border-[#F5B51B]" />
                       ORIGIN (RJ-14)
                     </span>
                     <span className="text-neutral-500 text-[10px]">DIRECT LINEHAUL</span>
-                    <span className="text-[#E9A015] font-bold flex items-center gap-1">
+                    <span className="text-[#F5B51B] font-bold flex items-center gap-1">
                       DELIVERY DROP
                       <span className="w-2 h-2 rounded-full bg-[#38bdf8]" />
                     </span>
@@ -868,14 +868,14 @@ export const RouteMapSection: React.FC<RouteMapSectionProps> = ({
                   <div className="flex items-center justify-between gap-2 font-['Archivo_Narrow'] font-extrabold text-lg sm:text-xl">
                     <div className="text-white">Jaipur</div>
                     <div className="flex-1 flex items-center justify-center px-2">
-                      <div className="h-[2px] w-full bg-gradient-to-r from-[#062448] via-[#E9A015] to-[#38bdf8] relative">
+                      <div className="h-[2px] w-full bg-gradient-to-r from-[#0B3A66] via-[#F5B51B] to-[#38bdf8] relative">
                         <Truck
                           size={15}
                           className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-white bg-[#121613] p-0.5 rounded-full border border-white/20"
                         />
                       </div>
                     </div>
-                    <div className="text-[#E9A015]">{activeCity.name}</div>
+                    <div className="text-[#F5B51B]">{activeCity.name}</div>
                   </div>
 
                   <div className="text-[11px] text-neutral-400 font-['Manrope'] mt-1.5 flex items-center justify-between">
@@ -891,7 +891,7 @@ export const RouteMapSection: React.FC<RouteMapSectionProps> = ({
                     <span className="text-[10px] text-neutral-400 font-['Space_Mono'] block">
                       Verified Freight Charge
                     </span>
-                    <span className="text-sm sm:text-base font-extrabold font-['Space_Mono'] text-[#E9A015] block mt-0.5">
+                    <span className="text-sm sm:text-base font-extrabold font-['Space_Mono'] text-[#F5B51B] block mt-0.5">
                       {activeCity.rateRange}
                     </span>
                     <span className="text-[10px] text-neutral-400 font-['Manrope'] block mt-0.5">
@@ -965,7 +965,7 @@ export const RouteMapSection: React.FC<RouteMapSectionProps> = ({
                   )}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-full py-2.5 px-4 rounded-xl bg-[#062448] hover:bg-[#138043] text-white font-bold font-['Manrope'] text-xs sm:text-sm flex items-center justify-center gap-2 transition-all shadow-lg shadow-[#062448]/30"
+                  className="w-full py-2.5 px-4 rounded-xl bg-[#0B3A66] hover:bg-[#138043] text-white font-bold font-['Manrope'] text-xs sm:text-sm flex items-center justify-center gap-2 transition-all shadow-lg shadow-[#0B3A66]/30"
                 >
                   <MessageCircle size={15} />
                   <span>Confirm {activeCity.name} Rate on WhatsApp</span>
@@ -976,7 +976,7 @@ export const RouteMapSection: React.FC<RouteMapSectionProps> = ({
                     href="tel:+919784800833"
                     className="flex-1 py-2 px-3 rounded-xl bg-white/10 hover:bg-white/15 text-white font-['Space_Mono'] text-xs flex items-center justify-center gap-1.5 transition-colors"
                   >
-                    <Phone size={13} className="text-[#E9A015]" />
+                    <Phone size={13} className="text-[#F5B51B]" />
                     <span>Call Terminal</span>
                   </a>
 
@@ -998,7 +998,7 @@ export const RouteMapSection: React.FC<RouteMapSectionProps> = ({
           <div className="mt-5 pt-4 border-t border-white/10 flex flex-wrap items-center justify-between gap-3 text-xs font-['Space_Mono'] text-neutral-300">
             <div className="flex flex-wrap items-center gap-4">
               <div className="flex items-center gap-2">
-                <span className="w-4 h-4 rounded-full bg-[#062448] border-2 border-[#E9A015] flex items-center justify-center text-[7px] font-bold text-white">
+                <span className="w-4 h-4 rounded-full bg-[#0B3A66] border-2 border-[#F5B51B] flex items-center justify-center text-[7px] font-bold text-white">
                   RJ
                 </span>
                 <span className="font-bold text-white">Origin Hub: Jaipur (RJ-14 Dispatch)</span>
@@ -1010,13 +1010,13 @@ export const RouteMapSection: React.FC<RouteMapSectionProps> = ({
               </div>
 
               <div className="flex items-center gap-2">
-                <div className="w-5 h-[2px] bg-gradient-to-r from-[#062448] to-[#E9A015]" />
+                <div className="w-5 h-[2px] bg-gradient-to-r from-[#0B3A66] to-[#F5B51B]" />
                 <span>Radiating Linehaul Corridor</span>
               </div>
             </div>
 
             <div className="text-neutral-400 text-[11px] flex items-center gap-1">
-              <span className="text-[#E9A015]">★</span>
+              <span className="text-[#F5B51B]">★</span>
               <span>Click or tap any city on map to inspect</span>
             </div>
           </div>
@@ -1028,13 +1028,13 @@ export const RouteMapSection: React.FC<RouteMapSectionProps> = ({
             onClick={() => setActiveTab('delhi')}
             className={`px-5 py-3 rounded-2xl font-['Archivo_Narrow'] font-bold text-xs sm:text-sm md:text-base uppercase tracking-wider transition-all flex items-center gap-2 shadow-sm ${
               activeTab === 'delhi'
-                ? 'bg-[#062448] text-white shadow-[#062448]/25 ring-2 ring-[#062448]/30'
-                : 'bg-white text-[#1a1f1b] border border-[#e2dacd] hover:border-[#062448]'
+                ? 'bg-[#0B3A66] text-white shadow-[#0B3A66]/25 ring-2 ring-[#0B3A66]/30'
+                : 'bg-white text-[#1a1f1b] border border-[#e2dacd] hover:border-[#0B3A66]'
             }`}
           >
             <Truck size={17} />
             <span>Delhi NCR (Table A & B)</span>
-            <span className="text-[10px] px-2 py-0.5 rounded-full bg-[#E9A015] text-[#4A2E00] font-['Space_Mono'] font-extrabold">
+            <span className="text-[10px] px-2 py-0.5 rounded-full bg-[#F5B51B] text-[#071F35] font-['Space_Mono'] font-extrabold">
               5T & 15T
             </span>
           </button>
@@ -1043,13 +1043,13 @@ export const RouteMapSection: React.FC<RouteMapSectionProps> = ({
             onClick={() => setActiveTab('pan-india')}
             className={`px-5 py-3 rounded-2xl font-['Archivo_Narrow'] font-bold text-xs sm:text-sm md:text-base uppercase tracking-wider transition-all flex items-center gap-2 shadow-sm ${
               activeTab === 'pan-india'
-                ? 'bg-[#062448] text-white shadow-[#062448]/25 ring-2 ring-[#062448]/30'
-                : 'bg-white text-[#1a1f1b] border border-[#e2dacd] hover:border-[#062448]'
+                ? 'bg-[#0B3A66] text-white shadow-[#0B3A66]/25 ring-2 ring-[#0B3A66]/30'
+                : 'bg-white text-[#1a1f1b] border border-[#e2dacd] hover:border-[#0B3A66]'
             }`}
           >
             <MapPin size={17} />
             <span>Jaipur ➔ Pan India (Left Rate Table)</span>
-            <span className="text-[10px] px-2 py-0.5 rounded-full bg-[#EBF2F9] text-[#062448] font-['Space_Mono'] font-bold">
+            <span className="text-[10px] px-2 py-0.5 rounded-full bg-[#EBF2F9] text-[#0B3A66] font-['Space_Mono'] font-bold">
               18 Cities • 7 Ton
             </span>
           </button>
@@ -1058,13 +1058,13 @@ export const RouteMapSection: React.FC<RouteMapSectionProps> = ({
             onClick={() => setActiveTab('parcel')}
             className={`px-5 py-3 rounded-2xl font-['Archivo_Narrow'] font-bold text-xs sm:text-sm md:text-base uppercase tracking-wider transition-all flex items-center gap-2 shadow-sm ${
               activeTab === 'parcel'
-                ? 'bg-[#062448] text-white shadow-[#062448]/25 ring-2 ring-[#062448]/30'
-                : 'bg-white text-[#1a1f1b] border border-[#e2dacd] hover:border-[#062448]'
+                ? 'bg-[#0B3A66] text-white shadow-[#0B3A66]/25 ring-2 ring-[#0B3A66]/30'
+                : 'bg-white text-[#1a1f1b] border border-[#e2dacd] hover:border-[#0B3A66]'
             }`}
           >
-            <span className="w-2.5 h-2.5 rounded-full bg-[#E9A015]" />
+            <span className="w-2.5 h-2.5 rounded-full bg-[#F5B51B]" />
             <span>Table C: Parcel / Courier & Freight</span>
-            <span className="text-[10px] px-2 py-0.5 rounded-full bg-[#FFF9E6] text-[#8a6500] font-['Space_Mono'] font-extrabold">
+            <span className="text-[10px] px-2 py-0.5 rounded-full bg-[#FFF9E6] text-[#071F35] font-['Space_Mono'] font-extrabold">
               Per KG
             </span>
           </button>
@@ -1075,7 +1075,7 @@ export const RouteMapSection: React.FC<RouteMapSectionProps> = ({
           <div className="bg-white rounded-3xl p-6 md:p-10 border border-[#e2dacd] shadow-xl animate-fadeIn">
             <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 pb-6 border-b border-[#e2dacd] mb-6">
               <div>
-                <div className="inline-flex items-center gap-2 text-xs font-bold text-[#062448] font-['Space_Mono'] uppercase">
+                <div className="inline-flex items-center gap-2 text-xs font-bold text-[#0B3A66] font-['Space_Mono'] uppercase">
                   <span>Corridor: Jaipur ➔ Delhi NCR</span>
                   <span>•</span>
                   <span>280 KM</span>
@@ -1098,7 +1098,7 @@ export const RouteMapSection: React.FC<RouteMapSectionProps> = ({
                   onClick={() => setDelhiWeightTier('5-ton')}
                   className={`px-4 py-2 rounded-xl text-xs font-bold uppercase font-['Space_Mono'] transition-all ${
                     delhiWeightTier === '5-ton'
-                      ? 'bg-[#062448] text-white shadow-sm'
+                      ? 'bg-[#0B3A66] text-white shadow-sm'
                       : 'text-neutral-700 hover:text-black'
                   }`}
                 >
@@ -1108,7 +1108,7 @@ export const RouteMapSection: React.FC<RouteMapSectionProps> = ({
                   onClick={() => setDelhiWeightTier('15-ton')}
                   className={`px-4 py-2 rounded-xl text-xs font-bold uppercase font-['Space_Mono'] transition-all ${
                     delhiWeightTier === '15-ton'
-                      ? 'bg-[#062448] text-white shadow-sm'
+                      ? 'bg-[#0B3A66] text-white shadow-sm'
                       : 'text-neutral-700 hover:text-black'
                   }`}
                 >
@@ -1121,7 +1121,7 @@ export const RouteMapSection: React.FC<RouteMapSectionProps> = ({
             <div className="overflow-x-auto">
               <table className="w-full text-left font-['Manrope'] text-sm">
                 <thead>
-                  <tr className="bg-[#FFF9E6] border-y border-[#E9A015]/30 text-xs font-['Space_Mono'] uppercase text-[#8a6500]">
+                  <tr className="bg-[#FFF9E6] border-y border-[#F5B51B]/30 text-xs font-['Space_Mono'] uppercase text-[#071F35]">
                     <th className="py-3 px-4 w-14">S. No.</th>
                     <th className="py-3 px-4">Vehicle Type</th>
                     <th className="py-3 px-4">Payload Spec</th>
@@ -1136,13 +1136,13 @@ export const RouteMapSection: React.FC<RouteMapSectionProps> = ({
                       <td className="py-3.5 px-4 font-['Space_Mono'] text-xs text-neutral-500 font-bold">{item.sNo}.</td>
                       <td className="py-3.5 px-4 font-bold text-[#1a1f1b]">
                         <div className="flex items-center gap-2">
-                          <Truck size={16} className="text-[#062448] shrink-0" />
+                          <Truck size={16} className="text-[#0B3A66] shrink-0" />
                           <span>{item.vehicleType}</span>
                         </div>
                       </td>
                       <td className="py-3.5 px-4 text-xs font-['Space_Mono'] text-neutral-600">{item.capacity}</td>
                       <td className="py-3.5 px-4 text-xs text-neutral-600 max-w-xs">{item.idealFor}</td>
-                      <td className="py-3.5 px-4 text-right font-extrabold text-[#062448] font-['Space_Mono'] text-sm sm:text-base whitespace-nowrap">
+                      <td className="py-3.5 px-4 text-right font-extrabold text-[#0B3A66] font-['Space_Mono'] text-sm sm:text-base whitespace-nowrap">
                         ₹{item.rateRange}
                       </td>
                       <td className="py-3.5 px-4 text-center">
@@ -1152,7 +1152,7 @@ export const RouteMapSection: React.FC<RouteMapSectionProps> = ({
                           )}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="inline-flex items-center justify-center gap-1.5 px-3 py-1.5 rounded-xl bg-[#062448] hover:bg-[#0c532b] text-white text-xs font-bold font-['Manrope'] transition-all shadow-sm"
+                          className="inline-flex items-center justify-center gap-1.5 px-3 py-1.5 rounded-xl bg-[#0B3A66] hover:bg-[#0c532b] text-white text-xs font-bold font-['Manrope'] transition-all shadow-sm"
                         >
                           <MessageCircle size={13} />
                           <span>Book</span>
@@ -1172,7 +1172,7 @@ export const RouteMapSection: React.FC<RouteMapSectionProps> = ({
               <div className="flex items-center gap-3">
                 <Link
                   to="/jaipur-to-delhi-transport"
-                  className="text-xs font-bold text-[#062448] hover:underline font-['Space_Mono'] inline-flex items-center gap-1"
+                  className="text-xs font-bold text-[#0B3A66] hover:underline font-['Space_Mono'] inline-flex items-center gap-1"
                 >
                   View Full Route Specs <ArrowRight size={14} />
                 </Link>
@@ -1193,7 +1193,7 @@ export const RouteMapSection: React.FC<RouteMapSectionProps> = ({
             {/* Search and Filters */}
             <div className="flex flex-col md:flex-row items-stretch md:items-center justify-between gap-4 pb-6 border-b border-[#e2dacd] mb-6">
               <div>
-                <span className="text-xs font-bold text-[#062448] font-['Space_Mono'] uppercase block">
+                <span className="text-xs font-bold text-[#0B3A66] font-['Space_Mono'] uppercase block">
                   Left Rate Table • Jaipur ➔ Pan India
                 </span>
                 <h3 className="text-2xl sm:text-3xl font-extrabold uppercase font-['Archivo_Narrow'] text-[#1a1f1b]">
@@ -1209,7 +1209,7 @@ export const RouteMapSection: React.FC<RouteMapSectionProps> = ({
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
                   placeholder="Search city, rate (e.g. 24k), or state..."
-                  className="w-full pl-10 pr-4 py-2.5 rounded-xl bg-[#fbf9f6] border border-[#d8d0c3] text-xs font-['Manrope'] focus:outline-none focus:border-[#062448]"
+                  className="w-full pl-10 pr-4 py-2.5 rounded-xl bg-[#fbf9f6] border border-[#d8d0c3] text-xs font-['Manrope'] focus:outline-none focus:border-[#0B3A66]"
                 />
               </div>
             </div>
@@ -1232,7 +1232,7 @@ export const RouteMapSection: React.FC<RouteMapSectionProps> = ({
                   onClick={() => setRegionFilter(r.value)}
                   className={`px-3 py-1 rounded-full text-xs font-bold font-['Manrope'] transition-all ${
                     regionFilter === r.value
-                      ? 'bg-[#062448] text-white shadow-sm'
+                      ? 'bg-[#0B3A66] text-white shadow-sm'
                       : 'bg-[#f4eee6] text-neutral-700 hover:bg-[#e8e0d4]'
                   }`}
                 >
@@ -1245,7 +1245,7 @@ export const RouteMapSection: React.FC<RouteMapSectionProps> = ({
             <div className="overflow-x-auto">
               <table className="w-full text-left font-['Manrope'] text-sm">
                 <thead>
-                  <tr className="bg-[#FFF9E6] border-y border-[#E9A015]/30 text-xs font-['Space_Mono'] uppercase text-[#8a6500]">
+                  <tr className="bg-[#FFF9E6] border-y border-[#F5B51B]/30 text-xs font-['Space_Mono'] uppercase text-[#071F35]">
                     <th className="py-3 px-4 w-14">S. No.</th>
                     <th className="py-3 px-4">City</th>
                     <th className="py-3 px-4">Rate (Load Upto 7 Ton)</th>
@@ -1269,12 +1269,12 @@ export const RouteMapSection: React.FC<RouteMapSectionProps> = ({
                         <td className="py-3.5 px-4 font-['Space_Mono'] text-xs text-neutral-500 font-bold">{item.sNo}.</td>
                         <td className="py-3.5 px-4 font-bold text-[#1a1f1b]">
                           <div className="flex items-center gap-1.5">
-                            <MapPin size={15} className="text-[#E9A015] shrink-0" />
+                            <MapPin size={15} className="text-[#F5B51B] shrink-0" />
                             <span className="text-base">{item.destination}</span>
                           </div>
                         </td>
                         <td className="py-3.5 px-4">
-                          <span className="inline-block px-3 py-1 rounded-xl bg-[#EBF2F9] text-[#062448] font-['Space_Mono'] font-extrabold text-sm border border-[#062448]/20">
+                          <span className="inline-block px-3 py-1 rounded-xl bg-[#EBF2F9] text-[#0B3A66] font-['Space_Mono'] font-extrabold text-sm border border-[#0B3A66]/20">
                             {item.rateRange}
                           </span>
                         </td>
@@ -1284,12 +1284,12 @@ export const RouteMapSection: React.FC<RouteMapSectionProps> = ({
                           </span>
                         </td>
                         <td className="py-3.5 px-4 text-xs font-['Space_Mono'] text-neutral-600">
-                          <span>{item.distanceKm} km</span> • <span className="text-[#062448] font-semibold">{item.transitTime}</span>
+                          <span>{item.distanceKm} km</span> • <span className="text-[#0B3A66] font-semibold">{item.transitTime}</span>
                         </td>
                         <td className="py-3.5 px-4 text-right font-bold text-neutral-700 font-['Space_Mono'] text-xs sm:text-sm">
                           {item.rate19ftFormatted}
                         </td>
-                        <td className="py-3.5 px-4 text-right font-extrabold text-[#062448] font-['Space_Mono'] text-xs sm:text-sm">
+                        <td className="py-3.5 px-4 text-right font-extrabold text-[#0B3A66] font-['Space_Mono'] text-xs sm:text-sm">
                           {item.rate22ftFormatted}
                         </td>
                         <td className="py-3.5 px-4 text-center">
@@ -1299,7 +1299,7 @@ export const RouteMapSection: React.FC<RouteMapSectionProps> = ({
                             )}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="inline-flex items-center justify-center gap-1 px-3 py-1.5 rounded-xl bg-[#062448] hover:bg-[#0c532b] text-white text-xs font-bold font-['Manrope'] transition-all shadow-sm"
+                            className="inline-flex items-center justify-center gap-1 px-3 py-1.5 rounded-xl bg-[#0B3A66] hover:bg-[#0c532b] text-white text-xs font-bold font-['Manrope'] transition-all shadow-sm"
                           >
                             <MessageCircle size={13} />
                             <span>Quote</span>
@@ -1320,7 +1320,7 @@ export const RouteMapSection: React.FC<RouteMapSectionProps> = ({
               <div className="flex items-center gap-3">
                 <Link
                   to="/blog/jaipur-to-pan-india-truck-transport-rates"
-                  className="px-4 py-2 rounded-xl bg-[#062448] text-white text-xs font-bold font-['Manrope'] hover:bg-[#0c532b] transition-colors"
+                  className="px-4 py-2 rounded-xl bg-[#0B3A66] text-white text-xs font-bold font-['Manrope'] hover:bg-[#0c532b] transition-colors"
                 >
                   Read 18-City Rate Analysis
                 </Link>
@@ -1334,7 +1334,7 @@ export const RouteMapSection: React.FC<RouteMapSectionProps> = ({
           <div className="bg-white rounded-3xl p-6 md:p-10 border border-[#e2dacd] shadow-xl animate-fadeIn">
             <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 pb-6 border-b border-[#e2dacd] mb-6">
               <div>
-                <span className="text-xs font-bold text-[#062448] font-['Space_Mono'] uppercase block">
+                <span className="text-xs font-bold text-[#0B3A66] font-['Space_Mono'] uppercase block">
                   Express Surface, Air & Rail Parcel Network
                 </span>
                 <h3 className="text-2xl sm:text-3xl font-extrabold uppercase font-['Archivo_Narrow'] text-[#1a1f1b]">
@@ -1345,8 +1345,8 @@ export const RouteMapSection: React.FC<RouteMapSectionProps> = ({
                 </p>
               </div>
 
-              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#FFF9E6] text-[#8a6500] font-['Space_Mono'] text-xs font-bold border border-[#E9A015]/30">
-                <Sparkles size={14} className="text-[#E9A015]" />
+              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#FFF9E6] text-[#071F35] font-['Space_Mono'] text-xs font-bold border border-[#F5B51B]/30">
+                <Sparkles size={14} className="text-[#F5B51B]" />
                 Per KG Door-to-Door Rates
               </div>
             </div>
@@ -1355,7 +1355,7 @@ export const RouteMapSection: React.FC<RouteMapSectionProps> = ({
             <div className="overflow-x-auto">
               <table className="w-full text-left font-['Manrope'] text-sm">
                 <thead>
-                  <tr className="bg-[#FFF9E6] border-y border-[#E9A015]/30 text-xs font-['Space_Mono'] uppercase text-[#8a6500]">
+                  <tr className="bg-[#FFF9E6] border-y border-[#F5B51B]/30 text-xs font-['Space_Mono'] uppercase text-[#071F35]">
                     <th className="py-3 px-4 w-14">S. No.</th>
                     <th className="py-3 px-4">Service Type</th>
                     <th className="py-3 px-4">Category</th>
@@ -1372,13 +1372,13 @@ export const RouteMapSection: React.FC<RouteMapSectionProps> = ({
                         <span className="text-base block">{item.serviceType}</span>
                       </td>
                       <td className="py-4 px-4 text-xs font-['Space_Mono']">
-                        <span className="px-2.5 py-1 rounded-full bg-[#EBF2F9] text-[#062448] font-bold">
+                        <span className="px-2.5 py-1 rounded-full bg-[#EBF2F9] text-[#0B3A66] font-bold">
                           {item.badge}
                         </span>
                       </td>
                       <td className="py-4 px-4 text-xs text-neutral-600 max-w-sm">{item.idealFor}</td>
                       <td className="py-4 px-4 text-right">
-                        <span className="font-extrabold text-[#062448] font-['Space_Mono'] text-base sm:text-lg whitespace-nowrap">
+                        <span className="font-extrabold text-[#0B3A66] font-['Space_Mono'] text-base sm:text-lg whitespace-nowrap">
                           {item.rate}
                         </span>
                       </td>
@@ -1389,7 +1389,7 @@ export const RouteMapSection: React.FC<RouteMapSectionProps> = ({
                           )}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="inline-flex items-center justify-center gap-1.5 px-3.5 py-2 rounded-xl bg-[#062448] hover:bg-[#0c532b] text-white text-xs font-bold font-['Manrope'] transition-all shadow-sm"
+                          className="inline-flex items-center justify-center gap-1.5 px-3.5 py-2 rounded-xl bg-[#0B3A66] hover:bg-[#0c532b] text-white text-xs font-bold font-['Manrope'] transition-all shadow-sm"
                         >
                           <MessageCircle size={13} />
                           <span>Book Parcel</span>
@@ -1423,13 +1423,13 @@ export const RouteMapSection: React.FC<RouteMapSectionProps> = ({
 
 
         {/* Contact Strip Banner from Image Details */}
-        <div className="mt-10 bg-gradient-to-r from-[#1C201D] to-[#262c27] text-white rounded-3xl p-6 md:p-8 border border-neutral-800 shadow-xl flex flex-col lg:flex-row items-center justify-between gap-6">
+        <div className="mt-10 bg-gradient-to-r from-[#071F35] to-[#262c27] text-white rounded-3xl p-6 md:p-8 border border-neutral-800 shadow-xl flex flex-col lg:flex-row items-center justify-between gap-6">
           <div className="flex items-center gap-4">
-            <div className="w-14 h-14 rounded-2xl bg-[#062448] text-white flex items-center justify-center shrink-0 shadow-lg">
+            <div className="w-14 h-14 rounded-2xl bg-[#0B3A66] text-white flex items-center justify-center shrink-0 shadow-lg">
               <Phone size={26} />
             </div>
             <div>
-              <span className="text-xs font-bold uppercase tracking-wider text-[#E9A015] font-['Space_Mono'] block">
+              <span className="text-xs font-bold uppercase tracking-wider text-[#F5B51B] font-['Space_Mono'] block">
                 Direct Transport Dispatch Desk
               </span>
               <h4 className="text-xl sm:text-2xl font-extrabold uppercase font-['Archivo_Narrow'] text-white">
@@ -1446,7 +1446,7 @@ export const RouteMapSection: React.FC<RouteMapSectionProps> = ({
               href={`tel:+919784800833`}
               className="px-5 py-3 rounded-xl bg-white text-[#1a1f1b] font-bold text-xs uppercase font-['Space_Mono'] hover:bg-neutral-100 transition-colors flex items-center gap-2"
             >
-              <Phone size={14} className="text-[#062448]" />
+              <Phone size={14} className="text-[#0B3A66]" />
               <span>+91 97848 00833</span>
             </a>
             <a

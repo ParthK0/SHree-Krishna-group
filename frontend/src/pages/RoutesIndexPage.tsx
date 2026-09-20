@@ -35,10 +35,10 @@ export const RoutesIndexPage: React.FC = () => {
   return (
     <div className="w-full bg-[#ECE6DD] min-h-screen text-[#1a1f1b]">
       {/* Top Header */}
-      <section className="bg-gradient-to-b from-[#E4DDD3] to-[#ECE6DD] py-12 md:py-16 px-4 md:px-12 border-b border-[#d8d0c3]">
+      <section className="bg-gradient-to-b from-[#E4DDD3] to-[#ECE6DD] py-8 md:py-10 px-4 md:px-12 border-b border-[#d8d0c3]">
         <div className="max-w-6xl mx-auto text-center space-y-4">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#062448]/10 text-[#062448] font-['Space_Mono'] text-xs font-bold border border-[#062448]/20">
-            <Sparkles size={14} className="text-[#E9A015]" />
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#0B3A66]/10 text-[#0B3A66] font-['Space_Mono'] text-xs font-bold border border-[#0B3A66]/20">
+            <Sparkles size={14} className="text-[#F5B51B]" />
             PAN INDIA TRANSPORT CORRIDORS & RATE CARDS
           </div>
           <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold uppercase font-['Archivo_Narrow'] text-[#1a1f1b]">
@@ -73,7 +73,7 @@ export const RoutesIndexPage: React.FC = () => {
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
                 placeholder="Search route or city..."
-                className="pl-9 pr-3 py-1.5 rounded-lg border border-[#d8d0c3] bg-white text-xs font-['Manrope'] focus:outline-none focus:border-[#062448]"
+                className="pl-9 pr-3 py-1.5 rounded-lg border border-[#d8d0c3] bg-white text-xs font-['Manrope'] focus:outline-none focus:border-[#0B3A66]"
               />
             </div>
 
@@ -101,11 +101,11 @@ export const RoutesIndexPage: React.FC = () => {
           {filteredRoutes.map((route) => (
             <div
               key={route.slug}
-              className="bg-white rounded-2xl p-6 border border-[#e2dacd] shadow-sm hover:shadow-lg transition-all hover:border-[#062448] flex flex-col justify-between group"
+              className="bg-white rounded-2xl p-6 border border-[#e2dacd] shadow-sm hover:shadow-lg transition-all hover:border-[#0B3A66] flex flex-col justify-between group"
             >
               <div>
                 <div className="flex items-center justify-between mb-3">
-                  <span className="px-2.5 py-0.5 rounded-full bg-[#EBF2F9] text-[#062448] text-[10px] font-bold font-['Space_Mono'] uppercase">
+                  <span className="px-2.5 py-0.5 rounded-full bg-[#EBF2F9] text-[#0B3A66] text-[10px] font-bold font-['Space_Mono'] uppercase">
                     Daily Scheduled Linehaul
                   </span>
                   <span className="text-xs font-['Space_Mono'] font-bold text-neutral-500">
@@ -113,7 +113,7 @@ export const RoutesIndexPage: React.FC = () => {
                   </span>
                 </div>
 
-                <h2 className="text-xl font-bold uppercase font-['Archivo_Narrow'] text-[#1a1f1b] group-hover:text-[#062448] transition-colors mb-2">
+                <h2 className="text-xl font-bold uppercase font-['Archivo_Narrow'] text-[#1a1f1b] group-hover:text-[#0B3A66] transition-colors mb-2">
                   {route.fromCity} ➔ {route.toCity}
                 </h2>
 
@@ -124,7 +124,7 @@ export const RoutesIndexPage: React.FC = () => {
                 <div className="space-y-1.5 text-xs text-neutral-500 font-['Manrope'] mb-4 border-t border-b border-[#ECE6DD] py-3">
                   <div className="flex items-center justify-between">
                     <span>Transit Time:</span>
-                    <span className="font-bold text-[#062448]">{route.transitTime}</span>
+                    <span className="font-bold text-[#0B3A66]">{route.transitTime}</span>
                   </div>
                   <div className="flex items-center justify-between">
                     <span>Fleet:</span>
@@ -132,7 +132,7 @@ export const RoutesIndexPage: React.FC = () => {
                   </div>
                   <div className="flex items-center justify-between">
                     <span>Starting Price:</span>
-                    <span className="font-bold text-[#E9A015] font-['Space_Mono']">
+                    <span className="font-bold text-[#F5B51B] font-['Space_Mono']">
                       {route.priceEstimates[0]?.priceRange || 'On Request'}
                     </span>
                   </div>
@@ -156,7 +156,7 @@ export const RoutesIndexPage: React.FC = () => {
               <div className="pt-2">
                 <Link
                   to={`/${route.slug}`}
-                  className="w-full py-2.5 rounded-xl bg-[#062448] text-white font-['Manrope'] font-bold text-xs uppercase tracking-wider flex items-center justify-center gap-1.5 hover:bg-[#0A3366] transition-colors"
+                  className="w-full py-2.5 rounded-xl bg-[#0B3A66] text-white font-['Manrope'] font-bold text-xs uppercase tracking-wider flex items-center justify-center gap-1.5 hover:bg-[#072D54] transition-colors"
                 >
                   <span>View Route & Rates</span>
                   <ArrowRight size={14} />
@@ -168,7 +168,7 @@ export const RoutesIndexPage: React.FC = () => {
 
         {/* Can't find route banner */}
         <div className="mt-12 bg-white rounded-3xl p-8 border border-[#e2dacd] text-center max-w-3xl mx-auto shadow-sm">
-          <Truck className="w-10 h-10 text-[#062448] mx-auto mb-3" />
+          <Truck className="w-10 h-10 text-[#0B3A66] mx-auto mb-3" />
           <h3 className="text-xl font-bold uppercase font-['Archivo_Narrow'] text-[#1a1f1b] mb-2">
             Need a Custom Route Not Listed Here?
           </h3>
@@ -178,7 +178,7 @@ export const RoutesIndexPage: React.FC = () => {
           <div className="flex justify-center gap-3 flex-wrap">
             <Link
               to="/book-truck"
-              className="px-6 py-3 rounded-xl bg-[#062448] text-white font-bold text-xs uppercase tracking-wider hover:bg-[#0A3366] transition-colors"
+              className="px-6 py-3 rounded-xl bg-[#0B3A66] text-white font-bold text-xs uppercase tracking-wider hover:bg-[#072D54] transition-colors"
             >
               Book Custom Truck
             </Link>

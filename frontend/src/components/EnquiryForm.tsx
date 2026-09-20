@@ -133,12 +133,12 @@ export const EnquiryForm: React.FC = () => {
   if (loadingStep === 'done') {
     return (
       <div className="w-full max-w-4xl mx-auto bg-white border border-[#c5beb4] rounded-2xl p-6 sm:p-10 shadow-lg text-center space-y-6 animate-fadeIn">
-        <div className="w-16 h-16 rounded-full bg-[#EBF2F9] border border-[#062448]/30 flex items-center justify-center text-[#062448] mx-auto">
+        <div className="w-16 h-16 rounded-full bg-[#EBF2F9] border border-[#0B3A66]/30 flex items-center justify-center text-[#0B3A66] mx-auto">
           <CheckCircle2 size={36} />
         </div>
 
         <div className="space-y-2">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#062448]/10 border border-[#062448]/30 text-[#062448] font-['Space_Mono'] text-xs font-bold">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#0B3A66]/10 border border-[#0B3A66]/30 text-[#0B3A66] font-['Space_Mono'] text-xs font-bold">
             <span>Reference ID: {refId}</span>
           </div>
           <h2 className="font-['Archivo_Narrow'] text-2xl sm:text-3xl font-bold uppercase text-[#1a1f1b]">
@@ -163,9 +163,9 @@ export const EnquiryForm: React.FC = () => {
         </div>
 
         {/* Response Callout */}
-        <div className="bg-[#EBF2F9] border border-[#062448]/30 rounded-xl p-4 max-w-lg mx-auto flex items-center gap-3 text-left">
-          <Clock size={20} className="text-[#062448] shrink-0" />
-          <p className="font-['Manrope'] text-xs text-[#03162C] leading-snug">
+        <div className="bg-[#EBF2F9] border border-[#0B3A66]/30 rounded-xl p-4 max-w-lg mx-auto flex items-center gap-3 text-left">
+          <Clock size={20} className="text-[#0B3A66] shrink-0" />
+          <p className="font-['Manrope'] text-xs text-[#071F35] leading-snug">
             <strong>1-Hour Response:</strong> Your request has been sent to our dispatch desk via email. We will review your consignment specs and send your quotation directly to your WhatsApp at <span className="font-['Space_Mono'] font-bold">{formData.phone}</span> within 60 minutes. For urgent enquiries, our WhatsApp number is <span className="font-['Space_Mono'] font-bold">+91 97848 00833</span>.
           </p>
         </div>
@@ -196,7 +196,7 @@ export const EnquiryForm: React.FC = () => {
   return (
     <div className="w-full max-w-4xl mx-auto bg-white border border-[#c5beB4] rounded-2xl p-6 sm:p-10 shadow-lg">
       <div className="flex items-center gap-2 mb-2">
-        <div className="w-8 h-8 rounded-lg bg-[#EBF2F9] flex items-center justify-center text-[#062448]">
+        <div className="w-8 h-8 rounded-lg bg-[#EBF2F9] flex items-center justify-center text-[#0B3A66]">
           <MessageSquare size={18} />
         </div>
         <p className="font-['Manrope'] text-[10px] font-bold text-[#6b786d] uppercase tracking-widest">
@@ -216,7 +216,7 @@ export const EnquiryForm: React.FC = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
           <div>
             <label htmlFor="enquiry-name" className={labelClass}>
-              Full Name <span className="text-[#062448] ml-0.5">*</span>
+              Full Name <span className="text-[#0B3A66] ml-0.5">*</span>
             </label>
             <input
               id="enquiry-name"
@@ -255,7 +255,7 @@ export const EnquiryForm: React.FC = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
           <div>
             <label htmlFor="enquiry-phone" className={labelClass}>
-              Phone / WhatsApp Number <span className="text-[#062448] ml-0.5">*</span>
+              Phone / WhatsApp Number <span className="text-[#0B3A66] ml-0.5">*</span>
             </label>
             <input
               id="enquiry-phone"
@@ -301,7 +301,7 @@ export const EnquiryForm: React.FC = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
           <div>
             <label htmlFor="enquiryType" className={labelClass}>
-              Enquiry Type <span className="text-[#062448] ml-0.5">*</span>
+              Enquiry Type <span className="text-[#0B3A66] ml-0.5">*</span>
             </label>
             <select
               id="enquiryType"
@@ -326,7 +326,7 @@ export const EnquiryForm: React.FC = () => {
                   key={method}
                   className={`flex items-center justify-center gap-1.5 p-2.5 rounded-lg border text-xs font-['Manrope'] font-bold cursor-pointer transition-all ${
                     formData.preferredContact === method
-                      ? 'border-[#062448] bg-[#EBF2F9] text-[#062448]'
+                      ? 'border-[#0B3A66] bg-[#EBF2F9] text-[#0B3A66]'
                       : 'border-[#C5BEB4] bg-[#F7F5F0] text-[#4A554C] hover:bg-[#e2dad0]'
                   }`}
                 >
@@ -348,7 +348,7 @@ export const EnquiryForm: React.FC = () => {
         {/* Message / Details Textarea */}
         <div>
           <label htmlFor="enquiry-message" className={labelClass}>
-            Message / Details <span className="text-[#062448] ml-0.5">*</span>
+            Message / Details <span className="text-[#0B3A66] ml-0.5">*</span>
           </label>
           <textarea
             id="enquiry-message"
@@ -384,16 +384,16 @@ export const EnquiryForm: React.FC = () => {
               />
               <label
                 htmlFor="file-attachment"
-                className="flex items-center justify-between gap-2 px-3.5 py-2.5 rounded-lg border-1.5 border-dashed border-[#C5BEB4] bg-[#F7F5F0] text-xs font-['Manrope'] font-medium text-[#4A554C] cursor-pointer hover:border-[#062448] hover:bg-[#EBF2F9] transition-all"
+                className="flex items-center justify-between gap-2 px-3.5 py-2.5 rounded-lg border-1.5 border-dashed border-[#C5BEB4] bg-[#F7F5F0] text-xs font-['Manrope'] font-medium text-[#4A554C] cursor-pointer hover:border-[#0B3A66] hover:bg-[#EBF2F9] transition-all"
               >
                 <div className="flex items-center gap-2 overflow-hidden">
-                  <Paperclip size={16} className="text-[#062448] shrink-0" />
+                  <Paperclip size={16} className="text-[#0B3A66] shrink-0" />
                   <span className="truncate">
                     {selectedFile ? selectedFile.name : 'Choose file (PDF, Doc, Image)'}
                   </span>
                 </div>
                 {selectedFile ? (
-                  <span className="text-[10px] font-bold text-[#062448] bg-[#062448]/10 px-2 py-0.5 rounded shrink-0">
+                  <span className="text-[10px] font-bold text-[#0B3A66] bg-[#0B3A66]/10 px-2 py-0.5 rounded shrink-0">
                     {(selectedFile.size / 1024).toFixed(0)} KB
                   </span>
                 ) : (
@@ -403,7 +403,7 @@ export const EnquiryForm: React.FC = () => {
             </div>
             {selectedFile && (
               <p className="mt-1 text-[10px] font-['Manrope'] text-neutral-500 flex items-center gap-1">
-                <FileText size={12} className="text-[#062448]" />
+                <FileText size={12} className="text-[#0B3A66]" />
                 <span>File specs attached to request. You can also share directly on WhatsApp after submit.</span>
               </p>
             )}
@@ -411,18 +411,18 @@ export const EnquiryForm: React.FC = () => {
 
           {/* Legal Consent Checkbox */}
           <div className="flex flex-col justify-end">
-            <label className="flex items-start gap-2.5 cursor-pointer p-3 rounded-xl border border-[#e2dad0] bg-[#f9f6f2] hover:border-[#062448] transition-colors">
+            <label className="flex items-start gap-2.5 cursor-pointer p-3 rounded-xl border border-[#e2dad0] bg-[#f9f6f2] hover:border-[#0B3A66] transition-colors">
               <input
                 type="checkbox"
                 name="consent"
                 checked={formData.consent}
                 onChange={handleChange}
-                className="mt-0.5 rounded border-[#C5BEB4] text-[#062448] focus:ring-[#062448] h-4 w-4 shrink-0"
+                className="mt-0.5 rounded border-[#C5BEB4] text-[#0B3A66] focus:ring-[#0B3A66] h-4 w-4 shrink-0"
               />
               <span className="font-['Manrope'] text-xs text-[#3d4a3f] leading-relaxed">
                 I confirm that the information provided is accurate and I agree to the{' '}
-                <a href="/terms-and-conditions" target="_blank" rel="noopener noreferrer" className="text-[#062448] underline font-bold">Terms & Conditions</a>{' '}and{' '}
-                <a href="/privacy-policy" target="_blank" rel="noopener noreferrer" className="text-[#062448] underline font-bold">Privacy Policy</a>.{' '}
+                <a href="/terms-and-conditions" target="_blank" rel="noopener noreferrer" className="text-[#0B3A66] underline font-bold">Terms & Conditions</a>{' '}and{' '}
+                <a href="/privacy-policy" target="_blank" rel="noopener noreferrer" className="text-[#0B3A66] underline font-bold">Privacy Policy</a>.{' '}
                 I authorize Shree Krishna Transport to contact me regarding this enquiry.
               </span>
             </label>
@@ -437,8 +437,8 @@ export const EnquiryForm: React.FC = () => {
 
         {/* Loading / Status block */}
         {loadingStep === 'preparing' && (
-          <div className="bg-[#EBF2F9] border border-[#062448]/30 rounded-lg px-4 py-3 flex items-center gap-2.5 font-['Manrope'] text-xs font-bold text-[#062448]">
-            <Loader2 size={16} className="spinner text-[#062448] shrink-0" />
+          <div className="bg-[#EBF2F9] border border-[#0B3A66]/30 rounded-lg px-4 py-3 flex items-center gap-2.5 font-['Manrope'] text-xs font-bold text-[#0B3A66]">
+            <Loader2 size={16} className="spinner text-[#0B3A66] shrink-0" />
             <span>Submitting enquiry and sending notification to team...</span>
           </div>
         )}

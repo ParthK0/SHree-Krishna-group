@@ -17,7 +17,7 @@ export const FloatingWhatsApp: React.FC = () => {
       
       {/* Floating Tooltip Bubble */}
       {!tooltipDismissed && (
-        <div className="hidden sm:flex items-center gap-2 bg-[#1C201D] text-white px-3.5 py-2 rounded-xl shadow-xl border border-neutral-700 animate-in fade-in slide-in-from-right-3 duration-300">
+        <div className="hidden sm:flex items-center gap-2 bg-[#071F35] text-white px-3.5 py-2 rounded-xl shadow-xl border border-[#0B3A66] animate-in fade-in slide-in-from-right-3 duration-300">
           <div className="text-left">
             <div className="font-['Manrope'] font-bold text-xs text-white">
               Instant WhatsApp Helpline
