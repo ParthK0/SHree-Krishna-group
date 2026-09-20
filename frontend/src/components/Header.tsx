@@ -109,25 +109,25 @@ export const Header: React.FC = () => {
             }`
           }`}
       >
-        <Link to="/" className="flex items-center gap-2.5 group shrink-0">
+        <Link to="/" className="flex items-center gap-2 group flex-1 md:flex-initial min-w-0 mr-1 md:mr-0 shrink-0">
           <img
             alt="Shree Krishna Transport Network Logo"
-            className={`object-contain transition-all duration-300 ${scrolled ? 'h-7 md:h-8' : 'h-8 md:h-9.5'
+            className={`object-contain transition-all duration-300 shrink-0 ${scrolled ? 'h-8 sm:h-9 md:h-8' : 'h-9 xs:h-10 sm:h-11 md:h-9.5'
               } ${isTransparentHero ? 'drop-shadow-md' : ''}`}
             src="/images/logo.png"
           />
           <span
-            className={`font-['Archivo_Narrow'] font-bold tracking-tight uppercase transition-all duration-300 ${scrolled ? 'text-sm sm:text-base' : 'text-base sm:text-lg'
+            className={`font-['Archivo_Narrow'] font-extrabold tracking-tight uppercase transition-all duration-300 ${scrolled ? 'text-[13px] xs:text-sm sm:text-base md:text-base' : 'text-[17px] xs:text-[18px] sm:text-lg md:text-base lg:text-base xl:text-lg'
               } ${isTransparentHero ? 'text-white drop-shadow-md' : 'text-[#1a1f1b]'
-              }`}
+              } leading-tight truncate md:overflow-visible`}
           >
             SHREE KRISHNA TRANSPORT NETWORK
           </span>
         </Link>
 
-        {/* Desktop Navigation: Floating Pill Capsule */}
+        {/* Desktop Navigation: Perfectly Center-Aligned Pill Capsule */}
         <nav
-          className={`hidden lg:flex items-center justify-center gap-1.5 px-3 py-1.5 rounded-full transition-all duration-300 mx-auto ${isTransparentHero
+          className={`hidden lg:flex items-center justify-center gap-1.5 px-3 py-1.5 rounded-full transition-all duration-300 lg:absolute lg:left-1/2 lg:top-1/2 lg:-translate-x-1/2 lg:-translate-y-1/2 z-10 ${isTransparentHero
             ? 'bg-[#071F35]/35 hover:bg-[#071F35]/50 backdrop-blur-md border border-white/20 shadow-sm text-white'
             : 'bg-white/90 backdrop-blur-md border border-[#c5beb4]/40 shadow-sm text-[#3d4a3f]'
             }`}

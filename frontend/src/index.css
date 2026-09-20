@@ -9,48 +9,50 @@
   --font-label: 'Manrope', sans-serif;
 
   /* Primary brand palette (Shree Krishna Transport: Navy & Amber) */
-  --color-brand:             #0B3A66;
-  --color-brand-dark:        #071F35;
-  --color-brand-mid:         #0E4D8A;
-  --color-cta:               #F5B51B;
-  --color-cta-hover:         #E0A212;
+  --color-brand: #0B3A66;
+  --color-brand-dark: #071F35;
+  --color-brand-mid: #0E4D8A;
+  --color-cta: #F5B51B;
+  --color-cta-hover: #E0A212;
 
   /* Surface palette */
-  --color-bg:                #ECE6DD;
-  --color-surface:           #fcf9f2;
-  --color-surface-alt:       #E0D9CE;
-  --color-surface-green:     #EBF2F9;
+  --color-bg: #ECE6DD;
+  --color-surface: #fcf9f2;
+  --color-surface-alt: #E0D9CE;
+  --color-surface-green: #EBF2F9;
 
   /* M3 semantic tokens (Navy & Amber) */
-  --color-primary:           #0B3A66;
+  --color-primary: #0B3A66;
   --color-primary-container: #0E4D8A;
-  --color-on-primary:        #ffffff;
+  --color-on-primary: #ffffff;
   --color-on-primary-container: #93C5FD;
-  --color-inverse-primary:   #85B7EB;
+  --color-inverse-primary: #85B7EB;
 
-  --color-secondary:         #F5B51B;
+  --color-secondary: #F5B51B;
   --color-secondary-container: #FEF7EB;
   --color-on-secondary-container: #071F35;
 
-  --color-background:        #ECE6DD;
-  --color-on-background:     #1a1f1b;
-  --color-on-surface:        #1a1f1b;
+  --color-background: #ECE6DD;
+  --color-on-background: #1a1f1b;
+  --color-on-surface: #1a1f1b;
   --color-on-surface-variant: #3d4a3f;
   --color-surface-container-low: #f1f5f2;
   --color-surface-container-high: #e5ebe7;
   --color-surface-container: #eaf0ec;
-  --color-surface-variant:   #dde5de;
+  --color-surface-variant: #dde5de;
 
-  --color-outline:           #4A554C;
-  --color-outline-variant:   #A3B0A5;
+  --color-outline: #4A554C;
+  --color-outline-variant: #A3B0A5;
 
-  --color-inverse-surface:   #2a2f2b;
+  --color-inverse-surface: #2a2f2b;
   --color-inverse-on-surface: #eef3ef;
 }
 
 /* ─── Base ──────────────────────────────────────── */
 @layer base {
-  html { scroll-behavior: smooth; }
+  html {
+    scroll-behavior: smooth;
+  }
 
   body {
     font-family: 'Manrope', 'Inter', sans-serif;
@@ -59,51 +61,116 @@
     -webkit-font-smoothing: antialiased;
   }
 
-  * { box-sizing: border-box; }
+  * {
+    box-sizing: border-box;
+  }
 }
 
 /* ─── Animations ────────────────────────────────── */
 @keyframes truck-slide {
-  0%   { transform: translateX(-120px); opacity: 0; }
-  8%   { opacity: 0.55; }
-  88%  { opacity: 0.55; }
-  100% { transform: translateX(calc(100vw + 120px)); opacity: 0; }
+  0% {
+    transform: translateX(-120px);
+    opacity: 0;
+  }
+
+  8% {
+    opacity: 0.55;
+  }
+
+  88% {
+    opacity: 0.55;
+  }
+
+  100% {
+    transform: translateX(calc(100vw + 120px));
+    opacity: 0;
+  }
 }
 
 @keyframes route-fill {
-  0%   { stroke-dashoffset: 100; opacity: 0.3; }
-  100% { stroke-dashoffset: 0;   opacity: 1;   }
+  0% {
+    stroke-dashoffset: 100;
+    opacity: 0.3;
+  }
+
+  100% {
+    stroke-dashoffset: 0;
+    opacity: 1;
+  }
 }
 
 @keyframes pulse-dot {
-  0%, 100% { transform: scale(1);   opacity: 1; }
-  50%       { transform: scale(1.4); opacity: 0.7; }
+
+  0%,
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+
+  50% {
+    transform: scale(1.4);
+    opacity: 0.7;
+  }
 }
 
 @keyframes count-up-fade {
-  from { opacity: 0; transform: translateY(12px); }
-  to   { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 @keyframes arrow-bounce {
-  0%, 100% { transform: translateX(0); }
-  50%       { transform: translateX(5px); }
+
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+
+  50% {
+    transform: translateX(5px);
+  }
 }
 
 @keyframes spin-smooth {
-  from { transform: rotate(0deg); }
-  to   { transform: rotate(360deg); }
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 @keyframes draw-check {
-  from { stroke-dashoffset: 40; }
-  to   { stroke-dashoffset: 0; }
+  from {
+    stroke-dashoffset: 40;
+  }
+
+  to {
+    stroke-dashoffset: 0;
+  }
 }
 
 @keyframes float-bg {
-  0%, 100% { transform: translateY(0) translateX(0); }
-  33%       { transform: translateY(-6px) translateX(4px); }
-  66%       { transform: translateY(4px) translateX(-3px); }
+
+  0%,
+  100% {
+    transform: translateY(0) translateX(0);
+  }
+
+  33% {
+    transform: translateY(-6px) translateX(4px);
+  }
+
+  66% {
+    transform: translateY(4px) translateX(-3px);
+  }
 }
 
 /* ─── Truck animation ───────────────────────────── */
@@ -155,10 +222,10 @@
   padding: 0 2px;
 }
 
-.float-label-wrap input:focus + label,
-.float-label-wrap input:not(:placeholder-shown) + label,
-.float-label-wrap select:focus + label,
-.float-label-wrap select:not([value=""]) + label {
+.float-label-wrap input:focus+label,
+.float-label-wrap input:not(:placeholder-shown)+label,
+.float-label-wrap select:focus+label,
+.float-label-wrap select:not([value=""])+label {
   top: -10px;
   transform: translateY(0);
   font-size: 0.6rem;
@@ -267,6 +334,7 @@
   0% {
     transform: translateX(0%);
   }
+
   100% {
     transform: translateX(-50%);
   }
@@ -277,4 +345,3 @@
   width: max-content;
   animation: marquee 35s linear infinite;
 }
-
