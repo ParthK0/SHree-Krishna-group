@@ -25,7 +25,7 @@ export const LiveActivityFeed: React.FC = () => {
       <div className="max-w-7xl mx-auto flex items-center gap-3">
         
         {/* Live Badge */}
-        <div className="shrink-0 flex items-center gap-2 bg-[#0F6A37]/25 border border-[#0F6A37]/50 px-2.5 py-1 rounded-md text-[#8ad7a0] font-['Space_Mono'] text-[10px] font-bold uppercase tracking-wider">
+        <div className="shrink-0 flex items-center gap-2 bg-[#0B3A66]/25 border border-[#0B3A66]/50 px-2.5 py-1 rounded-md text-[#85B7EB] font-['Space_Mono'] text-[10px] font-bold uppercase tracking-wider">
           <span className="w-2 h-2 rounded-full bg-[#25D366] animate-pulse" />
           <span className="hidden sm:inline">LIVE NETWORK</span>
           <span className="sm:hidden">LIVE</span>
@@ -40,16 +40,16 @@ export const LiveActivityFeed: React.FC = () => {
                 key={`${item.id}-${idx}`}
                 className="inline-flex items-center gap-2 text-xs font-['Manrope'] text-neutral-300"
               >
-                {item.icon === 'truck' && <Truck size={13} className="text-[#F4B400] shrink-0" />}
-                {item.icon === 'parcel' && <PackageCheck size={13} className="text-[#8ad7a0] shrink-0" />}
+                {item.icon === 'truck' && <Truck size={13} className="text-[#F5B51B] shrink-0" />}
+                {item.icon === 'parcel' && <PackageCheck size={13} className="text-[#85B7EB] shrink-0" />}
                 {item.icon === 'quote' && <Zap size={13} className="text-[#25D366] shrink-0" />}
-                {item.icon === 'verified' && <CheckCircle size={13} className="text-[#8ad7a0] shrink-0" />}
+                {item.icon === 'verified' && <CheckCircle size={13} className="text-[#85B7EB] shrink-0" />}
 
                 <span className="font-bold text-white">{item.route}</span>
                 <span className="text-neutral-500">•</span>
                 <span className="text-neutral-400 font-['Space_Mono'] text-[11px]">{item.load}</span>
                 <span className="text-neutral-600">•</span>
-                <span className="text-[10px] px-1.5 py-0.2 rounded bg-neutral-800 text-[#8ad7a0] font-semibold">
+                <span className="text-[10px] px-1.5 py-0.2 rounded bg-neutral-800 text-[#85B7EB] font-semibold">
                   {item.status}
                 </span>
                 <span className="text-neutral-500 text-[10px] font-['Space_Mono']">

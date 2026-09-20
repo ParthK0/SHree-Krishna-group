@@ -7,36 +7,36 @@ import { useMetaSEO } from '../lib/useMetaSEO';
 
 export const BookTruckPage: React.FC = () => {
   useMetaSEO({
-    title: 'Book a Truck Online in Jaipur | Instant Rates & Verified Drivers | Shree Krishna Transport',
+    title: 'Book a Truck Online in Jaipur | Instant Rates & Verified Drivers | Shree Krishna Transport Network',
     description: 'Book Full Truck Load (FTL) and Part Truck Load (PTL) online. 14ft to 32ft container trucks available on call across Rajasthan and North India.',
     canonicalPath: '/book-truck',
   });
 
   return (
-    <div className="min-h-screen bg-[#ECE6DD] py-10 md:py-16 px-4 md:px-12">
+    <div className="min-h-screen bg-[#ECE6DD] py-6 md:py-10 px-4 md:px-12">
       <div className="max-w-6xl mx-auto space-y-8">
         
         {/* Navigation Breadcrumb & Back Link */}
         <div className="flex items-center justify-between">
           <Link
             to="/"
-            className="inline-flex items-center gap-2 font-['Manrope'] text-xs font-bold text-[#0F6A37] hover:text-[#134E3A] uppercase tracking-wider transition-colors"
+            className="inline-flex items-center gap-2 font-['Manrope'] text-xs font-bold text-[#0B3A66] hover:text-[#071F35] uppercase tracking-wider transition-colors"
           >
             <ArrowLeft size={16} />
             <span>Back to Home</span>
           </Link>
                     <div className="font-['Space_Mono'] text-xs text-[#5a665c]">
-            <span>Home</span> / <span className="text-[#0F6A37] font-bold">Book Freight &amp; Parcel</span>
+            <span>Home</span> / <span className="text-[#0B3A66] font-bold">Book Freight &amp; Parcel</span>
           </div>
         </div>
         
         {/* Page Header */}
         <div className="bg-white border border-[#c5beB4] rounded-2xl p-6 md:p-8 shadow-sm">
           <div className="flex items-center gap-2 mb-2">
-            <div className="w-8 h-8 rounded-lg bg-[#EBF5EE] flex items-center justify-center text-[#0F6A37]">
+            <div className="w-8 h-8 rounded-lg bg-[#EBF2F9] flex items-center justify-center text-[#0B3A66]">
               <Truck size={18} />
             </div>
-            <span className="font-['Manrope'] text-xs font-bold text-[#0F6A37] uppercase tracking-widest">
+            <span className="font-['Manrope'] text-xs font-bold text-[#0B3A66] uppercase tracking-widest">
               Instant Freight &amp; Parcel Dispatch
             </span>
           </div>
@@ -63,6 +63,7 @@ export const BookTruckPage: React.FC = () => {
                 <img
                   src="/images/dropdelivery.webp"
                   alt="Book a Truck Delivery - Shree Krishna Transport"
+                  loading="lazy"
                   className="w-full h-72 sm:h-80 md:h-96 object-cover rounded-xl border border-[#e2dad0]"
                 />
                 <div className="p-4 space-y-2">

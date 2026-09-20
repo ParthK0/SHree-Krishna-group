@@ -1,5 +1,5 @@
-// Business constants — Shree Krishna Transport
-export const BUSINESS_NAME = 'Shree Krishna Transport';
+// Business constants — Shree Krishna Transport Network
+export const BUSINESS_NAME = 'Shree Krishna Transport Network';
 export const PHONE_NUMBER = '9784800833';
 export const PHONE_DISPLAY = '+91 97848 00833';
 export const WHATSAPP_NUMBER = '919784800833';

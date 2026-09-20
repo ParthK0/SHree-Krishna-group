@@ -12,16 +12,16 @@ const Section: React.FC<{ title: string; children: React.ReactNode }> = ({ title
 
 export const TermsPage: React.FC = () => {
   return (
-    <div className="min-h-screen bg-[#ECE6DD] py-10 md:py-16 px-4 md:px-12">
+    <div className="min-h-screen bg-[#ECE6DD] py-6 md:py-10 px-4 md:px-12">
       <div className="max-w-3xl mx-auto space-y-8">
 
         <div className="flex items-center justify-between">
-          <Link to="/" className="inline-flex items-center gap-2 font-['Manrope'] text-xs font-bold text-[#0F6A37] hover:text-[#134E3A] uppercase tracking-wider transition-colors">
+          <Link to="/" className="inline-flex items-center gap-2 font-['Manrope'] text-xs font-bold text-[#0B3A66] hover:text-[#071F35] uppercase tracking-wider transition-colors">
             <ArrowLeft size={16} />
             <span>Back to Home</span>
           </Link>
           <div className="font-['Space_Mono'] text-xs text-[#5a665c]">
-            Home / <span className="text-[#0F6A37] font-bold">Terms & Conditions</span>
+            Home / <span className="text-[#0B3A66] font-bold">Terms & Conditions</span>
           </div>
         </div>
 
@@ -35,7 +35,7 @@ export const TermsPage: React.FC = () => {
 
           <Section title="1. About Shree Krishna Transport">
             <p>
-              <strong>Shree Krishna Transport</strong> is a transportation service provider and freight facilitator based in Jaipur, Rajasthan (GSTIN: <span className="font-['Space_Mono'] font-bold text-[#0F6A37]">{GSTIN}</span>). We connect customers with our network of independent transport partners to arrange transportation services across India. Unless expressly agreed otherwise in writing, Shree Krishna Transport does not own or operate the vehicles used for transportation.
+              <strong>Shree Krishna Transport</strong> is a transportation service provider and freight facilitator based in Jaipur, Rajasthan (GSTIN: <span className="font-['Space_Mono'] font-bold text-[#0B3A66]">{GSTIN}</span>). We connect customers with our network of independent transport partners to arrange transportation services across India. Unless expressly agreed otherwise in writing, Shree Krishna Transport does not own or operate the vehicles used for transportation.
             </p>
             <p className="text-xs text-[#6b786d]">Registered Address: {ADDRESS_FULL}</p>
           </Section>
@@ -64,14 +64,14 @@ export const TermsPage: React.FC = () => {
               <strong>Consignment Note / LR:</strong> The independent transporter assigned to your shipment issues the Lorry Receipt (LR) / consignment note for cargo delivery.
             </p>
             <p>
-              <strong>Booking Reference ID:</strong> Shree Krishna Transport provides a unique Booking Reference ID (e.g., <code className="bg-[#f4f0ea] px-1.5 py-0.5 rounded font-['Space_Mono'] text-xs text-[#0F6A37]">SKT-BK-12345</code>) for your request to facilitate direct tracking and communication with our dispatch desk.
+              <strong>Booking Reference ID:</strong> Shree Krishna Transport provides a unique Booking Reference ID (e.g., <code className="bg-[#f4f0ea] px-1.5 py-0.5 rounded font-['Space_Mono'] text-xs text-[#0B3A66]">SKT-BK-12345</code>) for your request to facilitate direct tracking and communication with our dispatch desk.
             </p>
           </Section>
 
           <Section title="5. Vehicle Availability & Cancellation">
             <p>Cancellations requested before vehicle dispatch/confirmation are free of charge.</p>
             <p>If a confirmed transporter becomes unavailable due to unforeseen operational issues, Shree Krishna Transport will make reasonable efforts to arrange an alternate vehicle. Availability cannot be guaranteed.</p>
-            <p>See our full <Link to="/cancellation-refund-policy" className="text-[#0F6A37] underline font-bold">Cancellation & Refund Policy</Link> for details.</p>
+            <p>See our full <Link to="/cancellation-refund-policy" className="text-[#0B3A66] underline font-bold">Cancellation & Refund Policy</Link> for details.</p>
           </Section>
 
           <Section title="6. Force Majeure">
@@ -103,8 +103,8 @@ export const TermsPage: React.FC = () => {
           <Section title="11. Contact & Legal Details">
             <p>For any operational or legal inquiries regarding these terms:</p>
             <p><strong>Business Name:</strong> {BUSINESS_NAME} (Parent Entity: Shree Krishna Buildtech)</p>
-            <p><strong>GSTIN:</strong> <span className="font-['Space_Mono'] font-bold text-[#0F6A37]">{GSTIN}</span></p>
-            <p><strong>Email:</strong> <a href={`mailto:${CONTACT_EMAIL}`} className="text-[#0F6A37] underline">{CONTACT_EMAIL}</a></p>
+            <p><strong>GSTIN:</strong> <span className="font-['Space_Mono'] font-bold text-[#0B3A66]">{GSTIN}</span></p>
+            <p><strong>Email:</strong> <a href={`mailto:${CONTACT_EMAIL}`} className="text-[#0B3A66] underline">{CONTACT_EMAIL}</a></p>
             <p><strong>Phone / WhatsApp:</strong> {PHONE_DISPLAY}</p>
           </Section>
         </div>

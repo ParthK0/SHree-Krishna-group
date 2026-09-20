@@ -15,7 +15,7 @@ export const CalculatorPage: React.FC = () => {
   return (
     <div className="w-full min-h-screen bg-[#ECE6DD] text-[#1a1f1b] font-['Manrope'] pb-16">
       {/* Hero Header */}
-      <section className="bg-neutral-900 text-white py-12 md:py-16 px-4 md:px-8 border-b border-[#3e4841] relative overflow-hidden">
+      <section className="bg-neutral-900 text-white py-8 md:py-10 px-4 md:px-8 border-b border-[#3e4841] relative overflow-hidden">
         <div 
           className="absolute inset-0 bg-cover bg-center opacity-20 mix-blend-overlay"
           style={{ backgroundImage: "url('/images/home.webp')" }}
@@ -23,8 +23,8 @@ export const CalculatorPage: React.FC = () => {
         <div className="absolute inset-0 bg-gradient-to-b from-neutral-950/80 via-neutral-900 to-neutral-950/90" />
 
         <div className="relative z-10 max-w-4xl mx-auto text-center space-y-4">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#0F6A37]/30 border border-[#0F6A37]/60 text-[#8ad7a0] font-['Space_Mono'] text-xs uppercase font-bold tracking-wider">
-            <Truck size={14} className="text-[#F4B400]" />
+          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#0B3A66]/30 border border-[#0B3A66]/60 text-[#85B7EB] font-['Space_Mono'] text-xs uppercase font-bold tracking-wider">
+            <Truck size={14} className="text-[#F5B51B]" />
             <span>TRANSPARENT FREIGHT ESTIMATION</span>
           </div>
 
@@ -48,7 +48,7 @@ export const CalculatorPage: React.FC = () => {
         {/* 3 Pillars */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           <div className="bg-white border border-[#c5beb4] rounded-xl p-5 space-y-2 shadow-sm">
-            <div className="w-10 h-10 rounded-lg bg-[#EBF5EE] text-[#0F6A37] flex items-center justify-center">
+            <div className="w-10 h-10 rounded-lg bg-[#EBF2F9] text-[#0B3A66] flex items-center justify-center">
               <FileCheck size={20} />
             </div>
             <h3 className="font-['Archivo_Narrow'] font-bold text-lg uppercase text-[#1a1f1b]">
@@ -60,7 +60,7 @@ export const CalculatorPage: React.FC = () => {
           </div>
 
           <div className="bg-white border border-[#c5beb4] rounded-xl p-5 space-y-2 shadow-sm">
-            <div className="w-10 h-10 rounded-lg bg-[#EBF5EE] text-[#F4B400] flex items-center justify-center">
+            <div className="w-10 h-10 rounded-lg bg-[#EBF2F9] text-[#F5B51B] flex items-center justify-center">
               <ShieldCheck size={20} />
             </div>
             <h3 className="font-['Archivo_Narrow'] font-bold text-lg uppercase text-[#1a1f1b]">
@@ -72,7 +72,7 @@ export const CalculatorPage: React.FC = () => {
           </div>
 
           <div className="bg-white border border-[#c5beb4] rounded-xl p-5 space-y-2 shadow-sm">
-            <div className="w-10 h-10 rounded-lg bg-[#EBF5EE] text-[#0F6A37] flex items-center justify-center">
+            <div className="w-10 h-10 rounded-lg bg-[#EBF2F9] text-[#0B3A66] flex items-center justify-center">
               <MessageCircle size={20} />
             </div>
             <h3 className="font-['Archivo_Narrow'] font-bold text-lg uppercase text-[#1a1f1b]">
@@ -87,7 +87,7 @@ export const CalculatorPage: React.FC = () => {
         {/* FAQ Section */}
         <div className="bg-white border border-[#c5beb4] rounded-2xl p-6 sm:p-8 space-y-6 shadow-sm">
           <div className="flex items-center gap-2 border-b border-[#e5ded5] pb-4">
-            <HelpCircle size={22} className="text-[#0F6A37]" />
+            <HelpCircle size={22} className="text-[#0B3A66]" />
             <h2 className="font-['Archivo_Narrow'] text-xl sm:text-2xl font-bold uppercase text-[#1a1f1b]">
               Frequently Asked Questions About Freight Rates
             </h2>
@@ -122,7 +122,7 @@ export const CalculatorPage: React.FC = () => {
             </p>
             <Link
               to="/book-truck"
-              className="inline-flex items-center gap-2 text-xs font-bold font-['Manrope'] text-[#0F6A37] hover:text-[#0c562c] uppercase tracking-wider"
+              className="inline-flex items-center gap-2 text-xs font-bold font-['Manrope'] text-[#0B3A66] hover:text-[#072D54] uppercase tracking-wider"
             >
               <span>Go to Quote Form</span>
               <ArrowRight size={14} />

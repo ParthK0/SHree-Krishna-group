@@ -1,90 +1,106 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Truck, ArrowRight, MessageCircle, Package, ShieldCheck, Flame, Calculator } from 'lucide-react';
+import { motion } from 'framer-motion';
+import { Truck, CheckCircle2, ArrowRight } from 'lucide-react';
 
 export const Hero: React.FC = () => {
-  const scrollToCalculator = (e: React.MouseEvent) => {
-    e.preventDefault();
-    const el = document.getElementById('instant-quote');
-    if (el) {
-      el.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }
-  };
-
   return (
-    <section className="relative w-full min-h-[480px] md:min-h-[550px] lg:min-h-[600px] flex items-center px-4 sm:px-8 md:px-12 lg:px-20 py-12 md:py-20 overflow-hidden bg-neutral-900 border-b border-[#3e4841]">
-      {/* Full Background Image */}
-      <div
-        className="absolute inset-0 bg-cover bg-center"
-        style={{
-          backgroundImage: "url('/images/home.webp')",
-        }}
-      />
+    // White background padding frame
+    <section className="w-full h-[100dvh] min-h-[580px] bg-white flex items-center justify-center p-1.5 sm:p-2 md:p-3">
 
-      {/* Gradient Overlay for Readability */}
-      <div className="absolute inset-0 bg-gradient-to-r from-black/95 via-black/80 to-black/40 pointer-events-none" />
+      {/* 
+        Image Card Box:
+        Uses homefinalmobile.webp (portrait 1024x1536) for mobile view (< 768px)
+        and homefinal.webp (landscape 1828x860) for desktop view (>= 768px)
+      */}
+      <div className="relative w-full h-full overflow-hidden rounded-xl sm:rounded-2xl md:rounded-[22px] shadow-md border border-neutral-100">
 
-      {/* Copy Content */}
-      <div className="relative z-10 w-full max-w-5xl flex flex-col justify-center items-start text-left">
-        <div className="max-w-3xl">
-          
-          {/* Live Urgency Counter & Service Pills */}
-          <div className="flex flex-wrap items-center gap-2.5 mb-4">
-            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#F4B400]/20 border border-[#F4B400]/50 text-[#F4B400] font-['Space_Mono'] text-[10px] sm:text-[11px] font-bold">
-              <Flame size={13} className="text-[#F4B400] animate-bounce" />
-              <span>134+ Quotes Delivered This Week</span>
-            </span>
+        {/* Responsive Picture Element */}
+        <picture className="absolute inset-0 w-full h-full">
+          <source media="(max-width: 767px)" srcSet="/images/homefinalmobile.webp" type="image/webp" />
+          <source media="(min-width: 768px)" srcSet="/images/homefinal.webp" type="image/webp" />
+          <img
+            src="/images/homefinal.webp"
+            alt="Shree Krishna Transport Network Fleet Convoy"
+            className="w-full h-full object-cover object-[center_30%] sm:object-center transition-transform duration-1000 scale-100 hover:scale-105"
+          />
+        </picture>
 
-            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#0F6A37]/40 border border-[#0F6A37]/70 text-[#9be9b0] font-['Space_Mono'] text-[10px] sm:text-[11px] font-bold">
-              <ShieldCheck size={13} className="text-[#8ad7a0]" />
-              <span>Full Truck • Part Load • Parcel (0–150 kg)</span>
-            </span>
-          </div>
+        {/* 
+          Directional Gradients (darkness reduced by 20% for brighter scenery visibility):
+          - Desktop (md+): Left-to-right dark-to-transparent for side-by-side reading
+          - Mobile (<md): Bottom-to-top gradient so the sunny sky & convoy remain clear and bright up top
+        */}
+        <div className="absolute inset-0 hidden md:block bg-gradient-to-r from-black/45 via-black/30 sm:via-black/20 to-transparent pointer-events-none" />
+        <div className="absolute inset-0 md:hidden bg-gradient-to-t from-black/70 via-black/40 to-transparent pointer-events-none" />
 
-          <h1 className="font-['Archivo_Narrow'] text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold leading-[0.92] tracking-tight text-white uppercase mb-3.5 drop-shadow-xl">
-            SHREE KRISHNA TRANSPORT
-          </h1>
+        {/* 
+          Main Hero Visual Content:
+          Centered vertically (mid from height) and left-aligned on mobile and desktop
+        */}
+        <div className="absolute inset-0 z-10 flex flex-col justify-center items-start px-4 sm:px-8 md:px-14 lg:px-16 max-w-4xl pt-16 md:pt-14 pb-4 md:pb-0">
+          <motion.div
+            initial={{ opacity: 0, y: 18 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.55, ease: [0.16, 1, 0.3, 1] }}
+            className="space-y-3 sm:space-y-4 md:space-y-5 flex flex-col items-start w-full"
+          >
+            {/* Main Headline: Exactly 2 lines, left-aligned */}
+            <h1 className="text-2xl xs:text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold text-white uppercase font-['Archivo_Narrow'] tracking-tight leading-[1.1] md:leading-[1.2] drop-shadow-lg text-left">
+              <span className="block whitespace-nowrap md:inline">Reliable Freight Transportation</span>{' '}
+              <span className="block whitespace-nowrap md:inline">From Rajasthan Across India</span>
+            </h1>
 
-          <h2 className="font-['Archivo_Narrow'] text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-[#8ad7a0] uppercase mb-5 leading-tight drop-shadow-md">
-            Reliable Rajasthan to All India Transport &amp; Parcel Services
-          </h2>
+            {/* Value Proposition: 16px / 1.45 line-height, 2 explicit lines, high contrast */}
+            <p className="text-[#E2ECF6] font-['Manrope'] font-normal text-[14px] xs:text-[16px] sm:text-base md:text-base lg:text-[18px] leading-[1.45] drop-shadow-md max-w-xl text-left">
+              <span className="block md:inline">Full Truckload, Part Load &amp; Commercial Freight through</span>{' '}
+              <span className="block md:inline">our verified transport network.</span>
+            </p>
 
-          <p className="font-['Inter'] text-base sm:text-lg md:text-xl text-neutral-100 leading-relaxed max-w-xl mb-7 flex items-center gap-2.5">
-            <MessageCircle size={22} className="text-[#25D366] shrink-0" />
-            <span>
-              Get an instant freight quote within <strong className="text-[#F4B400] font-extrabold">60 minutes</strong> with transparent E-Way bill compliance.
-            </span>
-          </p>
+            {/* CTA Hierarchy: Stacked on mobile (line 1 & line 2), side-by-side on desktop */}
+            <div className="flex flex-col sm:flex-row items-start justify-start gap-2.5 sm:gap-3 md:gap-4 pt-1 sm:pt-2 w-full sm:w-auto">
+              {/* Amber Primary Button — Line 1 on mobile */}
+              <Link
+                to="/contact#enquiry"
+                className="inline-flex items-center justify-center gap-1.5 md:gap-2 bg-[#F5B51B] hover:bg-[#E0A212] text-[#071F35] font-['Manrope'] font-extrabold text-[13.5px] xs:text-[14px] sm:text-xs md:text-sm uppercase tracking-wider px-4 xs:px-5 py-2.5 xs:py-3 sm:px-6 sm:py-3 md:px-8 md:py-3.5 rounded-full shadow-xl hover:shadow-2xl transition-all duration-200 hover:-translate-y-0.5 active:scale-95 group shimmer-btn shrink-0"
+              >
+                <span>Get a Freight Quote</span>
+                <ArrowRight size={15} className="transition-transform group-hover:translate-x-1 animate-arrow-nudge text-[#071F35] md:w-4 md:h-4" />
+              </Link>
 
-          {/* Action Buttons */}
-          <div className="flex flex-col sm:flex-row flex-wrap gap-3 sm:gap-4 w-full sm:w-auto">
-            <Link
-              to="/book-truck"
-              className="inline-flex items-center justify-center gap-2 bg-[#F4B400] hover:bg-[#e0a500] text-[#6c5000] font-['Manrope'] font-extrabold text-sm sm:text-base px-6 py-3.5 rounded-xl shadow-xl hover:shadow-2xl transition-all duration-200 uppercase tracking-wider group"
-            >
-              <Truck size={19} className="transition-transform group-hover:translate-x-1 text-[#6c5000]" />
-              <span>Book a Truck</span>
-              <ArrowRight size={17} className="arrow-slide ml-0.5 transition-transform group-hover:translate-x-1.5" />
-            </Link>
+              {/* Blue Secondary Button — Line 2 on mobile */}
+              <Link
+                to="/book-truck"
+                className="inline-flex items-center justify-center gap-1.5 md:gap-2 bg-[#0B3A66]/90 hover:bg-[#072d54] text-white font-['Manrope'] font-bold text-[13.5px] xs:text-[14px] sm:text-xs md:text-sm uppercase tracking-wider px-4 xs:px-5 py-2.5 xs:py-3 sm:px-6 sm:py-3 md:px-8 md:py-3.5 rounded-full border border-[#85B7EB]/40 shadow-xl hover:shadow-2xl transition-all duration-200 hover:-translate-y-0.5 active:scale-95 group shrink-0"
+              >
+                <Truck size={15} className="transition-transform group-hover:scale-110 text-[#F5B51B] md:w-4 md:h-4" />
+                <span>Book a Truck</span>
+              </Link>
+            </div>
 
-            <Link
-              to="/book-truck?type=parcel"
-              className="inline-flex items-center justify-center gap-2 bg-[#0F6A37] hover:bg-[#0c562c] text-white font-['Manrope'] font-extrabold text-sm sm:text-base px-6 py-3.5 rounded-xl shadow-xl hover:shadow-2xl transition-all duration-200 uppercase tracking-wider group border border-[#8ad7a0]/40"
-            >
-              <Package size={19} className="transition-transform group-hover:translate-x-1 text-[#F4B400]" />
-              <span>Book a Parcel <span className="text-xs bg-white/20 px-1.5 py-0.5 rounded ml-1 font-['Space_Mono']">0-150 kg</span></span>
-              <ArrowRight size={17} className="arrow-slide ml-0.5 transition-transform group-hover:translate-x-1.5 text-white" />
-            </Link>
+            {/* Trust Row: 2x2 grid on mobile at 14px, horizontal on desktop */}
+            <div className="w-full grid grid-cols-2 gap-x-3 xs:gap-x-4 gap-y-2 md:flex md:flex-wrap md:items-center md:gap-x-6 md:gap-y-1.5 pt-3 sm:pt-4 border-t border-white/15 text-[#E2ECF6] text-[13px] xs:text-[14px] sm:text-xs md:text-sm font-['Manrope'] font-medium text-left">
+              <div className="inline-flex items-center gap-1.5">
+                <CheckCircle2 size={15} className="text-[#60A5FA] shrink-0" />
+                <span>Pan-India Delivery</span>
+              </div>
+              <div className="inline-flex items-center gap-1.5">
+                <CheckCircle2 size={15} className="text-[#60A5FA] shrink-0" />
+                <span>Verified Partners</span>
+              </div>
+              <div className="inline-flex items-center gap-1.5">
+                <CheckCircle2 size={15} className="text-[#60A5FA] shrink-0" />
+                <span>E-Way Bill Support</span>
+              </div>
+              <div className="inline-flex items-center gap-1.5">
+                <CheckCircle2 size={15} className="text-[#60A5FA] shrink-0" />
+                <span>Quote Within 60 Min</span>
+              </div>
+            </div>
 
-            <button
-              onClick={scrollToCalculator}
-              className="inline-flex items-center justify-center gap-2 bg-neutral-800/90 hover:bg-neutral-700 text-neutral-100 font-['Manrope'] font-extrabold text-sm sm:text-base px-5 py-3.5 rounded-xl shadow-lg transition-all duration-200 uppercase tracking-wider border border-neutral-700 group cursor-pointer"
-            >
-              <Calculator size={18} className="text-[#F4B400]" />
-              <span>Instant Calculator</span>
-            </button>
-          </div>
+          </motion.div>
         </div>
+
       </div>
     </section>
   );

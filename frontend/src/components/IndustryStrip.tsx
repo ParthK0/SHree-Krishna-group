@@ -74,13 +74,13 @@ export const IndustryStrip: React.FC = () => {
   const current = INDUSTRIES.find((i) => i.id === activeTab) || INDUSTRIES[0];
 
   return (
-    <section className="px-4 md:px-12 py-12 md:py-16 bg-[#F4EFE6] border-b border-[#e2dad0]">
+    <section className="px-4 md:px-12 py-8 md:py-10 bg-[#F4EFE6] border-b border-[#e2dad0]">
       <div className="max-w-6xl mx-auto">
         
         {/* Header */}
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-8">
           <div>
-            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#0F6A37]/15 border border-[#0F6A37]/30 text-[#0F6A37] font-['Space_Mono'] text-xs font-bold uppercase tracking-wider mb-2">
+            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#0B3A66]/15 border border-[#0B3A66]/30 text-[#0B3A66] font-['Space_Mono'] text-xs font-bold uppercase tracking-wider mb-2">
               <Layers size={13} />
               <span>Specialized Freight Sectors</span>
             </div>
@@ -94,7 +94,7 @@ export const IndustryStrip: React.FC = () => {
 
           <Link
             to="/routes"
-            className="inline-flex items-center gap-1.5 font-['Manrope'] text-xs font-extrabold text-[#0F6A37] hover:text-[#134E3A] uppercase tracking-wider transition-colors shrink-0"
+            className="inline-flex items-center gap-1.5 font-['Manrope'] text-xs font-extrabold text-[#0B3A66] hover:text-[#071F35] uppercase tracking-wider transition-colors shrink-0"
           >
             <span>Explore All Industrial Corridors</span>
             <ArrowRight size={14} />
@@ -111,8 +111,8 @@ export const IndustryStrip: React.FC = () => {
                 onClick={() => setActiveTab(ind.id)}
                 className={`flex items-center gap-2 px-4 py-2.5 rounded-xl font-['Manrope'] font-bold text-xs uppercase tracking-wider whitespace-nowrap transition-all border ${
                   isActive
-                    ? 'bg-[#0F6A37] text-white border-[#0F6A37] shadow-md'
-                    : 'bg-white text-[#3d4a3f] border-[#c5beb4] hover:border-[#0F6A37]'
+                    ? 'bg-[#0B3A66] text-white border-[#0B3A66] shadow-md'
+                    : 'bg-white text-[#3d4a3f] border-[#c5beb4] hover:border-[#0B3A66]'
                 }`}
               >
                 <span>{ind.icon}</span>
@@ -133,7 +133,7 @@ export const IndustryStrip: React.FC = () => {
                   <h3 className="font-['Archivo_Narrow'] text-2xl font-bold uppercase text-[#1a1f1b]">
                     {current.title}
                   </h3>
-                  <p className="font-['Space_Mono'] text-xs text-[#0F6A37] font-bold">
+                  <p className="font-['Space_Mono'] text-xs text-[#0B3A66] font-bold">
                     Hubs: {current.hub}
                   </p>
                 </div>
@@ -146,7 +146,7 @@ export const IndustryStrip: React.FC = () => {
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2">
                 <div className="bg-[#FAF7F2] p-3 rounded-xl border border-[#e2dad0]">
                   <div className="font-['Manrope'] text-[10px] font-bold uppercase tracking-wider text-[#6b786d] mb-1 flex items-center gap-1.5">
-                    <Truck size={12} className="text-[#0F6A37]" />
+                    <Truck size={12} className="text-[#0B3A66]" />
                     <span>Recommended Fleet</span>
                   </div>
                   <div className="font-['Manrope'] text-xs font-bold text-[#1a1f1b]">
@@ -156,7 +156,7 @@ export const IndustryStrip: React.FC = () => {
 
                 <div className="bg-[#FAF7F2] p-3 rounded-xl border border-[#e2dad0]">
                   <div className="font-['Manrope'] text-[10px] font-bold uppercase tracking-wider text-[#6b786d] mb-1 flex items-center gap-1.5">
-                    <ShieldCheck size={12} className="text-[#F4B400]" />
+                    <ShieldCheck size={12} className="text-[#F5B51B]" />
                     <span>Key Corridors</span>
                   </div>
                   <div className="font-['Manrope'] text-xs font-bold text-[#1a1f1b]">
@@ -167,9 +167,9 @@ export const IndustryStrip: React.FC = () => {
             </div>
 
             {/* CTA Box */}
-            <div className="lg:col-span-4 bg-[#1C201D] text-white p-6 rounded-xl space-y-3 flex flex-col justify-between">
+            <div className="lg:col-span-4 bg-[#071F35] text-white p-6 rounded-xl space-y-3 flex flex-col justify-between">
               <div>
-                <div className="text-[10px] font-['Space_Mono'] text-[#8ad7a0] uppercase font-bold tracking-wider mb-1">
+                <div className="text-[10px] font-['Space_Mono'] text-[#85B7EB] uppercase font-bold tracking-wider mb-1">
                   Dedicated Business Account
                 </div>
                 <h4 className="font-['Archivo_Narrow'] text-lg font-bold uppercase text-white leading-tight">
@@ -182,7 +182,7 @@ export const IndustryStrip: React.FC = () => {
 
               <Link
                 to="/book-truck"
-                className="inline-flex items-center justify-center gap-2 bg-[#F4B400] hover:bg-[#e0a500] text-[#6c5000] font-['Manrope'] font-bold text-xs py-3 px-4 rounded-lg uppercase tracking-wider transition-all shadow-md mt-2"
+                className="inline-flex items-center justify-center gap-2 bg-[#F5B51B] hover:bg-[#E0A212] text-[#071F35] font-['Manrope'] font-bold text-xs py-3 px-4 rounded-lg uppercase tracking-wider transition-all shadow-md mt-2"
               >
                 <span>Request Custom Quote</span>
                 <ArrowRight size={14} />

@@ -61,7 +61,7 @@ Please share competitive freight rates and vehicle availability.`
     : `/book-truck?to=${encodeURIComponent(currentDest.city)}&vehicle=${encodeURIComponent(currentVehicle.name)}`;
 
   return (
-    <section className="w-full bg-[#161917] text-white border-y border-neutral-800 py-12 md:py-16 px-4 md:px-12 relative overflow-hidden">
+    <section className="w-full bg-[#071F35] text-white border-y border-[#0B3A66]/50 py-8 md:py-10 px-4 md:px-12 relative overflow-hidden">
       {/* Background Decorative Subtle Grid Elements */}
       <div 
         className="absolute inset-0 opacity-[0.03] pointer-events-none" 
@@ -74,21 +74,21 @@ Please share competitive freight rates and vehicle availability.`
       <div className="max-w-6xl mx-auto relative z-10">
         
         {/* Header Strip */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-8 pb-6 border-b border-neutral-800">
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-5 pb-4 border-b border-[#0B3A66]/50">
           <div>
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#0F6A37]/20 border border-[#0F6A37]/40 text-[#8ad7a0] font-['Space_Mono'] text-xs font-bold uppercase tracking-wider mb-2">
-              <Zap size={13} className="text-[#F4B400]" />
-              <span>Interactive Route & Fleet Hub</span>
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#0B3A66]/30 border border-[#0B3A66]/60 text-[#85B7EB] font-['Space_Mono'] text-xs font-bold uppercase tracking-wider mb-2">
+              <Zap size={13} className="text-[#F5B51B]" />
+              <span>Interactive Route &amp; Fleet Hub</span>
             </div>
             <h2 className="font-['Archivo_Narrow'] text-2xl md:text-3xl font-bold uppercase text-white tracking-tight">
-              Instant Corridor & Transit Check
+              Instant Corridor &amp; Transit Check
             </h2>
-            <p className="font-['Manrope'] text-xs md:text-sm text-neutral-400 mt-1 max-w-xl">
-              Calculate verified highway distance, expected transit window, and recommended fleet capacity originating from Jaipur & Rajasthan.
+            <p className="font-['Manrope'] text-xs md:text-sm text-[#D9E4EE]/80 mt-1 max-w-xl">
+              Calculate verified highway distance, expected transit window, and recommended fleet capacity originating from Jaipur &amp; Rajasthan.
             </p>
           </div>
 
-          <div className="flex items-center gap-2 shrink-0 font-['Space_Mono'] text-xs text-neutral-400 bg-neutral-900/90 px-3.5 py-2 rounded-lg border border-neutral-800">
+          <div className="flex items-center gap-2 shrink-0 font-['Space_Mono'] text-xs text-[#D9E4EE] bg-[#0B3A66]/30 px-3.5 py-2 rounded-lg border border-[#0B3A66]/50">
             <span className="w-2.5 h-2.5 rounded-full bg-[#25D366] animate-pulse" />
             <span className="text-white font-bold">Jaipur Hub:</span>
             <span>Daily Express Departures</span>
@@ -103,8 +103,8 @@ Please share competitive freight rates and vehicle availability.`
             
             {/* 1. Destination Selector */}
             <div>
-              <label className="block font-['Space_Mono'] text-xs uppercase tracking-widest text-[#8ad7a0] mb-2.5 font-bold flex items-center gap-1.5">
-                <MapPin size={14} className="text-[#F4B400]" />
+              <label className="block font-['Space_Mono'] text-xs uppercase tracking-widest text-[#85B7EB] mb-2.5 font-bold flex items-center gap-1.5">
+                <MapPin size={14} className="text-[#F5B51B]" />
                 <span>1. Select Destination City (From Jaipur)</span>
               </label>
               <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-2">
@@ -117,14 +117,14 @@ Please share competitive freight rates and vehicle availability.`
                       type="button"
                       className={`text-left p-2.5 rounded-lg border transition-all ${
                         isSelected
-                          ? 'bg-[#0F6A37] border-[#25D366]/60 text-white shadow-md shadow-[#0F6A37]/30'
-                          : 'bg-neutral-900/60 border-neutral-800 text-neutral-300 hover:border-neutral-700 hover:text-white'
+                          ? 'bg-[#0B3A66] border-[#60A5FA]/60 text-white shadow-md shadow-[#0B3A66]/40'
+                          : 'bg-[#071F35]/60 border-[#0B3A66]/40 text-[#D9E4EE] hover:border-[#0B3A66] hover:text-white'
                       }`}
                     >
                       <div className="font-['Manrope'] font-bold text-xs leading-tight">
                         {dest.city}
                       </div>
-                      <div className={`font-['Space_Mono'] text-[10px] mt-1 ${isSelected ? 'text-neutral-200' : 'text-neutral-500'}`}>
+                      <div className={`font-['Space_Mono'] text-[10px] mt-1 ${isSelected ? 'text-neutral-200' : 'text-[#D9E4EE]/60'}`}>
                         {dest.distanceKm} km
                       </div>
                     </button>
@@ -135,8 +135,8 @@ Please share competitive freight rates and vehicle availability.`
 
             {/* 2. Vehicle / Load Selector */}
             <div>
-              <label className="block font-['Space_Mono'] text-xs uppercase tracking-widest text-[#8ad7a0] mb-2.5 font-bold flex items-center gap-1.5">
-                <Truck size={14} className="text-[#F4B400]" />
+              <label className="block font-['Space_Mono'] text-xs uppercase tracking-widest text-[#85B7EB] mb-2.5 font-bold flex items-center gap-1.5">
+                <Truck size={14} className="text-[#F5B51B]" />
                 <span>2. Select Vehicle / Load Requirement</span>
               </label>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
@@ -149,18 +149,18 @@ Please share competitive freight rates and vehicle availability.`
                       type="button"
                       className={`flex items-center justify-between p-3 rounded-lg border text-left transition-all ${
                         isSelected
-                          ? 'bg-[#0F6A37] border-[#25D366]/60 text-white shadow-md shadow-[#0F6A37]/30'
-                          : 'bg-neutral-900/60 border-neutral-800 text-neutral-300 hover:border-neutral-700 hover:text-white'
+                          ? 'bg-[#0B3A66] border-[#60A5FA]/60 text-white shadow-md shadow-[#0B3A66]/40'
+                          : 'bg-[#071F35]/60 border-[#0B3A66]/40 text-[#D9E4EE] hover:border-[#0B3A66] hover:text-white'
                       }`}
                     >
                       <div>
                         <div className="font-['Manrope'] font-bold text-xs">{v.name}</div>
-                        <div className={`font-['Space_Mono'] text-[10px] ${isSelected ? 'text-neutral-200' : 'text-neutral-400'}`}>
+                        <div className={`font-['Space_Mono'] text-[10px] ${isSelected ? 'text-neutral-200' : 'text-[#D9E4EE]/60'}`}>
                           {v.capacity}
                         </div>
                       </div>
                       <span className={`text-[9px] px-2 py-0.5 rounded font-['Space_Mono'] uppercase font-bold tracking-wider ${
-                        isSelected ? 'bg-white/20 text-white' : 'bg-neutral-800 text-neutral-400'
+                        isSelected ? 'bg-white/20 text-white' : 'bg-[#0B3A66]/40 text-[#85B7EB]'
                       }`}>
                         {v.badge}
                       </span>
@@ -174,16 +174,16 @@ Please share competitive freight rates and vehicle availability.`
 
           {/* Right Column: Live Calculated Transit Card */}
           <div className="lg:col-span-5">
-            <div className="bg-neutral-900/95 border-2 border-[#0F6A37]/40 rounded-2xl p-6 md:p-7 shadow-xl space-y-5 relative">
+            <div className="bg-[#071F35]/95 border-2 border-[#0B3A66]/70 rounded-2xl p-6 md:p-7 shadow-xl space-y-5 relative">
               
-              <div className="flex items-center justify-between pb-4 border-b border-neutral-800">
+              <div className="flex items-center justify-between pb-4 border-b border-[#0B3A66]/50">
                 <div className="flex items-center gap-2">
-                  <Route size={18} className="text-[#8ad7a0]" />
-                  <span className="font-['Space_Mono'] text-xs font-bold text-[#8ad7a0] uppercase tracking-wider">
+                  <Route size={18} className="text-[#85B7EB]" />
+                  <span className="font-['Space_Mono'] text-xs font-bold text-[#85B7EB] uppercase tracking-wider">
                     Corridor Profile
                   </span>
                 </div>
-                <span className="font-['Space_Mono'] text-[10px] px-2 py-0.5 rounded bg-[#F4B400]/20 text-[#F4B400] font-bold uppercase">
+                <span className="font-['Space_Mono'] text-[10px] px-2 py-0.5 rounded bg-[#F5B51B]/20 text-[#F5B51B] font-bold uppercase">
                   Verified Route
                 </span>
               </div>
@@ -191,50 +191,50 @@ Please share competitive freight rates and vehicle availability.`
               {/* Route Summary */}
               <div className="space-y-3 font-['Manrope']">
                 <div className="flex items-center justify-between">
-                  <span className="text-neutral-400 text-xs uppercase tracking-wider">Corridor:</span>
+                  <span className="text-[#D9E4EE]/70 text-xs uppercase tracking-wider">Corridor:</span>
                   <span className="text-white font-bold text-sm font-['Space_Mono']">
                     Jaipur ➔ {currentDest.city}
                   </span>
                 </div>
 
                 <div className="flex items-center justify-between">
-                  <span className="text-neutral-400 text-xs uppercase tracking-wider">Route Highway:</span>
+                  <span className="text-[#D9E4EE]/70 text-xs uppercase tracking-wider">Route Highway:</span>
                   <span className="text-neutral-200 text-xs font-semibold">
                     {currentDest.highway}
                   </span>
                 </div>
 
                 <div className="flex items-center justify-between">
-                  <span className="text-neutral-400 text-xs uppercase tracking-wider">Highway Distance:</span>
+                  <span className="text-[#D9E4EE]/70 text-xs uppercase tracking-wider">Highway Distance:</span>
                   <span className="text-white font-bold text-sm font-['Space_Mono']">
                     ~{currentDest.distanceKm} km
                   </span>
                 </div>
 
                 <div className="flex items-center justify-between">
-                  <span className="text-neutral-400 text-xs uppercase tracking-wider">Estimated Transit:</span>
-                  <span className="text-[#8ad7a0] font-bold text-sm font-['Space_Mono'] flex items-center gap-1.5">
+                  <span className="text-[#D9E4EE]/70 text-xs uppercase tracking-wider">Estimated Transit:</span>
+                  <span className="text-[#85B7EB] font-bold text-sm font-['Space_Mono'] flex items-center gap-1.5">
                     <Clock size={14} />
                     {currentDest.transitHours}
                   </span>
                 </div>
 
-                <div className="flex items-center justify-between pt-2 border-t border-neutral-800">
-                  <span className="text-neutral-400 text-xs uppercase tracking-wider">Selected Load:</span>
-                  <span className="text-[#F4B400] font-bold text-xs font-['Space_Mono']">
+                <div className="flex items-center justify-between pt-2 border-t border-[#0B3A66]/50">
+                  <span className="text-[#D9E4EE]/70 text-xs uppercase tracking-wider">Selected Load:</span>
+                  <span className="text-[#F5B51B] font-bold text-xs font-['Space_Mono']">
                     {currentVehicle.name} ({currentVehicle.capacity})
                   </span>
                 </div>
               </div>
 
               {/* Guarantees */}
-              <div className="grid grid-cols-2 gap-2 pt-2 text-[10px] font-['Manrope'] text-neutral-400">
+              <div className="grid grid-cols-2 gap-2 pt-2 text-[10px] font-['Manrope'] text-[#D9E4EE]/80">
                 <div className="flex items-center gap-1.5">
-                  <ShieldCheck size={13} className="text-[#0F6A37]" />
-                  <span>GST Invoicing & E-Way Bill</span>
+                  <ShieldCheck size={13} className="text-[#60A5FA]" />
+                  <span>GST Invoicing &amp; E-Way Bill</span>
                 </div>
                 <div className="flex items-center gap-1.5">
-                  <ShieldCheck size={13} className="text-[#0F6A37]" />
+                  <ShieldCheck size={13} className="text-[#60A5FA]" />
                   <span>Doorstep Pickup Available</span>
                 </div>
               </div>
@@ -243,17 +243,17 @@ Please share competitive freight rates and vehicle availability.`
               <div className="space-y-2.5 pt-2">
                 <Link
                   to={bookingUrl}
-                  className="w-full flex items-center justify-center gap-2 bg-[#0F6A37] hover:bg-[#134E3A] text-white font-['Manrope'] font-bold text-xs py-3 rounded-xl uppercase tracking-wider transition-all shadow-md group"
+                  className="w-full flex items-center justify-center gap-2 bg-[#F5B51B] hover:bg-[#E0A212] text-[#071F35] font-['Manrope'] font-extrabold text-xs py-3.5 rounded-xl uppercase tracking-wider transition-all shadow-md group"
                 >
                   <span>Book This Route Online</span>
-                  <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />
+                  <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform text-[#071F35]" />
                 </Link>
 
                 <a
                   href={`https://wa.me/${WHATSAPP_NUMBER}?text=${whatsappMessage}`}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-full flex items-center justify-center gap-2 bg-neutral-800 hover:bg-neutral-700 text-neutral-200 hover:text-white font-['Manrope'] font-bold text-xs py-3 rounded-xl uppercase tracking-wider transition-colors border border-neutral-700"
+                  className="w-full flex items-center justify-center gap-2 bg-[#0B3A66] hover:bg-[#072D54] text-white font-['Manrope'] font-bold text-xs py-3 rounded-xl uppercase tracking-wider transition-colors border border-[#85B7EB]/40"
                 >
                   <MessageCircle size={15} className="text-[#25D366]" />
                   <span>Get WhatsApp Quote in 60 Mins</span>

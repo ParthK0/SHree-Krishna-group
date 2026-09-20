@@ -10,13 +10,13 @@ import {
   CheckCircle2,
   Send,
   Boxes,
-  Compass,
   ArrowRight,
   Info,
 } from 'lucide-react';
-import { getRouteBySlug, getPublishedRoutes } from '../data/routeRegistry';
+import { getRouteBySlug } from '../data/routeRegistry';
 import { usePageSEO } from '../lib/usePageSEO';
 import { sendAutomatedForm } from '../lib/whatsapp';
+import { NotFoundPage } from './NotFoundPage';
 
 export const RouteTemplatePage: React.FC = () => {
   const { slug } = useParams<{ slug: string }>();
@@ -47,57 +47,9 @@ export const RouteTemplatePage: React.FC = () => {
   const [formStatus, setFormStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle');
   const [statusMessage, setStatusMessage] = useState('');
 
-  // Fallback view if route not found
+  // Fallback view if route not found — render genuine 404 page
   if (!route) {
-    const publishedRoutes = getPublishedRoutes();
-    return (
-      <div className="min-h-[70vh] flex flex-col items-center justify-center px-4 py-16 text-center max-w-3xl mx-auto">
-        <div className="w-16 h-16 rounded-full bg-[#0F6A37]/10 flex items-center justify-center text-[#0F6A37] mb-4">
-          <Compass size={36} />
-        </div>
-        <h1 className="text-3xl font-extrabold text-[#1a1f1b] font-['Archivo_Narrow'] uppercase tracking-tight mb-3">
-          Transport Route Not Found
-        </h1>
-        <p className="text-neutral-600 mb-8 font-['Manrope']">
-          We couldn't find an exact pre-configured corridor for "{activeSlug}". However, Shree Krishna Transport operates daily across all major routes in Rajasthan and Pan-India.
-        </p>
-
-        <div className="w-full bg-white p-6 rounded-2xl shadow-md border border-[#e5ebe7] mb-8 text-left">
-          <h2 className="text-lg font-bold text-[#1a1f1b] mb-4 flex items-center gap-2">
-            <Truck size={20} className="text-[#0F6A37]" /> Explore Popular Verified Transport Routes:
-          </h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-            {publishedRoutes.map((r) => (
-              <Link
-                key={r.slug}
-                to={`/${r.slug}`}
-                className="p-3 rounded-lg border border-[#e5ebe7] hover:border-[#0F6A37] hover:bg-[#EBF5EE] transition-all flex items-center justify-between group"
-              >
-                <span className="font-bold text-[#1a1f1b] text-sm group-hover:text-[#0F6A37]">
-                  {r.fromCity} → {r.toCity}
-                </span>
-                <span className="text-xs text-neutral-500 font-['Space_Mono']">{r.transitTime}</span>
-              </Link>
-            ))}
-          </div>
-        </div>
-
-        <div className="flex gap-4">
-          <Link
-            to="/routes"
-            className="px-6 py-3 rounded-lg bg-[#0F6A37] text-white font-bold hover:bg-[#0c562c] transition-colors"
-          >
-            View All Routes
-          </Link>
-          <Link
-            to="/book-truck"
-            className="px-6 py-3 rounded-lg bg-[#F4B400] text-[#6c5000] font-bold hover:bg-[#e0a500] transition-colors"
-          >
-            Custom Quote
-          </Link>
-        </div>
-      </div>
-    );
+    return <NotFoundPage />;
   }
 
   // Handle Quote Form Submission
@@ -153,9 +105,9 @@ export const RouteTemplatePage: React.FC = () => {
       {/* 1. BREADCRUMBS & TOP BAR */}
       <nav aria-label="Breadcrumb" className="bg-[#E4DDD3] border-b border-[#d8d0c3] py-2 px-4 md:px-12 text-xs font-['Manrope']">
         <div className="max-w-7xl mx-auto flex items-center gap-2 text-neutral-600">
-          <Link to="/" className="hover:text-[#0F6A37] transition-colors">Home</Link>
+          <Link to="/" className="hover:text-[#0B3A66] transition-colors">Home</Link>
           <span>/</span>
-          <Link to="/routes" className="hover:text-[#0F6A37] transition-colors">Routes</Link>
+          <Link to="/routes" className="hover:text-[#0B3A66] transition-colors">Routes</Link>
           <span>/</span>
           <span className="font-bold text-[#1a1f1b]">{route.fromCity} to {route.toCity}</span>
         </div>
@@ -166,8 +118,8 @@ export const RouteTemplatePage: React.FC = () => {
         <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
           <div className="lg:col-span-7 space-y-5">
             {/* Corridor badge */}
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#0F6A37]/10 text-[#0F6A37] font-['Space_Mono'] text-xs font-bold border border-[#0F6A37]/20">
-              <span className="w-2 h-2 rounded-full bg-[#0F6A37] animate-pulse"></span>
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#0B3A66]/10 text-[#0B3A66] font-['Space_Mono'] text-xs font-bold border border-[#0B3A66]/20">
+              <span className="w-2 h-2 rounded-full bg-[#0B3A66] animate-pulse"></span>
               {route.distanceKm} KM DIRECT FREIGHT CORRIDOR • {route.transitTime}
             </div>
 
@@ -185,7 +137,7 @@ export const RouteTemplatePage: React.FC = () => {
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 pt-2">
               {route.heroHighlights.map((hl, idx) => (
                 <div key={idx} className="flex items-center gap-2.5 text-sm font-bold text-neutral-800 font-['Manrope']">
-                  <CheckCircle2 size={18} className="text-[#0F6A37] shrink-0" />
+                  <CheckCircle2 size={18} className="text-[#0B3A66] shrink-0" />
                   <span>{hl}</span>
                 </div>
               ))}
@@ -196,7 +148,7 @@ export const RouteTemplatePage: React.FC = () => {
               <button
                 onClick={scrollToQuote}
                 id="hero-book-truck-btn"
-                className="px-6 py-3.5 rounded-xl bg-[#0F6A37] text-white font-['Manrope'] font-bold text-sm uppercase tracking-wider shadow-lg hover:bg-[#0c562c] transition-all transform hover:-translate-y-0.5 flex items-center gap-2"
+                className="px-6 py-3.5 rounded-xl bg-[#0B3A66] text-white font-['Manrope'] font-bold text-sm uppercase tracking-wider shadow-lg hover:bg-[#072D54] transition-all transform hover:-translate-y-0.5 flex items-center gap-2"
               >
                 <Truck size={18} />
                 <span>Book Truck</span>
@@ -205,7 +157,7 @@ export const RouteTemplatePage: React.FC = () => {
               <button
                 onClick={scrollToQuote}
                 id="hero-instant-quote-btn"
-                className="px-6 py-3.5 rounded-xl bg-[#F4B400] text-[#6c5000] font-['Manrope'] font-extrabold text-sm uppercase tracking-wider shadow-md hover:bg-[#e0a500] transition-all transform hover:-translate-y-0.5 flex items-center gap-2"
+                className="px-6 py-3.5 rounded-xl bg-[#F5B51B] text-[#071F35] font-['Manrope'] font-extrabold text-sm uppercase tracking-wider shadow-md hover:bg-[#E0A212] transition-all transform hover:-translate-y-0.5 flex items-center gap-2"
               >
                 <span>Get Instant Quote</span>
                 <ArrowRight size={16} />
@@ -216,7 +168,7 @@ export const RouteTemplatePage: React.FC = () => {
                 id="hero-call-now-btn"
                 className="px-5 py-3.5 rounded-xl bg-white border border-[#d8d0c3] text-[#1a1f1b] font-['Manrope'] font-bold text-sm uppercase tracking-wider hover:bg-[#f5f1eb] transition-all flex items-center gap-2 shadow-sm"
               >
-                <Phone size={17} className="text-[#0F6A37]" />
+                <Phone size={17} className="text-[#0B3A66]" />
                 <span>Call: +91 97848 00833</span>
               </a>
 
@@ -235,7 +187,7 @@ export const RouteTemplatePage: React.FC = () => {
             <div className="bg-white/95 backdrop-blur-md rounded-2xl p-6 shadow-xl border border-[#e2dacd] relative">
               <div className="flex items-center justify-between border-b border-[#ECE6DD] pb-4 mb-4">
                 <div className="flex items-center gap-2.5">
-                  <div className="p-2 rounded-lg bg-[#0F6A37]/10 text-[#0F6A37]">
+                  <div className="p-2 rounded-lg bg-[#0B3A66]/10 text-[#0B3A66]">
                     <Truck size={22} />
                   </div>
                   <div>
@@ -247,7 +199,7 @@ export const RouteTemplatePage: React.FC = () => {
                     </span>
                   </div>
                 </div>
-                <span className="px-2.5 py-1 rounded bg-[#EBF5EE] text-[#0F6A37] text-xs font-bold font-['Space_Mono']">
+                <span className="px-2.5 py-1 rounded bg-[#EBF2F9] text-[#0B3A66] text-xs font-bold font-['Space_Mono']">
                   VERIFIED
                 </span>
               </div>
@@ -260,7 +212,7 @@ export const RouteTemplatePage: React.FC = () => {
                 </div>
                 <div className="flex items-center justify-between py-2 border-b border-neutral-100">
                   <span className="text-neutral-500 font-medium">Standard Transit Time:</span>
-                  <span className="font-bold text-[#0F6A37]">{route.transitTime}</span>
+                  <span className="font-bold text-[#0B3A66]">{route.transitTime}</span>
                 </div>
                 <div className="flex items-center justify-between py-2 border-b border-neutral-100">
                   <span className="text-neutral-500 font-medium">Service Modes:</span>
@@ -272,7 +224,7 @@ export const RouteTemplatePage: React.FC = () => {
                 </div>
                 <div className="flex items-center justify-between py-2 border-b border-neutral-100">
                   <span className="text-neutral-500 font-medium">GST Tax Invoice:</span>
-                  <span className="inline-flex items-center gap-1 font-bold text-[#0F6A37]">
+                  <span className="inline-flex items-center gap-1 font-bold text-[#0B3A66]">
                     <CheckCircle2 size={15} /> 100% Tax Compliant
                   </span>
                 </div>
@@ -285,7 +237,7 @@ export const RouteTemplatePage: React.FC = () => {
               <div className="mt-5 pt-4 border-t border-[#ECE6DD]">
                 <button
                   onClick={scrollToQuote}
-                  className="w-full py-3 rounded-xl bg-[#0F6A37] text-white font-['Manrope'] font-bold text-xs uppercase tracking-wider hover:bg-[#0c562c] transition-colors text-center block"
+                  className="w-full py-3 rounded-xl bg-[#0B3A66] text-white font-['Manrope'] font-bold text-xs uppercase tracking-wider hover:bg-[#072D54] transition-colors text-center block"
                 >
                   Calculate Rate for My Consignment
                 </button>
@@ -296,10 +248,10 @@ export const RouteTemplatePage: React.FC = () => {
       </section>
 
       {/* 4. ABOUT THIS ROUTE (Comprehensive 500-700 Words Editorial) */}
-      <section className="py-16 px-4 md:px-12 max-w-7xl mx-auto">
+      <section className="py-8 md:py-10 px-4 md:px-12 max-w-7xl mx-auto">
         <div className="bg-white rounded-3xl p-6 md:p-12 shadow-sm border border-[#e2dacd]">
           <div className="max-w-3xl mb-8">
-            <span className="text-xs font-bold uppercase tracking-wider text-[#0F6A37] font-['Space_Mono'] block mb-2">
+            <span className="text-xs font-bold uppercase tracking-wider text-[#0B3A66] font-['Space_Mono'] block mb-2">
               Route Intelligence & Freight Guide
             </span>
             <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold uppercase font-['Archivo_Narrow'] text-[#1a1f1b]">
@@ -310,7 +262,7 @@ export const RouteTemplatePage: React.FC = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 text-neutral-700 font-['Manrope'] leading-relaxed text-sm md:text-base">
             <div className="space-y-4">
               <h3 className="text-lg font-bold text-[#1a1f1b] flex items-center gap-2">
-                <MapPin size={18} className="text-[#0F6A37]" /> Corridor Overview & Highway Network
+                <MapPin size={18} className="text-[#0B3A66]" /> Corridor Overview & Highway Network
               </h3>
               <p>{route.aboutContent.overview}</p>
               <p>{route.aboutContent.corridorContext}</p>
@@ -318,7 +270,7 @@ export const RouteTemplatePage: React.FC = () => {
 
             <div className="space-y-4">
               <h3 className="text-lg font-bold text-[#1a1f1b] flex items-center gap-2">
-                <Boxes size={18} className="text-[#0F6A37]" /> Industries & Cargo Demands
+                <Boxes size={18} className="text-[#0B3A66]" /> Industries & Cargo Demands
               </h3>
               <p>{route.aboutContent.industriesUsingRoute}</p>
               <p>{route.aboutContent.whyBusinessesChooseUs}</p>
@@ -349,7 +301,7 @@ export const RouteTemplatePage: React.FC = () => {
       {/* 5. SERVICES AVAILABLE */}
       <section className="py-14 px-4 md:px-12 max-w-7xl mx-auto border-t border-[#d8d0c3]">
         <div className="text-center max-w-2xl mx-auto mb-10">
-          <span className="text-xs font-bold uppercase tracking-wider text-[#0F6A37] font-['Space_Mono'] block mb-2">
+          <span className="text-xs font-bold uppercase tracking-wider text-[#0B3A66] font-['Space_Mono'] block mb-2">
             Tailored Logistics
           </span>
           <h2 className="text-2xl sm:text-3xl font-extrabold uppercase font-['Archivo_Narrow'] text-[#1a1f1b]">
@@ -390,10 +342,10 @@ export const RouteTemplatePage: React.FC = () => {
           ].map((svc, idx) => (
             <div
               key={idx}
-              className="bg-white rounded-2xl p-5 border border-[#e2dacd] shadow-sm hover:shadow-md transition-all hover:border-[#0F6A37] flex flex-col justify-between"
+              className="bg-white rounded-2xl p-5 border border-[#e2dacd] shadow-sm hover:shadow-md transition-all hover:border-[#0B3A66] flex flex-col justify-between"
             >
               <div>
-                <span className="text-[10px] font-bold font-['Space_Mono'] px-2 py-0.5 rounded bg-[#0F6A37]/10 text-[#0F6A37] uppercase">
+                <span className="text-[10px] font-bold font-['Space_Mono'] px-2 py-0.5 rounded bg-[#0B3A66]/10 text-[#0B3A66] uppercase">
                   {svc.badge}
                 </span>
                 <h3 className="font-bold text-[#1a1f1b] font-['Archivo_Narrow'] text-lg mt-3 mb-2 uppercase">
@@ -405,7 +357,7 @@ export const RouteTemplatePage: React.FC = () => {
               </div>
               <button
                 onClick={scrollToQuote}
-                className="mt-4 inline-flex items-center gap-1.5 text-xs font-bold text-[#0F6A37] hover:underline"
+                className="mt-4 inline-flex items-center gap-1.5 text-xs font-bold text-[#0B3A66] hover:underline"
               >
                 <span>Book This Service</span>
                 <ArrowRight size={14} />
@@ -419,7 +371,7 @@ export const RouteTemplatePage: React.FC = () => {
       <section className="py-14 px-4 md:px-12 max-w-7xl mx-auto border-t border-[#d8d0c3]">
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-10">
           <div>
-            <span className="text-xs font-bold uppercase tracking-wider text-[#0F6A37] font-['Space_Mono'] block mb-2">
+            <span className="text-xs font-bold uppercase tracking-wider text-[#0B3A66] font-['Space_Mono'] block mb-2">
               Fleet Options
             </span>
             <h2 className="text-2xl sm:text-3xl font-extrabold uppercase font-['Archivo_Narrow'] text-[#1a1f1b]">
@@ -435,15 +387,15 @@ export const RouteTemplatePage: React.FC = () => {
           {route.truckTypes.map((truck, idx) => (
             <div
               key={idx}
-              className="bg-white rounded-2xl p-5 border border-[#e2dacd] hover:border-[#0F6A37] shadow-sm hover:shadow-md transition-all flex flex-col justify-between"
+              className="bg-white rounded-2xl p-5 border border-[#e2dacd] hover:border-[#0B3A66] shadow-sm hover:shadow-md transition-all flex flex-col justify-between"
             >
               <div>
                 <div className="flex items-center justify-between mb-3">
-                  <div className="p-2 rounded-lg bg-[#ECE6DD] text-[#0F6A37]">
+                  <div className="p-2 rounded-lg bg-[#ECE6DD] text-[#0B3A66]">
                     <Truck size={20} />
                   </div>
                   {truck.tag && (
-                    <span className="text-[10px] font-bold font-['Space_Mono'] px-2 py-0.5 rounded bg-[#F4B400]/20 text-[#6c5000]">
+                    <span className="text-[10px] font-bold font-['Space_Mono'] px-2 py-0.5 rounded bg-[#F5B51B]/20 text-[#071F35]">
                       {truck.tag}
                     </span>
                   )}
@@ -462,7 +414,7 @@ export const RouteTemplatePage: React.FC = () => {
                   setFormData((prev) => ({ ...prev, truckType: truck.name }));
                   scrollToQuote();
                 }}
-                className="mt-5 w-full py-2.5 rounded-lg bg-[#ECE6DD] hover:bg-[#0F6A37] hover:text-white text-[#1a1f1b] font-bold text-xs uppercase tracking-wider font-['Manrope'] transition-all"
+                className="mt-5 w-full py-2.5 rounded-lg bg-[#ECE6DD] hover:bg-[#0B3A66] hover:text-white text-[#1a1f1b] font-bold text-xs uppercase tracking-wider font-['Manrope'] transition-all"
               >
                 Select & Book
               </button>
@@ -476,7 +428,7 @@ export const RouteTemplatePage: React.FC = () => {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
           {/* Industries Served */}
           <div className="lg:col-span-6 bg-white rounded-3xl p-6 md:p-8 border border-[#e2dacd]">
-            <span className="text-xs font-bold uppercase tracking-wider text-[#0F6A37] font-['Space_Mono'] block mb-2">
+            <span className="text-xs font-bold uppercase tracking-wider text-[#0B3A66] font-['Space_Mono'] block mb-2">
               Industry Specialization
             </span>
             <h2 className="text-xl sm:text-2xl font-extrabold uppercase font-['Archivo_Narrow'] text-[#1a1f1b] mb-4">
@@ -486,9 +438,9 @@ export const RouteTemplatePage: React.FC = () => {
               {route.industries.map((ind, idx) => (
                 <div
                   key={idx}
-                  className="p-3 rounded-xl bg-[#fbf9f6] border border-[#ECE6DD] hover:border-[#0F6A37]/50 transition-colors text-xs font-bold text-[#1a1f1b] flex items-center gap-2 font-['Manrope']"
+                  className="p-3 rounded-xl bg-[#fbf9f6] border border-[#ECE6DD] hover:border-[#0B3A66]/50 transition-colors text-xs font-bold text-[#1a1f1b] flex items-center gap-2 font-['Manrope']"
                 >
-                  <span className="w-1.5 h-1.5 rounded-full bg-[#0F6A37]"></span>
+                  <span className="w-1.5 h-1.5 rounded-full bg-[#0B3A66]"></span>
                   <span>{ind}</span>
                 </div>
               ))}
@@ -497,7 +449,7 @@ export const RouteTemplatePage: React.FC = () => {
 
           {/* What We Transport */}
           <div className="lg:col-span-6 bg-white rounded-3xl p-6 md:p-8 border border-[#e2dacd]">
-            <span className="text-xs font-bold uppercase tracking-wider text-[#0F6A37] font-['Space_Mono'] block mb-2">
+            <span className="text-xs font-bold uppercase tracking-wider text-[#0B3A66] font-['Space_Mono'] block mb-2">
               Freight Expertise
             </span>
             <h2 className="text-xl sm:text-2xl font-extrabold uppercase font-['Archivo_Narrow'] text-[#1a1f1b] mb-4">
@@ -507,7 +459,7 @@ export const RouteTemplatePage: React.FC = () => {
               {route.materialsTransported.map((mat, idx) => (
                 <span
                   key={idx}
-                  className="px-3.5 py-2 rounded-xl bg-[#EBF5EE] text-[#0F6A37] text-xs font-bold font-['Manrope'] border border-[#0F6A37]/15 flex items-center gap-1.5"
+                  className="px-3.5 py-2 rounded-xl bg-[#EBF2F9] text-[#0B3A66] text-xs font-bold font-['Manrope'] border border-[#0B3A66]/15 flex items-center gap-1.5"
                 >
                   <CheckCircle2 size={14} />
                   {mat}
@@ -523,14 +475,14 @@ export const RouteTemplatePage: React.FC = () => {
 
       {/* 9. ESTIMATED PRICING SECTION */}
       <section className="py-14 px-4 md:px-12 max-w-7xl mx-auto border-t border-[#d8d0c3]">
-        <div className="bg-[#1C201D] text-white rounded-3xl p-6 md:p-12 shadow-2xl relative overflow-hidden">
+        <div className="bg-[#071F35] text-white rounded-3xl p-6 md:p-12 shadow-2xl relative overflow-hidden">
           <div className="max-w-3xl mb-8">
             <div className="flex flex-wrap items-center gap-2 mb-2">
-              <span className="text-xs font-bold uppercase tracking-wider text-[#F4B400] font-['Space_Mono'] block">
+              <span className="text-xs font-bold uppercase tracking-wider text-[#F5B51B] font-['Space_Mono'] block">
                 Transparent Official Freight Rates
               </span>
               {route.rateCardHighlights?.loadCapacityBadge && (
-                <span className="px-2.5 py-0.5 rounded-full bg-[#F4B400] text-[#6c5000] text-[10px] font-extrabold font-['Space_Mono'] uppercase">
+                <span className="px-2.5 py-0.5 rounded-full bg-[#F5B51B] text-[#071F35] text-[10px] font-extrabold font-['Space_Mono'] uppercase">
                   {route.rateCardHighlights.loadCapacityBadge}
                 </span>
               )}
@@ -547,11 +499,11 @@ export const RouteTemplatePage: React.FC = () => {
               <div className="mt-4 grid grid-cols-2 sm:grid-cols-3 gap-3 pt-2">
                 <div className="p-3 rounded-xl bg-white/10 border border-white/15">
                   <span className="text-[10px] text-neutral-400 font-['Space_Mono'] block uppercase">19 ft Container (Up to 7T)</span>
-                  <span className="text-xl font-bold font-['Space_Mono'] text-[#F4B400]">{route.rateCardHighlights.panIndiaRate.rate19ft}</span>
+                  <span className="text-xl font-bold font-['Space_Mono'] text-[#F5B51B]">{route.rateCardHighlights.panIndiaRate.rate19ft}</span>
                 </div>
                 <div className="p-3 rounded-xl bg-white/10 border border-white/15">
                   <span className="text-[10px] text-neutral-400 font-['Space_Mono'] block uppercase">22 ft Container (Up to 7T)</span>
-                  <span className="text-xl font-bold font-['Space_Mono'] text-[#8ad7a0]">{route.rateCardHighlights.panIndiaRate.rate22ft}</span>
+                  <span className="text-xl font-bold font-['Space_Mono'] text-[#85B7EB]">{route.rateCardHighlights.panIndiaRate.rate22ft}</span>
                 </div>
                 <div className="p-3 rounded-xl bg-white/5 border border-white/10 hidden sm:block">
                   <span className="text-[10px] text-neutral-400 font-['Space_Mono'] block uppercase">WhatsApp Quotation</span>
@@ -565,7 +517,7 @@ export const RouteTemplatePage: React.FC = () => {
           <div className="overflow-x-auto mb-8">
             <table className="w-full text-left font-['Manrope'] text-sm">
               <thead>
-                <tr className="border-b border-neutral-700 text-xs font-['Space_Mono'] uppercase text-[#F4B400]">
+                <tr className="border-b border-neutral-700 text-xs font-['Space_Mono'] uppercase text-[#F5B51B]">
                   <th className="pb-3 pr-4">Truck Model</th>
                   <th className="pb-3 px-4">Payload Capacity</th>
                   <th className="pb-3 px-4">Body Specification</th>
@@ -577,13 +529,13 @@ export const RouteTemplatePage: React.FC = () => {
                 {route.priceEstimates.map((item, idx) => (
                   <tr key={idx} className="hover:bg-white/5 transition-colors">
                     <td className="py-4 pr-4 font-bold text-white flex items-center gap-2">
-                      <Truck size={16} className="text-[#8ad7a0]" />
+                      <Truck size={16} className="text-[#85B7EB]" />
                       {item.truckName}
                     </td>
                     <td className="py-4 px-4 text-neutral-300 font-['Space_Mono'] text-xs">{item.capacity}</td>
                     <td className="py-4 px-4 text-neutral-400 text-xs">{item.bodyType}</td>
                     <td className="py-4 px-4 text-neutral-300 text-xs">{item.idealFor}</td>
-                    <td className="py-4 pl-4 text-right font-extrabold text-[#F4B400] font-['Space_Mono']">
+                    <td className="py-4 pl-4 text-right font-extrabold text-[#F5B51B] font-['Space_Mono']">
                       {item.priceRange}
                     </td>
                   </tr>
@@ -595,7 +547,7 @@ export const RouteTemplatePage: React.FC = () => {
           {/* Pricing Determinants Notes */}
           <div className="bg-white/5 border border-white/10 rounded-2xl p-5 text-xs text-neutral-300 font-['Manrope'] space-y-2">
             <div className="font-bold text-white uppercase font-['Space_Mono'] flex items-center gap-2">
-              <Info size={15} className="text-[#F4B400]" /> Final Rate Determining Factors:
+              <Info size={15} className="text-[#F5B51B]" /> Final Rate Determining Factors:
             </div>
             <ul className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-neutral-300 list-disc list-inside">
               {route.pricingFactors.map((factor, idx) => (
@@ -610,7 +562,7 @@ export const RouteTemplatePage: React.FC = () => {
             </div>
             <button
               onClick={scrollToQuote}
-              className="px-6 py-3 rounded-xl bg-[#F4B400] text-[#6c5000] font-bold text-xs uppercase tracking-wider font-['Manrope'] hover:bg-[#e0a500] transition-colors"
+              className="px-6 py-3 rounded-xl bg-[#F5B51B] text-[#071F35] font-bold text-xs uppercase tracking-wider font-['Manrope'] hover:bg-[#E0A212] transition-colors"
             >
               Get Exact Quote for My Cargo
             </button>
@@ -622,7 +574,7 @@ export const RouteTemplatePage: React.FC = () => {
       {/* 10. TRANSIT TIME & 12. HOW BOOKING WORKS */}
       <section className="py-14 px-4 md:px-12 max-w-7xl mx-auto border-t border-[#d8d0c3]">
         <div className="text-center max-w-2xl mx-auto mb-12">
-          <span className="text-xs font-bold uppercase tracking-wider text-[#0F6A37] font-['Space_Mono'] block mb-2">
+          <span className="text-xs font-bold uppercase tracking-wider text-[#0B3A66] font-['Space_Mono'] block mb-2">
             Execution Roadmap
           </span>
           <span className ="text-centremax">
@@ -643,11 +595,11 @@ export const RouteTemplatePage: React.FC = () => {
               className="bg-white rounded-2xl p-6 border border-[#e2dacd] relative shadow-sm hover:shadow-md transition-shadow"
             >
               <div className="flex items-center justify-between mb-4">
-                <span className="w-9 h-9 rounded-full bg-[#0F6A37] text-white font-['Space_Mono'] font-extrabold text-sm flex items-center justify-center">
+                <span className="w-9 h-9 rounded-full bg-[#0B3A66] text-white font-['Space_Mono'] font-extrabold text-sm flex items-center justify-center">
                   0{step.step}
                 </span>
                 {step.expectedTime && (
-                  <span className="text-[11px] font-bold font-['Space_Mono'] text-[#0F6A37] bg-[#EBF5EE] px-2.5 py-0.5 rounded-full">
+                  <span className="text-[11px] font-bold font-['Space_Mono'] text-[#0B3A66] bg-[#EBF2F9] px-2.5 py-0.5 rounded-full">
                     {step.expectedTime}
                   </span>
                 )}
@@ -668,7 +620,7 @@ export const RouteTemplatePage: React.FC = () => {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
           {/* Why Choose Us */}
           <div className="lg:col-span-7 bg-white rounded-3xl p-6 md:p-8 border border-[#e2dacd]">
-            <span className="text-xs font-bold uppercase tracking-wider text-[#0F6A37] font-['Space_Mono'] block mb-2">
+            <span className="text-xs font-bold uppercase tracking-wider text-[#0B3A66] font-['Space_Mono'] block mb-2">
               Enterprise Trust
             </span>
             <h2 className="text-2xl font-extrabold uppercase font-['Archivo_Narrow'] text-[#1a1f1b] mb-6">
@@ -687,7 +639,7 @@ export const RouteTemplatePage: React.FC = () => {
               ].map((item, idx) => (
                 <div key={idx} className="p-3.5 rounded-xl bg-[#fbf9f6] border border-[#ECE6DD]">
                   <div className="font-bold text-[#1a1f1b] flex items-center gap-2 mb-1">
-                    <CheckCircle2 size={16} className="text-[#0F6A37] shrink-0" />
+                    <CheckCircle2 size={16} className="text-[#0B3A66] shrink-0" />
                     <span>{item.title}</span>
                   </div>
                   <p className="text-xs text-neutral-600 leading-relaxed pl-6">{item.desc}</p>
@@ -699,7 +651,7 @@ export const RouteTemplatePage: React.FC = () => {
 
           {/* 13. Documents Required */}
           <div className="lg:col-span-5 bg-white rounded-3xl p-6 md:p-8 border border-[#e2dacd]">
-            <span className="text-xs font-bold uppercase tracking-wider text-[#0F6A37] font-['Space_Mono'] block mb-2">
+            <span className="text-xs font-bold uppercase tracking-wider text-[#0B3A66] font-['Space_Mono'] block mb-2">
               Compliance Checklist
             </span>
             <h2 className="text-2xl font-extrabold uppercase font-['Archivo_Narrow'] text-[#1a1f1b] mb-4">
@@ -716,7 +668,7 @@ export const RouteTemplatePage: React.FC = () => {
                     <span className="font-bold text-[#1a1f1b] text-sm">{doc.name}</span>
                     <span
                       className={`text-[10px] font-bold font-['Space_Mono'] px-2 py-0.5 rounded ${
-                        doc.mandatory ? 'bg-[#0F6A37] text-white' : 'bg-neutral-200 text-neutral-700'
+                        doc.mandatory ? 'bg-[#0B3A66] text-white' : 'bg-neutral-200 text-neutral-700'
                       }`}
                     >
                       {doc.mandatory ? 'MANDATORY' : 'OPTIONAL'}
@@ -733,7 +685,7 @@ export const RouteTemplatePage: React.FC = () => {
       {/* 14. FAQ SECTION (15+ Comprehensive Questions) */}
       <section className="py-14 px-4 md:px-12 max-w-5xl mx-auto border-t border-[#d8d0c3]">
         <div className="text-center max-w-2xl mx-auto mb-10">
-          <span className="text-xs font-bold uppercase tracking-wider text-[#0F6A37] font-['Space_Mono'] block mb-2">
+          <span className="text-xs font-bold uppercase tracking-wider text-[#0B3A66] font-['Space_Mono'] block mb-2">
             Frequently Asked Questions
           </span>
           <h2 className="text-2xl sm:text-3xl font-extrabold uppercase font-['Archivo_Narrow'] text-[#1a1f1b]">
@@ -751,10 +703,10 @@ export const RouteTemplatePage: React.FC = () => {
               >
                 <button
                   onClick={() => setOpenFaqIndex(isOpen ? null : idx)}
-                  className="w-full text-left px-5 py-4 flex items-center justify-between font-bold text-sm sm:text-base text-[#1a1f1b] hover:text-[#0F6A37] transition-colors focus:outline-none"
+                  className="w-full text-left px-5 py-4 flex items-center justify-between font-bold text-sm sm:text-base text-[#1a1f1b] hover:text-[#0B3A66] transition-colors focus:outline-none"
                 >
                   <span className="pr-4">{faq.question}</span>
-                  {isOpen ? <ChevronUp size={20} className="text-[#0F6A37] shrink-0" /> : <ChevronDown size={20} className="text-neutral-400 shrink-0" />}
+                  {isOpen ? <ChevronUp size={20} className="text-[#0B3A66] shrink-0" /> : <ChevronDown size={20} className="text-neutral-400 shrink-0" />}
                 </button>
                 {isOpen && (
                   <div className="px-5 pb-5 text-sm text-neutral-700 leading-relaxed border-t border-neutral-100 pt-3">
@@ -771,7 +723,7 @@ export const RouteTemplatePage: React.FC = () => {
       {route.galleryImages && route.galleryImages.length > 0 && (
         <section className="py-14 px-4 md:px-12 max-w-7xl mx-auto border-t border-[#d8d0c3]">
           <div className="space-y-4">
-            <span className="text-xs font-bold uppercase tracking-wider text-[#0F6A37] font-['Space_Mono'] block">
+            <span className="text-xs font-bold uppercase tracking-wider text-[#0B3A66] font-['Space_Mono'] block">
               Fleet in Action
             </span>
             <h2 className="text-2xl font-extrabold uppercase font-['Archivo_Narrow'] text-[#1a1f1b]">
@@ -804,7 +756,7 @@ export const RouteTemplatePage: React.FC = () => {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
           {/* Related Routes */}
           <div className="lg:col-span-6 bg-white rounded-3xl p-6 md:p-8 border border-[#e2dacd]">
-            <span className="text-xs font-bold uppercase tracking-wider text-[#0F6A37] font-['Space_Mono'] block mb-2">
+            <span className="text-xs font-bold uppercase tracking-wider text-[#0B3A66] font-['Space_Mono'] block mb-2">
               Interconnected Corridors
             </span>
             <h2 className="text-xl sm:text-2xl font-extrabold uppercase font-['Archivo_Narrow'] text-[#1a1f1b] mb-4">
@@ -815,15 +767,15 @@ export const RouteTemplatePage: React.FC = () => {
                 <Link
                   key={idx}
                   to={`/${rel.slug}`}
-                  className="p-3 rounded-xl border border-[#ECE6DD] hover:border-[#0F6A37] hover:bg-[#EBF5EE] transition-all flex items-center justify-between group font-['Manrope']"
+                  className="p-3 rounded-xl border border-[#ECE6DD] hover:border-[#0B3A66] hover:bg-[#EBF2F9] transition-all flex items-center justify-between group font-['Manrope']"
                 >
                   <div>
-                    <span className="font-bold text-sm text-[#1a1f1b] group-hover:text-[#0F6A37] block">
+                    <span className="font-bold text-sm text-[#1a1f1b] group-hover:text-[#0B3A66] block">
                       {rel.fromCity} ➔ {rel.toCity}
                     </span>
                     <span className="text-[11px] text-neutral-500 font-['Space_Mono']">{rel.distanceKm} km</span>
                   </div>
-                  <span className="text-xs font-bold text-[#0F6A37] font-['Space_Mono']">{rel.transitTime}</span>
+                  <span className="text-xs font-bold text-[#0B3A66] font-['Space_Mono']">{rel.transitTime}</span>
                 </Link>
               ))}
             </div>
@@ -831,7 +783,7 @@ export const RouteTemplatePage: React.FC = () => {
 
           {/* Blog Suggestions */}
           <div className="lg:col-span-6 bg-white rounded-3xl p-6 md:p-8 border border-[#e2dacd]">
-            <span className="text-xs font-bold uppercase tracking-wider text-[#0F6A37] font-['Space_Mono'] block mb-2">
+            <span className="text-xs font-bold uppercase tracking-wider text-[#0B3A66] font-['Space_Mono'] block mb-2">
               Logistics Knowledge Base
             </span>
             <h2 className="text-xl sm:text-2xl font-extrabold uppercase font-['Archivo_Narrow'] text-[#1a1f1b] mb-4">
@@ -839,13 +791,13 @@ export const RouteTemplatePage: React.FC = () => {
             </h2>
             <div className="space-y-3 font-['Manrope']">
               {route.blogSuggestions.map((blog, idx) => (
-                <div key={idx} className="p-3.5 rounded-xl bg-[#fbf9f6] border border-[#ECE6DD] hover:border-[#0F6A37]/50 transition-colors">
+                <div key={idx} className="p-3.5 rounded-xl bg-[#fbf9f6] border border-[#ECE6DD] hover:border-[#0B3A66]/50 transition-colors">
                   <div className="flex items-center justify-between text-[11px] font-['Space_Mono'] text-neutral-500 mb-1">
-                    <span className="text-[#0F6A37] font-bold">{blog.category}</span>
+                    <span className="text-[#0B3A66] font-bold">{blog.category}</span>
                     <span>{blog.readTime}</span>
                   </div>
                   <Link to={blog.link || '/blog'}>
-                    <h3 className="font-bold text-sm text-[#1a1f1b] hover:text-[#0F6A37] cursor-pointer transition-colors">
+                    <h3 className="font-bold text-sm text-[#1a1f1b] hover:text-[#0B3A66] cursor-pointer transition-colors">
                       {blog.title}
                     </h3>
                   </Link>
@@ -858,10 +810,10 @@ export const RouteTemplatePage: React.FC = () => {
       </section>
 
       {/* 19. ROUTE-SPECIFIC QUOTE FORM (Pre-filled origin & destination) */}
-      <section id="route-quote-form" className="py-16 px-4 md:px-12 max-w-4xl mx-auto border-t border-[#d8d0c3]">
+      <section id="route-quote-form" className="py-8 md:py-10 px-4 md:px-12 max-w-4xl mx-auto border-t border-[#d8d0c3]">
         <div className="bg-white rounded-3xl p-6 md:p-10 shadow-xl border border-[#e2dacd]">
           <div className="text-center max-w-xl mx-auto mb-8">
-            <span className="text-xs font-bold uppercase tracking-wider text-[#0F6A37] font-['Space_Mono'] block mb-2">
+            <span className="text-xs font-bold uppercase tracking-wider text-[#0B3A66] font-['Space_Mono'] block mb-2">
               Instant Quote Generator
             </span>
             <h2 className="text-2xl sm:text-3xl font-extrabold uppercase font-['Archivo_Narrow'] text-[#1a1f1b]">
@@ -873,8 +825,8 @@ export const RouteTemplatePage: React.FC = () => {
           </div>
 
           {formStatus === 'success' ? (
-            <div className="bg-[#EBF5EE] border border-[#0F6A37]/30 rounded-2xl p-8 text-center space-y-4">
-              <div className="w-14 h-14 rounded-full bg-[#0F6A37] text-white flex items-center justify-center mx-auto">
+            <div className="bg-[#EBF2F9] border border-[#0B3A66]/30 rounded-2xl p-8 text-center space-y-4">
+              <div className="w-14 h-14 rounded-full bg-[#0B3A66] text-white flex items-center justify-center mx-auto">
                 <CheckCircle2 size={32} />
               </div>
               <h3 className="text-xl font-bold text-[#1a1f1b] font-['Archivo_Narrow'] uppercase">
@@ -886,7 +838,7 @@ export const RouteTemplatePage: React.FC = () => {
               <div className="pt-2 flex justify-center gap-3">
                 <button
                   onClick={() => setFormStatus('idle')}
-                  className="px-5 py-2.5 rounded-lg bg-[#0F6A37] text-white font-bold text-xs uppercase tracking-wider"
+                  className="px-5 py-2.5 rounded-lg bg-[#0B3A66] text-white font-bold text-xs uppercase tracking-wider"
                 >
                   Send Another Enquiry
                 </button>
@@ -905,7 +857,7 @@ export const RouteTemplatePage: React.FC = () => {
                     placeholder="e.g. Ramesh Kumar"
                     value={formData.name}
                     onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                    className="w-full px-4 py-3 rounded-xl border border-[#d8d0c3] bg-[#fbf9f6] text-sm focus:outline-none focus:border-[#0F6A37]"
+                    className="w-full px-4 py-3 rounded-xl border border-[#d8d0c3] bg-[#fbf9f6] text-sm focus:outline-none focus:border-[#0B3A66]"
                   />
                 </div>
                 <div>
@@ -918,7 +870,7 @@ export const RouteTemplatePage: React.FC = () => {
                     placeholder="+91 98765 43210"
                     value={formData.phone}
                     onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                    className="w-full px-4 py-3 rounded-xl border border-[#d8d0c3] bg-[#fbf9f6] text-sm focus:outline-none focus:border-[#0F6A37]"
+                    className="w-full px-4 py-3 rounded-xl border border-[#d8d0c3] bg-[#fbf9f6] text-sm focus:outline-none focus:border-[#0B3A66]"
                   />
                 </div>
               </div>
@@ -933,7 +885,7 @@ export const RouteTemplatePage: React.FC = () => {
                     placeholder="e.g. ABC Industrial Corp"
                     value={formData.company}
                     onChange={(e) => setFormData({ ...formData, company: e.target.value })}
-                    className="w-full px-4 py-3 rounded-xl border border-[#d8d0c3] bg-[#fbf9f6] text-sm focus:outline-none focus:border-[#0F6A37]"
+                    className="w-full px-4 py-3 rounded-xl border border-[#d8d0c3] bg-[#fbf9f6] text-sm focus:outline-none focus:border-[#0B3A66]"
                   />
                 </div>
                 <div>
@@ -945,7 +897,7 @@ export const RouteTemplatePage: React.FC = () => {
                     placeholder="contact@company.com"
                     value={formData.email}
                     onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                    className="w-full px-4 py-3 rounded-xl border border-[#d8d0c3] bg-[#fbf9f6] text-sm focus:outline-none focus:border-[#0F6A37]"
+                    className="w-full px-4 py-3 rounded-xl border border-[#d8d0c3] bg-[#fbf9f6] text-sm focus:outline-none focus:border-[#0B3A66]"
                   />
                 </div>
               </div>
@@ -959,7 +911,7 @@ export const RouteTemplatePage: React.FC = () => {
                     type="text"
                     value={formData.pickup}
                     onChange={(e) => setFormData({ ...formData, pickup: e.target.value })}
-                    className="w-full px-4 py-3 rounded-xl border border-[#d8d0c3] bg-[#fbf9f6] text-sm focus:outline-none focus:border-[#0F6A37]"
+                    className="w-full px-4 py-3 rounded-xl border border-[#d8d0c3] bg-[#fbf9f6] text-sm focus:outline-none focus:border-[#0B3A66]"
                   />
                 </div>
                 <div>
@@ -970,7 +922,7 @@ export const RouteTemplatePage: React.FC = () => {
                     type="text"
                     value={formData.drop}
                     onChange={(e) => setFormData({ ...formData, drop: e.target.value })}
-                    className="w-full px-4 py-3 rounded-xl border border-[#d8d0c3] bg-[#fbf9f6] text-sm focus:outline-none focus:border-[#0F6A37]"
+                    className="w-full px-4 py-3 rounded-xl border border-[#d8d0c3] bg-[#fbf9f6] text-sm focus:outline-none focus:border-[#0B3A66]"
                   />
                 </div>
               </div>
@@ -985,7 +937,7 @@ export const RouteTemplatePage: React.FC = () => {
                     placeholder="e.g. Marble, Machines, Steel"
                     value={formData.goodsType}
                     onChange={(e) => setFormData({ ...formData, goodsType: e.target.value })}
-                    className="w-full px-4 py-3 rounded-xl border border-[#d8d0c3] bg-[#fbf9f6] text-sm focus:outline-none focus:border-[#0F6A37]"
+                    className="w-full px-4 py-3 rounded-xl border border-[#d8d0c3] bg-[#fbf9f6] text-sm focus:outline-none focus:border-[#0B3A66]"
                   />
                 </div>
                 <div>
@@ -997,7 +949,7 @@ export const RouteTemplatePage: React.FC = () => {
                     placeholder="e.g. 5 Tons, 12 Tons"
                     value={formData.weight}
                     onChange={(e) => setFormData({ ...formData, weight: e.target.value })}
-                    className="w-full px-4 py-3 rounded-xl border border-[#d8d0c3] bg-[#fbf9f6] text-sm focus:outline-none focus:border-[#0F6A37]"
+                    className="w-full px-4 py-3 rounded-xl border border-[#d8d0c3] bg-[#fbf9f6] text-sm focus:outline-none focus:border-[#0B3A66]"
                   />
                 </div>
                 <div>
@@ -1007,7 +959,7 @@ export const RouteTemplatePage: React.FC = () => {
                   <select
                     value={formData.truckType}
                     onChange={(e) => setFormData({ ...formData, truckType: e.target.value })}
-                    className="w-full px-4 py-3 rounded-xl border border-[#d8d0c3] bg-[#fbf9f6] text-sm focus:outline-none focus:border-[#0F6A37]"
+                    className="w-full px-4 py-3 rounded-xl border border-[#d8d0c3] bg-[#fbf9f6] text-sm focus:outline-none focus:border-[#0B3A66]"
                   >
                     {route.truckTypes.map((t, idx) => (
                       <option key={idx} value={t.name}>
@@ -1028,14 +980,14 @@ export const RouteTemplatePage: React.FC = () => {
                   placeholder="Need crane loading? Immediate dispatch? Unloading address pin code..."
                   value={formData.message}
                   onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                  className="w-full px-4 py-3 rounded-xl border border-[#d8d0c3] bg-[#fbf9f6] text-sm focus:outline-none focus:border-[#0F6A37]"
+                  className="w-full px-4 py-3 rounded-xl border border-[#d8d0c3] bg-[#fbf9f6] text-sm focus:outline-none focus:border-[#0B3A66]"
                 />
               </div>
 
               <button
                 type="submit"
                 disabled={formStatus === 'submitting'}
-                className="w-full py-4 rounded-xl bg-[#0F6A37] text-white font-['Manrope'] font-bold text-sm uppercase tracking-wider shadow-lg hover:bg-[#0c562c] transition-all flex items-center justify-center gap-2"
+                className="w-full py-4 rounded-xl bg-[#0B3A66] text-white font-['Manrope'] font-bold text-sm uppercase tracking-wider shadow-lg hover:bg-[#072D54] transition-all flex items-center justify-center gap-2"
               >
                 {formStatus === 'submitting' ? (
                   <>
@@ -1055,9 +1007,9 @@ export const RouteTemplatePage: React.FC = () => {
       </section>
 
       {/* 20. LARGE BOTTOM CTA BANNER */}
-      <section className="py-16 px-4 md:px-12 bg-[#0F6A37] text-white text-center">
+      <section className="py-8 md:py-10 px-4 md:px-12 bg-[#0B3A66] text-white text-center">
         <div className="max-w-4xl mx-auto space-y-6">
-          <span className="text-xs font-bold font-['Space_Mono'] uppercase tracking-widest text-[#F4B400] bg-black/20 px-3 py-1 rounded-full">
+          <span className="text-xs font-bold font-['Space_Mono'] uppercase tracking-widest text-[#F5B51B] bg-black/20 px-3 py-1 rounded-full">
             Fastest Freight Movement Across Rajasthan & Delhi NCR
           </span>
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold font-['Archivo_Narrow'] uppercase tracking-tight">
@@ -1069,13 +1021,13 @@ export const RouteTemplatePage: React.FC = () => {
           <div className="pt-4 flex flex-wrap gap-4 justify-center items-center">
             <button
               onClick={scrollToQuote}
-              className="px-8 py-4 rounded-xl bg-[#F4B400] text-[#6c5000] font-['Manrope'] font-extrabold text-sm uppercase tracking-wider shadow-lg hover:bg-[#e0a500] transition-transform transform hover:-translate-y-0.5"
+              className="px-8 py-4 rounded-xl bg-[#F5B51B] text-[#071F35] font-['Manrope'] font-extrabold text-sm uppercase tracking-wider shadow-lg hover:bg-[#E0A212] transition-transform transform hover:-translate-y-0.5"
             >
               Book Truck Now
             </button>
             <a
               href="tel:+919784800833"
-              className="px-7 py-4 rounded-xl bg-white text-[#0F6A37] font-['Manrope'] font-bold text-sm uppercase tracking-wider hover:bg-neutral-100 transition-colors flex items-center gap-2 shadow-md"
+              className="px-7 py-4 rounded-xl bg-white text-[#0B3A66] font-['Manrope'] font-bold text-sm uppercase tracking-wider hover:bg-neutral-100 transition-colors flex items-center gap-2 shadow-md"
             >
               <Phone size={18} />
               <span>Call: +91 97848 00833</span>
