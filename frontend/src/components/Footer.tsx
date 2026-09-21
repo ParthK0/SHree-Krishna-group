@@ -14,7 +14,7 @@ export const Footer: React.FC = () => {
     { label: 'Logistics Blog & Rates', href: '/blog' },
     { label: 'Register Vehicle', href: '/register-truck' },
     { label: 'General Enquiry', href: '/contact#enquiry' },
-    { label: 'About Us', href: '/#about-us' },
+    { label: 'About Us', href: '/about' },
     { label: 'Contact', href: '/contact' },
   ];
 

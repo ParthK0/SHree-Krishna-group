@@ -189,9 +189,19 @@ export const AboutUs: React.FC = () => {
                 Your Trusted Partner in Pan-India Logistics
               </h2>
 
-              <p className="font-['Manrope'] text-sm sm:text-base text-[#4A554C] leading-relaxed max-w-2xl mb-4">
+              <p className="font-['Manrope'] text-sm sm:text-base text-[#4A554C] leading-relaxed max-w-2xl mb-3">
                 Shree Krishna Transport Network delivers more than shipments — we deliver reliability, confidence, and transparent freight solutions that connect Rajasthan's core industrial manufacturing hubs with commercial centers across India.
               </p>
+
+              <div className="flex flex-wrap items-center gap-3 mb-3">
+                <Link
+                  to="/about"
+                  className="inline-flex items-center gap-1.5 text-xs font-['Manrope'] font-bold text-[#0B3A66] hover:text-[#071F35] uppercase tracking-wider bg-white/90 border border-[#c5beb4]/70 px-3.5 py-1.5 rounded-full shadow-xs hover:shadow-sm transition-all"
+                >
+                  <span>Explore Full Company Profile &amp; Fleet</span>
+                  <ArrowRight size={13} />
+                </Link>
+              </div>
             </div>
 
             {/* Twin Interactive Cards (Navy & Crisp White) */}

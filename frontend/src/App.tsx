@@ -17,6 +17,7 @@ import { HomePage } from './pages/HomePage';
 // Lazy load subpages to drastically reduce initial JS bundle size
 const BookTruckPage = lazy(() => import('./pages/BookTruckPage').then(m => ({ default: m.BookTruckPage })));
 const RegisterTruckPage = lazy(() => import('./pages/RegisterTruckPage').then(m => ({ default: m.RegisterTruckPage })));
+const AboutPage = lazy(() => import('./pages/AboutPage').then(m => ({ default: m.AboutPage })));
 const ContactPage = lazy(() => import('./pages/ContactPage').then(m => ({ default: m.ContactPage })));
 const TermsPage = lazy(() => import('./pages/TermsPage').then(m => ({ default: m.TermsPage })));
 const PrivacyPage = lazy(() => import('./pages/PrivacyPage').then(m => ({ default: m.PrivacyPage })));
@@ -45,6 +46,8 @@ function AnimatedRoutes() {
       >
         <Routes location={location}>
           <Route path="/" element={<HomePage />} />
+          <Route path="/about" element={<AboutPage />} />
+          <Route path="/about-us" element={<Navigate to="/about" replace />} />
           <Route path="/book-truck" element={<BookTruckPage />} />
           <Route path="/register-truck" element={<RegisterTruckPage />} />
           <Route path="/enquiry" element={<Navigate to="/contact#enquiry" replace />} />

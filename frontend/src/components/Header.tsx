@@ -78,6 +78,7 @@ export const Header: React.FC = () => {
   // Primary Links with Home and unified Services option
   const primaryLinks: NavLinkItem[] = [
     { name: 'Home', href: '/', icon: Home },
+    { name: 'About Us', href: '/about', icon: Building2 },
     { name: 'Services', href: '/book-truck', icon: Truck },
     { name: 'Routes', href: '/routes', icon: MapPin },
     { name: 'Blog', href: '/blog', icon: BookOpen },
@@ -87,7 +88,7 @@ export const Header: React.FC = () => {
   // Secondary Links for "More" Dropdown
   const moreLinks: NavLinkItem[] = [
     { name: 'How It Works', href: '/#how-it-works', icon: Info },
-    { name: 'About Us', href: '/#about-us', icon: Building2 },
+    { name: 'About Us', href: '/about', icon: Building2 },
     { name: 'Quick Enquiry', href: '/contact#enquiry', icon: MessageSquare },
     { name: 'Register Vehicle', href: '/register-truck', icon: Calendar },
   ];
