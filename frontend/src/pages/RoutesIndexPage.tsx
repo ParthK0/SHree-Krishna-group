@@ -10,6 +10,9 @@ import {
   Layers,
   Phone,
   CheckCircle2,
+  Filter,
+  ChevronDown,
+  ChevronUp,
 } from 'lucide-react';
 import { getPublishedRoutes } from '../data/routeRegistry';
 import { RouteMapSection } from '../components/RouteMapSection';
@@ -18,7 +21,7 @@ import { useMetaSEO } from '../lib/useMetaSEO';
 export const RoutesIndexPage: React.FC = () => {
   useMetaSEO({
     title: 'Verified Freight Corridors & Current Rate Guide | Shree Krishna Transport',
-    description: 'Browse verified daily scheduled freight routes from Jaipur to Delhi, Mumbai, Ahmedabad, Pune, Surat, Jodhpur & Pan-India. Compare indicative rate cards and book verified fleet linehaul.',
+    description: 'Browse verified daily scheduled freight routes from Jaipur to Delhi, Haryana, Punjab, Gujarat, Uttar Pradesh, Rajasthan & Pan-India. Compare indicative rate cards and book verified fleet linehaul.',
     canonicalPath: '/routes',
     ogImage: '/images/hero-truck-1.webp',
   });
@@ -26,6 +29,9 @@ export const RoutesIndexPage: React.FC = () => {
   const routes = getPublishedRoutes();
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedCity, setSelectedCity] = useState('all');
+  const [selectedState, setSelectedState] = useState('all');
+  const [sortBy, setSortBy] = useState('default');
+  const [visibleLimit, setVisibleLimit] = useState<number>(9);
 
   // Structured Route Finder State
   const [finderDestination, setFinderDestination] = useState('');
@@ -34,12 +40,20 @@ export const RoutesIndexPage: React.FC = () => {
 
   const popularCorridors = [
     { label: 'Jaipur ➔ Delhi NCR', city: 'Delhi', target: 'delhi' },
-    { label: 'Jaipur ➔ Mumbai', city: 'Mumbai', target: 'mumbai' },
+    { label: 'Jaipur ➔ Gurgaon', city: 'Gurgaon', target: 'gurgaon' },
+    { label: 'Jaipur ➔ Noida', city: 'Noida', target: 'noida' },
+    { label: 'Jaipur ➔ Sonipat', city: 'Sonipat', target: 'sonipat' },
+    { label: 'Jaipur ➔ Chandigarh', city: 'Chandigarh', target: 'chandigarh' },
+    { label: 'Jaipur ➔ Ludhiana', city: 'Ludhiana', target: 'ludhiana' },
     { label: 'Jaipur ➔ Ahmedabad', city: 'Ahmedabad', target: 'ahmedabad' },
-    { label: 'Jaipur ➔ Pune', city: 'Pune', target: 'pune' },
     { label: 'Jaipur ➔ Surat', city: 'Surat', target: 'surat' },
+    { label: 'Jaipur ➔ Alwar', city: 'Alwar', target: 'alwar' },
+    { label: 'Jaipur ➔ Kota', city: 'Kota', target: 'kota' },
     { label: 'Jaipur ➔ Jodhpur', city: 'Jodhpur', target: 'jodhpur' },
-    { label: 'Jaipur ➔ Bhiwadi', city: 'Bhiwadi', target: 'bhiwadi' },
+    { label: 'Jaipur ➔ Udaipur', city: 'Udaipur', target: 'udaipur' },
+    { label: 'Jaipur ➔ Agra', city: 'Agra', target: 'agra' },
+    { label: 'Jaipur ➔ Lucknow', city: 'Lucknow', target: 'lucknow' },
+    { label: 'Jaipur ➔ Mumbai', city: 'Mumbai', target: 'mumbai' },
   ];
 
   const handleFinderSubmit = (e: React.FormEvent) => {
@@ -68,20 +82,87 @@ export const RoutesIndexPage: React.FC = () => {
     }
   };
 
-  const filteredRoutes = routes.filter((route) => {
-    const matchSearch =
-      route.fromCity.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      route.toCity.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      route.h1.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      route.industries.some((i) => i.toLowerCase().includes(searchTerm.toLowerCase()));
+  const stateOptions = [
+    { label: 'All States', value: 'all' },
+    { label: 'Rajasthan', value: 'Rajasthan' },
+    { label: 'Delhi / NCR', value: 'Delhi / NCR' },
+    { label: 'Haryana', value: 'Haryana' },
+    { label: 'Punjab', value: 'Punjab' },
+    { label: 'Uttar Pradesh', value: 'Uttar Pradesh' },
+    { label: 'Uttarakhand', value: 'Uttarakhand' },
+    { label: 'Gujarat', value: 'Gujarat' },
+    { label: 'Maharashtra', value: 'Maharashtra' },
+    { label: 'Madhya Pradesh', value: 'Madhya Pradesh' },
+    { label: 'South India', value: 'South' },
+    { label: 'East India', value: 'East' },
+    { label: 'Other Regions', value: 'Other' },
+  ];
 
-    const matchCity =
-      selectedCity === 'all' ||
-      route.fromCity.toLowerCase() === selectedCity.toLowerCase() ||
-      route.toCity.toLowerCase() === selectedCity.toLowerCase();
+  const filteredRoutes = routes
+    .filter((route) => {
+      const query = searchTerm.toLowerCase().trim();
+      const matchSearch =
+        !query ||
+        route.fromCity.toLowerCase().includes(query) ||
+        route.toCity.toLowerCase().includes(query) ||
+        (route.state && route.state.toLowerCase().includes(query)) ||
+        route.h1.toLowerCase().includes(query) ||
+        route.industries.some((i) => i.toLowerCase().includes(query));
 
-    return matchSearch && matchCity;
-  });
+      const matchCity =
+        selectedCity === 'all' ||
+        route.fromCity.toLowerCase().includes(selectedCity.toLowerCase()) ||
+        route.toCity.toLowerCase().includes(selectedCity.toLowerCase());
+
+      const matchState =
+        selectedState === 'all'
+          ? true
+          : selectedState === 'South'
+          ? ['Tamil Nadu', 'Karnataka', 'Telangana', 'Andhra Pradesh'].includes(route.state || '')
+          : selectedState === 'East'
+          ? ['West Bengal', 'Bihar', 'Jharkhand', 'Chhattisgarh'].includes(route.state || '')
+          : selectedState === 'Other'
+          ? ![
+              'Rajasthan',
+              'Haryana',
+              'Delhi / NCR',
+              'Punjab',
+              'Gujarat',
+              'Uttar Pradesh',
+              'Uttarakhand',
+              'Maharashtra',
+              'Madhya Pradesh',
+              'Tamil Nadu',
+              'Karnataka',
+              'Telangana',
+              'Andhra Pradesh',
+              'West Bengal',
+              'Bihar',
+              'Jharkhand',
+              'Chhattisgarh',
+            ].includes(route.state || '')
+          : route.state?.toLowerCase() === selectedState.toLowerCase();
+
+      return matchSearch && matchCity && matchState;
+    })
+    .sort((a, b) => {
+      if (sortBy === 'state-asc') {
+        const stateA = a.state || '';
+        const stateB = b.state || '';
+        if (stateA !== stateB) return stateA.localeCompare(stateB);
+        return a.toCity.localeCompare(b.toCity);
+      }
+      if (sortBy === 'city-asc') {
+        return a.toCity.localeCompare(b.toCity);
+      }
+      if (sortBy === 'dist-asc') {
+        return a.distanceKm - b.distanceKm;
+      }
+      if (sortBy === 'dist-desc') {
+        return b.distanceKm - a.distanceKm;
+      }
+      return 0;
+    });
 
   return (
     <div className="w-full bg-[#ECE6DD] min-h-screen text-[#1a1f1b]">
@@ -106,7 +187,7 @@ export const RoutesIndexPage: React.FC = () => {
             <div className="bg-white/80 backdrop-blur-sm p-3.5 rounded-2xl border border-[#d8d0c3] shadow-sm">
               <div className="flex items-center gap-2 text-[#0B3A66] font-['Space_Mono'] font-bold text-xs">
                 <CheckCircle2 size={16} className="text-[#22c55e]" />
-                <span>21 Active Corridors</span>
+                <span>{routes.length} Active Corridors</span>
               </div>
               <p className="text-[11px] text-neutral-600 font-['Manrope'] mt-1">
                 Scheduled daily linehaul radiating from Jaipur Central Hub to all major regional drop zones.
@@ -116,20 +197,20 @@ export const RoutesIndexPage: React.FC = () => {
             <div className="bg-white/80 backdrop-blur-sm p-3.5 rounded-2xl border border-[#d8d0c3] shadow-sm">
               <div className="flex items-center gap-2 text-[#0B3A66] font-['Space_Mono'] font-bold text-xs">
                 <CheckCircle2 size={16} className="text-[#22c55e]" />
-                <span>18 Industrial Hubs</span>
+                <span>15+ States & Regions</span>
               </div>
               <p className="text-[11px] text-neutral-600 font-['Manrope'] mt-1">
-                Published 7-Ton benchmark market rate cards for Gujarat, Maharashtra, MP, UP & Haryana.
+                Published benchmark market rate cards across Northern, Western, Central, Southern & Eastern India.
               </p>
             </div>
 
             <div className="bg-white/80 backdrop-blur-sm p-3.5 rounded-2xl border border-[#d8d0c3] shadow-sm">
               <div className="flex items-center gap-2 text-[#0B3A66] font-['Space_Mono'] font-bold text-xs">
                 <CheckCircle2 size={16} className="text-[#22c55e]" />
-                <span>12 Published Route Guides</span>
+                <span>{routes.length} Published Route Guides</span>
               </div>
               <p className="text-[11px] text-neutral-600 font-['Manrope'] mt-1">
-                In-depth route blueprints with toll breakdown, highway checkpoints, and booking steps.
+                In-depth route blueprints with verified rates, transit times, toll breakdown, and booking steps.
               </p>
             </div>
           </div>
@@ -167,20 +248,51 @@ export const RoutesIndexPage: React.FC = () => {
                 className="w-full bg-transparent font-bold text-xs sm:text-sm text-[#1a1f1b] font-['Manrope'] focus:outline-none cursor-pointer"
               >
                 <option value="">Select Destination Hub...</option>
-                <option value="Delhi">Delhi NCR (Gurugram, Okhla, Kundli)</option>
-                <option value="Mumbai">Mumbai (Bhiwandi, JNPT, Panvel)</option>
-                <option value="Ahmedabad">Ahmedabad (Sanand, Changodar)</option>
-                <option value="Pune">Pune (Chakan, Bhosari, Talegaon)</option>
-                <option value="Surat">Surat (Sachin GIDC, Ring Road)</option>
-                <option value="Jodhpur">Jodhpur (Basni, Boronada SEZ)</option>
-                <option value="Ajmer">Ajmer / Kishangarh Marble Zone</option>
-                <option value="Bhiwadi">Bhiwadi / Neemrana Auto Hub</option>
-                <option value="Udaipur">Udaipur (Sukher, Madri GIDC)</option>
-                <option value="Kota">Kota (Ranpur, DCM Road)</option>
-                <option value="Indore">Indore (Pithampur, Dewas)</option>
-                <option value="Agra">Agra / Mathura UP Zone</option>
-                <option value="Kanpur">Kanpur Industrial Area</option>
-                <option value="Lucknow">Lucknow Transport Nagar</option>
+                <optgroup label="Delhi & NCR">
+                  <option value="Delhi">Delhi Central / Okhla</option>
+                  <option value="Gurgaon">Gurgaon / Manesar (Haryana)</option>
+                  <option value="Noida">Noida / Greater Noida (UP)</option>
+                  <option value="Faridabad">Faridabad / Ballabgarh (Haryana)</option>
+                  <option value="Bahadurgarh">Bahadurgarh / Jhajjar (Haryana)</option>
+                </optgroup>
+                <optgroup label="Haryana Industrial Belt">
+                  <option value="Sonipat">Sonipat / Kundli / Rai</option>
+                  <option value="Panipat">Panipat Textile Belt</option>
+                  <option value="Karnal">Karnal Agri-Industrial</option>
+                  <option value="Jind">Jind Central Mandi</option>
+                  <option value="Jhajjar">Jhajjar Industrial Zone</option>
+                </optgroup>
+                <optgroup label="Rajasthan Intra-State">
+                  <option value="Alwar">Alwar / Matsya Industrial Area</option>
+                  <option value="Bhiwadi">Bhiwadi / Neemrana Auto Cluster</option>
+                  <option value="Kota">Kota Coaching & Chemical Hub</option>
+                  <option value="Jodhpur">Jodhpur Handicrafts & Basni</option>
+                  <option value="Ajmer">Ajmer / Kishangarh Marble</option>
+                  <option value="Udaipur">Udaipur Marble & Minerals</option>
+                  <option value="Jaisalmer">Jaisalmer Solar & Stone Zone</option>
+                </optgroup>
+                <optgroup label="Punjab & North">
+                  <option value="Chandigarh">Ambala / Chandigarh Tricity</option>
+                  <option value="Ludhiana">Ludhiana Industrial Hub</option>
+                  <option value="Amritsar">Amritsar Border Gateway</option>
+                </optgroup>
+                <optgroup label="Gujarat & Western India">
+                  <option value="Ahmedabad">Ahmedabad (Sanand, Changodar)</option>
+                  <option value="Surat">Surat (Sachin GIDC, Textile)</option>
+                  <option value="Vadodara">Vadodara Chemical & Engg</option>
+                  <option value="Rajkot">Rajkot Auto Ancillary & Foundry</option>
+                </optgroup>
+                <optgroup label="Maharashtra">
+                  <option value="Mumbai">Mumbai (Bhiwandi, JNPT, Panvel)</option>
+                  <option value="Pune">Pune (Chakan, Bhosari, Talegaon)</option>
+                </optgroup>
+                <optgroup label="Uttar Pradesh & Central">
+                  <option value="Agra">Agra Leather & Foundry Hub</option>
+                  <option value="Kanpur">Kanpur Industrial Hub</option>
+                  <option value="Lucknow">Lucknow Transport Nagar</option>
+                  <option value="Indore">Indore / Pithampur (MP)</option>
+                  <option value="Kolkata">Kolkata Dankuni Hub (WB)</option>
+                </optgroup>
               </select>
             </div>
 
@@ -253,69 +365,186 @@ export const RoutesIndexPage: React.FC = () => {
 
       {/* STAGE 5: Complete Transport Corridors Catalog */}
       <section className="py-12 px-4 md:px-12 max-w-7xl mx-auto border-t border-[#d8d0c3]" id="all-corridors">
-        <div className="flex items-center justify-between mb-8 flex-wrap gap-4">
+        <div className="flex flex-col lg:flex-row lg:items-end justify-between mb-6 gap-4">
           <div>
             <div className="inline-flex items-center gap-1.5 text-xs font-bold font-['Space_Mono'] uppercase text-[#0B3A66] mb-1">
               <Truck size={14} />
-              <span>Published Route Guides</span>
+              <span>Verified Transport Network</span>
             </div>
             <h2 className="text-xl sm:text-2xl md:text-3xl font-extrabold uppercase font-['Archivo_Narrow'] text-[#1a1f1b]">
               Complete Transport Corridors Directory
             </h2>
-            <span className="font-['Space_Mono'] text-xs uppercase font-bold text-neutral-500">
-              Showing {filteredRoutes.length} of {routes.length} Published Route Guides
-            </span>
+            <p className="text-xs sm:text-sm text-neutral-600 font-['Manrope'] mt-0.5">
+              Showing {Math.min(visibleLimit, filteredRoutes.length)} of {filteredRoutes.length} Corridors ({routes.length} Published Route Blueprints)
+            </p>
           </div>
 
-          <div className="flex flex-wrap items-center gap-3">
+          <div className="flex flex-wrap items-center gap-2.5">
+            {/* Search Input */}
             <div className="relative">
               <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-neutral-400" size={15} />
               <input
                 type="text"
                 value={searchTerm}
-                onChange={(e) => setSearchTerm(e.target.value)}
-                placeholder="Search route, cargo, or city..."
-                className="pl-9 pr-3 py-2 rounded-xl border border-[#d8d0c3] bg-white text-xs font-['Manrope'] focus:outline-none focus:border-[#0B3A66] w-56"
+                onChange={(e) => {
+                  setSearchTerm(e.target.value);
+                  setVisibleLimit(9);
+                }}
+                placeholder="Search route, city, state..."
+                className="pl-9 pr-3 py-2 rounded-xl border border-[#d8d0c3] bg-white text-xs font-['Manrope'] focus:outline-none focus:border-[#0B3A66] w-48 sm:w-56"
               />
             </div>
 
-            <div className="flex items-center gap-1.5 text-xs font-['Manrope']">
+            {/* City Dropdown */}
+            <div className="flex items-center text-xs font-['Manrope']">
               <select
                 value={selectedCity}
-                onChange={(e) => setSelectedCity(e.target.value)}
-                className="px-3 py-2 rounded-xl border border-[#d8d0c3] bg-white text-xs font-bold focus:outline-none focus:border-[#0B3A66]"
+                onChange={(e) => {
+                  setSelectedCity(e.target.value);
+                  setVisibleLimit(9);
+                }}
+                className="px-3 py-2 rounded-xl border border-[#d8d0c3] bg-white text-xs font-bold focus:outline-none focus:border-[#0B3A66] cursor-pointer"
               >
-                <option value="all">All Destinations</option>
-                <option value="Delhi">Delhi NCR</option>
-                <option value="Mumbai">Mumbai</option>
-                <option value="Ahmedabad">Ahmedabad</option>
-                <option value="Jodhpur">Jodhpur</option>
-                <option value="Ajmer">Ajmer</option>
-                <option value="Pune">Pune</option>
-                <option value="Surat">Surat</option>
-                <option value="Bhiwadi">Bhiwadi</option>
-                <option value="Kota">Kota</option>
-                <option value="Udaipur">Udaipur</option>
-                <option value="Indore">Indore</option>
-                <option value="Jaipur">Jaipur (Inbound)</option>
+                <option value="all">All Destination Hubs</option>
+                {Array.from(new Set(routes.map((r) => r.toCity))).sort().map((city) => (
+                  <option key={city} value={city}>
+                    {city}
+                  </option>
+                ))}
+              </select>
+            </div>
+
+            {/* Sort Dropdown */}
+            <div className="flex items-center text-xs font-['Manrope']">
+              <select
+                value={sortBy}
+                onChange={(e) => {
+                  setSortBy(e.target.value);
+                  setVisibleLimit(9);
+                }}
+                className="px-3 py-2 rounded-xl border border-[#d8d0c3] bg-white text-xs font-bold focus:outline-none focus:border-[#0B3A66] cursor-pointer"
+              >
+                <option value="default">Sort: Default</option>
+                <option value="state-asc">Sort: State (A-Z)</option>
+                <option value="city-asc">Sort: Destination City (A-Z)</option>
+                <option value="dist-asc">Sort: Distance (Low to High)</option>
+                <option value="dist-desc">Sort: Distance (High to Low)</option>
               </select>
             </div>
           </div>
         </div>
 
-        {/* Route Cards Grid */}
+        {/* State Filter Pills / Tabs */}
+        <div className="flex items-center gap-1.5 overflow-x-auto pb-3 mb-6 scrollbar-thin">
+          <span className="text-[11px] font-bold text-neutral-500 font-['Space_Mono'] uppercase mr-1 shrink-0 flex items-center gap-1">
+            <Filter size={13} className="text-[#0B3A66]" />
+            State:
+          </span>
+          {stateOptions.map((opt) => {
+            const isActive = selectedState === opt.value;
+            const count =
+              opt.value === 'all'
+                ? routes.length
+                : opt.value === 'South'
+                ? routes.filter((r) => ['Tamil Nadu', 'Karnataka', 'Telangana', 'Andhra Pradesh'].includes(r.state || '')).length
+                : opt.value === 'East'
+                ? routes.filter((r) => ['West Bengal', 'Bihar', 'Jharkhand', 'Chhattisgarh'].includes(r.state || '')).length
+                : opt.value === 'Other'
+                ? routes.filter(
+                    (r) =>
+                      ![
+                        'Rajasthan',
+                        'Haryana',
+                        'Delhi / NCR',
+                        'Punjab',
+                        'Gujarat',
+                        'Uttar Pradesh',
+                        'Uttarakhand',
+                        'Maharashtra',
+                        'Madhya Pradesh',
+                        'Tamil Nadu',
+                        'Karnataka',
+                        'Telangana',
+                        'Andhra Pradesh',
+                        'West Bengal',
+                        'Bihar',
+                        'Jharkhand',
+                        'Chhattisgarh',
+                      ].includes(r.state || '')
+                  ).length
+                : routes.filter((r) => r.state?.toLowerCase() === opt.value.toLowerCase()).length;
+
+            return (
+              <button
+                key={opt.value}
+                onClick={() => {
+                  setSelectedState(opt.value);
+                  setVisibleLimit(9);
+                }}
+                className={`px-3 py-1.5 rounded-full text-xs font-bold font-['Manrope'] shrink-0 transition-all flex items-center gap-1.5 ${
+                  isActive
+                    ? 'bg-[#0B3A66] text-white shadow-sm'
+                    : 'bg-white text-neutral-700 border border-[#d8d0c3] hover:border-[#0B3A66] hover:bg-neutral-50'
+                }`}
+              >
+                <span>{opt.label}</span>
+                <span
+                  className={`text-[10px] px-1.5 py-0.2 rounded-full font-['Space_Mono'] ${
+                    isActive ? 'bg-white/25 text-white' : 'bg-[#ece6dd] text-neutral-600'
+                  }`}
+                >
+                  {count}
+                </span>
+              </button>
+            );
+          })}
+        </div>
+
+        {/* No Results Fallback */}
+        {filteredRoutes.length === 0 && (
+          <div className="bg-white rounded-3xl p-10 border border-[#d8d0c3] text-center my-6">
+            <Truck className="w-12 h-12 text-neutral-400 mx-auto mb-3 opacity-60" />
+            <h3 className="text-lg font-bold font-['Archivo_Narrow'] uppercase text-[#1a1f1b] mb-1">
+              No corridors match your current filter
+            </h3>
+            <p className="text-xs text-neutral-500 font-['Manrope'] mb-4">
+              Try clearing the search term, selecting "All States", or adjusting the destination filter.
+            </p>
+            <button
+              onClick={() => {
+                setSearchTerm('');
+                setSelectedCity('all');
+                setSelectedState('all');
+                setSortBy('default');
+                setVisibleLimit(9);
+              }}
+              className="px-4 py-2 rounded-xl bg-[#0B3A66] text-white text-xs font-bold font-['Manrope'] hover:bg-[#072D54] transition-colors"
+            >
+              Reset All Filters
+            </button>
+          </div>
+        )}
+
+        {/* Route Cards Grid (Default 9 visible) */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {filteredRoutes.map((route) => (
+          {filteredRoutes.slice(0, visibleLimit).map((route) => (
             <div
               key={route.slug}
               className="bg-white rounded-2xl p-6 border border-[#e2dacd] shadow-sm hover:shadow-lg transition-all hover:border-[#0B3A66] flex flex-col justify-between group"
             >
               <div>
-                <div className="flex items-center justify-between mb-3">
-                  <span className="px-2.5 py-0.5 rounded-full bg-[#EBF2F9] text-[#0B3A66] text-[10px] font-bold font-['Space_Mono'] uppercase">
-                    Daily Scheduled Linehaul
-                  </span>
-                  <span className="text-xs font-['Space_Mono'] font-bold text-neutral-500">
+                <div className="flex items-center justify-between mb-3 gap-2">
+                  <div className="flex items-center gap-1.5 flex-wrap">
+                    <span className="px-2.5 py-0.5 rounded-full bg-[#EBF2F9] text-[#0B3A66] text-[10px] font-bold font-['Space_Mono'] uppercase">
+                      Daily Linehaul
+                    </span>
+                    {route.state && (
+                      <span className="px-2 py-0.5 rounded-full bg-[#F5B51B]/20 text-[#8a6505] text-[10px] font-bold font-['Space_Mono'] uppercase">
+                        {route.state}
+                      </span>
+                    )}
+                  </div>
+                  <span className="text-xs font-['Space_Mono'] font-bold text-neutral-500 shrink-0">
                     {route.distanceKm} km
                   </span>
                 </div>
@@ -348,7 +577,7 @@ export const RoutesIndexPage: React.FC = () => {
                 {/* Explicit Industry Pills */}
                 <div className="mb-4">
                   <span className="text-[10px] font-bold text-neutral-400 font-['Space_Mono'] uppercase tracking-wider block mb-1.5">
-                    Best For:
+                    Key Cargo & Industries:
                   </span>
                   <div className="flex flex-wrap gap-1">
                     {route.industries.slice(0, 4).map((ind, i) => (
@@ -377,6 +606,33 @@ export const RoutesIndexPage: React.FC = () => {
             </div>
           ))}
         </div>
+
+        {/* View More Option (Keep 9 in front, rest on click) */}
+        {filteredRoutes.length > 9 && (
+          <div className="text-center mt-10">
+            {visibleLimit < filteredRoutes.length ? (
+              <button
+                onClick={() => setVisibleLimit(filteredRoutes.length)}
+                className="inline-flex items-center gap-2 px-8 py-3.5 rounded-2xl bg-[#0B3A66] hover:bg-[#072D54] text-white font-bold font-['Archivo_Narrow'] text-sm sm:text-base uppercase tracking-wider transition-all shadow-md hover:shadow-lg group cursor-pointer"
+              >
+                <span>View More Corridors ({filteredRoutes.length - visibleLimit} More)</span>
+                <ChevronDown size={18} className="transition-transform group-hover:translate-y-0.5" />
+              </button>
+            ) : (
+              <button
+                onClick={() => {
+                  setVisibleLimit(9);
+                  const catalogEl = document.getElementById('all-corridors');
+                  if (catalogEl) catalogEl.scrollIntoView({ behavior: 'smooth' });
+                }}
+                className="inline-flex items-center gap-2 px-6 py-2.5 rounded-xl bg-white hover:bg-neutral-50 text-neutral-700 border border-[#d8d0c3] font-bold font-['Manrope'] text-xs uppercase tracking-wider transition-all shadow-xs cursor-pointer"
+              >
+                <span>Show Less (Keep 9 Front Cities)</span>
+                <ChevronUp size={15} />
+              </button>
+            )}
+          </div>
+        )}
 
         {/* STAGE 6: Custom Route Request & Dispatch CTA */}
         <div className="mt-12 bg-white rounded-3xl p-8 border border-[#e2dacd] text-center max-w-3xl mx-auto shadow-sm">

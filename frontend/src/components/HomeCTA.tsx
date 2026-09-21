@@ -16,7 +16,7 @@ export const HomeCTA: React.FC = () => {
   };
 
   return (
-    <section className="px-4 sm:px-6 md:px-12 pt-8 pb-4 bg-[#ECE6DD]">
+    <section className="px-4 sm:px-6 md:px-12 pt-8 pb-8 sm:pb-12 bg-[#ECE6DD]">
       <div className="max-w-7xl mx-auto">
         
         {/* Floating CTA Card */}
@@ -102,9 +102,12 @@ export const HomeCTA: React.FC = () => {
           </div>
         </div>
 
-        {/* Massive Footer Brand Typography (Watermark) */}
-        <div className="text-center pt-3 pb-1 select-none overflow-hidden">
-          <div aria-hidden="true" className="font-['Archivo_Narrow'] text-[6vw] sm:text-[6.5vw] font-extrabold text-[#0B3A66]/10 uppercase tracking-tight sm:tracking-tighter leading-none whitespace-nowrap">
+        {/* Brand Typography Watermark */}
+        <div className="text-center pt-8 sm:pt-10 pb-4 select-none overflow-hidden">
+          <div
+            aria-hidden="true"
+            className="font-['Archivo_Narrow'] text-xl sm:text-3xl md:text-5xl lg:text-6xl xl:text-7xl font-extrabold text-[#0B3A66]/12 uppercase tracking-wider sm:tracking-widest leading-normal whitespace-nowrap px-4"
+          >
             SHREE KRISHNA TRANSPORT NETWORK
           </div>
         </div>
