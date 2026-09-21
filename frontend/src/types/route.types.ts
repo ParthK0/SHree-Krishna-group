@@ -39,6 +39,7 @@ export interface RouteConfig {
   // General Fields
   fromCity: string;
   toCity: string;
+  state?: string; // Destination State e.g. "Rajasthan", "Haryana", "Delhi / NCR", "Punjab", "Gujarat", "Uttar Pradesh"
   slug: string; // e.g. "jaipur-to-delhi-transport"
   heroHeading: string;
   heroSubheading: string;

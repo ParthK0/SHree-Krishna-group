@@ -1,9 +1,12 @@
 import type { RouteConfig } from '../types/route.types';
+import { ADDITIONAL_ROUTES } from './additionalRoutes';
+import { EXTENDED_ROUTES } from './extendedCorridorRoutes';
 
-export const DEFAULT_ROUTES: RouteConfig[] = [
+const INITIAL_ROUTES: RouteConfig[] = [
   {
     fromCity: 'Jaipur',
     toCity: 'Delhi',
+    state: 'Delhi / NCR',
     slug: 'jaipur-to-delhi-transport',
     heroHeading: 'Jaipur to Delhi Transport Service',
     heroSubheading: 'Reliable Truck Transportation from Jaipur to Delhi (NCR)',
@@ -514,6 +517,7 @@ export const DEFAULT_ROUTES: RouteConfig[] = [
   {
     fromCity: 'Jaipur',
     toCity: 'Mumbai',
+    state: 'Maharashtra',
     slug: 'jaipur-to-mumbai-transport',
     heroHeading: 'Jaipur to Mumbai Transport Service',
     heroSubheading: 'Heavy Industrial Freight & Daily FTL Trucking from Jaipur to Mumbai',
@@ -650,6 +654,7 @@ export const DEFAULT_ROUTES: RouteConfig[] = [
   {
     fromCity: 'Jaipur',
     toCity: 'Ahmedabad',
+    state: 'Gujarat',
     slug: 'jaipur-to-ahmedabad-transport',
     heroHeading: 'Jaipur to Ahmedabad Transport Service',
     heroSubheading: 'Direct Industrial Logistics & Daily Trucking between Jaipur and Ahmedabad',
@@ -667,15 +672,17 @@ export const DEFAULT_ROUTES: RouteConfig[] = [
     transitTime: '1–2 Days',
     servicesOffered: ['FTL', 'PTL', 'Container', 'Open Taurus'],
     priceEstimates: [
-      { truckName: '19 ft Container / Truck', capacity: 'Up to 7 Tons', bodyType: 'Closed Container / Open', idealFor: 'GIDC industrial machinery, ceramics, tiles', priceRange: '₹24,000' },
-      { truckName: '22 ft Container / Truck', capacity: 'Up to 7 Tons', bodyType: 'High Cube Container', idealFor: 'General merchandise, chemicals, textiles', priceRange: '₹26,000' },
-      { truckName: '32 Feet Multi-Axle', capacity: '15T', bodyType: 'HQ Container', idealFor: 'High-volume cargo, solar panels', priceRange: '₹38,000 – ₹46,000' },
+      { truckName: 'Pickup / Bolero', capacity: '1.5 Tons', bodyType: 'Open / Closed Box', idealFor: 'Express parcels, retail cargo, light samples', priceRange: '₹11,000 – ₹12,500' },
+      { truckName: '14 ft Truck', capacity: 'Up to 4.5 Tons', bodyType: 'Open / High Deck', idealFor: 'Commercial hardware, engineering parts, textiles', priceRange: '₹21,500 – ₹23,000' },
+      { truckName: '19 ft Container / Truck', capacity: 'Up to 7 Tons', bodyType: 'Closed Container / Open', idealFor: 'GIDC industrial machinery, ceramics, tiles', priceRange: '₹23,500 – ₹24,500' },
+      { truckName: '22 ft Container / Truck', capacity: 'Up to 7 Tons', bodyType: 'High Cube Container', idealFor: 'General merchandise, chemicals, textiles', priceRange: '₹25,000 – ₹26,500' },
+      { truckName: '32 Feet Multi-Axle', capacity: '15T', bodyType: 'HQ Container', idealFor: 'High-volume cargo, solar panels, FMCG', priceRange: '₹30,000 – ₹32,000' },
     ],
     rateCardHighlights: {
       loadCapacityBadge: 'LOAD UPTO 7 TON',
       panIndiaRate: {
-        rate19ft: '₹24,000',
-        rate22ft: '₹26,000',
+        rate19ft: '₹23,500 – ₹24,500',
+        rate22ft: '₹25,000 – ₹26,500',
       },
     },
     pricingFactors: ['GIDC destination', 'Weight and volume', 'Toll charges'],
@@ -731,6 +738,7 @@ export const DEFAULT_ROUTES: RouteConfig[] = [
   {
     fromCity: 'Jaipur',
     toCity: 'Pune',
+    state: 'Maharashtra',
     slug: 'jaipur-to-pune-transport',
     heroHeading: 'Jaipur to Pune Transport Service',
     heroSubheading: 'Full Truck Load & Industrial Freight from Jaipur to Pune Industrial Corridor',
@@ -805,6 +813,7 @@ export const DEFAULT_ROUTES: RouteConfig[] = [
   {
     fromCity: 'Jaipur',
     toCity: 'Surat',
+    state: 'Gujarat',
     slug: 'jaipur-to-surat-transport',
     heroHeading: 'Jaipur to Surat Transport Service',
     heroSubheading: 'Reliable Textile, Machinery & Industrial Freight from Jaipur to Surat',
@@ -822,15 +831,17 @@ export const DEFAULT_ROUTES: RouteConfig[] = [
     transitTime: '2 Days',
     servicesOffered: ['FTL', 'PTL', '32ft Container', '14ft Truck'],
     priceEstimates: [
-      { truckName: '19 ft Container / Truck', capacity: 'Up to 7 Tons', bodyType: 'Container / Closed', idealFor: 'Textile bales, diamond machinery, yarn cones', priceRange: '₹26,500' },
-      { truckName: '22 ft Container / Truck', capacity: 'Up to 7 Tons', bodyType: 'High Cube Container', idealFor: 'Volumetric apparel, fabrics, chemicals', priceRange: '₹28,500' },
-      { truckName: '32 Feet Container', capacity: '15T', bodyType: 'High Cube Multi-Axle', idealFor: 'Volumetric fabric, yarns, FMCG', priceRange: '₹48,000 – ₹56,000' },
+      { truckName: 'Pickup / Bolero', capacity: '1.5 Tons', bodyType: 'Open / Closed Box', idealFor: 'Fast textile samples, light apparel boxes', priceRange: '₹14,000 – ₹15,000' },
+      { truckName: '14 ft Truck', capacity: 'Up to 4.5 Tons', bodyType: 'Closed Container / Open', idealFor: 'Garment bundles, packaging, machinery spares', priceRange: '₹24,000 – ₹25,000' },
+      { truckName: '19 ft Container / Truck', capacity: 'Up to 7 Tons', bodyType: 'Container / Closed', idealFor: 'Textile bales, diamond machinery, yarn cones', priceRange: '₹25,000 – ₹26,500' },
+      { truckName: '22 ft Container / Truck', capacity: 'Up to 7 Tons', bodyType: 'High Cube Container', idealFor: 'Volumetric apparel, fabrics, chemicals', priceRange: '₹27,000 – ₹28,500' },
+      { truckName: '32 Feet Container', capacity: '15T', bodyType: 'High Cube Multi-Axle', idealFor: 'Volumetric fabric, yarns, FMCG', priceRange: '₹33,000 – ₹35,000' },
     ],
     rateCardHighlights: {
       loadCapacityBadge: 'LOAD UPTO 7 TON',
       panIndiaRate: {
-        rate19ft: '₹26,500',
-        rate22ft: '₹28,500',
+        rate19ft: '₹25,000 – ₹26,500',
+        rate22ft: '₹27,000 – ₹28,500',
       },
     },
     pricingFactors: ['Drop location in Surat (Pandesara, Sachin, Ring Road)', 'Material weight and volume'],
@@ -886,6 +897,7 @@ export const DEFAULT_ROUTES: RouteConfig[] = [
   {
     fromCity: 'Delhi',
     toCity: 'Jaipur',
+    state: 'Rajasthan',
     slug: 'delhi-to-jaipur-transport',
     heroHeading: 'Delhi to Jaipur Transport Service',
     heroSubheading: 'Reliable Inbound Trucking from Delhi NCR to Jaipur & Rajasthan',
@@ -960,6 +972,7 @@ export const DEFAULT_ROUTES: RouteConfig[] = [
   {
     fromCity: 'Jaipur',
     toCity: 'Jodhpur',
+    state: 'Rajasthan',
     slug: 'jaipur-to-jodhpur-transport',
     heroHeading: 'Jaipur to Jodhpur Transport Service',
     heroSubheading: 'Daily Scheduled FTL & Industrial Trucking from Jaipur to Jodhpur Hub',
@@ -977,15 +990,17 @@ export const DEFAULT_ROUTES: RouteConfig[] = [
     transitTime: 'Same / Next Day',
     servicesOffered: ['FTL', 'PTL', '19ft Container', '22ft Container'],
     priceEstimates: [
-      { truckName: '19 ft Container / Truck', capacity: 'Up to 7 Tons', bodyType: 'Closed / Open', idealFor: 'Handicrafts, stone, commercial goods', priceRange: '₹17,000' },
-      { truckName: '22 ft Container / Truck', capacity: 'Up to 7 Tons (HQ)', bodyType: 'High Cube', idealFor: 'Furniture, volumetric packages, textiles', priceRange: '₹19,000' },
-      { truckName: '32 ft Container', capacity: '15 Tons', bodyType: 'Multi-Axle Container', idealFor: 'High-volume export cargo, handicraft containers', priceRange: '₹28,000 – ₹32,000' },
+      { truckName: 'Pickup / Bolero', capacity: '1.5 Tons', bodyType: 'Open / Closed Box', idealFor: 'Handicrafts, samples, local parcel express', priceRange: '₹6,500 – ₹7,000' },
+      { truckName: '14 ft Truck', capacity: 'Up to 4.5 Tons', bodyType: 'Open / High Deck', idealFor: 'Stone slabs, furniture, hardware packages', priceRange: '₹15,000 – ₹16,000' },
+      { truckName: '19 ft Container / Truck', capacity: 'Up to 7 Tons', bodyType: 'Closed / Open', idealFor: 'Handicrafts, stone, commercial goods', priceRange: '₹16,000 – ₹17,000' },
+      { truckName: '22 ft Container / Truck', capacity: 'Up to 7 Tons (HQ)', bodyType: 'High Cube', idealFor: 'Furniture, volumetric packages, textiles', priceRange: '₹17,000 – ₹18,000' },
+      { truckName: '32 ft Container', capacity: '15 Tons', bodyType: 'Multi-Axle Container', idealFor: 'High-volume export cargo, handicraft containers', priceRange: '₹23,000 – ₹25,000' },
     ],
     rateCardHighlights: {
       loadCapacityBadge: 'LOAD UPTO 7 TON',
       panIndiaRate: {
-        rate19ft: '₹17,000',
-        rate22ft: '₹19,000',
+        rate19ft: '₹16,000 – ₹17,000',
+        rate22ft: '₹17,000 – ₹18,000',
       },
     },
     pricingFactors: ['Boranada SEZ vs Basni delivery points', 'Total gross tonnage', 'Loading timing'],
@@ -1039,10 +1054,11 @@ export const DEFAULT_ROUTES: RouteConfig[] = [
   {
     fromCity: 'Jaipur',
     toCity: 'Ajmer',
+    state: 'Rajasthan',
     slug: 'jaipur-to-ajmer-transport',
     heroHeading: 'Jaipur to Ajmer & Kishangarh Transport Service',
     heroSubheading: 'Express Same-Day Commercial Truck Transport between Jaipur and Ajmer / Kishangarh',
-    heroHighlights: ['135 km Direct Express Route', 'Same-Day Fast Delivery', 'Kishangarh Marble Specialists', '19ft @ ₹10,500 & 22ft @ ₹11,500'],
+    heroHighlights: ['135 km Direct Express Route', 'Same-Day Fast Delivery', 'Kishangarh Marble Specialists', '19ft @ ₹11,500 & 22ft @ ₹12,500'],
     bannerImage: '/images/hero-truck-1.webp',
     aboutContent: {
       overview: 'Connecting Jaipur with the marble capital Kishangarh and Ajmer industrial hubs, this 135 km corridor is among the busiest daily freight lanes in Rajasthan.',
@@ -1056,15 +1072,17 @@ export const DEFAULT_ROUTES: RouteConfig[] = [
     transitTime: 'Same Day (3–5 Hours)',
     servicesOffered: ['FTL', 'PTL', '19ft Container', '22ft Container', 'Marble Trailer'],
     priceEstimates: [
-      { truckName: '19 ft Container / Truck', capacity: 'Up to 7 Tons', bodyType: 'Closed / Open', idealFor: 'Marble tiles, cement, FMCG, machinery', priceRange: '₹10,500' },
-      { truckName: '22 ft Container / Truck', capacity: 'Up to 7 Tons (HQ)', bodyType: 'High Cube Container', idealFor: 'General merchandise, furniture, textiles', priceRange: '₹11,500' },
-      { truckName: '10 Tyre Truck', capacity: '10–12 Tons', bodyType: 'Taurus', idealFor: 'Heavy marble slabs, stone blocks', priceRange: '₹15,000 – ₹17,000' },
+      { truckName: 'Pickup / Bolero', capacity: '1.5 Tons', bodyType: 'Open / Closed Box', idealFor: 'Fast parcel delivery, urgent spares, retail samples', priceRange: '₹4,000 – ₹5,000' },
+      { truckName: '14 ft Truck', capacity: 'Up to 4.5 Tons', bodyType: 'Open / High Deck', idealFor: 'Hardware, marble tiles, commercial cargo', priceRange: '₹10,500 – ₹11,500' },
+      { truckName: '19 ft Container / Truck', capacity: 'Up to 7 Tons', bodyType: 'Closed / Open', idealFor: 'Marble tiles, cement, FMCG, machinery', priceRange: '₹11,500' },
+      { truckName: '22 ft Container / Truck', capacity: 'Up to 7 Tons (HQ)', bodyType: 'High Cube Container', idealFor: 'General merchandise, furniture, textiles', priceRange: '₹12,500' },
+      { truckName: '32 ft Container / Truck', capacity: '15 Tons', bodyType: 'Multi-Axle Container / Open', idealFor: 'Heavy marble slabs, stone blocks, bulk freight', priceRange: '₹15,500 – ₹16,500' },
     ],
     rateCardHighlights: {
       loadCapacityBadge: 'LOAD UPTO 7 TON',
       panIndiaRate: {
-        rate19ft: '₹10,500',
-        rate22ft: '₹11,500',
+        rate19ft: '₹11,500',
+        rate22ft: '₹12,500',
       },
     },
     pricingFactors: ['Kishangarh bypass vs Ajmer city', 'Gross stone payload', 'Vehicle size'],
@@ -1118,6 +1136,7 @@ export const DEFAULT_ROUTES: RouteConfig[] = [
   {
     fromCity: 'Jaipur',
     toCity: 'Bangalore',
+    state: 'Karnataka',
     slug: 'jaipur-to-bangalore-transport',
     heroHeading: 'Jaipur to Bangalore Transport Service',
     heroSubheading: 'Reliable Container & Truck Transport from Jaipur to Bengaluru / Karnataka',
@@ -1192,6 +1211,7 @@ export const DEFAULT_ROUTES: RouteConfig[] = [
   {
     fromCity: 'Jaipur',
     toCity: 'Hyderabad',
+    state: 'Telangana',
     slug: 'jaipur-to-hyderabad-transport',
     heroHeading: 'Jaipur to Hyderabad Transport Service',
     heroSubheading: 'Full Truck Load & Commercial Freight Transport between Jaipur and Hyderabad / Telangana',
@@ -1265,6 +1285,7 @@ export const DEFAULT_ROUTES: RouteConfig[] = [
   {
     fromCity: 'Jaipur',
     toCity: 'Indore',
+    state: 'Madhya Pradesh',
     slug: 'jaipur-to-indore-transport',
     heroHeading: 'Jaipur to Indore Transport Service',
     heroSubheading: 'Next-Day Express Truck Transportation between Jaipur and Indore / Madhya Pradesh',
@@ -1345,6 +1366,7 @@ export const DEFAULT_ROUTES: RouteConfig[] = [
   {
     fromCity: 'Jaipur',
     toCity: 'Kolkata',
+    state: 'West Bengal',
     slug: 'jaipur-to-kolkata-transport',
     heroHeading: 'Jaipur to Kolkata Transport Service',
     heroSubheading: 'Pan-India Freight & Container Truck Transport from Jaipur to Kolkata / Howrah',
@@ -1415,6 +1437,12 @@ export const DEFAULT_ROUTES: RouteConfig[] = [
     sitemapStatus: true,
     status: 'published',
   },
+];
+
+export const DEFAULT_ROUTES: RouteConfig[] = [
+  ...INITIAL_ROUTES,
+  ...ADDITIONAL_ROUTES,
+  ...EXTENDED_ROUTES,
 ];
 
 const LOCAL_STORAGE_KEY = 'SKG_CUSTOM_ROUTES';
