@@ -1,6 +1,32 @@
+# robots.txt for Shree Krishna Transport Network
+# https://www.shree-krishna-transport.org
+
 User-agent: *
 Allow: /
 Disallow: /admin/
-Disallow: /admin/routes
+Disallow: /admin/*
+Disallow: /api/
+Disallow: /api/*
 
+User-agent: Googlebot
+Allow: /
+Allow: /images/
+Allow: /assets/
+Disallow: /admin/
+Disallow: /admin/*
+Disallow: /api/
+Disallow: /api/*
+
+User-agent: Bingbot
+Allow: /
+Disallow: /admin/
+Disallow: /admin/*
+Disallow: /api/
+Disallow: /api/*
+
+# Crawl-delay for aggressive bots
+User-agent: Yandex
+Crawl-delay: 2
+
+Host: https://www.shree-krishna-transport.org
 Sitemap: https://www.shree-krishna-transport.org/sitemap.xml

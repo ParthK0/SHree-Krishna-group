@@ -1,0 +1,19 @@
+{
+  "short_name": "SKTN Logistics",
+  "name": "Shree Krishna Transport Network",
+  "description": "Pan-India Freight Logistics, Truck Booking, and Corridor Rates",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "type": "image/svg+xml",
+      "sizes": "192x192 512x512",
+      "purpose": "any maskable"
+    }
+  ],
+  "start_url": "/",
+  "background_color": "#ECE6DD",
+  "theme_color": "#0B3A66",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "scope": "/"
+}

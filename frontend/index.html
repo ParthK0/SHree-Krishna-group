@@ -13,10 +13,19 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="Shree Krishna Transport Network — Reliable freight solutions, trucks on call, loads on time. Connecting businesses with independent truck owners and drivers across India." />
-    <meta name="keywords" content="Shree Krishna Transport Network, Truck booking Jaipur, Freight logistics, Goods transport, Truck hire, Jaipur logistics" />
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+    <meta name="description" content="Shree Krishna Transport Network — Reliable freight solutions, trucks on call, loads on time. Connecting businesses with independent truck owners and drivers across India. Book FTL, PTL & parcel trucks within 60 minutes." />
+    <meta name="keywords" content="Shree Krishna Transport Network, Truck booking Jaipur, Freight logistics, Goods transport, Truck hire Jaipur, Jaipur to Delhi transport, Pan India truck rates, FTL transport, PTL transport" />
     <meta name="author" content="Shree Krishna Transport Network" />
+    <meta name="theme-color" content="#0B3A66" />
     <link rel="canonical" href="https://www.shree-krishna-transport.org/" />
+    <link rel="manifest" href="/manifest.json" />
+
+    <!-- Local SEO Geo Meta Tags (Jaipur, Rajasthan) -->
+    <meta name="geo.region" content="IN-RJ" />
+    <meta name="geo.placename" content="Jaipur" />
+    <meta name="geo.position" content="26.9388;75.7950" />
+    <meta name="ICBM" content="26.9388, 75.7950" />
 
     <!-- Google Search Console Verification -->
     <meta name="google-site-verification" content="google72cbff53c6aa584c" />
@@ -24,40 +33,143 @@
     <!-- Open Graph & Social Cards -->
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://www.shree-krishna-transport.org/" />
-    <meta property="og:title" content="Shree Krishna Transport Network | Verified Freight & Fleet" />
-    <meta property="og:description" content="Reliable freight solutions. Book trucks or register for loads across India within 60 minutes." />
+    <meta property="og:site_name" content="Shree Krishna Transport Network" />
+    <meta property="og:title" content="Shree Krishna Transport Network | Pan-India Freight & Fleet Logistics" />
+    <meta property="og:description" content="Reliable freight solutions. Book trucks or register for loads across 53+ Indian corridors within 60 minutes. Verified fleet, 24x7 support." />
     <meta property="og:image" content="https://www.shree-krishna-transport.org/images/homefinal.webp" />
+    <meta property="og:locale" content="en_IN" />
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Shree Krishna Transport Network | Freight & Fleet Logistics" />
-    <meta name="twitter:description" content="Book trucks or register loads across India within 60 minutes." />
+    <meta name="twitter:title" content="Shree Krishna Transport Network | Pan-India Freight & Fleet Logistics" />
+    <meta name="twitter:description" content="Book trucks or register loads across 53+ corridors in India within 60 minutes." />
     <meta name="twitter:image" content="https://www.shree-krishna-transport.org/images/homefinal.webp" />
 
     <!-- LCP Image Preload -->
     <link rel="preload" as="image" href="/images/homefinal.webp" type="image/webp" />
 
-    <title>Shree Krishna Transport Network | Reliable Freight Across India</title>
+    <title>Shree Krishna Transport Network | Reliable Freight Solutions Across India</title>
 
     <!-- Google Fonts: Archivo Narrow & Manrope -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Archivo+Narrow:ital,wght@0,400..700;1,400..700&family=Manrope:wght@300..800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet"/>
 
-    <!-- Structured Data (JSON-LD) -->
+    <!-- Comprehensive Structured Data (JSON-LD Graph) -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
-      "@type": "LogisticsService",
-      "name": "Shree Krishna Transport",
-      "description": "Connecting businesses with truck owners and drivers across Jaipur, Rajasthan, and North India.",
-      "url": "https://www.shree-krishna-transport.org",
-      "telephone": "+919784800833",
-      "areaServed": "North India",
-      "address": {
-        "@type": "PostalAddress",
-        "addressLocality": "Jaipur",
-        "addressRegion": "Rajasthan",
-        "addressCountry": "IN"
-      }
+      "@graph": [
+        {
+          "@type": "Organization",
+          "@id": "https://www.shree-krishna-transport.org/#organization",
+          "name": "Shree Krishna Transport Network",
+          "alternateName": ["Shree Krishna Transport", "SKTN Logistics"],
+          "url": "https://www.shree-krishna-transport.org",
+          "logo": "https://www.shree-krishna-transport.org/favicon.svg",
+          "taxID": "08KEYPK3684A1ZV",
+          "parentOrganization": {
+            "@type": "Organization",
+            "name": "Shree Krishna Buildtech"
+          },
+          "contactPoint": {
+            "@type": "ContactPoint",
+            "telephone": "+91-97848-00833",
+            "contactType": "customer support",
+            "areaServed": "IN",
+            "availableLanguage": ["en", "hi"]
+          },
+          "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "1D, Lalita Colony, Nahari Ka Naka, Shastri Nagar",
+            "addressLocality": "Jaipur",
+            "addressRegion": "Rajasthan",
+            "postalCode": "302016",
+            "addressCountry": "IN"
+          }
+        },
+        {
+          "@type": ["LocalBusiness", "LogisticsService"],
+          "@id": "https://www.shree-krishna-transport.org/#localbusiness",
+          "name": "Shree Krishna Transport Network",
+          "image": "https://www.shree-krishna-transport.org/images/homefinal.webp",
+          "url": "https://www.shree-krishna-transport.org",
+          "telephone": "+919784800833",
+          "email": "deepesh3052@gmail.com",
+          "priceRange": "₹₹",
+          "paymentAccepted": "Cash, Credit Card, Bank Transfer, UPI",
+          "currenciesAccepted": "INR",
+          "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "1D, Lalita Colony, Nahari Ka Naka, Shastri Nagar",
+            "addressLocality": "Jaipur",
+            "addressRegion": "Rajasthan",
+            "postalCode": "302016",
+            "addressCountry": "IN"
+          },
+          "geo": {
+            "@type": "GeoCoordinates",
+            "latitude": 26.9388,
+            "longitude": 75.7950
+          },
+          "openingHoursSpecification": {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": [
+              "Monday",
+              "Tuesday",
+              "Wednesday",
+              "Thursday",
+              "Friday",
+              "Saturday",
+              "Sunday"
+            ],
+            "opens": "00:00",
+            "closes": "23:59"
+          },
+          "areaServed": [
+            {
+              "@type": "Country",
+              "name": "India"
+            },
+            {
+              "@type": "State",
+              "name": "Rajasthan"
+            },
+            {
+              "@type": "State",
+              "name": "Delhi"
+            },
+            {
+              "@type": "State",
+              "name": "Haryana"
+            },
+            {
+              "@type": "State",
+              "name": "Gujarat"
+            },
+            {
+              "@type": "State",
+              "name": "Maharashtra"
+            }
+          ]
+        },
+        {
+          "@type": "WebSite",
+          "@id": "https://www.shree-krishna-transport.org/#website",
+          "url": "https://www.shree-krishna-transport.org",
+          "name": "Shree Krishna Transport Network",
+          "description": "Pan-India Freight Logistics, Truck Booking, and Corridor Rates",
+          "publisher": {
+            "@id": "https://www.shree-krishna-transport.org/#organization"
+          },
+          "potentialAction": {
+            "@type": "SearchAction",
+            "target": {
+              "@type": "EntryPoint",
+              "urlTemplate": "https://www.shree-krishna-transport.org/routes?search={search_term_string}"
+            },
+            "query-input": "required name=search_term_string"
+          }
+        }
+      ]
     }
     </script>
   </head>
