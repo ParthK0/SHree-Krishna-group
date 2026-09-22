@@ -18,3 +18,12 @@ export const ADDRESS_FULL = `${ADDRESS_LINE1}, ${ADDRESS_LINE2}, ${ADDRESS_CITY}
 
 export const BUSINESS_HOURS = 'Mon–Sat, 9:00 AM – 7:00 PM';
 export const PARENT_ENTITY = 'Shree Krishna Buildtech';
+
+// Social Profiles & Marketing Links
+export const SOCIAL_LINKS = {
+  instagram: 'https://www.instagram.com/shreekrishnatransport/',
+  facebook: 'https://www.facebook.com/shreekrishnatransportnetwork/',
+  linkedin: 'https://www.linkedin.com/company/shree-krishna-transport-network/',
+  youtube: 'https://www.youtube.com/@shreekrishnatransport',
+  whatsapp: 'https://wa.me/919784800833?text=Hi%2C%20I%20would%20like%20to%20inquire%20about%20freight%20transportation',
+};

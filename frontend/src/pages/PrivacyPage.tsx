@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowLeft } from 'lucide-react';
 import { BUSINESS_NAME, CONTACT_EMAIL, PHONE_DISPLAY } from '../lib/constants';
+import { useMetaSEO } from '../lib/useMetaSEO';
 
 const Section: React.FC<{ title: string; children: React.ReactNode }> = ({ title, children }) => (
   <div className="space-y-3 pb-6 border-b border-[#e2dad0] last:border-0 last:pb-0">
@@ -11,6 +12,12 @@ const Section: React.FC<{ title: string; children: React.ReactNode }> = ({ title
 );
 
 export const PrivacyPage: React.FC = () => {
+  useMetaSEO({
+    title: 'Privacy Policy | Shree Krishna Transport Network',
+    description: 'Privacy policy and data protection standards of Shree Krishna Transport Network for consignors, fleet owners, and drivers.',
+    canonicalPath: '/privacy-policy',
+  });
+
   return (
     <div className="min-h-screen bg-[#ECE6DD] py-6 md:py-10 px-4 md:px-12">
       <div className="max-w-3xl mx-auto space-y-8">

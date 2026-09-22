@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowLeft } from 'lucide-react';
 import { BUSINESS_NAME, CONTACT_EMAIL, PHONE_DISPLAY, ADDRESS_FULL, GSTIN } from '../lib/constants';
+import { useMetaSEO } from '../lib/useMetaSEO';
 
 const Section: React.FC<{ title: string; children: React.ReactNode }> = ({ title, children }) => (
   <div className="space-y-3 pb-6 border-b border-[#e2dad0] last:border-0 last:pb-0">
@@ -11,6 +12,12 @@ const Section: React.FC<{ title: string; children: React.ReactNode }> = ({ title
 );
 
 export const TermsPage: React.FC = () => {
+  useMetaSEO({
+    title: 'Terms & Conditions | Shree Krishna Transport Network',
+    description: 'Official freight transportation terms, bill of lading guidelines, and carrier liability conditions of Shree Krishna Transport Network.',
+    canonicalPath: '/terms-and-conditions',
+  });
+
   return (
     <div className="min-h-screen bg-[#ECE6DD] py-6 md:py-10 px-4 md:px-12">
       <div className="max-w-3xl mx-auto space-y-8">
