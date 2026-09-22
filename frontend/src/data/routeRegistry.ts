@@ -1229,9 +1229,9 @@ const INITIAL_ROUTES: RouteConfig[] = [
     transitTime: '3–4 Days',
     servicesOffered: ['FTL', '19ft Container', '22ft Container', '10 Tyre Truck', 'Heavy Multi-Axle'],
     priceEstimates: [
-      { truckName: '19 ft Container / Truck', capacity: 'Up to 7 Tons', bodyType: 'Closed / Open', idealFor: 'Pharma tools, hardware, tiles, electricals', priceRange: '₹42,000 – ₹45,000' },
-      { truckName: '22 ft Container / Truck', capacity: 'Up to 7 Tons (HQ)', bodyType: 'High Cube Container', idealFor: 'Textiles, furniture, volumetric cartons', priceRange: '₹46,000 – ₹50,000' },
-      { truckName: '10 Tyre Multi-Axle', capacity: '10–12 Tons', bodyType: 'Heavy Commercial Open Body', idealFor: 'Heavy marble slabs, steel structures', priceRange: '₹58,000 – ₹64,000' },
+      { truckName: '19 ft Container / Truck', capacity: 'Up to 7 Tons', bodyType: 'Closed / Open', idealFor: 'Pharma tools, hardware, tiles, electricals', priceRange: '₹50,000 – ₹52,000' },
+      { truckName: '22 ft Container / Truck', capacity: 'Up to 7 Tons (HQ)', bodyType: 'High Cube Container', idealFor: 'Textiles, furniture, volumetric cartons', priceRange: '₹55,000' },
+      { truckName: '10 Tyre Multi-Axle', capacity: '10–12 Tons', bodyType: 'Heavy Commercial Open Body', idealFor: 'Heavy marble slabs, steel structures', priceRange: '₹60,000 – ₹65,000' },
     ],
     pricingFactors: ['Loading cluster in Jaipur (Sitapura vs Bagru)', 'Patancheru vs Jeedimetla delivery zones', 'Gross material weight'],
     truckTypes: [
@@ -1384,9 +1384,9 @@ const INITIAL_ROUTES: RouteConfig[] = [
     transitTime: '3–4 Days',
     servicesOffered: ['FTL', '19ft Container', '22ft Container', '32ft Container', 'Multi-Axle Taurus'],
     priceEstimates: [
-      { truckName: '19 ft Container', capacity: 'Up to 7 Tons', bodyType: 'Closed Container', idealFor: 'General cargo, hardware, electricals, apparel', priceRange: '₹45,000 – ₹48,000' },
-      { truckName: '22 ft Container', capacity: 'Up to 7 Tons (HQ)', bodyType: 'High Cube Container', idealFor: 'Textiles, furniture, volumetric cartons', priceRange: '₹50,000 – ₹54,000' },
-      { truckName: '10 Tyre Truck', capacity: '10–12 Tons', bodyType: 'Heavy Commercial Open Body', idealFor: 'Heavy machinery, steel, industrial items', priceRange: '₹62,000 – ₹68,000' },
+      { truckName: '19 ft Container', capacity: 'Up to 7 Tons', bodyType: 'Closed Container', idealFor: 'General cargo, hardware, electricals, apparel', priceRange: '₹55,000 – ₹58,000' },
+      { truckName: '22 ft Container', capacity: 'Up to 7 Tons (HQ)', bodyType: 'High Cube Container', idealFor: 'Textiles, furniture, volumetric cartons', priceRange: '₹60,000 – ₹62,000' },
+      { truckName: '10 Tyre Truck', capacity: '10–12 Tons', bodyType: 'Heavy Commercial Open Body', idealFor: 'Heavy machinery, steel, industrial items', priceRange: '₹75,000 – ₹80,000' },
     ],
     pricingFactors: ['Howrah vs Dankuni delivery hub', 'Gross tonnage vs CBM volume', 'Toll charges on NH-19'],
     truckTypes: [

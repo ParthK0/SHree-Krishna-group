@@ -566,10 +566,14 @@ export const RoutesIndexPage: React.FC = () => {
                     <span>Fleet Types:</span>
                     <span className="font-semibold text-neutral-800">Pickup to 32ft / Trailer</span>
                   </div>
-                  <div className="flex items-center justify-between">
-                    <span>Indicative Freight:</span>
-                    <span className="font-bold text-[#B8860B] font-['Space_Mono']">
-                      {route.priceEstimates[0]?.priceRange || 'On Request'}
+                  <div className="flex items-center justify-between gap-2">
+                    <span className="shrink-0">Indicative Freight:</span>
+                    <span className="font-bold text-[#B8860B] font-['Space_Mono'] text-right truncate">
+                      {route.rateCardHighlights?.panIndiaRate
+                        ? `19ft: ${route.rateCardHighlights.panIndiaRate.rate19ft}`
+                        : route.priceEstimates[0]
+                        ? `${route.priceEstimates[0].truckName.split('(')[0].trim()}: ${route.priceEstimates[0].priceRange}`
+                        : 'On Request'}
                     </span>
                   </div>
                 </div>

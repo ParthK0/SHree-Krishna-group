@@ -24,12 +24,9 @@ const PrivacyPage = lazy(() => import('./pages/PrivacyPage').then(m => ({ defaul
 const RefundPage = lazy(() => import('./pages/RefundPage').then(m => ({ default: m.RefundPage })));
 const RouteTemplatePage = lazy(() => import('./pages/RouteTemplatePage').then(m => ({ default: m.RouteTemplatePage })));
 const RoutesIndexPage = lazy(() => import('./pages/RoutesIndexPage').then(m => ({ default: m.RoutesIndexPage })));
-const AdminRoutesPage = lazy(() => import('./pages/AdminRoutesPage').then(m => ({ default: m.AdminRoutesPage })));
 const BlogIndexPage = lazy(() => import('./pages/BlogIndexPage').then(m => ({ default: m.BlogIndexPage })));
 const BlogPostPage = lazy(() => import('./pages/BlogPostPage').then(m => ({ default: m.BlogPostPage })));
 const NotFoundPage = lazy(() => import('./pages/NotFoundPage').then(m => ({ default: m.NotFoundPage })));
-
-
 
 function AnimatedRoutes() {
   const location = useLocation();
@@ -59,7 +56,6 @@ function AnimatedRoutes() {
           {/* Route Directory & Master Route Templates */}
           <Route path="/routes" element={<RoutesIndexPage />} />
           <Route path="/routes/:slug" element={<RouteTemplatePage />} />
-          <Route path="/admin/routes" element={<AdminRoutesPage />} />
 
           {/* Logistics Intelligence Blog */}
           <Route path="/blog" element={<BlogIndexPage />} />

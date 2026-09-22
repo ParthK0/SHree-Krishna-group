@@ -1,5 +1,5 @@
-﻿State,Destination City,14 ft,19 ft,22 ft,32 ft
-Madhya Pradesh,Bhopal,₹20–22K,₹26–27K,₹30K,₹37–39K
+State,Destination City,14 ft,19 ft,22 ft,32 ft
+Madhya Pradesh,Bhopal,₹20–22K,₹26–27.5K,₹29.5–30K,₹36–39K
 Madhya Pradesh,Indore,₹19–20K,₹24–25K,₹26–28K,₹34–35K
 Karnataka,Bangalore,₹55K,₹60K,₹64–68K,₹75–80K
 Karnataka,Mangalore,₹58K,₹62K,₹66–69K,₹85–90K
@@ -8,23 +8,19 @@ Tamil Nadu,Chennai,₹60K,₹65–68K,₹70K,₹80–85K
 Telangana,Hyderabad,₹46–48K,₹50–52K,₹55K,₹60–65K
 West Bengal,Kolkata,₹50–52K,₹55–58K,₹60–62K,₹75–80K
 Jharkhand,Ranchi,₹50K,₹55K,₹60K,₹70–75K
+Jharkhand,Hazaribagh,₹48–50K,₹52–55K,₹58–60K,₹68–72K
 Bihar,Patna,₹45K,₹50K,₹55K,₹65–68K
 Uttarakhand,Haridwar,₹20–22K,₹25–27K,₹30K,₹35K
 Uttarakhand,Dehradun,₹21–23K,₹26–28K,₹30–32K,₹35K
 Uttarakhand,Rudrapur,₹21–23K,₹26–28K,₹30–32K,₹35K
 Punjab,Jalandhar,₹20K,₹25K,₹30K,₹35K
+Punjab,Ludhiana,₹18–20.5K,₹22.5–24.5K,₹24–26K,₹35K
 Gujarat,Vapi / Surat,₹25K,₹28K,₹30K,₹35K
 Gujarat,Bharuch,₹25K,₹28K,₹30K,₹35K
-,Hazaribagh,₹11K,₹13K,₹15K,₹22K
 Uttar Pradesh,Meerut,₹11K,₹13K,₹15K,₹22K
 Uttar Pradesh,Mathura,₹11K,₹13K,₹15K,₹22K
 Maharashtra,Nashik,₹30K,₹35K,₹40K,₹45K
 Maharashtra,Nagpur,₹30K,₹35K,₹40K,₹45K
 Maharashtra,Aurangabad,₹30K,₹35K,₹40K,₹45K
-Madhya Pradesh,Bhopal,₹22K,₹25K,₹30K,₹36K
-Punjab,Ludhiana,₹14K,₹18K,₹24K,₹32K
 Chhattisgarh,Raipur,₹45K,₹50K,₹55K,₹65K
-Tamil Nadu,Chennai,₹60K,₹65K,₹70K,₹85K
-Tamil Nadu,Coimbatore,₹63K,₹68K,₹75K,₹90K
 Andhra Pradesh,Vijayawada,₹55K,₹60K,₹65K,₹75K
-Bihar,Patna,₹45K,₹50K,₹55K,₹65K

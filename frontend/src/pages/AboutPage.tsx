@@ -42,15 +42,6 @@ export const AboutPage: React.FC = () => {
     },
   });
 
-  // Key Operational Stats
-  const stats = [
-    { value: '12+', label: 'Years Experience', subtext: 'Established freight legacy' },
-    { value: '50+', label: 'Verified Fleet Partners', subtext: 'Continuous linehaul availability' },
-    { value: '200+', label: 'Industrial Shippers', subtext: 'Corporate & SME trust' },
-    { value: '53+', label: 'Direct Corridors', subtext: 'Connecting 28+ states' },
-    { value: '10,000+', label: 'Tons Moved / Mo.', subtext: 'Heavy industrial cargo' },
-    { value: '99.2%', label: 'On-Time Delivery SLA', subtext: 'Strict transit adherence' },
-  ];
 
   // Core Value Pillars
   const coreValues = [
@@ -187,27 +178,6 @@ export const AboutPage: React.FC = () => {
           </div>
         </div>
 
-        {/* 3. Operational Performance Stats Strip */}
-        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3 sm:gap-4">
-          {stats.map((stat, i) => (
-            <div
-              key={i}
-              className="bg-white rounded-2xl p-4 sm:p-5 border border-[#c5beb4]/70 shadow-sm hover:shadow-md transition-shadow flex flex-col justify-between"
-            >
-              <div className="font-['Space_Mono'] text-2xl sm:text-3xl font-extrabold text-[#0B3A66] tracking-tight">
-                {stat.value}
-              </div>
-              <div className="mt-2">
-                <div className="font-['Archivo_Narrow'] text-xs sm:text-sm font-bold uppercase text-[#1a1f1b]">
-                  {stat.label}
-                </div>
-                <div className="font-['Manrope'] text-[11px] text-[#5a665c] leading-tight mt-0.5">
-                  {stat.subtext}
-                </div>
-              </div>
-            </div>
-          ))}
-        </div>
 
         {/* 4. Company Heritage, Origin & Parent Entity Synergy */}
         <div className="bg-white border border-[#c5beb4] rounded-3xl p-6 sm:p-10 shadow-sm">

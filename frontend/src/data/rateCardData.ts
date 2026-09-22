@@ -190,11 +190,11 @@ export const PARCEL_COURIER_FREIGHT_RATES: ParcelFreightRate[] = [
   },
   {
     sNo: 2,
-    serviceType: 'Heavy Special Freight Parcel (Air / Rail / Delicate etc.)',
+    serviceType: 'Fragile & High-Value Specialized Parcel (Express Road)',
     rate: '₹40–120 per kg',
     unit: 'per kg',
-    idealFor: 'High-value items, fragile & delicate cargo, express multimodal transit',
-    badge: 'Express Air / Rail',
+    idealFor: 'High-value items, fragile & delicate cargo, padded express transit',
+    badge: 'Express Surface Road',
   },
   {
     sNo: 3,
@@ -453,11 +453,11 @@ export const PAN_INDIA_RATES: PanIndiaRouteRate[] = [
     region: 'North',
     distanceKm: 320,
     transitTime: '1 Day',
-    rateRange: '₹15.5k – ₹17.5k',
-    rate19ft: 15500,
-    rate22ft: 17500,
-    rate19ftFormatted: '₹15,500',
-    rate22ftFormatted: '₹17,500',
+    rateRange: '₹14k – ₹16k',
+    rate19ft: 14000,
+    rate22ft: 16000,
+    rate19ftFormatted: '₹14,000 – ₹16,000',
+    rate22ftFormatted: '₹14,000 – ₹16,000',
     popularGoods: ['Poultry & Feed', 'Steel Tubes', 'Agro Machinery'],
   },
   {
@@ -551,6 +551,6 @@ export const RATE_CARD_META = {
   services: [
     { name: 'Full Truck Load (FTL)', desc: 'Dedicated point-to-point trucks directly from factory/warehouse to destination.' },
     { name: 'Part Truck Load (PTL)', desc: 'Economical shared cargo space for consignments from 100 kg to 5 Tons.' },
-    { name: 'Parcel / Courier Delivery', desc: 'Fast express parcels (Road, Rail, Air) with door-to-door per-kg rates.' },
+    { name: 'Parcel / Courier Delivery', desc: 'Fast express parcels with dedicated point-to-point road dispatch and per-kg rates.' },
   ],
 };
